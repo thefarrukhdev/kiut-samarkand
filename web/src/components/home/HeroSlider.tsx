@@ -41,6 +41,45 @@ const slideImages = [
   },
 ];
 
+const slideMetadata = [
+  {
+    num: "01",
+    tag: { uz: "Amaliy ta'lim", ru: "Практика", en: "Hands-on" },
+    caption: {
+      uz: "Xalqaro standartlardagi amaliy ta'lim muhiti",
+      ru: "Практическое обучение по международным стандартам",
+      en: "Practical education aligned with global standards",
+    },
+  },
+  {
+    num: "02",
+    tag: { uz: "Spitamen binosi", ru: "Новый кампус", en: "Main Campus" },
+    caption: {
+      uz: "Spitamen shoh ko'chasidagi zamonaviy bino",
+      ru: "Современный корпус на проспекте Спитамен",
+      en: "State-of-the-art campus on Spitamen Avenue",
+    },
+  },
+  {
+    num: "03",
+    tag: { uz: "Xalqaro forum", ru: "Конференции", en: "Conferences" },
+    caption: {
+      uz: "Xorijiy professor-o'qituvchilar ma'ruzalari",
+      ru: "Лекции зарубежных профессоров и ученых",
+      en: "Lectures by international visiting professors",
+    },
+  },
+  {
+    num: "04",
+    tag: { uz: "5+1 Dual ta'lim", ru: "Дуальное обучение", en: "Dual Study" },
+    caption: {
+      uz: "5+1 Dual ta'lim va ishlab chiqarish amaliyoti",
+      ru: "5+1 Дуальная система и производственная практика",
+      en: "5+1 Dual training and industrial internship",
+    },
+  },
+];
+
 interface HeroSliderProps {
   currentLocale?: Locale;
   onOpenAdmissionModal?: () => void;
@@ -300,18 +339,18 @@ export function HeroSlider({
             </AnimatePresence>
           </div>
 
-          {/* Right Column: Curated Framed Photographic Showcase Card */}
+          {/* Right Column: Curated Framed Photographic Showcase Card & Interactive Thumbnails */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/10 border border-slate-200/90 aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/4.3] bg-slate-900 group">
-              {/* Slide Image */}
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/10 border border-slate-200/90 aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/4.2] bg-slate-900 group">
+              {/* Slide Image with Smooth Ken-Burns Motion */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${current}-${currentLocale}`}
-                  initial={{ opacity: 0, scale: 1.04 }}
+                  initial={{ opacity: 0, scale: 1.05 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="absolute inset-0 z-0"
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute inset-0 z-0 overflow-hidden"
                 >
                   <Image
                     src={currentPhoto.src}
@@ -322,7 +361,7 @@ export function HeroSlider({
                     className="object-cover object-center"
                   />
                   {/* Subtle lower gradient for caption readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#172D50]/90 via-[#172D50]/20 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#172D50] via-[#172D50]/25 to-transparent pointer-events-none" />
                 </motion.div>
               </AnimatePresence>
 
@@ -333,7 +372,7 @@ export function HeroSlider({
                     KIUT Samarqand
                   </p>
                   <p className="text-xs sm:text-sm font-semibold text-white line-clamp-1">
-                    {currentPhoto.caption}
+                    {slideMetadata[current]?.caption[currentLocale] || currentPhoto.caption}
                   </p>
                 </div>
 
@@ -362,23 +401,69 @@ export function HeroSlider({
               </div>
             </div>
 
-            {/* Thumbnail Indicators below card */}
-            <div className="flex items-center justify-center gap-2 mt-4" role="tablist" aria-label="Slider indicators">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  type="button"
-                  onClick={() => setCurrent(index)}
-                  aria-label={`Slide ${index + 1}`}
-                  aria-selected={current === index}
-                  role="tab"
-                  className={`h-1.5 transition-all duration-300 rounded-full cursor-pointer ${
-                    current === index
-                      ? "w-8 bg-[#0096DB]"
-                      : "w-2.5 bg-slate-300 hover:bg-slate-400"
-                  }`}
-                />
-              ))}
+            {/* Interactive 4-Slide Thumbnail Preview Grid */}
+            <div
+              className="grid grid-cols-4 gap-2 sm:gap-2.5 mt-3.5"
+              role="tablist"
+              aria-label="Slaydlar galereyasi"
+            >
+              {slideImages.map((img, idx) => {
+                const meta = slideMetadata[idx];
+                const isActive = current === idx;
+                return (
+                  <button
+                    key={idx}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setCurrent(idx)}
+                    className={`group relative rounded-xl overflow-hidden border-2 transition-all p-1 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB] ${
+                      isActive
+                        ? "border-[#0096DB] bg-white shadow-md shadow-[#0096DB]/15"
+                        : "border-slate-200/90 bg-white/70 hover:border-slate-400 hover:bg-white"
+                    }`}
+                  >
+                    <div className="relative aspect-[16/10] rounded-lg overflow-hidden bg-slate-900">
+                      <Image
+                        src={img.src}
+                        alt={img.alt}
+                        fill
+                        sizes="140px"
+                        className={`object-cover transition-all duration-300 ${
+                          isActive
+                            ? "scale-105 opacity-100"
+                            : "opacity-65 group-hover:opacity-95"
+                        }`}
+                      />
+                      <div className="absolute top-1 left-1 bg-[#172D50] text-white text-[9px] font-black px-1.5 py-0.5 rounded">
+                        {meta.num}
+                      </div>
+                    </div>
+                    <div className="mt-1 px-0.5">
+                      <p
+                        className={`text-[11px] font-bold truncate ${
+                          isActive
+                            ? "text-[#0096DB]"
+                            : "text-slate-700 group-hover:text-[#172D50]"
+                        }`}
+                      >
+                        {meta.tag[currentLocale] || meta.tag.uz}
+                      </p>
+                    </div>
+                    {isActive && (
+                      <div className="mt-1 h-0.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <motion.div
+                          key={`progress-${idx}`}
+                          initial={{ width: "0%" }}
+                          animate={{ width: "100%" }}
+                          transition={{ duration: 6.5, ease: "linear" }}
+                          className="h-full bg-[#0096DB]"
+                        />
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
