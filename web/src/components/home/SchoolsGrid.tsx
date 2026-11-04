@@ -721,10 +721,10 @@ export function SchoolsGrid({
 
                   {/* Top Badges */}
                   <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-white bg-[#172D50]/85 backdrop-blur-md px-3 py-1 rounded-md border border-white/20 tracking-wide uppercase">
+                    <span className="text-xs font-semibold text-white bg-[#172D50] px-3 py-1 rounded-md border border-white/10 tracking-wide uppercase">
                       {faculty.badge}
                     </span>
-                    <span className="text-xs font-semibold text-white bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/20">
+                    <span className="text-xs font-semibold text-white bg-slate-900 px-2.5 py-1 rounded-md border border-white/10">
                       {faculty.count}
                     </span>
                   </div>
@@ -860,7 +860,7 @@ export function SchoolsGrid({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setModalFaculty(null)}
-              className="fixed inset-0 bg-[#172D50]/80 backdrop-blur-md"
+              className="fixed inset-0 bg-slate-950/75"
             />
 
             <motion.div

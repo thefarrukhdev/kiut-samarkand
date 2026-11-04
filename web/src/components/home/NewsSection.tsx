@@ -299,7 +299,7 @@ export function NewsSection({ currentLocale = "uz" }: NewsSectionProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedArticle(null)}
-              className="fixed inset-0 bg-[#172D50]/80 backdrop-blur-sm"
+              className="fixed inset-0 bg-slate-950/75"
             />
 
             <motion.div
@@ -321,7 +321,7 @@ export function NewsSection({ currentLocale = "uz" }: NewsSectionProps) {
                 <button
                   type="button"
                   onClick={() => setSelectedArticle(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 backdrop-blur-xs transition-colors cursor-pointer"
+                  className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 text-white hover:bg-black transition-colors cursor-pointer"
                   aria-label="Yopish"
                 >
                   <X className="h-5 w-5" />

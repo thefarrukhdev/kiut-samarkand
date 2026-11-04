@@ -133,10 +133,8 @@ export function Navbar({
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/90 py-2.5"
-          : "bg-white/95 backdrop-blur-md border-b border-slate-200/90 py-3.5"
+      className={`sticky top-0 z-50 bg-white transition-all duration-300 border-b border-slate-200 ${
+        isScrolled ? "shadow-sm py-2.5" : "py-3.5"
       }`}
     >
       <Container className="flex items-center justify-between gap-4">
@@ -330,7 +328,7 @@ export function Navbar({
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="lg:hidden overflow-hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl shadow-xl"
+            className="lg:hidden overflow-hidden border-t border-slate-200 bg-white shadow-xl"
           >
             <Container className="py-5 space-y-4">
               <nav className="flex flex-col space-y-1" aria-label="Mobil menyu">

@@ -56,10 +56,6 @@ export function Footer({ currentLocale = "uz" }: FooterProps) {
       id="contact"
       className="bg-[#172D50] text-slate-300 relative overflow-hidden border-t border-slate-800"
     >
-      {/* Subtle background glow */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#0096DB]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#2364AD]/5 rounded-full blur-3xl pointer-events-none" />
-
       {/* Main Footer Content */}
       <div className="pt-16 pb-12 relative z-10">
         <Container>

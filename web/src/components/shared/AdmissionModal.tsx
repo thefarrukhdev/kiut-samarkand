@@ -181,7 +181,7 @@ export function AdmissionModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleModalClose}
-            className="fixed inset-0 bg-[#172D50]/80 backdrop-blur-md"
+            className="fixed inset-0 bg-slate-950/75"
           />
 
           {/* Modal Dialog */}

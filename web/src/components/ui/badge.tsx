@@ -13,7 +13,7 @@ const badgeVariants = cva(
         royal: "bg-[#2364AD] text-white",
         cyan: "bg-[#0096DB] text-white",
         gold: "bg-slate-100 text-[#172D50] border border-slate-200",
-        outline: "border border-slate-200 text-slate-700 bg-white/90 backdrop-blur-xs",
+        outline: "border border-slate-200 text-slate-700 bg-white",
         success: "bg-emerald-50 text-emerald-700 border border-emerald-200",
       },
     },

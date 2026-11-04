@@ -246,7 +246,7 @@ export function HeroSlider({
               </AnimatePresence>
 
               {/* Floating Official Accreditation Chip (Top Right) */}
-              <div className="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur-md rounded-xl px-3 py-1.5 shadow-md border border-slate-200/80 text-[11px] font-bold text-[#172D50] flex items-center gap-1.5">
+              <div className="absolute top-4 right-4 z-10 bg-white rounded-xl px-3 py-1.5 shadow-md border border-slate-200 text-[11px] font-bold text-[#172D50] flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Litsenziya № 039281</span>
               </div>
@@ -263,7 +263,7 @@ export function HeroSlider({
                 </div>
 
                 {/* Slider Controls */}
-                <div className="flex items-center gap-1 bg-black/40 backdrop-blur-md p-1 rounded-xl border border-white/20 shrink-0">
+                <div className="flex items-center gap-1 bg-[#172D50] p-1 rounded-xl border border-white/20 shrink-0">
                   <button
                     type="button"
                     onClick={prevSlide}

@@ -183,7 +183,7 @@ export function AdmissionCTA({
                 return (
                   <div
                     key={`${benefit.title}-${currentLocale}`}
-                    className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3.5 backdrop-blur-xs hover:bg-white/10 transition-colors"
+                    className="p-4 rounded-2xl bg-[#1E3A66] border border-white/15 flex items-start gap-3.5 hover:bg-[#234275] transition-colors"
                   >
                     <div className="p-2 rounded-xl bg-[#0096DB]/20 text-[#0096DB] shrink-0 mt-0.5">
                       <Icon className="h-5 w-5" />
