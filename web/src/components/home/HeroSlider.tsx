@@ -326,12 +326,6 @@ export function HeroSlider({
                 </motion.div>
               </AnimatePresence>
 
-              {/* Floating Official Accreditation Chip (Top Right) */}
-              <div className="absolute top-4 right-4 z-10 bg-white rounded-xl px-3 py-1.5 shadow-md border border-slate-200 text-[11px] font-bold text-[#172D50] flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Litsenziya № 039281</span>
-              </div>
-
               {/* Photo Caption & Slide Navigation Controls (Bottom) */}
               <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between gap-3 text-white">
                 <div className="pr-2">

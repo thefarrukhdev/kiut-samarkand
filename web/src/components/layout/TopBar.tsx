@@ -49,7 +49,7 @@ export function TopBar({
             className="hidden sm:inline-flex items-center gap-2 hover:text-white transition-colors group text-slate-300"
             title={t.addressTitle}
           >
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[#0096DB] group-hover:bg-[#0096DB] group-hover:text-white transition-all">
               <MapPin className="h-3 w-3" />
             </span>
             <span className="truncate max-w-[260px] lg:max-w-none">
