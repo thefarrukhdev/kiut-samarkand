@@ -1,0 +1,146 @@
+{
+  "uz": {
+    "title": "Bosh Sahifa - TKXU Samarqand",
+    "hero_slides": [],
+    "stats": [
+      {
+        "number": "5",
+        "label": "Fakultet"
+      },
+      {
+        "number": "5",
+        "label": "Fakultet"
+      },
+      {
+        "number": "48",
+        "label": "Bakalavriat yo‘nalishi"
+      },
+      {
+        "number": "36",
+        "label": "Magistratura mutaxassisligi"
+      },
+      {
+        "number": "150+",
+        "label": "Professor-o‘qituvchilar"
+      }
+    ],
+    "schools": [
+      {
+        "name": "Filologiya fakulteti",
+        "url": "https://sam.kiut.uz/uz/dasturlar/school/filologiya-fakulteti/"
+      },
+      {
+        "name": "Taʼlim fakulteti",
+        "url": "https://sam.kiut.uz/uz/dasturlar/school/talim-fakulteti/"
+      },
+      {
+        "name": "Muhandislik fakulteti",
+        "url": "https://sam.kiut.uz/uz/dasturlar/school/muhandislik-fakulteti/"
+      },
+      {
+        "name": "Iqtisodiyot fakulteti",
+        "url": "https://sam.kiut.uz/uz/dasturlar/school/iqtisodiyot-fakulteti/"
+      },
+      {
+        "name": "Tibbiyot fakulteti",
+        "url": "https://sam.kiut.uz/uz/dasturlar/school/tibbiyot-fakulteti/"
+      }
+    ]
+  },
+  "ru": {
+    "title": "Главная - ТМУК Самарканд",
+    "hero_slides": [],
+    "stats": [
+      {
+        "number": "5",
+        "label": "Факультетов"
+      },
+      {
+        "number": "5",
+        "label": "Факультетов"
+      },
+      {
+        "number": "48",
+        "label": "Направлений бакалавриата"
+      },
+      {
+        "number": "36",
+        "label": "Специальностей магистратуры"
+      },
+      {
+        "number": "150+",
+        "label": "Профессорско-преподавательский состав"
+      }
+    ],
+    "schools": [
+      {
+        "name": "Факультет филологии",
+        "url": "https://sam.kiut.uz/ru/programmy/school/fakultet-filologii/"
+      },
+      {
+        "name": "Факультет образования",
+        "url": "https://sam.kiut.uz/ru/programmy/school/fakultet-obrazovaniya/"
+      },
+      {
+        "name": "Факультет инженерии",
+        "url": "https://sam.kiut.uz/ru/programmy/school/fakultet-inzhenerii/"
+      },
+      {
+        "name": "Факультет экономии",
+        "url": "https://sam.kiut.uz/ru/programmy/school/shkola-biznesa-i-finansov/"
+      },
+      {
+        "name": "Факультет медицины",
+        "url": "https://sam.kiut.uz/ru/programmy/school/fakultet-mediciny/"
+      }
+    ]
+  },
+  "en": {
+    "title": "Home - KIUT Samarkand",
+    "hero_slides": [],
+    "stats": [
+      {
+        "number": "5",
+        "label": "Faculties"
+      },
+      {
+        "number": "5",
+        "label": "Faculties"
+      },
+      {
+        "number": "48",
+        "label": "Undergraduate programmes"
+      },
+      {
+        "number": "36",
+        "label": "Master’s specialisations"
+      },
+      {
+        "number": "150+",
+        "label": "Academic staff"
+      }
+    ],
+    "schools": [
+      {
+        "name": "Faculty of Philology",
+        "url": "https://sam.kiut.uz/en/programs/school/faculty-of-philology/"
+      },
+      {
+        "name": "Faculty of Education",
+        "url": "https://sam.kiut.uz/en/programs/school/faculty-of-education/"
+      },
+      {
+        "name": "Faculty of Engineering",
+        "url": "https://sam.kiut.uz/en/programs/school/faculty-of-engineering/"
+      },
+      {
+        "name": "Faculty of Economy",
+        "url": "https://sam.kiut.uz/en/programs/school/faculty-of-economy/"
+      },
+      {
+        "name": "Faculty of Medicine",
+        "url": "https://sam.kiut.uz/en/programs/school/faculty-of-medicine/"
+      }
+    ]
+  }
+}

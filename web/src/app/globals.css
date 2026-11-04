@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #172D50;
+  --color-primary-hover: #0F1E36;
+  --color-primary-royal: #2364AD;
+  --color-primary-light: #2364AD;
+
+  --color-accent: #0096DB;
+  --color-accent-hover: #007BB3;
+  --color-accent-light: #E9F2FF;
+  --color-ice-blue: #E3EDFC;
+
+  --color-action: #0096DB;
+  --color-action-hover: #007BB3;
+  --color-action-light: #E9F2FF;
+
+  --color-gold: #F59E0B;
+  --color-gold-light: #FEF3C7;
+
+  --color-surface: #F4F7FC;
+  --color-surface-hover: #E9F2FF;
+  --color-border: #E2E8F0;
+  --color-card: #FFFFFF;
+  --color-background: #F4F7FC;
+  --color-foreground: #334155;
+  --color-muted: #64748B;
+}
+
+@layer base {
+  :root {
+    /* KIUT Authentic Brand Colors */
+    --color-primary: #172D50;
+    --color-primary-hover: #0F1E36;
+    --color-primary-royal: #2364AD;
+    --color-primary-light: #2364AD;
+
+    --color-accent: #0096DB;
+    --color-accent-hover: #007BB3;
+    --color-accent-light: #E9F2FF;
+    --color-ice-blue: #E3EDFC;
+
+    --color-action: #0096DB;
+    --color-action-hover: #007BB3;
+    --color-action-light: #E9F2FF;
+
+    --color-gold: #F59E0B;
+    --color-gold-light: #FEF3C7;
+
+    /* Neutrals & Surfaces */
+    --color-background: #F4F7FC;
+    --color-foreground: #334155;
+    --color-surface: #F4F7FC;
+    --color-surface-hover: #E9F2FF;
+
+    --color-muted: #64748B;
+    --color-border: #E2E8F0;
+    --color-card: #FFFFFF;
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F4F7FC;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}

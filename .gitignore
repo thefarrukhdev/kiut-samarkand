@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+web/node_modules/
+.pnp
+.pnp.js
+
+# Production builds
+.next/
+web/.next/
+out/
+web/out/
+build/
+web/build/
+dist/
+web/dist/
+
+# Turbopack & cache
+.turbo/
+web/.turbo/
+
+# Environment Variables & Secrets (Strict Zero-Leak Policy)
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun.lockb
+*.log
+
+# Scraper Raw Data Dumps (Preserve code, mapping & parsed content, ignore raw dumps)
+data/raw_pages/
+data/raw_html/
+data/media/
+data/archive/
+data/documents/
+**/__pycache__/
+*.pyc
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/

@@ -1,0 +1,382 @@
+"use client";
+
+import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Phone,
+  ArrowRight,
+  Globe,
+} from "lucide-react";
+import { Container } from "@/components/ui/container";
+import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from "framer-motion";
+import { translations } from "@/lib/translations";
+import type { Locale } from "@/types";
+
+interface NavbarProps {
+  currentLocale?: Locale;
+  onLocaleChange?: (locale: Locale) => void;
+  onOpenAdmissionModal?: () => void;
+}
+
+export function Navbar({
+  currentLocale = "uz",
+  onLocaleChange,
+  onOpenAdmissionModal,
+}: NavbarProps) {
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [facultiesDropdownOpen, setFacultiesDropdownOpen] = React.useState(false);
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+
+  const t = translations[currentLocale].nav;
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  React.useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setFacultiesDropdownOpen(false);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setFacultiesDropdownOpen(false);
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const handleAdmissionClick = () => {
+    setMobileMenuOpen(false);
+    if (onOpenAdmissionModal) {
+      onOpenAdmissionModal();
+    } else {
+      const el = document.getElementById("admission");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  const navLinks = [
+    {
+      label: t.faculties,
+      href: "#schools",
+      hasDropdown: true,
+    },
+    { label: t.university, href: "#about" },
+    { label: t.stats, href: "#stats" },
+    { label: t.news, href: "#news" },
+    { label: t.contact, href: "#contact" },
+  ];
+
+  const facultyList = [
+    {
+      name: currentLocale === "ru" ? "Факультет медицины" : currentLocale === "en" ? "School of Medicine" : "Tibbiyot fakulteti",
+      href: "#schools",
+      count: currentLocale === "ru" ? "5+ направлений" : currentLocale === "en" ? "5+ Programs" : "5+ yo'nalish",
+    },
+    {
+      name: currentLocale === "ru" ? "Факультет инженерии и IT" : currentLocale === "en" ? "School of Engineering & IT" : "Muhandislik va IT fakulteti",
+      href: "#schools",
+      count: currentLocale === "ru" ? "18+ направлений" : currentLocale === "en" ? "18+ Programs" : "18+ yo'nalish",
+    },
+    {
+      name: currentLocale === "ru" ? "Факультет экономики и бизнеса" : currentLocale === "en" ? "School of Business & Economy" : "Iqtisodiyot va biznes fakulteti",
+      href: "#schools",
+      count: currentLocale === "ru" ? "8+ направлений" : currentLocale === "en" ? "8+ Programs" : "8+ yo'nalish",
+    },
+    {
+      name: currentLocale === "ru" ? "Факультет педагогики" : currentLocale === "en" ? "School of Education" : "Pedagogika va ta'lim fakulteti",
+      href: "#schools",
+      count: currentLocale === "ru" ? "4+ направлений" : currentLocale === "en" ? "4+ Programs" : "4+ yo'nalish",
+    },
+    {
+      name: currentLocale === "ru" ? "Факультет филологии" : currentLocale === "en" ? "School of Philology" : "Filologiya fakulteti",
+      href: "#schools",
+      count: currentLocale === "ru" ? "5+ направлений" : currentLocale === "en" ? "5+ Programs" : "5+ yo'nalish",
+    },
+  ];
+
+  return (
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/90 py-2.5"
+          : "bg-white/95 backdrop-blur-md border-b border-slate-200/90 py-3.5"
+      }`}
+    >
+      <Container className="flex items-center justify-between gap-4">
+        {/* KIUT Brand Logo & Academic Label */}
+        <Link
+          href="/"
+          className="flex items-center gap-3.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB] rounded-lg"
+          aria-label="KIUT Samarqand Bosh Sahifa"
+        >
+          <div className="relative h-10 w-36 sm:h-11 sm:w-44 flex items-center">
+            <Image
+              src="/assets/icons_and_logos/logo.f177ff7dfd83.png"
+              alt="KIUT Samarkand"
+              fill
+              priority
+              sizes="(max-width: 640px) 144px, 176px"
+              className="object-contain object-left group-hover:scale-[1.02] transition-transform duration-200"
+            />
+          </div>
+          <div className="hidden sm:flex flex-col border-l border-slate-200 pl-3.5">
+            <span className="text-[11px] font-black uppercase tracking-wider text-[#172D50]">
+              {t.branchLabel}
+            </span>
+            <span className="text-[10px] text-slate-500 font-medium">
+              {t.branchSub}
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Asosiy menyu">
+          {navLinks.map((link) => {
+            if (link.hasDropdown) {
+              return (
+                <div
+                  key={link.label}
+                  ref={dropdownRef}
+                  className="relative"
+                  onMouseEnter={() => setFacultiesDropdownOpen(true)}
+                  onMouseLeave={() => setFacultiesDropdownOpen(false)}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setFacultiesDropdownOpen((prev) => !prev)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setFacultiesDropdownOpen((prev) => !prev);
+                      }
+                    }}
+                    aria-expanded={facultiesDropdownOpen}
+                    aria-haspopup="menu"
+                    className="flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold text-[#172D50] hover:text-[#0096DB] transition-colors rounded-lg hover:bg-slate-50 cursor-pointer"
+                  >
+                    <span>{link.label}</span>
+                    <ChevronDown
+                      className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${
+                        facultiesDropdownOpen ? "rotate-180 text-[#0096DB]" : ""
+                      }`}
+                    />
+                  </button>
+
+                  {/* Mega dropdown */}
+                  <AnimatePresence>
+                    {facultiesDropdownOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute left-0 top-full pt-2 w-80 z-50"
+                        role="menu"
+                      >
+                        <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 overflow-hidden">
+                          <div className="px-3.5 py-2 border-b border-slate-100 text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
+                            <span>
+                              {currentLocale === "ru"
+                                ? "5 основных факультетов"
+                                : currentLocale === "en"
+                                ? "5 Core Faculties"
+                                : "5 asosiy fakultet"}
+                            </span>
+                            <span className="text-[11px] font-semibold text-[#0096DB] bg-[#E9F2FF] px-2 py-0.5 rounded-md">
+                              {t.facultiesCount}
+                            </span>
+                          </div>
+                          <div className="py-1">
+                            {facultyList.map((faculty) => (
+                              <a
+                                key={faculty.name}
+                                href={faculty.href}
+                                role="menuitem"
+                                onClick={() => setFacultiesDropdownOpen(false)}
+                                className="flex items-center justify-between px-3.5 py-2.5 text-xs font-medium text-slate-700 hover:text-[#0096DB] hover:bg-[#F4F7FC] rounded-xl transition-colors group"
+                              >
+                                <span className="font-semibold text-[#172D50] group-hover:text-[#0096DB]">
+                                  {faculty.name}
+                                </span>
+                                <span className="text-[11px] text-slate-400 group-hover:text-slate-600 font-medium">
+                                  {faculty.count}
+                                </span>
+                              </a>
+                            ))}
+                          </div>
+                          <div className="p-2 border-t border-slate-100 bg-[#F4F7FC] rounded-xl mt-1">
+                            <a
+                              href="#schools"
+                              role="menuitem"
+                              onClick={() => setFacultiesDropdownOpen(false)}
+                              className="flex items-center justify-between px-2 py-1 text-xs font-bold text-[#0096DB] hover:text-[#007BB3] transition-colors"
+                            >
+                              <span>{t.facultiesAll}</span>
+                              <ArrowRight className="h-3.5 w-3.5" />
+                            </a>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            }
+
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                className="px-3.5 py-2 text-sm font-semibold text-[#172D50] hover:text-[#0096DB] transition-colors rounded-lg hover:bg-slate-50"
+              >
+                {link.label}
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* Action Button & Language Switcher */}
+        <div className="flex items-center gap-3">
+          {/* Single Unified Language Selector */}
+          <div className="flex items-center gap-0.5 bg-slate-100 rounded-lg p-1 border border-slate-200" role="group" aria-label="Language selection">
+            <Globe className="h-3.5 w-3.5 ml-1 mr-0.5 text-slate-500 hidden sm:block" />
+            {(["uz", "ru", "en"] as const).map((lang) => (
+              <button
+                key={lang}
+                type="button"
+                onClick={() => onLocaleChange?.(lang)}
+                className={`px-2 py-0.5 rounded-md text-[11px] font-bold uppercase transition-all cursor-pointer ${
+                  currentLocale === lang
+                    ? "bg-[#172D50] text-white shadow-xs"
+                    : "text-slate-600 hover:text-[#172D50]"
+                }`}
+                aria-pressed={currentLocale === lang}
+              >
+                {lang}
+              </button>
+            ))}
+          </div>
+
+          {/* High-contrast Admission CTA */}
+          <Button
+            onClick={handleAdmissionClick}
+            variant="action"
+            size="default"
+            className="hidden sm:inline-flex items-center gap-2 font-bold bg-[#0096DB] hover:bg-[#007BB3] text-white shadow-md shadow-[#0096DB]/25 hover:shadow-lg hover:shadow-[#0096DB]/35 px-4.5 py-2 rounded-xl text-sm transition-all"
+          >
+            <span>{t.cta}</span>
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+
+          {/* Mobile Menu Trigger */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 rounded-xl text-[#172D50] hover:text-[#0096DB] hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB] transition-colors"
+            aria-expanded={mobileMenuOpen}
+            aria-label="Menyuni ochish"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6 text-[#172D50]" />
+            ) : (
+              <Menu className="h-6 w-6 text-[#172D50]" />
+            )}
+          </button>
+        </div>
+      </Container>
+
+      {/* Mobile Drawer Navigation */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="lg:hidden overflow-hidden border-t border-slate-200 bg-white/98 backdrop-blur-xl shadow-xl"
+          >
+            <Container className="py-5 space-y-4">
+              <nav className="flex flex-col space-y-1" aria-label="Mobil menyu">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-semibold text-[#172D50] hover:bg-[#F4F7FC] hover:text-[#0096DB] transition-colors"
+                  >
+                    <span>{link.label}</span>
+                    <ArrowRight className="h-4 w-4 text-slate-400" />
+                  </a>
+                ))}
+              </nav>
+
+              {/* Mobile CTA */}
+              <div className="pt-2">
+                <Button
+                  onClick={handleAdmissionClick}
+                  variant="action"
+                  size="lg"
+                  className="w-full flex items-center justify-center gap-2 font-bold bg-[#0096DB] hover:bg-[#007BB3] text-white shadow-md shadow-[#0096DB]/25 rounded-xl py-3"
+                >
+                  <span>{t.cta}</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </div>
+
+              {/* Mobile Direct Contact */}
+              <div className="pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-2">
+                <a
+                  href="tel:+998557024040"
+                  className="flex items-center gap-2 font-semibold text-[#172D50] hover:text-[#0096DB]"
+                >
+                  <Phone className="h-4 w-4 text-[#0096DB]" />
+                  <span>{t.hotline}</span>
+                </a>
+                <p className="text-slate-500 text-[11px]">
+                  Samarqand shahar, Spitamen shoh ko&apos;chasi, 270-uy
+                </p>
+              </div>
+            </Container>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}

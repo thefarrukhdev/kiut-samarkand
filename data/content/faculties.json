@@ -1,0 +1,842 @@
+{
+  "uz": [
+    {
+      "slug": "chiroy-estetikasi",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Chiroy estetikasi – invaziv boʻlmagan yoki minimal invaziv usullardan foydalanishni oʻz ichiga olgan kosmetologiyaning bir boʻlimi."
+    },
+    {
+      "slug": "stomatologiya",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Stomatologiya bakalavriat taʼlim yoʻnalishi – taʼlim yoʻnalishi boʻyicha bakalavrlar kasbiy faoliyatining sohalari davlat va nodavlat korxonalar, tashkilotlar, muassasalar, davlat boshqaruv organlarida, sogʻliqni saqlash tizimining muassasalarida stomatologiyani rivojlantirish, kasalliklarni tashxislar va davolashning zamonaviy usullaridan keng foydalangan xolda bemorlarning tibbiy muammolari boʻyicha asosiy vazifalarni hal qilish, stomatologik yordam va dispanser kuzatuv faoliyatining usullari va uslublarining sifatini oshirish (davolash-profilaktik, tibbiy-ijtimoiy) boʻyicha kompleks masalalarni yechish, ilmiy-tadqiqot markazlari, ilmiy-ishlab chiqarish birlashmalarida ilmiy-tadqiqot ishlarida ishtirok etishni oʻz ichiga oladi."
+    },
+    {
+      "slug": "davolash-ishi",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Davolash ishi taʼlim yoʼnalishi – sogʼliqni saqlash sohasidagi yoʼnalish boʼlib, u tibbiyot sohasini rivojlantirishga, istiqbolini belgilashga, kasbiy koʼnikmaga, mutasaddilik qobiliyatiga yoʼnaltirilgan inson faoliyatining vositalari, usullari, uslublarining majmuasini qamrab oladi. Davolash ishi yoʼnalishi tibbiyotning eng nufuzli yoʼnalishlaridan biri boʼlib bu yoʼnalishda mamlakatimizda bu yoʼnalish boʼyicha kadrlar 100 yildan ortiq vaqt mobaynida tayyorlab kelinadi."
+    },
+    {
+      "slug": "pediatriya-ishi",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Pediatriya ishi bakalavriat ta’lim yo‘nalishi “Sog‘liqni saqlash” ta’lim sohasiga oid yo‘nalishi bo‘lib, u bakalavrlar kasbiy faoliyatining sohalari davlat va nodavlat korxonalar, tashkilotlar, muassasalar, davlat boshqaruv organlarida bolalar sog‘ligini saqlash, mustaxkamlash, bolalikdagi kasalliklariing oldini olish va davolash bo‘yicha kompleks masalalami yechish bilan shug‘ullanuvchi sohalar majmuasini qamrab oladi."
+    },
+    {
+      "slug": "oliy-hamshiralik-ishi",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Oliy hamshiralik ishi taʼlim yoʼnalishi fan va sog'liqni saqlash sohalariga tegishli yo'nalish bo`lib, sog'liqni saqlash tizimi muassasalarida, aholi o'rtasida o'tkir va surunkali kasalliklaming tarqalishini oldini olish, sog'lom turmush tarzini targ`ibot qilish, zamonaviy usullardan keng foydalangan holda bemorlari sog'lomlashtirish bo'yicha asosiy muammolarni hal qilish, sog'liqni saqlash tizimining birlamchi bo'g'inida tibbiy-ijtimoiy vazifalarni bajarish bo`yicha kompleks masalalar bilan bog'liq kasbiy sohalar majmuasini qamrab oladi. O’qish muddati 4 yil."
+    },
+    {
+      "slug": "kompyuter-injiniringi",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "axborot-tizimlari-muhandisligi",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Axborot tizimlari muhandisligi – matematika, biznes va informatika kabi fanlarni birlashtirgan koʻp tarmoqli soha. Axborot tizimlari muhandislari asosan maʼlumotlar uchun ishlatiladigan tizimlarni ishlab chiqadilar, sinovdan oʻtkazadilar. Axborot tizimlari turli shakllarda boʻlishi mumkin, shu jumladan, geografik axborot tizimlari, meteorologik tasvirni qayta ishlash yoki aloqa tarmoqlari. Axborot tizimlari muhandislari davlat va xususiy sektorda, shu jumladan, mudofaa idoralarida, tibbiyot sanoatida yoki moliyaviy korporatsiyalarda ishlaydilar. Axborot tizimlari muhandislari moliya, sogʻliqni saqlash, hukumat va texnologiya kabi turli sohalarda ishlashi mumkin. Ular ma’lumotlar bazasini loyihalash va boshqarish, tarmoq xavfsizligi, dasturiy ta’minotni ishlab chiqish va loyihalarni boshqarish bilan shugʻullanishlari mumkin. Biznes va kundalik hayotning barcha jabhalarida texnologiyaga boʻlgan ishonch ortib borayotganligi sababli axborot tizimlari muhandislariga talab yuqori."
+    },
+    {
+      "slug": "elektrotexnika",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Elektrotexnika – bu elektromagnit maydon va kontaktlarning zanglashiga olib keladigan nazariyasi yordamida elektr hodisalarining qoʻllanilishini oʻrganadigan muhandislik sohasi. Ushbu sektorda elektr energiya tizimlari, elektr mashinalari va drayvlari, elektron quvvat konvertorlari, transport vositalari uchun elektr tizimlar, elektr va elektron oʻlchovlar, kontaktlarning zanglashiga olib kelishi nazariyasi va elektromagnit moslashuv alohida qiziqish uygʻotadi. Elektrotexnika dasturi elektrotexnika boʻyicha bakalavriat va magistratura bosqichida taʼlim olish uchun zarur boʻlgan barcha fanlarni oʻz ichiga oladi. Hozirgi vaqtda ijtimoiy va sanoat oʻsishi asosan yorugʻlik, issiqlik, harakat, maʼlumotlarni uzatish va masofadan ishlov berish, elektrokimyoviy faollik uchun elektromagnit toʻlqinlarga osongina aylanadigan shaklda energiya mavjudligiga asoslanadi. Elektr energiyasi birlamchi energiya manbalaridan energiyani aylantirish va uni uzoq joylarga tashishning eng samarali usuli hisoblanadi. Uning xususiyatlari elektr energiyasini kundalik hayotda, uy xoʻjaligi, sanoat yoki xizmat koʻrsatishdan tortib koʻplab tadbirlar uchun noyob qiladi. Elektr energiyasini boshqarish oson va ekologik jihatdan qulay. Mamlakatimizda isteʼmol qilinadigan energiyaning uchdan bir qismidan koʻprogʻi oxirgi foydalanishdan oldin elektr energiyasiga aylanadi. Elektrotexnika koʻp tarmoqli boʻlib, juda koʻp turli xil qoʻllash sohalarini oʻz ichiga oladi. Bularga elektr mashinalari, elektron quvvat konvertorlari, transformatorlar, elektr uzatish va taqsimlash tarmoqlari, maishiy va sanoat ilovalari uchun elektr tizimlari, sanoat avtomatizatsiyasi, elektr tortish, ogʻir metall sanoati, elektromagnit moslashuv kiradi."
+    },
+    {
+      "slug": "yol-harakatini-boshqarish",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Yoʻl harakatini boshqarish – bu statsionar va harakatlanuvchi transport vositalari, shu jumladan, piyodalar, velosipedchilar va barcha turdagi transport vositalarining harakatini tashkil etish, boshqarish va nazorat qilishdan iborat. Uning maqsadi odamlar va yuklarning xavfsiz, tartibli va samarali harakatlanishini ta’minlash, ularni imkon qadar himoya qilish, yoʻllarni va tevarak atrofidagi mahalliy atrof-muhit sifatini yaxshilashdir."
+    },
+    {
+      "slug": "mashinasozlik-texnologiyasi",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Mashinasozlik – bu mashina va tizimlarni loyihalash, qurish va ulardan foydalanish bilan shugʻullanadigan muhandislik sohasi. Mexanik muhandislar tibbiy asboblar va avtomobillardan to elektr stansiyalari va ishlab chiqarish korxonalarigacha boʻlgan keng turdagi mahsulotlarni loyihalash va ishlab chiqish uchun fizika va materialshunoslik tamoyillaridan foydalanadilar. Ular, shuningdek, isitish va sovitish, suyuqlik dinamikasi va qayta tiklanadigan energiya kabi turli tizimlarda ishlaydi."
+    },
+    {
+      "slug": "mexatronika",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Mexatronika - ilgʻor tizimlar va qurilmalarni loyihalash, ishlab chiqish va boshqarish uchun mashinasozlik, elektrotexnika va kompyuter fanlarini birlashtirgan koʻp tarmoqli sohadir. Mexatronika ishlab chiqarish, avtomatlashtirish, robototexnika, aerokosmik va maishiy elektronika kabi keng koʻlamli dasturlarda qoʻllaniladi."
+    },
+    {
+      "slug": "arxitektura-va-shaharsozlik",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Bugungi kunda shaharning barqaror rivojlanishini arxitektorlar ishtirokisiz tasavvur qilib boʻlmaydi. Zamonaviy sharoitda me’morchilikning ortib borayotgan roli arxitektura va dizayn faoliyatining turli shakllarini belgilab berdi. Arxitektor rassomni, muhandisni, mehnat, turmush va dam olish jarayonlarining tashkilotchisini uzviy birlashtirgan ijodkor shaxs –jamiyat taraqqiyoti istiqbollarini, atrof-muhitni yaxshilash vazifalarini tushunadigan va qobiliyatli mutaxassis sifatida shakllanadi. Arxitektura va shaharsozlik oldida turgan muammolarni hal qilish."
+    },
+    {
+      "slug": "qurilish",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Bugungi kunda qurilish sanoati jadal rivojlanmoqda, bu esa qurilish obyektlarini loyihalash, qurish, foydalanish va rekonstruksiya qilish sohasida yuqori malakali mutaxassislarni tayyorlashni taqozo etmoqda. Qurilish muhandisining kasbiy faoliyati quyidagi funksiyalar bilan bogʻliq: qurilish ishlab chiqarishni tashkil etish va qurilish jarayonlarini boshqarish, metall, temir-beton, tosh konstruktsiyalar, zamin va poydevorlarni, shuningdek, umuman strukturaning konstruktiv elementlarini loyihalash; suv ta’minoti, issiqlik va gaz ta’minoti va ventilatsiyaning ayrim masalalarini hal qilish, texnik hujjatlarni ishlab chiqish bilan bogʻliq."
+    },
+    {
+      "slug": "muqobil-energiya",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Qayta tiklanadigan energiya – bu sanoatning barcha sohalarida qoʻllanilishi uchun avtomatik ravishda qayta tiklanadigan, tugamaydigan energiya manbalaridan energiyaning turli shakllarini samarali, xavfsiz va iqtisodiy jihatdan foydali ishlab chiqarish va uzatish bilan shugʻullanadigan muhandislik sohasi. Qayta tiklanadigan energiya soʻnggi paytlarda an’anaviy energiyaning doimiy oʻsib borayotgan narxlari va energiyaga boʻlgan ehtiyoj va talabning ortib borayotgani nuqtayi nazaridan muhim tadqiqot sohasiga aylandi. Qayta tiklanadigan energiya manbalarining ba’zi turlari: Quyosh energiyasi – quyosh nurlanishidan toʻgʻridan-toʻgʻri fotovoltaik (PV) hujayralar orqali yoki bilvosita konsentrlangan quyosh energiyasi (CSP) tizimlari orqali hosil boʻladigan energiya. Shamol energiyasi – shamol harakatidan, odatda, shamol turbinalari orqali hosil boʻladigan energiya. Gidroenergetika – suv harakati natijasida hosil boʻladigan energiya, odatda, gidroelektr toʻgʻonlar orqali. Geotermal energiya – yerdagi issiqlikdan, odatda, geotermal elektr stantsiyalari orqali hosil boʻladigan energiya. Bioenergiya – oʻsimlik materiallari va chiqindilari kabi organik moddalardan hosil boʻladigan energiya."
+    },
+    {
+      "slug": "amaliy-matematika",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "kosmik-texnologiyalari",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "O'zbekiston Respublikasida iqtisodiyotning barcha tarmoqlari uchun jadal rivojlanayotgan kosmik texnika va istiqbolli kosmik texnologiyalar sohasida kadrlar tayyorlash."
+    },
+    {
+      "slug": "muhandislik-kommunikasiyalari-qurilish-va-montaji-turlari-boyicha",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "lift-muhandisligi",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Lift muhandisligi - mashinasozlikning ixtisoslashgan sohasi boʻlib, liftlarni loyihalash, ishlab chiqish va texnik xizmat koʻrsatishga qaratilgan. Lift muhandislari ushbu tizimlarning xavfsizligi, samaradorligi va ishonchliligini taʼminlash uchun javobgardir."
+    },
+    {
+      "slug": "barqaror-transport",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "dasturiy-injiniring",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "axborot-tizimlari-va-texnologiyalari",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "sanoat-muhandisligi-va-menejmenti",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "rangtasvir",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Rangtasvir - tasviriy sanʼatning bir turi boʻlib, real olamdagi buyum va hodisalarni boʻyoqlar yordamida ifodalab beradi."
+    },
+    {
+      "slug": "dizayn-interyer-dizayni",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "liboslar-dizayni",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Liboslar dizayni taʼlim dasturi Toshkent Kimyo Xalqaro Universitetining Sanʼat maktabi tarkibida faoliyat yuritadi. Ushbu yoʻnalish bugungi kunda rivojlangan badiiy taʼlim dasturlaridan biri boʻlib, erkin ijodiy faoliyat, yengil sanoat kabi sohalar mutaxassislarini tayyorlaydi. Libos dizaynerining ixtisoslik bo‘yicha faoliyati quyidagi vazifalarni bajarishga qaratilgan:"
+    },
+    {
+      "slug": "english-education",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "English education oʻquv dasturining maqsadi yuqori malakali ingliz tili oʻqituvchilarini tayyorlash hamda talabalarga ikkinchi fan (double degree), yaʼni gumanitar yoki aniq fanlar yoʻnalishlarida ham bakalavr darajasini berish. English education bakalavr dasturi 148 kreditni oʻz ichiga olib, har bir semestr 20 kreditdan iborat. Oʻquv dasturi ingliz tilini oʻqitish metodikasining amaliy va nazariy jihatlari va talabalar tomonidan tanlangan yoʻnalishlardan biri (aniq yoki gumanitar)ni oʻz ichiga oladi."
+    },
+    {
+      "slug": "ozbek-tili-va-adabiyoti",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "ozga-tilli-guruhlarda-rus-tili-ozbek-guruhlari-uchun",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "koreys-filologiyasi",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Koreys filologiyasi koreys tili va uning adabiyotini oʻrganuvchi fandir. Bu koreys tilining tarixi, tuzilishi va qoʻllanilishini tahlil qilish, shuningdek, koreys adabiyoti, jumladan, she’riyat, badiiy adabiyot va dramaturgiyani sharhlash va tahlil qilishni oʻz ichiga oladi. Koreys tili bo‘yicha filologlar vaqt oʻtishi bilan koreys tili va adabiyotini shakllantirgan til va madaniy ta’sirlarni ham oʻrganishlari mumkin."
+    },
+    {
+      "slug": "tarjimashunoslik-xitoy-ingliz-tili",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Tarjimashunoslik bakalavriati kursi (1. Ingliz, 2. Xitoy) doirasida talabalar tilning oʻziga xos xususiyatlari, tarjima nazariyasi va amaliyoti, matn uslubi, yozma tarjima va tarjima kabi tarjima turlari boʻyicha har tomonlama bilim olib, o’z bilimlarini hayotga tadbiq qiladilar."
+    },
+    {
+      "slug": "yapon-tili",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "tarjimashunoslik-nazariyasi-va-amaliyoti-turk-tili",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "maktabgacha-talim",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Maktabgacha ta'lim - O‘zbekiston Respublikasining davlat va xususiy maktabgacha taʼlim muassasalari uchun mo‘ljallangan taʼlim-tarbiya jarayoniga bo‘lajak tarbiyachi-pedagoglarni yuqori malaka darajasida tayyorlash, ularni jamiyatdagi rolini oshirish, yangi innovatsion texnologiyalar asosida o‘qitishga hamda axborot texnologiyalari va xorijiy tillarni o‘zlashtirishga qaratilgan. Maktabgacha taʼlimning asosiy maqsadi kichik yoshdagi bolalar uchun xavfsiz, tarbiya rivojlantiruvchi va ragʻbatlantiruvchi muhitni taʼminlashdan iborat boʻlib, bu ularni nafaqat boshlangʻich maktab, balki ta’limning undan keyingi maktablar bosqichlariga tayyorlashga yordam beradi."
+    },
+    {
+      "slug": "boshlangich-talim",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Boshlangʻich taʼlim – umumiy oʻrta taʼlimning dastlabki bosqichi. Oʻzbekiston Respublikasida boshlangʻich taʼlim 1-4-sinflarda bolalarga ilk taʼlim berish, ularni maʼnaviy kamol toptirishning boshlanish davri hisoblanadi. Bunda taʼlim mazmunini belgilash muhim ahamiyatga ega. Oʻzbekiston Respublikasining davlat va xususiy maktablarida 1-4 sinflar uchun moʻljallangan taʼlim jarayoniga boʻlajak boshlangʻich sinf oʻqituvchilarini yuqori malaka darajasida tayyorlash, ularni jamiyatdagi rolini oshirish, yangi innovatsion texnologiyalar asosida oʻqitishga hamda axborot texnologiyalari va xorijiy tillarni oʻzlashtirishga qaratilgan. Mazkur taʼlim yoʻnalishi dasturi davlat taʼlim standartlari talablari asosida boshlangʻich sinf oʻqituvchisi uchun zarur boʻlgan bilim, koʻnikma va malakalarni oʻzlashtirishga nazariy va amaliy yordam beradi."
+    },
+    {
+      "slug": "tarix",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Tarix taʼlim yoʻnalishi talabalarga Oʻzbekiston va jahon tarixining asosiy voqealarini ilmiy, nazariy jihatdan bilish, mushohada va tahlil qila olishga yoʻnaltirilgan fanlarni oʻqitish, shuningdek, ularda tarix fanining nazariy va uslubiy bilim, koʻnikma, malaka va kasbiy kompetensiyalarni shakllantiradi. Toshkent Kimyo xalqaro universiteti talabalarga nafaqat nazariy va amaliy bilim berish, balki bu bilimlarni kelajakdagi kasbiy faoliyatida qoʻllay bilishidan manfaatdor. Taʼlimning asosiy negizi amaliy koʻnikmalardan iborat."
+    },
+    {
+      "slug": "maxsus-pedagogika",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Maxsus pedagogika (defektologiya) yoʻnalishi – sogʻlom hamda nogironligi boʻlgan/imkoniyati cheklangan bolalar bilan ishlash uchun zaruriy pedagog kadrlarni tayyorlaydi."
+    },
+    {
+      "slug": "psixologiya-faoliyati-turlari-boyicha",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "jismoniy-madaniyat",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "bank-ishi-bakalavr",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Bank ishi – oʻz mijozlariga omonatlar qabul qilish, kreditlar berish va boshqa turli moliyaviy munosabatlar bo‘icha xizmatlar koʻrsatuvchi moliya institutlarining faoliyati. Banklar pul oqimini osonlashtirish hamda odamlarga pullarini saqlash va boshqarish uchun xavfsiz joyni ta’minlash orqali iqtisodiyotda hal qiluvchi rol oʻynaydi. Banklarning bir qancha turlari, jumladan, tijorat banklari, omonat-ssuda uyushmalari, kredit uyushmalari, investitsiya banklari mavjud. Tijorat banklari jismoniy va yuridik shaxslarga keng koʻlamli xizmatlarni – chek va jamgʻarma hisob varaqlari, kreditlar va boshqa moliyaviy mahsulotlarni taklif etadi. Investitsiya banklari kompaniyalar va hukumatga qimmatli qogʻozlar boʻyicha anderrayting hamda qoʻshilish va sotib olish boʻyicha maslahatlar berish kabi xizmatlar koʻrsatadi."
+    },
+    {
+      "slug": "xalqaro-munosabatlar",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "buxgalteriya",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Buxgalteriya hisobi – bu moliyaviy operatsiyalarni qayd etish, tasniflash va umumlashtirish jarayoni. U moliyaviy hisobotlarni, jumladan, kompaniyaning moliyaviy holatini aks ettiruvchi balans, daromadlar toʻgʻrisidagi hisobot va pul oqimi toʻgʻrisidagi hisobotni tayyorlashni oʻz ichiga oladi. Buxgalteriya hisobi, shuningdek, qarzdorlik soliqlarini hisoblash va manfaatdor tomonlar, jumladan, investorlar, kreditorlar va davlat idoralari uchun hisobotlarni yaratishni qamrab oladi. Shu sababdan ushbu yoʻnalish oliy oʻquv yurtlarida talab katta boʻlgan yoʻnalishlardan biridir."
+    },
+    {
+      "slug": "xalqaro-marketing",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Xalqaro marketing deganda kompaniyaning mahsulot yoki xizmatlarini bir necha mamlakatlarda ilgari surish, sotish va tarqatish jarayoni tushuniladi. Xalqaro marketing global biznesga qiziqqan, kuchli muloqot va shaxslararo munosabatlarga ega va turli madaniyatlararo muhitlarda qulay ishlashga qobiliyati bor shaxslar uchun qiziqarli imkoniyatlarni taklif etadi. Xalqaro marketing global biznes amaliyoti, madaniy farqlar, siyosiy va iqtisodiy sharoitlarning iste’molchi xatti-harakatlariga ta’sirini chuqur tushunishni talab qiladi. Shuningdek, u mahalliy hamkorlar, distribyutorlar va tashqi bozorlardagi mijozlar bilan munosabatlarni rivojlantirish va boshqarishni oʻz ichiga oladi."
+    },
+    {
+      "slug": "biznesni-boshqarish",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Biznesni boshqarish – kompaniya yoki tashkilotni samarali boshqarish va nazorat qilish jarayonidir. Biznesni boshqarish kuchli yetakchilik, tashkiliy va muammolarni hal qila olish qobiliyatini, shuningdek, moliyaviy, iqtisodiy va bozor tendensiyalarini tushunishni talab qiladi. Soha doimiy ravishda rivojlanib boradi va biznesni boshqarishda muvaffaqiyat koʻpincha tajriba, taʼlim, doimiy oʻrganish va oʻzgaruvchan sharoitlarga moslashishga tayyorlikni talab qiladi. Biznes menejeri operatsiyalar, moliyaviy natijalar, inson resurslari, marketing va kompaniyaning kundalik faoliyatining boshqa jihatlarini nazorat qilish uchun javobgar hisoblanadi. Ular, shuningdek, strategiyani ishlab chiqish va amalga oshirishda, tashkilotning umumiy muvaffaqiyatiga taʼsir qiluvchi qarorlarni qabul qilishda ishtirok etishlari mumkin.Oʻquv dasturining maqsadi: Iqtisodiyot, moliya va soliq sohasida, tadbirkorlik faoliyati va uni samarali tashkil etish haqida talabalarda har tomonlama keng qamrovli bilim va koʻnikmalarini shakllantirish. Yirik tadbirkor va ishbilarmonlar bilan uchrashuvlar tashkil etish va oʻzining mustaqil biznesini samarali tashkil etish uchun yetarli bilimlarga ega boʻlgan mamlakat iqtisodiyoti sohasida yetuk yuqori sifatli va malakali kadrlarni tayyorlash. Talabalarga fundamental, nazariy va amaliy bilim va koʻnikmalarini berish va ularni mustahkamlab borish. Yetuk soxa mutaxassislarini tayyorlash.Ishga joylashish imkoniyatlari: Operatsion menejer Inson resurslari menejeri Moliyaviy menejer Marketing menejeri Loyihalar boʻyicha menejer Taʼminot zanjiri menejeri Sotuv boʻyicha menejer Tadbirkor."
+    },
+    {
+      "slug": "xalqaro-iqtisodiy-munosabatlar",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Xalqaro iqtisodiy munosabatlar mamlakatlarning savdo, investitsiya va moliyaviy oqimlar nuqtayi nazaridan bir-birlari bilan qanday munosabatda boʻlishini oʻrganishga e’tibor qaratadi. Bu iqtisodiyot, siyosatshunoslik va xalqaro munosabatlar elementlarini birlashtirgan koʻp tarmoqli soha boʻlib, davlatlar oʻrtasidagi munosabatlarni va bu hamkorlikning jahon iqtisodiyotiga ta’sirini tushunish uchun juda muhim hisoblanadi. Bu sohadagi muvaffaqiyat koʻpincha iqtisodiyot, siyosat va xalqaro munosabatlarni chuqur tushunishni, shuningdek, doimiy ravishda oʻrganish va oʻzgaruvchan global sharoitlarga moslashishga tayyorlikni talab qiladi."
+    },
+    {
+      "slug": "turizm",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Turizm sohasi har qanday mamlakatning iqtisodiy rivojlanishi uchun eng muhim sohalardan biri hisoblanadi. Ushbu yoʻnalishda asosiy maqsadimiz tovarlar va xizmatlarning jahon bozorlariga bosqichma-bosqich kirishi uchun turizm xizmatlaridan samarali foydalanish va mamlakatning iqtisodiy oʻsishini oshirish uchun yoshlarni tayyorlash. Shuningdek, Turizm yoʻnalishi mehmondoʻstlik, transport, koʻngilochar va madaniy meros kabi koʻplab sohalarni oʻz ichiga oladi. Turizm sohasida muvaffaqiyatga erishish uchun sayohatga boʻlgan ishtiyoq, mijozlarga yuqori saviyada xizmat koʻrsatish yoʻnalishi sanalib, tez sur’atda, doimiy oʻzgaruvchan muhitda yaxshi ishlash qobiliyatiga ega boʻlish muhimdir."
+    },
+    {
+      "slug": "moliya",
+      "name": "Dasturlar",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Moliya – bu pul, investitsiyalar va boshqa moliyaviy aktivlarni boshqarish bilan shugʻullanadigan soha. U resurslarni taqsimlash va risklarni boshqarish boʻyicha asosli qarorlar qabul qilish uchun moliyaviy ma’lumotlarni yaratish, tahlil qilish va talqin qilishni oʻz ichiga oladi. Moliya ham shaxsiy, ham korporativ moliya bilan bogʻliq boʻlib, sarmoya, bank, sugʻurta, koʻchmas mulk, buxgalteriya hisobi va iqtisod kabi keng koʻlamli mavzularni qamrab oladi."
+    }
+  ],
+  "ru": [
+    {
+      "slug": "estetika-krasoty",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Эстетика красоты (эстетическая косметология) – это раздел косметологии, который подразумевает применения неинвазивных либо малоинвазивных методик. Большим отличием является то, что специалисты, которые работают в данной области, это специалисты, получившие степень бакалавра в области Эстетики красоты. Это не врачи, это не медработники, это специалисты, обладающие соответствующим образованием, которые имеют право оказать требуемую услугу. Это сфера услуг, а не медицина, но при этом дипломированный косметолог непосредственно воздействует на здоровье своего подопечного. Эстетика красоты сконцентрирована на комплексных процедурах омоложения и сохранения молодости, красоты и здоровья, вобравшая в себя все теоретические сведения и практические возможности коррекции внешних данных человека с помощью различных собранных воедино методик.В целом, в индустрии эстетики красоты осуществляют деятельность специалисты двух категорий (видов):"
+    },
+    {
+      "slug": "ctomatologiya",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Специальность «Стоматология» является одной из самых востребованных среди прочих медицинских профессий. Программа бакалавриата предусматривает углубленное изучение специальных дисциплин, таких как заболевания слизистой оболочки рта, клиническая стоматология, кариесология, детская стоматология, реконструктивная хирургия рта и т.д. Студенты также осваивают блок естественнонаучных, медико-биологических и гуманитарных дисциплин. Выпускник должен обладать широкой эрудицией, позволяющей ему свободно ориентироваться в современных лечебных технологиях и методах диагностики и на высоком уровне владеть приемами практического мастерства, соответствующих требованиям сегодняшнего дня."
+    },
+    {
+      "slug": "lechebnoe-delo",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Образовательное направление “Лечебное дело” – это направление в области здравоохранения, которое охватывает комплекс средств, методов, приемов человеческой деятельности, направленных на развитие медицинской сферы, определение перспектив, профессиональных навыков, компетентности."
+    },
+    {
+      "slug": "pediatricheskoe-delo",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "«Педиатрическое дело» - образовательное направление бакалавриата “Здравоохранение”, охватывающее комплекс направлений профессиональной деятельности бакалавров, занимающихся решением комплексных задач по охране, укреплению здоровья детей, профилактике и лечению детских болезней на государственных и негосударственных предприятиях, в организациях, учреждениях, органах государственного управления."
+    },
+    {
+      "slug": "vysshee-sestrinskoe-delo",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Образовательное направление высшего медсестринского дела относится к области науки и здравоохранения и направлено на решение основных проблем в учреждениях системы здравоохранения, профилактику распространения острых и хронических заболеваний среди населения, пропаганду здорового образа жизни, оздоровление пациентов с широким использованием современных методов, охватывает комплекс профессиональных сфер, связанных с комплексными вопросами выполнения медико-социальных задач в первичном звене системы здравоохранения. Срок обучения 4 года."
+    },
+    {
+      "slug": "kompyuternyj-inzhenering",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "proektirovanie-informacionnyh-sistem",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Инженерия информационных систем - это междисциплинарная область, которая объединяет такие дисциплины, как математика, бизнес и информатика. Инженеры по информационным системам проектируют, разрабатывают, тестируют и обслуживают системы, используемые в основном для данных. Информационные системы могут быть в различных формах, включая географические информационные системы, обработку метеорологических изображений или сети связи. Инженеры по информационным системам работают в государственном и частном секторах, включая оборонные агентства, медицинские предприятия или финансовые корпорации."
+    },
+    {
+      "slug": "elektrotehnika",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Электротехника — это инженерная область, которая исследует приложения электрических явлений с помощью электромагнитного поля и теории цепей. Особый интерес для этого сектора представляют электроэнергетические системы, электрические машины и приводы, электронные преобразователи энергии, электрические системы для транспорта, электрические и электронные измерения, теория цепей и электромагнитная совместимость. Программа по электротехнике охватывает все предметы, необходимые для обучения студентов и аспирантов электротехнике."
+    },
+    {
+      "slug": "upravlenie-dorozhnym-dvizheniem",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Управление дорожным движением — это организация, руководство и контроль как стационарного, так и движущегося транспорта, включая пешеходов, велосипедистов и всех видов транспортных средств. Его цель – обеспечить безопасное, упорядоченное и эффективное передвижение людей и товаров, а также защитить их, по возможности, улучшить качество местной окружающей среды на дорогах и рядом с ними."
+    },
+    {
+      "slug": "tehnologiya-mashinostroeniya",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Машиностроение, одна из самых сложных и функциональных инженерных дисциплин, – это изучение движущихся объектов и систем. Таким образом, почти каждый аспект современной жизни, включая человеческое тело, очень сложную машину, находится под влиянием области машиностроения."
+    },
+    {
+      "slug": "mehatronika",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Системная инженерия мехатроники охватывает интеграцию механических, электронных и интеллектуальных подсистем управления для реализации полной системы, которая может быть продуктом, машиной или процессом. Междисциплинарный характер мехатроники использует принципы проектирования, процессы, модели, наборы инструментов и философию, уникальные для инженеров мехатроники, которые позволяют проектировать и разрабатывать более простые, более экономичные и надежные системы. Курс сочетает в себе уникальный баланс ключевых аналитических предметов и профессиональных навыков. Управленческие навыки, необходимые для успешной работы многопрофильного инженера в современной промышленности, продвигаются и развиваются на всех этапах курса."
+    },
+    {
+      "slug": "arhitektura-i-gradostroitelstv",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Сегодня невозможно существование и развитие города без участия архитекторов. Возрастание роли архитектора в современных условиях определили различные формы архитектурно-проектной деятельности. Архитектор формируется как творческая личность, органически сочетающая в себе художника, инженера, организатора процессов труда, быта и досуга – специалиста, понимающего перспективы развития общества, задачи оздоровления экологии и способного решать проблемы, стоящие перед архитектурой и градостроительством."
+    },
+    {
+      "slug": "stroitelstvo",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Сегодняшний день строительная индустрия динамично развивается, что требует подготовки высококвалифицированных специалистов в области проектирования, строительства, эксплуатации и реконструкции строительных объектов. Профессиональная деятельность инженера-строителя связана с выполнением следующих функций: организация строительного производства и управления строительными процессами, проектирование металлических, железобетонных, каменных конструкций, оснований и фундаментов, а также конструктивных элементов сооружения в целом, решение отдельных вопросов водоснабжения, теплогазоснабжения и вентиляции, разработка технической документации."
+    },
+    {
+      "slug": "alternativnaya-energetika",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Возобновляемая энергетика — это отрасль техники, которая занимается эффективным, безопасным и экономически целесообразным производством и передачей различных форм энергии из автоматически возобновляемых, неисчерпаемых источников энергии, чтобы их можно было использовать во всех различных областях промышленности."
+    },
+    {
+      "slug": "prikladnaya-matematika",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "kosmicheskie-tehnologii",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Подготовка кадров в области космической техники и перспективных космических технологий, динамично развивающихся в Республике Узбекистан для всех отраслей экономики."
+    },
+    {
+      "slug": "stroitelstvo-i-montazh-inzhenernyh-kommunikacij-po-vidam",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "liftostroenie",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Практически все вновь возводимые здания имеют в своем составе лифтовую установку. При этом современные лифты достаточно сложны и разнообразны. Существуют грузовые лифты, скоростные установки, специализированные лифты в больничных комплексах и т.д. Для их обслуживания требуется достаточно много специалистов. Парк оборудования обширен, сфера деятельности широка. Востребованность профессии на среднесрочную перспективу высокая."
+    },
+    {
+      "slug": "ustojchivyj-transport",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "programmnaya-inzheneriya",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "informacionnye-sistemy-i-tehnologii",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "promyshlennaya-inzheneriya-i-menedzhment",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "zhivopis",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Живопись – вид изобразительного искусства, воспроизводящий предметы и явления реального мира с помощью красок.Художник живописец — это творческий человек, который умеет переносить свои мысли, переживания и впечатления на полотно с помощью красок, карандашей и т.д. Это мастер изобразительного и других видов искусств.Профессия художника – это творческий труд, требующий хорошей фантазии, вдохновения и владения техниками рисования. В нашей программе студенты получат фундаментальные знания по Академическому Рисунку, Живописи и Композиции. Изучат основы графического дизайна и скульптуры. Получат теоретические и практические знания в области истории искусства и современного искусства. Пройдут курс по предмету арт маркетинга и методологии живописи. По окончанию обучения студенты будут способны создавать и демонстрировать свои собственные художественные произведения. Работать и применять свои знания в сфере культуры, искусства и дизайна. Осуществлять деятельность в сфере образования."
+    },
+    {
+      "slug": "dizajn-dizajn-interera",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "dizajn-odezhdy",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Образовательная программа «Дизайн одежды» в Ташкентском международном университете Кимё, является одним из направлений школы Искусства. На сегодняшний день данное направление образования является одним из самых востребованных и подразумевает подготовку специалистов для свободной творческой деятельности, также в сфере легкой промышленности. Профессиональная деятельность дизайнера одежды направлена на выполнение следующих задач:"
+    },
+    {
+      "slug": "english-education",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Направления «ENGLISH EDUCATION» представляет собой программу двойного диплома, целью которой является подготовка преподавателей английского языка, а также педагогов по направлениям образования (науки или искусства)."
+    },
+    {
+      "slug": "uzbekskij-yazyk-i-literatura",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "russkij-yazyk-v-inoyazychnyh-gruppah-dlya-uzbekskih-grupp",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "korejskaya-filologiya",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Подготовка преподавателей корейского языка, обладающих профессиональными знаниями в области обучения корейскому языку и широким пониманием корейской культуры."
+    },
+    {
+      "slug": "perevodovedenie-kitajskij-anglijskij",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Направления «Бакалавр переводоведения» (1. английский язык, 2. китайский язык) В рамках этого предмета студенты получают всесторонние знания, касающиеся специфики языка, теории и практики перевода, стиля текста, таких видов перевода, как письменный перевод и интерпретация"
+    },
+    {
+      "slug": "yaponskij-yazyk",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "ruscha-teoriya-i-praktika-perevoda-tureckij-yazyk",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "doshkolnoe-obrazovanie",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Курс дошкольного образования – это курс, который готовит конкурентоспособных специалистов, которые займут свое место в обществе, представляет собой профессиональную подготовку будущих педагогов к образовательному процессу, предназначенному для государственных и частных дошкольных образовательных учреждений Республики Узбекистан, повышение их роли в обществе, обучение на основе новых инновационных технологий и информации, направленное на овладение технологиями и иностранными языками."
+    },
+    {
+      "slug": "nachalnoe-obrazovanie",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Начальное образование является начальной ступенью общего среднего образования. Начальное образование в Республике Узбекистан – это начальный период обучения детей в 1-4 классах и их духовного развития. Важно определить содержание образования."
+    },
+    {
+      "slug": "istoriya",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Введение Направление образования “История” обучает студентов дисциплинам, ориентированных на получение научно-теоретических знаний, умений наблюдать и анализировать основные события истории Узбекистана и всемирной истории также формирование теоретико-методических навыков и профессиональных компетенций по истории. Ташкентский международный университет Кимё заинтересован не только в предоставлении студентам теоретических и практических знаний, но и в применении этих знаний в будущей профессиональной деятельности. Основу образования составляют практические навыки."
+    },
+    {
+      "slug": "specialnaya-pedagogika",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Направление “Специальная педагогика” (Дефектология) - готовит необходимых педагогов для здоровых детей и детей с ограниченными возможностями. “Специальная педагогика” включает в себя 4 направления:"
+    },
+    {
+      "slug": "psihologiya-po-vidam-deyatelnosti",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "fizicheskaya-kultura",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "mezhdunarodnye-otnosheniya",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "buhgalteriya",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Описание Основная информация Бухгалтерский учет играет жизненно важную роль в ведении бизнеса, потому что помогает отслеживать доходы и расходы, обеспечивать соблюдение требований законодательства и предоставлять инвесторам, руководству и государственным органам количественную финансовую информацию, которая может использоваться при принятии деловых решений. Более того, это одна из самых востребованных дисциплин в системе высшего образования."
+    },
+    {
+      "slug": "mezhdunarodnyj-marketing",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Введение Направление образования « Международный маркетинг » является одним из важнейших факторов экономического развития государства, и подготовка молодёжи и направлена на подготовку специалистов для изучения, планирования, реализации и мониторинга маркетинговых и коммуникационных стратегий. Программа знакомит студентов с международными перспективами маркетинга, а также знакомит студентов с международными рынками, международным маркетингом и управлением международным бизнесом. Международный университет Кимё в г. Ташкенте заинтересован не только в предоставлении студентам теоретических и практических знаний, но и в применении этих знаний в будущей профессиональной деятельности. Поэтому основной базой образования является практические навыки."
+    },
+    {
+      "slug": "upravlenie-biznesom",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Направление факультета \"Управление бизнесом\" является одним из важнейших факторов экономического развития любой страны. Эффективная организация деловой активности и широкое участие иностранных инвестиций являются ключевыми факторами в этом направлении. В рейтинге Всемирного банка \"Ведение бизнеса\" стоят на передовых позициях и являются главными составляющими в проводимых реформах в сфере бизнес-сектора. Учитывая потребности рынка труда, в стране предусмотрена подготовка высококвалифицированных кадров в сферах бизнеса, производства, маркетинга, в сферах с различными секторами экономики в соответствии с перспективами социально-экономического развития, а также задачами, изложенными в новой стратегии развития Узбекистана на 2022-2026 годы. Ташкентский международный университет Кимё также заботится не только о том, чтобы предоставить студентам теоретические знания, но и применять эти знания в своей будущей карьере. Поэтому главной основой образования является формирование и развитие практических навыков наряду с теоретическими знаниями.Цель учебной программы: Формирование всеобъемлющих знаний и навыков в области экономики, финансов и налогообложения, предпринимательства и его эффективной организации. Организация встреч с крупными предпринимателями и бизнесменами и обучение высококвалифицированных и квалифицированных кадров в экономике страны, у которых достаточно знаний для эффективной организации своего независимого бизнеса. Дать студентам фундаментальные, теоретические и практические знания и навыки и укрепить их. Подготовка зрелых специалистов в сфере.Результат: Студенты получат диплом после освоения 4-летних программ обучения, а также выпускники смогут продолжить свою трудовую деятельность в органах государственного и хозяйственного управления, секторах частного бизнеса. Они также могут продолжить свое обучение в национальных и зарубежных университетах на этапах магистратуры."
+    },
+    {
+      "slug": "mezhdunarodnye-ekonomicheskie-otnosheniya",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Направление образования \"Международные экономические отношения\" является одним из важнейших факторов экономического развития любой страны. Эффективная организация деловой активности и широкое участие иностранных инвестиций являются ключевыми факторами в этом направлении. В рейтинге Всемирного банка \"Ведение бизнеса\" стоят на передовых позициях и являются главными составляющими в проводимых реформах в сфере экономического сектора страны. Учитывая потребности рынка труда, в стране предусмотрена подготовка высококвалифицированных кадров в сферах международной экономики, бизнеса, производства, маркетинга, в сферах с различными секторами экономики в соответствии с перспективами социально-экономического развития, а также задачами, изложенными в новой стратегии развития Узбекистана на 2022-2026 годы. Ташкентский международный университет Кимё также заботится не только о том, чтобы предоставить студентам теоретические знания, но и применять эти знания в своей будущей карьере. Поэтому главной основой образования является формирование и развитие практических навыков наряду с теоретическими знаниями."
+    },
+    {
+      "slug": "turizmbakalavr",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Turizm sohasi har qanday mamlakatning iqtisodiy rivojlanishi uchun eng muhim sohalardan biri hisoblanadi. Ushbu yoʻnalishda asosiy maqsadimiz tovarlar va xizmatlarning jahon bozorlariga bosqichma-bosqich kirishi uchun turizm xizmatlaridan samarali foydalanish va mamlakatning iqtisodiy oʻsishini oshirish uchun yoshlarni tayyorlash. Shuningdek, Turizm yoʻnalishi mehmondoʻstlik, transport, koʻngilochar va madaniy meros kabi koʻplab sohalarni oʻz ichiga oladi. Turizm sohasida muvaffaqiyatga erishish uchun sayohatga boʻlgan ishtiyoq, mijozlarga yuqori saviyada xizmat koʻrsatish yoʻnalishi sanalib, tez sur’atda, doimiy oʻzgaruvchan muhitda yaxshi ishlash qobiliyatiga ega boʻlish muhimdir."
+    },
+    {
+      "slug": "finansy",
+      "name": "Программы",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Описание Основная информация Всем известно, что основой рыночной экономики являются товарно-денежные отношения, можно утверждать, что «финансы» играют важную роль в макроэкономике при формировании и управлении денежными отношениями, повышении эффективности, рациональном использовании материальных, трудовых и финансовых ресурсов. В стране большое значение уделяется такой сфере образования, как «Финансы». Более того, это одна из самых востребованных дисциплин в сфере высшего образования."
+    }
+  ],
+  "en": [
+    {
+      "slug": "beauty-aesthetics",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Aesthetics is a branch of cosmetology that makes use of minimally or non-invasive procedures. The key feature of the educational direction is that professionals who wish to work in this area must hold a bachelor's degree in Cosmetology. These graduates are beauty and skin specialists with the necessary knowledge and abilities; they are not medical professionals or doctors. Although this is a service industry unrelated to medicine, a professional with a cosmetology diploma is nonetheless directly in charge of the client's health."
+    },
+    {
+      "slug": "dentistry",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "The department of Bachelors in Dentistry- is designed to prepare specialists in a higher educational institution for the improvement of professional activities in governmental and private entities, public health care, state and executive branches, and other sectors. Additionally, it includes the main tasks of utilizing alternative methods of diagnosis and treatment in a wide spectrum to deal with the medical problems of patients. Development of Professional dental care and dispensary observation techniques (therapeutic and preventive, medico-social), organizing scientific research centers, and taking part in scientific production organizations are also included in the program."
+    },
+    {
+      "slug": "general-medicine",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Direction of General Medicine – is the direction in field of health care, which covers a set of medical spheres, methods, practices of human activity, aimed to developing the medical sphere and professional skills. In our country the department of General Medicine is one of the most famous departments, which has been providing medical education to specialists of that sphere during hundred years. General Medicine is an established discipline and has been taught in Uzbekistan for hundreds of years."
+    },
+    {
+      "slug": "pediatrics",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Pediatrics is a direction of undergraduate education related to the field of “Healthcare”, and the fields of professional activity of bachelors are the maintenance of children’s health in state and non-state enterprises, organizations, institutions, and state administration bodies maintenance covers a complex of areas involved in solving the complex problem of strengthening, prevention and treatment of children’s diseases"
+    },
+    {
+      "slug": "biotechnology",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "nursing-information",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Nursing - the field belonging to educational and healthcare systems in institutions, conducting preventative measures of spreading acute and chronic diseases among the population, promoting a healthy lifestyle, solving the main problems of improving the wellness of patients with the wide use of modern methods, covering a set of professional fields related to the complex issues of performing medical and social tasks at the primary level of the healthcare system. The duration of the study is 4 years."
+    },
+    {
+      "slug": "computer-engineering",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "information-system-engineering",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Information systems engineering is an interdisciplinary field that combines disciplines such as mathematics, business, and computer science. Information systems engineers develop and test systems that are primarily used for data. Information systems can take many forms, including geographic information systems, meteorological image processing, or communications networks. Information systems engineers work in the public and private sectors, including defense agencies, the medical industry, and financial corporations."
+    },
+    {
+      "slug": "electrical-engineering",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Electrical engineering is the branch of engineering that studies the application of electrical phenomena through electromagnetic fields and circuit theory. This sector is of particular interest in electrical power systems, electrical machines and drives, electronic power converters, electrical systems for vehicles, electrical and electronic measurements, circuit theory and electromagnetic compatibility. The Electrical Engineering program covers all subjects required for undergraduate and graduate electrical engineering education. Today, social and industrial growth is largely based on the availability of energy in a form that can easily be converted into electromagnetic waves for light, heat, motion, data transmission and remote processing, and electrochemical activity. Electricity is the most efficient way to convert energy from primary energy sources and transport it to distant places. Its characteristics make electricity unique for many activities in everyday life, households, industry or services. Electricity is easy to manage and environmentally friendly. More than a third of the energy consumed in our country is converted into electricity before its final use. Electrical engineering is multidisciplinary and covers many different fields of application. These include electric machines, electronic power converters, transformers, power transmission and distribution networks, electrical systems for domestic and industrial applications, industrial automation, traction, heavy metal industry, and electromagnetic compatibility."
+    },
+    {
+      "slug": "traffic-management",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "The management of stationary and moving traffic, including pedestrians, bicycles, and all forms of vehicles, is referred to as traffic management. Its goal is to provide the efficient, safe, and effective movement of people and goods while also protecting and, when feasible, improving the quality of the local environment on and around roadways."
+    },
+    {
+      "slug": "mechanical-engineering",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Mechanical engineering is the branch of engineering that deals with the design, construction, and operation of machines and systems. Mechanical engineers use the principles of physics and materials science to design and develop a wide range of products, from medical devices and automobiles to power plants and manufacturing plants. They also work in a variety of systems such as heating and cooling, fluid dynamics, and renewable energy."
+    },
+    {
+      "slug": "mechatronics",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Mechatronics is an interdisciplinary field that combines mechanical engineering, electrical engineering, and computer science to design, develop, and control advanced systems and devices. Mechatronics is used in a wide range of applications, including manufacturing, automation, robotics, aerospace, and consumer electronics."
+    },
+    {
+      "slug": "architecture-and-urban-planning",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Today, the existence and development of the city are impossible without the participation of architects. The increasing role of the architect in modern conditions has determined various forms of architectural and design activities. An architect is formed as a creative person, organically combining the facets of an artist, an engineer, and an organizer of the processes of work – they are specialists who understand the prospects for the development of society, the task of improving the environment and is able to solve the problems facing architecture and urban planning. The duration of the educational program is four years. During the training period, students, future architects, study various disciplines related to the history of art, architecture, and urban planning, as well as disciplines related to construction specialties such as building materials, architectural structures, architectural physics, engineering communications, etc. Particular attention is paid to language training. A significant part of the learning process is occupied by practical classes, where students receive modern knowledge and skills in designing a building and structure, starting with the simplest (individual residential building) and ending with complex, multifunctional objects (community center, theater)."
+    },
+    {
+      "slug": "civil-engineering",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Today, the construction industry is rapidly developing, which requires the training of highly qualified specialists in the field of design, construction, operation, and reconstruction of construction objects. The professional activity of a construction engineer is related to the following functions: organization of construction production and management of construction processes, design of metal, reinforced concrete, stone structures, floors, and foundations, as well as structural elements of the structure in general; contributing to the solution of such issues as water supply, heat, and gas supply and ventilation, as well as the drawing-up of technical documents."
+    },
+    {
+      "slug": "alternative-energy",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Renewable energy is a branch of engineering that deals with the efficient, safe and cost-effective generation and transmission of various forms of energy from renewable, exhaustible energy sources automatically for use in all industries. Renewable energy has recently become an important area of research in view of the ever-increasing prices of conventional energy and the increasing need and demand for energy. Some examples of renewable energy sources are: Solar Energy: Energy generated from solar radiation, either directly through photovoltaic (PV) cells or indirectly through concentrated solar power (CSP) systems. Wind Energy: Energy is generated from the movement of the wind, usually through wind turbines. Hydropower: Energy generated by the movement of water, usually through hydroelectric dams. Geothermal Energy: Energy generated from heat in the earth, usually through geothermal power plants. Bioenergy: Energy generated from organic matter such as plant material and waste."
+    },
+    {
+      "slug": "applied-mathematics",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "space-technology",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Training of personnel in the field of space technology and advanced space technologies, dynamically developing in the Republic of Uzbekistan for all sectors of the economy."
+    },
+    {
+      "slug": "construction-and-installation-of-engineering-communications-by-types",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "lift-engineering",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Lift engineering is a specialized field of mechanical engineering that focuses on the design, development, and maintenance of lifts. Lift engineers are responsible for ensuring the safety, efficiency, and reliability of these systems."
+    },
+    {
+      "slug": "artificial-intellegence",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "sustainable-transport",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "software-engineering",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "information-systems-and-technologies",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "industrial-engineering-and-management",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "painting",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Painting is a form of fine art that uses paint to represent real-world objects and phenomena. An artist painter is a creative person who is adept at using paints and pencils to convey their ideas, impressions, and experiences onto the canvas. They are skilled in the fine and performing arts. Being an artist is a creative job that calls for a strong sense of inspiration, imagination, and drawing skill expertise. Students who enrol in our program will master the fundamentals of Academic Drawing, Painting, and Composition as well as Graphic Design and Sculpture. Additionally, they will acquire both theoretical and practical knowledge and skills in the areas of contemporary art and art history. They will enrol in classes in paint methodology and art marketing. Upon graduation, students will be qualified to produce and exhibit their own works of art, work and apply their expertise in the fields of culture, art, and design, and engage in educational activities."
+    },
+    {
+      "slug": "design-interior-design",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "fashion-design",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Fashion Design is one of the directions of the School of Art at Kimyo International University in Tashkent. Nowadays Fashion Design is one of the most popular education programs which involves the training of future specialists in creative spheres as well as in light industry."
+    },
+    {
+      "slug": "english-education",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "The course Bachelor of Education is a double degree programme with the aim to prepare teachers of the English language as well as educators in one of the selected content areas (science or arts)."
+    },
+    {
+      "slug": "uzbek-language-and-literature",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "russian-language-in-foreign-language-groups-for-uzbek-groups",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "korean-philology",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "The study of the Korean language and literature is known as Korean philology. It also involves interpretation and analysis of Korean literature, including poetry, fiction, and theatre, as well as the history, structure, and usage of the Korean language. The linguistic and cultural factors that have shaped Korean literature and language are also a subject of study for Korean philologists."
+    },
+    {
+      "slug": "translation-studies-chinese-and-english-languages",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "The course Bachelor of Translation studies (1. English, 2. Chinese) Within the framework of this subject, students receive comprehensive knowledge regarding the specifics of the language, theory and practice of translation, text style, types of translation such as written translation and interpretation"
+    },
+    {
+      "slug": "japanese-language",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "theory-and-practice-of-translation-turkish",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "preschool-education",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Course description Preschool Education aims to prepare future educators at a professional level for the educational process intended for public and private preschool educational institutions in the Republic of Uzbekistan. It also aims to increase their social impact by teaching using cutting-edge educational techniques and information technology. The main goal of preschool education is to give young children a secure, supportive, and stimulating environment that will help them prepare for later education. Children participate in a variety of activities in preschool education that aid in the development of their social, emotional, physical, and cognitive skills. Play-based techniques, artistic creation, storytelling, music, and movement are some examples of these activities. Additionally, preschool instruction aids in the language, self-assurance, and self-esteem development of young learners."
+    },
+    {
+      "slug": "primary-education",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "The first phase of secondary education is called Primary Education. In the Republic of Uzbekistan, primary education is the beginning phase of instruction for pupils in grades 1-4 and their spiritual growth. Determining the educational content of the syllabus at this point is crucial."
+    },
+    {
+      "slug": "history",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Students are taught disciplines under the academic direction \"History\" that are intended to help them acquire scientific and theoretical knowledge, the capacity to observe and evaluate significant historical events in Uzbekistan and around the world, as well as the development of theoretical and methodological knowledge, skills, and professional competencies in historical science."
+    },
+    {
+      "slug": "special-pedagogy",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "The Special Pedagogy (Defectology) trains teaching professionals for both able-bodied children and children with special educational needs."
+    },
+    {
+      "slug": "psychology",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "physical-culture",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "banking",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Financial institutions that accept deposits, provide loans, and offer a range of other financial services to their clients are engaged in banking. By enabling the movement of money and offering a secure location for consumers to keep and manage their money, banks play a critical role in the economy. Commercial banks, credit unions, and investment banks are just a few of the various types of banks. Both individuals and businesses are provided with a wide range of services, such as checking and savings accounts, loans, and other financial goods by banks. Investment banks offer government and corporate clients services like advising on mergers and acquisitions and underwriting securities."
+    },
+    {
+      "slug": "international-relations",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": ""
+    },
+    {
+      "slug": "accounting",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "The process of recording, categorizing, and compiling financial transactions is known as accounting. It entails devising financial statements that show the financial situation of the company, such as the balance sheet, income statement, and cash flow statement. In addition to calculating taxes due, accounting encompasses producing reports for various stakeholders, such as creditors, investors, and governmental organizations. For this reason, higher education institutions have a high demand for this field of study."
+    },
+    {
+      "slug": "international-marketing",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "The process of advertising, selling, and distributing a company's goods or services across borders is known as international marketing. International marketing can offer fascinating employment prospects for those interested in international business, having excellent interpersonal and communication skills, and functioning well in a variety of cross-cultural situations. Understanding cultural variations, worldwide business practices, and the influence of politics and the economy on customer behavior are all important components of international marketing. Additionally, it entails creating and maintaining connections with regional distributors, partners, and clients in overseas markets."
+    },
+    {
+      "slug": "business-management",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Business management is the practice of efficiently managing and controlling a business or organization. Strong organizational, leadership, and problem-solving skills are needed for business management, as well as knowledge of financial, economic, and market trends. Success in business management frequently needs experience, knowledge, continuous learning, and the ability to adapt to new conditions as the industry is constantly changing. A business manager is in charge of managing the day-to-day activities of the company, including operations, finances, human resources, marketing, and other areas. They might also participate in decision-making that has an impact on the organization's overall success, strategy creation, and implementation of plans."
+    },
+    {
+      "slug": "international-economic-relations",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Studying how nations interact with one another in terms of trade, investment, and financial flows is the main focus of international economic relations. It is a multidisciplinary field that includes aspects of political science, economics, and international relations and is essential to comprehending how countries interact with one another and how this collaboration affects the world economy. Deep knowledge of politics, economics, and international relations are frequently necessary for success in this sector, as is the commitment to continuously study and adjust to shifting circumstances on a global scale."
+    },
+    {
+      "slug": "tourism",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "Turizm sohasi har qanday mamlakatning iqtisodiy rivojlanishi uchun eng muhim sohalardan biri hisoblanadi. Ushbu yoʻnalishda asosiy maqsadimiz tovarlar va xizmatlarning jahon bozorlariga bosqichma-bosqich kirishi uchun turizm xizmatlaridan samarali foydalanish va mamlakatning iqtisodiy oʻsishini oshirish uchun yoshlarni tayyorlash. Shuningdek, Turizm yoʻnalishi mehmondoʻstlik, transport, koʻngilochar va madaniy meros kabi koʻplab sohalarni oʻz ichiga oladi. Turizm sohasida muvaffaqiyatga erishish uchun sayohatga boʻlgan ishtiyoq, mijozlarga yuqori saviyada xizmat koʻrsatish yoʻnalishi sanalib, tez sur’atda, doimiy oʻzgaruvchan muhitda yaxshi ishlash qobiliyatiga ega boʻlish muhimdir."
+    },
+    {
+      "slug": "finance",
+      "name": "Programs",
+      "image": "/static/img/logo.f177ff7dfd83.png",
+      "description": "The subject matter of finance is the management of money, investments and other financial assets. Effective risk management and resource allocation entail gathering, analyzing, and interpreting financial data. Finance includes a wide range of subjects including investment, banking, insurance, real estate, accounting, and economics. It deals with both personal and corporate finance."
+    }
+  ]
+}
