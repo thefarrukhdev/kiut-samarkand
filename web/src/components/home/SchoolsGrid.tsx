@@ -113,7 +113,7 @@ export function SchoolsGrid({
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary tracking-tight">
             {t.title}
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#334155] leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
             {t.description}
           </p>
 
@@ -129,7 +129,7 @@ export function SchoolsGrid({
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   activeTab === tab.id
                     ? "bg-primary text-white shadow-sm"
-                    : "bg-white text-[#334155] hover:text-primary border border-slate-200 hover:border-slate-300"
+                    : "bg-white text-slate-600 hover:text-primary border border-slate-200 hover:border-slate-300"
                 }`}
               >
                 {tab.label}
@@ -198,14 +198,14 @@ export function SchoolsGrid({
                       <h3 className="text-xl sm:text-2xl font-bold text-primary group-hover:text-accent transition-colors">
                         {faculty.name}
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#334155] line-clamp-2 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed">
                         {faculty.description}
                       </p>
 
                       {/* Highlights */}
                       <div className="space-y-1.5 pt-2 border-t border-slate-100">
                         {faculty.highlights.map((h, i) => (
-                          <div key={i} className="flex items-start gap-2 text-xs text-[#334155]">
+                          <div key={i} className="flex items-start gap-2 text-xs text-slate-600">
                             <CheckCircle2 className="h-3.5 w-3.5 text-accent shrink-0 mt-0.5" />
                             <span className="line-clamp-1">{h}</span>
                           </div>
@@ -221,7 +221,7 @@ export function SchoolsGrid({
                           {faculty.popularPrograms.slice(0, 3).map((prog) => (
                             <span
                               key={prog}
-                              className="text-[11px] font-semibold text-[#334155] bg-surface border border-slate-200/60 px-2.5 py-1 rounded-lg"
+                              className="text-[11px] font-semibold text-slate-600 bg-surface border border-slate-200/60 px-2.5 py-1 rounded-lg"
                             >
                               {prog}
                             </span>
@@ -346,7 +346,7 @@ export function SchoolsGrid({
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
                     {t.modalAbout}
                   </h4>
-                  <p className="text-sm text-[#334155] leading-relaxed">
+                  <p className="text-sm text-slate-600 leading-relaxed">
                     {modalFaculty.description}
                   </p>
                 </div>
@@ -397,7 +397,7 @@ export function SchoolsGrid({
                           </button>
 
                           {isExpanded && prog.description && (
-                            <div className="px-3 pb-3 pt-1 text-xs text-[#334155] bg-white border-t border-slate-200/80 leading-relaxed">
+                            <div className="px-3 pb-3 pt-1 text-xs text-slate-600 bg-white border-t border-slate-200/80 leading-relaxed">
                               {prog.description}
                             </div>
                           )}

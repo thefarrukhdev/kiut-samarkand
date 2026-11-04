@@ -17,19 +17,22 @@ import { TopBar } from "@/components/layout/TopBar";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingContact } from "@/components/shared/FloatingContact";
+import { AdmissionModal } from "@/components/shared/AdmissionModal";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { useTranslation, useLocale } from "@/lib/i18n";
 import { formatUzbekistanPhone, isValidUzbekistanPhone } from "@/lib/phone";
 
 export default function ContactPage() {
-  const { locale } = useLocale();
+  const { locale, setLocale } = useLocale();
   const { t } = useTranslation("footer");
 
   const [fullName, setFullName] = React.useState("");
   const [phone, setPhone] = React.useState("+998 ");
   const [message, setMessage] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [admissionModalOpen, setAdmissionModalOpen] = React.useState(false);
 
   const breadcrumbHome = locale === "ru" ? "Главная" : locale === "en" ? "Home" : "Bosh sahifa";
   const breadcrumbContact = locale === "ru" ? "Контакты" : locale === "en" ? "Campus & Contacts" : "Aloqa va Manzil";
@@ -38,10 +41,30 @@ export default function ContactPage() {
     setPhone(formatUzbekistanPhone(e.target.value));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName.trim() || !isValidUzbekistanPhone(phone)) return;
-    setSubmitted(true);
+    if (!fullName.trim() || !isValidUzbekistanPhone(phone) || isSubmitting) return;
+    setIsSubmitting(true);
+    try {
+      await fetch("/api/admission", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName: fullName.trim(),
+          phone,
+          selectedFaculty: "Murojaat va Konsultatsiya",
+          degree: "Bakalavriat",
+          language: "O'zbek",
+          studyType: "Kunduzgi",
+        }),
+      });
+      setSubmitted(true);
+    } catch {
+      // Graceful fallback
+      setSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const departments = [
@@ -74,7 +97,10 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col min-h-screen bg-surface">
       <TopBar />
-      <Navbar />
+      <Navbar
+        onLocaleChange={(newLocale) => setLocale(newLocale)}
+        onOpenAdmissionModal={() => setAdmissionModalOpen(true)}
+      />
 
       <main className="flex-1">
         {/* Breadcrumb Bar */}
@@ -318,7 +344,12 @@ export default function ContactPage() {
       </main>
 
       <Footer />
-      <FloatingContact />
+      <FloatingContact onOpenAdmissionModal={() => setAdmissionModalOpen(true)} />
+      <AdmissionModal
+        isOpen={admissionModalOpen}
+        onClose={() => setAdmissionModalOpen(false)}
+        defaultFaculty="Tibbiyot fakulteti"
+      />
     </div>
   );
 }

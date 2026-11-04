@@ -25,8 +25,12 @@ import { Container } from "@/components/ui/container";
 import { useTranslation, useLocale } from "@/lib/i18n";
 
 export default function AdmissionPage() {
-  const { locale } = useLocale();
+  const { locale, setLocale } = useLocale();
   const { t } = useTranslation("admission");
+
+  const scrollToForm = React.useCallback(() => {
+    document.getElementById("admission-form")?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   const breadcrumbHome = locale === "ru" ? "Главная" : locale === "en" ? "Home" : "Bosh sahifa";
   const breadcrumbAdmission = locale === "ru" ? "Прием 2026/2027" : locale === "en" ? "Admissions 2026/2027" : "Qabul 2026/2027";
@@ -88,7 +92,10 @@ export default function AdmissionPage() {
   return (
     <div className="flex flex-col min-h-screen bg-surface">
       <TopBar />
-      <Navbar />
+      <Navbar
+        onLocaleChange={(newLocale) => setLocale(newLocale)}
+        onOpenAdmissionModal={scrollToForm}
+      />
 
       <main className="flex-1">
         {/* Breadcrumb Bar */}
@@ -149,7 +156,9 @@ export default function AdmissionPage() {
                 </div>
                 <div>
                   <span className="text-xs text-slate-500 font-semibold block">{t.hotlineHours}</span>
-                  <span className="text-sm font-bold text-primary block mt-0.5">Dush – Shanba: 09:00 – 18:00</span>
+                  <span className="text-sm font-bold text-primary block mt-0.5">
+                    {locale === "ru" ? "Пн – Сб: 09:00 – 18:00" : locale === "en" ? "Mon – Sat: 09:00 – 18:00" : "Dush – Shanba: 09:00 – 18:00"}
+                  </span>
                 </div>
               </div>
 
@@ -175,7 +184,9 @@ export default function AdmissionPage() {
                   <span className="text-xs text-slate-500 font-semibold block">
                     {locale === "ru" ? "Аккредитация" : locale === "en" ? "Accreditation" : "Litsenziya"}
                   </span>
-                  <span className="text-sm font-bold text-primary block mt-0.5">№ 039281 Davlat Litsenziyasi</span>
+                  <span className="text-sm font-bold text-primary block mt-0.5">
+                    {locale === "ru" ? "Гослицензия № 039281" : locale === "en" ? "State License № 039281" : "№ 039281 Davlat Litsenziyasi"}
+                  </span>
                 </div>
               </div>
             </div>
@@ -269,7 +280,7 @@ export default function AdmissionPage() {
       </main>
 
       <Footer />
-      <FloatingContact />
+      <FloatingContact onOpenAdmissionModal={scrollToForm} />
     </div>
   );
 }

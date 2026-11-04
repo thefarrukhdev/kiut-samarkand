@@ -105,7 +105,7 @@ export function AdmissionCTA({
                 return (
                   <div
                     key={`${benefit.title}-${currentLocale}`}
-                    className="p-4 rounded-2xl bg-[#1E3A66] border border-white/15 flex items-start gap-3.5 hover:bg-[#234275] transition-colors"
+                    className="p-4 rounded-2xl bg-white/10 border border-white/15 flex items-start gap-3.5 hover:bg-white/15 transition-colors"
                   >
                     <div className="p-2 rounded-xl bg-accent/20 text-accent shrink-0 mt-0.5">
                       <Icon className="h-5 w-5" />
@@ -165,7 +165,7 @@ export function AdmissionCTA({
                       <h3 className="text-2xl font-black text-primary">
                         {t.formTitle}
                       </h3>
-                      <p className="text-xs text-[#334155] mt-1">
+                      <p className="text-xs text-slate-600 mt-1">
                         {t.formSubtitle}
                       </p>
                     </div>
@@ -281,7 +281,7 @@ export function AdmissionCTA({
                             className={`py-2 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
                               language === l.value
                                 ? "bg-primary text-white border-primary"
-                                : "bg-surface text-[#334155] border-slate-200 hover:border-slate-300 hover:text-primary"
+                                : "bg-surface text-slate-600 border-slate-200 hover:border-slate-300 hover:text-primary"
                             }`}
                             aria-pressed={language === l.value}
                           >
@@ -336,7 +336,7 @@ export function AdmissionCTA({
                       <h3 className="text-2xl font-bold text-primary">
                         {t.successGreeting} {fullName}!
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#334155] leading-relaxed max-w-sm mx-auto">
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-sm mx-auto">
                         <strong>{faculty}</strong> ({degree}, {studyType}) {t.successMessage}
                       </p>
                     </div>

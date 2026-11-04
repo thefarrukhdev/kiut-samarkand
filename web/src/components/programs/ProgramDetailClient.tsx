@@ -120,7 +120,7 @@ export function ProgramDetailClient({ slug }: ProgramDetailClientProps) {
       case "engineering":
         return "bg-accent-light text-accent border-accent/25";
       case "economy":
-        return "bg-amber-50 text-amber-700 border-amber-200";
+        return "bg-slate-100 text-primary border-slate-200";
       case "education":
         return "bg-purple-50 text-purple-700 border-purple-200";
       case "philology":

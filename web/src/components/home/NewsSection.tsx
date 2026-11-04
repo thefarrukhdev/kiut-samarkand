@@ -86,26 +86,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
   const t = propLocale ? (translations[propLocale]?.news || contextT) : contextT;
 
   const [activeFilter, setActiveFilter] = React.useState<string>("all");
-  const [selectedArticle, setSelectedArticle] = React.useState<EnrichedNewsItem | null>(null);
-
-  // Lock body scroll and handle Escape key on modal
-  React.useEffect(() => {
-    if (selectedArticle) {
-      document.body.style.overflow = "hidden";
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          setSelectedArticle(null);
-        }
-      };
-      document.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.body.style.overflow = "";
-        document.removeEventListener("keydown", handleKeyDown);
-      };
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [selectedArticle]);
+  const [selectedArticleSlug, setSelectedArticleSlug] = React.useState<string | null>(null);
 
   // Transform raw scraped news data dynamically for currentLocale
   const enrichedArticles: EnrichedNewsItem[] = React.useMemo(() => {
@@ -137,6 +118,30 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
       };
     });
   }, [currentLocale]);
+
+  const selectedArticle = React.useMemo(() => {
+    if (!selectedArticleSlug) return null;
+    return enrichedArticles.find((a) => a.slug === selectedArticleSlug) || null;
+  }, [enrichedArticles, selectedArticleSlug]);
+
+  // Lock body scroll and handle Escape key on modal
+  React.useEffect(() => {
+    if (selectedArticle) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setSelectedArticleSlug(null);
+        }
+      };
+      document.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [selectedArticle]);
 
   const filteredArticles = React.useMemo(() => {
     return activeFilter === "all"
@@ -178,7 +183,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary tracking-tight">
               {t.title}
             </h2>
-            <p className="mt-3 text-base sm:text-lg text-[#334155]">
+            <p className="mt-3 text-base sm:text-lg text-slate-600">
               {t.description}
             </p>
           </div>
@@ -195,7 +200,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                 className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   activeFilter === tab.id
                     ? "bg-primary text-white shadow-sm"
-                    : "bg-surface text-[#334155] hover:text-primary border border-slate-200 hover:border-slate-300"
+                    : "bg-surface text-slate-600 hover:text-primary border border-slate-200 hover:border-slate-300"
                 }`}
               >
                 {tab.label}
@@ -257,7 +262,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                     </h3>
 
                     {/* Summary */}
-                    <p className="text-xs sm:text-sm text-[#334155] line-clamp-3 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed">
                       {article.summary}
                     </p>
                   </div>
@@ -266,7 +271,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                   <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                     <button
                       type="button"
-                      onClick={() => setSelectedArticle(article)}
+                      onClick={() => setSelectedArticleSlug(article.slug)}
                       className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-accent hover:text-accent-hover group/btn transition-colors cursor-pointer"
                     >
                       <span>{t.readMore}</span>
@@ -311,7 +316,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setSelectedArticle(null)}
+              onClick={() => setSelectedArticleSlug(null)}
               className="fixed inset-0 bg-slate-950/75"
             />
 
@@ -327,13 +332,14 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                   src={selectedArticle.image}
                   alt={selectedArticle.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 768px"
                   className="object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
 
                 <button
                   type="button"
-                  onClick={() => setSelectedArticle(null)}
+                  onClick={() => setSelectedArticleSlug(null)}
                   className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 text-white hover:bg-black transition-colors cursor-pointer"
                   aria-label={t.modalClose}
                 >
@@ -366,7 +372,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                   </span>
                 </div>
 
-                <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
+                <div className="text-sm sm:text-base text-slate-600 leading-relaxed space-y-4">
                   <p className="font-medium text-primary">
                     {selectedArticle.summary}
                   </p>
@@ -383,7 +389,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
               {/* Modal Footer */}
               <div className="p-4 border-t border-slate-100 bg-surface flex justify-end">
                 <Button
-                  onClick={() => setSelectedArticle(null)}
+                  onClick={() => setSelectedArticleSlug(null)}
                   variant="secondary"
                   size="default"
                   className="font-bold border-slate-200"

@@ -275,7 +275,9 @@ export default function AboutPage() {
               <div className="flex flex-col md:flex-row items-center gap-8">
                 <div className="h-28 w-28 sm:h-36 sm:w-36 rounded-2xl bg-primary text-white flex flex-col items-center justify-center shrink-0 shadow-lg text-center p-3">
                   <GraduationCap className="h-10 w-10 text-accent mb-1" />
-                  <span className="text-[11px] font-black uppercase tracking-wider">TKXU Samarqand</span>
+                  <span className="text-[11px] font-black uppercase tracking-wider">
+                    {locale === "ru" ? "ТМУК Самарканд" : locale === "en" ? "KIUT Samarkand" : "TKXU Samarqand"}
+                  </span>
                 </div>
                 <div className="space-y-3 text-center md:text-left">
                   <span className="text-xs font-black uppercase tracking-widest text-accent">

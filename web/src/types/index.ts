@@ -9,25 +9,6 @@ export interface HeroSlide {
   ctaLink?: string;
 }
 
-export interface UniversityStat {
-  value: string;
-  label: string;
-  icon?: string;
-}
-
-export interface FacultyProgram {
-  slug: string;
-  name: string;
-  school: string;
-  degree: "Bakalavr" | "Magistratura";
-  duration: string;
-  language: string;
-  description: string;
-  image: string;
-  tuitionFee?: string;
-  careerProspects?: string[];
-}
-
 export interface ProgramItem {
   id: string;
   slug: string;
@@ -40,24 +21,6 @@ export interface ProgramItem {
   modes: Array<"day" | "evening" | "distance">;
   description: string;
   career: string;
-}
-
-export interface ScholarshipItem {
-  id: string;
-  title: string;
-  coverage: string;
-  badge: string;
-  description: string;
-  eligibility: string;
-}
-
-export interface CampusCluster {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  image: string;
-  features: string[];
 }
 
 export interface FaqItem {

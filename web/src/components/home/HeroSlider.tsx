@@ -263,7 +263,7 @@ export function HeroSlider({
           ? "University Hero Showcase"
           : "Universitet Asosiy Qismi"
       }
-      className="relative bg-gradient-to-b from-white via-[#F8FAFC] to-surface border-b border-slate-200/80 overflow-hidden py-10 sm:py-14 lg:py-18"
+      className="relative bg-gradient-to-b from-white via-slate-50 to-surface border-b border-slate-200/80 overflow-hidden py-10 sm:py-14 lg:py-18"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}

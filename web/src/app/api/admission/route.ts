@@ -65,8 +65,14 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString(),
     };
 
-    // Log the lead record for operational auditing
-    console.log("[ADMISSION_LEAD_SUBMISSION]", JSON.stringify(leadRecord));
+    // Log the lead record for operational auditing (PII-masked)
+    console.log("[ADMISSION_LEAD_SUBMISSION]", {
+      confirmationId,
+      selectedFaculty: leadRecord.selectedFaculty,
+      degree: leadRecord.degree,
+      studyType: leadRecord.studyType,
+      submittedAt: leadRecord.submittedAt,
+    });
 
     return NextResponse.json({
       success: true,

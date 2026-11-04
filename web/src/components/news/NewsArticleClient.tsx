@@ -346,7 +346,7 @@ export function NewsArticleClient({
                       ) : (
                         <>
                           <Copy className="w-4 h-4 text-muted" />
-                          <span>Nusxalash</span>
+                          <span>{locale === "ru" ? "Копировать" : locale === "en" ? "Copy" : "Nusxalash"}</span>
                         </>
                       )}
                     </button>
@@ -382,7 +382,7 @@ export function NewsArticleClient({
                     href="/news"
                     className="text-xs font-semibold text-accent hover:text-accent-hover transition-colors inline-flex items-center gap-1"
                   >
-                    <span>Barchasi</span>
+                    <span>{locale === "ru" ? "Все" : locale === "en" ? "View all" : "Barchasi"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -454,7 +454,7 @@ export function NewsArticleClient({
       <Footer />
 
       {/* Floating Action Button */}
-      <FloatingContact />
+      <FloatingContact onOpenAdmissionModal={() => setAdmissionModalOpen(true)} />
 
       {/* Admission Modal */}
       <AdmissionModal

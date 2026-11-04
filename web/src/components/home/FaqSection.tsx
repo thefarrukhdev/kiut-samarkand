@@ -240,7 +240,7 @@ export function FaqSection({
                   <button
                     type="button"
                     onClick={() => toggleFaq(index)}
-                    className="w-full p-5 sm:p-6 text-left flex items-start justify-between gap-4 cursor-pointer focus:outline-none"
+                    className="w-full p-5 sm:p-6 text-left flex items-start justify-between gap-4 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset"
                     aria-expanded={isOpen}
                   >
                     <span className="text-sm sm:text-base font-bold text-primary leading-snug">

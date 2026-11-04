@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import {
   Search,
   X,
@@ -25,16 +26,32 @@ import { PROGRAMS_DATA } from "@/data/programs";
 import { resolveFacultyName } from "@/lib/admissions";
 import type { ProgramItem } from "@/types";
 
-export function ProgramsDirectoryClient() {
+function ProgramsDirectoryContent() {
   const { locale, setLocale } = useLocale();
+  const searchParams = useSearchParams();
   const dict = React.useMemo(() => getProgramsDictionary(locale), [locale]);
+
+  const urlFaculty = searchParams.get("faculty");
+  const urlDegree = searchParams.get("degree");
+  const urlFormat = searchParams.get("format");
+  const urlLang = searchParams.get("lang");
 
   // Filters State
   const [searchQuery, setSearchQuery] = React.useState("");
-  const [selectedFaculty, setSelectedFaculty] = React.useState<string>("all");
-  const [selectedDegree, setSelectedDegree] = React.useState<string>("all");
-  const [selectedFormat, setSelectedFormat] = React.useState<string>("all");
-  const [selectedLanguage, setSelectedLanguage] = React.useState<string>("all");
+  const [userFaculty, setUserFaculty] = React.useState<string | null>(null);
+  const [userDegree, setUserDegree] = React.useState<string | null>(null);
+  const [userFormat, setUserFormat] = React.useState<string | null>(null);
+  const [userLanguage, setUserLanguage] = React.useState<string | null>(null);
+
+  const selectedFaculty = userFaculty ?? (urlFaculty || "all");
+  const selectedDegree = userDegree ?? (urlDegree || "all");
+  const selectedFormat = userFormat ?? (urlFormat || "all");
+  const selectedLanguage = userLanguage ?? (urlLang || "all");
+
+  const setSelectedFaculty = React.useCallback((val: string) => setUserFaculty(val), []);
+  const setSelectedDegree = React.useCallback((val: string) => setUserDegree(val), []);
+  const setSelectedFormat = React.useCallback((val: string) => setUserFormat(val), []);
+  const setSelectedLanguage = React.useCallback((val: string) => setUserLanguage(val), []);
 
   // Modal State
   const [admissionModalOpen, setAdmissionModalOpen] = React.useState(false);
@@ -102,10 +119,10 @@ export function ProgramsDirectoryClient() {
 
   const resetAllFilters = React.useCallback(() => {
     setSearchQuery("");
-    setSelectedFaculty("all");
-    setSelectedDegree("all");
-    setSelectedFormat("all");
-    setSelectedLanguage("all");
+    setUserFaculty("all");
+    setUserDegree("all");
+    setUserFormat("all");
+    setUserLanguage("all");
   }, []);
 
   const handleOpenAdmission = React.useCallback(
@@ -125,7 +142,7 @@ export function ProgramsDirectoryClient() {
       case "engineering":
         return "bg-accent-light text-accent border-accent/25";
       case "economy":
-        return "bg-amber-50 text-amber-700 border-amber-200";
+        return "bg-slate-100 text-primary border-slate-200";
       case "education":
         return "bg-purple-50 text-purple-700 border-purple-200";
       case "philology":
@@ -451,5 +468,13 @@ export function ProgramsDirectoryClient() {
         defaultFaculty={targetFaculty}
       />
     </div>
+  );
+}
+
+export function ProgramsDirectoryClient() {
+  return (
+    <React.Suspense fallback={<div className="min-h-screen bg-surface" />}>
+      <ProgramsDirectoryContent />
+    </React.Suspense>
   );
 }

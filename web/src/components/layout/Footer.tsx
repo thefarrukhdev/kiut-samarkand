@@ -315,12 +315,12 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
           <p>{t.copyright}</p>
 
           <div className="flex items-center gap-6">
-            <a href="#about" className="hover:text-white transition-colors">
+            <Link href="/about" className="hover:text-white transition-colors">
               {t.privacy}
-            </a>
-            <a href="#admission" className="hover:text-white transition-colors">
+            </Link>
+            <Link href="/admission" className="hover:text-white transition-colors">
               {t.terms}
-            </a>
+            </Link>
             <button
               type="button"
               onClick={scrollToTop}

@@ -271,6 +271,7 @@ export function NewsPortalClient() {
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
                   placeholder={searchPlaceholder}
+                  aria-label={searchPlaceholder}
                   className="w-full h-11 pl-10 pr-10 text-sm bg-surface border border-border rounded-xl text-primary placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all"
                 />
                 {searchQuery && (
@@ -339,7 +340,7 @@ export function NewsPortalClient() {
                         className="gap-1.5"
                       >
                         <ArrowLeft className="w-4 h-4" />
-                        <span>Oldingi</span>
+                        <span>{locale === "ru" ? "Назад" : locale === "en" ? "Previous" : "Oldingi"}</span>
                       </Button>
 
                       <div className="flex items-center gap-1">
@@ -376,7 +377,7 @@ export function NewsPortalClient() {
                         }}
                         className="gap-1.5"
                       >
-                        <span>Keyingi</span>
+                        <span>{locale === "ru" ? "Вперед" : locale === "en" ? "Next" : "Keyingi"}</span>
                         <ArrowRight className="w-4 h-4" />
                       </Button>
                     </div>
@@ -411,7 +412,7 @@ export function NewsPortalClient() {
       <Footer />
 
       {/* Floating Action Button */}
-      <FloatingContact />
+      <FloatingContact onOpenAdmissionModal={() => setAdmissionModalOpen(true)} />
 
       {/* Interactive Admission Modal */}
       <AdmissionModal

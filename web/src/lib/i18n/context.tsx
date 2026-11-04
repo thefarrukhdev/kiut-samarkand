@@ -77,6 +77,12 @@ export function LocaleProvider({
 
   const effectiveLocale = storeLocale || activeLocale || initialLocale;
 
+  React.useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.lang = effectiveLocale;
+    }
+  }, [effectiveLocale]);
+
   const contextValue = React.useMemo<LocaleContextValue>(() => {
     return {
       locale: effectiveLocale,

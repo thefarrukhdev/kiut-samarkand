@@ -191,6 +191,7 @@ export function useAdmissionLeadForm({
   const [phone, setPhone] = React.useState("+998 ");
   const [faculty, setFaculty] = React.useState(resolvedFaculty);
   const [prevResolvedFaculty, setPrevResolvedFaculty] = React.useState(resolvedFaculty);
+  const [prevLocale, setPrevLocale] = React.useState(currentLocale);
   const [degree, setDegree] = React.useState(degreeOptions[0].value);
   const [language, setLanguage] = React.useState(languageOptions[0].value);
   const [studyType, setStudyType] = React.useState(
@@ -202,7 +203,14 @@ export function useAdmissionLeadForm({
   const [confirmationId, setConfirmationId] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState("");
 
-  if (resolvedFaculty !== prevResolvedFaculty) {
+  if (currentLocale !== prevLocale) {
+    setPrevLocale(currentLocale);
+    setFaculty(resolvedFaculty);
+    setPrevResolvedFaculty(resolvedFaculty);
+    setDegree(degreeOptions[0].value);
+    setLanguage(languageOptions[0].value);
+    setStudyType(studyTypeOptions[0].value);
+  } else if (resolvedFaculty !== prevResolvedFaculty) {
     setPrevResolvedFaculty(resolvedFaculty);
     setFaculty(resolvedFaculty);
   }
