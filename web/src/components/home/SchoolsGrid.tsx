@@ -15,6 +15,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { translations } from "@/lib/translations";
+import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import type { Locale } from "@/types";
 
 export interface ProgramDetail {
@@ -706,9 +707,16 @@ export function SchoolsGrid({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:border-[#0096DB]/40 transition-all duration-300 group hover:-translate-y-1"
+                className="h-full"
               >
-                {/* Image Banner */}
+                <SpotlightCard
+                  theme="light"
+                  spotlightColor="rgba(0, 150, 219, 0.28)"
+                  spotlightSize={340}
+                  intensity={0.28}
+                  className="!p-0 !rounded-2xl flex flex-col h-full bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#0096DB]/50 transition-all duration-300 group hover:-translate-y-1 overflow-hidden"
+                >
+                  {/* Image Banner */}
                 <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-[#172D50]">
                   <Image
                     src={faculty.image}
@@ -816,8 +824,9 @@ export function SchoolsGrid({
                     </Button>
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              </SpotlightCard>
+            </motion.div>
+          ))}
           </AnimatePresence>
         </div>
 

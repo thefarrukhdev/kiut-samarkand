@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import type { Locale } from "@/types";
 
 interface ScholarshipsSectionProps {
@@ -179,9 +180,13 @@ export function ScholarshipsSection({
         {/* 4 Grant Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {grants.map((grant) => (
-            <div
+            <SpotlightCard
               key={grant.id}
-              className={`rounded-2xl border p-6 flex flex-col justify-between transition-all duration-300 ${
+              theme="light"
+              spotlightColor="rgba(0, 150, 219, 0.22)"
+              spotlightSize={280}
+              intensity={0.22}
+              className={`!rounded-2xl border !p-6 flex flex-col justify-between transition-all duration-300 ${
                 grant.highlight
                   ? "bg-white border-[#0096DB] shadow-lg ring-1 ring-[#0096DB]/20"
                   : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-md"
@@ -258,7 +263,7 @@ export function ScholarshipsSection({
                   <ArrowRight className="h-3.5 w-3.5 ml-1" />
                 </Button>
               </div>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
 
