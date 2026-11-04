@@ -10,6 +10,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
+import { useLocale } from "@/lib/i18n";
 import type { Locale } from "@/types";
 
 interface ScholarshipsSectionProps {
@@ -18,9 +19,11 @@ interface ScholarshipsSectionProps {
 }
 
 export function ScholarshipsSection({
-  currentLocale = "uz",
+  currentLocale: propLocale,
   onOpenAdmissionModal,
-}: ScholarshipsSectionProps) {
+}: ScholarshipsSectionProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const currentLocale = propLocale || contextLocale;
   const grants = React.useMemo(
     () => [
       {

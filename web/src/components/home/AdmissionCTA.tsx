@@ -16,7 +16,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { translations } from "@/lib/translations";
+import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import { useAdmissionLeadForm } from "@/lib/admissions";
 import type { Locale } from "@/types";
 
@@ -28,10 +28,13 @@ interface AdmissionCTAProps {
 const benefitIcons = [ShieldCheck, Award, Building, GraduationCap];
 
 export function AdmissionCTA({
-  currentLocale = "uz",
+  currentLocale: propLocale,
   initialFaculty = "",
-}: AdmissionCTAProps) {
-  const t = translations[currentLocale].admission;
+}: AdmissionCTAProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const { t: contextT } = useTranslation("admission");
+  const currentLocale = propLocale || contextLocale;
+  const t = propLocale ? (translations[propLocale]?.admission || contextT) : contextT;
 
   const {
     fullName,

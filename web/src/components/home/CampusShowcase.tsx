@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/lib/i18n";
 import type { Locale } from "@/types";
 
 interface CampusShowcaseProps {
@@ -17,9 +18,11 @@ interface CampusShowcaseProps {
 }
 
 export function CampusShowcase({
-  currentLocale = "uz",
+  currentLocale: propLocale,
   onOpenAdmissionModal,
-}: CampusShowcaseProps) {
+}: CampusShowcaseProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const currentLocale = propLocale || contextLocale;
   const [activeCluster, setActiveCluster] = React.useState<number>(0);
 
   const clusters = React.useMemo(

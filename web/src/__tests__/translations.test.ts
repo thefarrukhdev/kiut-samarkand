@@ -1,14 +1,25 @@
 import { describe, expect, it } from "bun:test";
 import { translations } from "@/lib/translations";
+import { dictionaries, getDictionary, uz, ru, en } from "@/lib/i18n";
 import type { Locale } from "@/types";
 
-describe("Translations Integrity", () => {
+describe("Translations Integrity & Modular i18n Architecture", () => {
   const locales: Locale[] = ["uz", "ru", "en"];
 
-  it("contains all required locales", () => {
+  it("contains all required locales via backward-compatible translations export", () => {
     locales.forEach((loc) => {
       expect(translations[loc]).toBeDefined();
     });
+  });
+
+  it("exports modular dictionaries and provides getDictionary helper", () => {
+    expect(dictionaries.uz).toBe(uz);
+    expect(dictionaries.ru).toBe(ru);
+    expect(dictionaries.en).toBe(en);
+
+    expect(getDictionary("uz")).toBe(uz);
+    expect(getDictionary("ru")).toBe(ru);
+    expect(getDictionary("en")).toBe(en);
   });
 
   it("has valid nav links and CTA for all locales", () => {
@@ -44,6 +55,19 @@ describe("Translations Integrity", () => {
       expect(stats.find((s) => s.id === "master")?.targetValue).toBe(36);
       expect(stats.find((s) => s.id === "professors")?.targetValue).toBe(150);
       expect(stats.find((s) => s.id === "students")?.targetValue).toBe(5000);
+    });
+  });
+
+  it("has complete and populated FAQ translations across all locales", () => {
+    locales.forEach((loc) => {
+      const faq = translations[loc].faq;
+      expect(faq).toBeDefined();
+      expect(faq.sectionLabel.length).toBeGreaterThan(0);
+      expect(faq.badge.length).toBeGreaterThan(0);
+      expect(faq.title.length).toBeGreaterThan(0);
+      expect(faq.description.length).toBeGreaterThan(0);
+      expect(faq.helpCardTitle.length).toBeGreaterThan(0);
+      expect(faq.helpCardPhone.length).toBeGreaterThan(0);
     });
   });
 });

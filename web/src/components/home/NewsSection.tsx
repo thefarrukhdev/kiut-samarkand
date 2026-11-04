@@ -12,7 +12,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { translations } from "@/lib/translations";
+import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import rawNewsData from "@/data/news.json";
 import type { Locale } from "@/types";
 
@@ -78,11 +78,14 @@ interface NewsSectionProps {
   currentLocale?: Locale;
 }
 
-export function NewsSection({ currentLocale = "uz" }: NewsSectionProps) {
+export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const { t: contextT } = useTranslation("news");
+  const currentLocale = propLocale || contextLocale;
+  const t = propLocale ? (translations[propLocale]?.news || contextT) : contextT;
+
   const [activeFilter, setActiveFilter] = React.useState<string>("all");
   const [selectedArticle, setSelectedArticle] = React.useState<EnrichedNewsItem | null>(null);
-
-  const t = translations[currentLocale].news;
 
   // Lock body scroll and handle Escape key on modal
   React.useEffect(() => {

@@ -14,7 +14,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
-import { translations } from "@/lib/translations";
+import { useLocale, useTranslation, translations } from "@/lib/i18n";
 import { getFacultySummaries } from "@/data/schools";
 import type { Locale } from "@/types";
 
@@ -25,16 +25,19 @@ interface NavbarProps {
 }
 
 export function Navbar({
-  currentLocale = "uz",
+  currentLocale: propLocale,
   onLocaleChange,
   onOpenAdmissionModal,
 }: NavbarProps) {
+  const { locale: contextLocale, setLocale } = useLocale();
+  const { t: contextT } = useTranslation("nav");
+  const currentLocale = propLocale || contextLocale;
+  const t = propLocale ? (translations[propLocale]?.nav || contextT) : contextT;
+
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [facultiesDropdownOpen, setFacultiesDropdownOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLDivElement>(null);
-
-  const t = translations[currentLocale].nav;
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -301,11 +304,14 @@ export function Navbar({
               <button
                 key={lang}
                 type="button"
-                onClick={() => onLocaleChange?.(lang)}
+                onClick={() => {
+                  setLocale(lang);
+                  onLocaleChange?.(lang);
+                }}
                 className={`px-2 py-0.5 rounded-md text-[11px] font-bold uppercase transition-all cursor-pointer ${
                   currentLocale === lang
-                    ? "bg-[#172D50] text-white shadow-xs"
-                    : "text-slate-600 hover:text-[#172D50]"
+                    ? "bg-primary text-white shadow-xs"
+                    : "text-slate-600 hover:text-primary"
                 }`}
                 aria-pressed={currentLocale === lang}
               >
@@ -319,7 +325,7 @@ export function Navbar({
             onClick={handleAdmissionClick}
             variant="action"
             size="default"
-            className="hidden sm:inline-flex items-center gap-2 font-bold bg-[#0096DB] hover:bg-[#007BB3] text-white shadow-md shadow-[#0096DB]/25 hover:shadow-lg hover:shadow-[#0096DB]/35 px-4.5 py-2 rounded-xl text-sm transition-all"
+            className="hidden sm:inline-flex items-center gap-2 font-bold bg-accent hover:bg-accent-hover text-white shadow-md shadow-accent/25 hover:shadow-lg hover:shadow-accent/35 px-4.5 py-2 rounded-xl text-sm transition-all"
           >
             <span>{t.cta}</span>
             <ArrowRight className="h-4 w-4" />
@@ -380,7 +386,7 @@ export function Navbar({
                     key={link.label}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-semibold text-[#172D50] hover:bg-[#F4F7FC] hover:text-[#0096DB] transition-colors"
+                    className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-base font-semibold text-primary hover:bg-surface hover:text-accent transition-colors"
                   >
                     <span>{link.label}</span>
                     <ArrowRight className="h-4 w-4 text-slate-400" />
@@ -394,7 +400,7 @@ export function Navbar({
                   onClick={handleAdmissionClick}
                   variant="action"
                   size="lg"
-                  className="w-full flex items-center justify-center gap-2 font-bold bg-[#0096DB] hover:bg-[#007BB3] text-white shadow-md shadow-[#0096DB]/25 rounded-xl py-3"
+                  className="w-full flex items-center justify-center gap-2 font-bold bg-accent hover:bg-accent-hover text-white shadow-md shadow-accent/25 rounded-xl py-3"
                 >
                   <span>{t.cta}</span>
                   <ArrowRight className="h-4 w-4" />
@@ -405,9 +411,9 @@ export function Navbar({
               <div className="pt-3 border-t border-slate-100 text-xs text-slate-600 space-y-2">
                 <a
                   href="tel:+998557024040"
-                  className="flex items-center gap-2 font-semibold text-[#172D50] hover:text-[#0096DB]"
+                  className="flex items-center gap-2 font-semibold text-primary hover:text-accent"
                 >
-                  <Phone className="h-4 w-4 text-[#0096DB]" />
+                  <Phone className="h-4 w-4 text-accent" />
                   <span>{t.hotline}</span>
                 </a>
                 <p className="text-slate-500 text-[11px]">

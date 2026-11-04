@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { useLocale } from "@/lib/i18n";
 import { PROGRAMS_DATA } from "@/data/programs";
 import type { Locale, ProgramItem } from "@/types";
 
@@ -100,9 +101,11 @@ const localizedLabels = {
 };
 
 export function ProgramFinder({
-  currentLocale = "uz",
+  currentLocale: propLocale,
   onSelectProgramForAdmission,
-}: ProgramFinderProps) {
+}: ProgramFinderProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const currentLocale = propLocale || contextLocale;
   const [searchQuery, setSearchQuery] = React.useState("");
   const [selectedFaculty, setSelectedFaculty] = React.useState<string>("all");
   const [selectedMode, setSelectedMode] = React.useState<string>("all");

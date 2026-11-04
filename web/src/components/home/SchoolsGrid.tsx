@@ -14,7 +14,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { translations } from "@/lib/translations";
+import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import { getLocalizedFaculties, type FacultyData } from "@/data/schools";
 import type { Locale } from "@/types";
@@ -25,14 +25,18 @@ interface SchoolsGridProps {
 }
 
 export function SchoolsGrid({
-  currentLocale = "uz",
+  currentLocale: propLocale,
   onSelectFacultyForAdmission,
-}: SchoolsGridProps) {
+}: SchoolsGridProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const { t: contextT } = useTranslation("schools");
+  const currentLocale = propLocale || contextLocale;
+  const t = propLocale ? (translations[propLocale]?.schools || contextT) : contextT;
+
   const [activeTab, setActiveTab] = React.useState<string>("all");
   const [modalFaculty, setModalFaculty] = React.useState<FacultyData | null>(null);
   const [expandedProgramIndex, setExpandedProgramIndex] = React.useState<number | null>(null);
 
-  const t = translations[currentLocale].schools;
   const facultiesData = React.useMemo(() => getLocalizedFaculties(currentLocale), [currentLocale]);
 
   // Lock body scroll and add Escape key listener when modal is open

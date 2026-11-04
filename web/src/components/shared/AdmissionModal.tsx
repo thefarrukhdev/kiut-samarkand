@@ -10,7 +10,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { translations } from "@/lib/translations";
+import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import { useAdmissionLeadForm } from "@/lib/admissions";
 import type { Locale } from "@/types";
 
@@ -25,9 +25,12 @@ export function AdmissionModal({
   isOpen,
   onClose,
   defaultFaculty = "Tibbiyot fakulteti",
-  currentLocale = "uz",
+  currentLocale: propLocale,
 }: AdmissionModalProps) {
-  const t = translations[currentLocale].admission;
+  const { locale: contextLocale } = useLocale();
+  const { t: contextT } = useTranslation("admission");
+  const currentLocale = propLocale || contextLocale;
+  const t = propLocale ? (translations[propLocale]?.admission || contextT) : contextT;
 
   const {
     fullName,

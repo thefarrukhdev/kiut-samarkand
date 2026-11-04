@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { translations } from "@/lib/translations";
+import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import type { Locale, FaqItem } from "@/types";
 
 interface FaqSectionProps {
@@ -153,11 +153,15 @@ const FAQS_DATA: Record<Locale, FaqItem[]> = {
 };
 
 export function FaqSection({
-  currentLocale = "uz",
+  currentLocale: propLocale,
   onOpenAdmissionModal,
-}: FaqSectionProps) {
+}: FaqSectionProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const { t: contextT } = useTranslation("faq");
+  const currentLocale = propLocale || contextLocale;
+  const t = propLocale ? (translations[propLocale]?.faq || contextT) : contextT;
+
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
-  const t = translations[currentLocale]?.faq || translations.uz.faq;
   const list = FAQS_DATA[currentLocale] || FAQS_DATA.uz;
 
   const toggleFaq = React.useCallback((index: number) => {

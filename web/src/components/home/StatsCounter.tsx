@@ -10,7 +10,7 @@ import {
   Users,
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { translations } from "@/lib/translations";
+import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import type { Locale } from "@/types";
 
 interface StatsCounterProps {
@@ -102,8 +102,11 @@ function CounterDigit({
   );
 }
 
-export function StatsCounter({ currentLocale = "uz" }: StatsCounterProps) {
-  const statsData = translations[currentLocale].stats;
+export function StatsCounter({ currentLocale: propLocale }: StatsCounterProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const { t: contextT } = useTranslation("stats");
+  const currentLocale = propLocale || contextLocale;
+  const statsData = propLocale ? (translations[propLocale]?.stats || contextT) : contextT;
 
   return (
     <section

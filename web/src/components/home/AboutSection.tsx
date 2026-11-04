@@ -11,7 +11,7 @@ import {
   GraduationCap,
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { translations } from "@/lib/translations";
+import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import type { Locale } from "@/types";
 
 interface AboutSectionProps {
@@ -30,8 +30,11 @@ const partners = [
   { name: "Oxbridge International", logo: "/assets/icons_and_logos/oxbridge_logo.png" },
 ];
 
-export function AboutSection({ currentLocale = "uz" }: AboutSectionProps) {
-  const t = translations[currentLocale].about;
+export function AboutSection({ currentLocale: propLocale }: AboutSectionProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const { t: contextT } = useTranslation("about");
+  const currentLocale = propLocale || contextLocale;
+  const t = propLocale ? (translations[propLocale]?.about || contextT) : contextT;
 
   return (
     <section

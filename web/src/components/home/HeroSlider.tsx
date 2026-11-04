@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { translations } from "@/lib/translations";
+import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import type { Locale } from "@/types";
 
 const slideImages = [
@@ -88,14 +88,18 @@ interface HeroSliderProps {
 }
 
 export function HeroSlider({
-  currentLocale = "uz",
+  currentLocale: propLocale,
   onOpenAdmissionModal,
-}: HeroSliderProps) {
+}: HeroSliderProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const { t: contextT } = useTranslation("hero");
+  const currentLocale = propLocale || contextLocale;
+  const heroData = propLocale ? (translations[propLocale]?.hero || contextT) : contextT;
+
   const [current, setCurrent] = React.useState(0);
   const [isPaused, setIsPaused] = React.useState(false);
   const [touchStartX, setTouchStartX] = React.useState<number | null>(null);
 
-  const heroData = translations[currentLocale].hero;
   const slides = heroData.slides;
   const length = slides.length;
 

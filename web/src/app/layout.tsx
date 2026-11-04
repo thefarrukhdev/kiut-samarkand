@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { LocaleProvider } from "@/lib/i18n";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -24,8 +25,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="uz" className={`${jakarta.variable} font-sans scroll-smooth`}>
-      <body className="min-h-screen flex flex-col bg-[#F4F7FC] text-[#334155] antialiased selection:bg-[#0096DB] selection:text-white">
-        {children}
+      <body className="min-h-screen flex flex-col bg-surface text-slate-700 antialiased selection:bg-accent selection:text-white">
+        <LocaleProvider>
+          {children}
+        </LocaleProvider>
       </body>
     </html>
   );

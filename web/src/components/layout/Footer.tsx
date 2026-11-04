@@ -19,7 +19,7 @@ import {
   YoutubeIcon,
 } from "@/components/shared/SocialIcons";
 import { Container } from "@/components/ui/container";
-import { translations } from "@/lib/translations";
+import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import { getFacultySummaries } from "@/data/schools";
 import type { Locale } from "@/types";
 
@@ -27,12 +27,15 @@ interface FooterProps {
   currentLocale?: Locale;
 }
 
-export function Footer({ currentLocale = "uz" }: FooterProps) {
+export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const { t: contextT } = useTranslation("footer");
+  const currentLocale = propLocale || contextLocale;
+  const t = propLocale ? (translations[propLocale]?.footer || contextT) : contextT;
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  const t = translations[currentLocale].footer;
 
   const graduateLabel =
     currentLocale === "ru"

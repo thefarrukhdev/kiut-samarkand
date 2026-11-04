@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Phone, Send, ArrowUp, GraduationCap } from "lucide-react";
+import { useLocale } from "@/lib/i18n";
 import type { Locale } from "@/types";
 
 interface FloatingContactProps {
@@ -37,9 +38,11 @@ const FLOATING_LABELS = {
 };
 
 export function FloatingContact({
-  currentLocale = "uz",
+  currentLocale: propLocale,
   onOpenAdmissionModal,
-}: FloatingContactProps) {
+}: FloatingContactProps = {}) {
+  const { locale: contextLocale } = useLocale();
+  const currentLocale = propLocale || contextLocale;
   const [showScrollTop, setShowScrollTop] = React.useState(false);
 
   React.useEffect(() => {

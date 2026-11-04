@@ -14,7 +14,7 @@ import {
   YoutubeIcon,
 } from "@/components/shared/SocialIcons";
 import { Container } from "@/components/ui/container";
-import { translations } from "@/lib/translations";
+import { useTranslation, translations } from "@/lib/i18n";
 import type { Locale } from "@/types";
 
 interface TopBarProps {
@@ -22,12 +22,13 @@ interface TopBarProps {
 }
 
 export function TopBar({
-  currentLocale = "uz",
-}: TopBarProps) {
-  const t = translations[currentLocale].topbar;
+  currentLocale: propLocale,
+}: TopBarProps = {}) {
+  const { t: contextT } = useTranslation("topbar");
+  const t = propLocale ? (translations[propLocale]?.topbar || contextT) : contextT;
 
   return (
-    <div className="bg-[#172D50] text-slate-300 text-xs border-b border-white/10 relative z-40 transition-colors">
+    <div className="bg-primary text-slate-300 text-xs border-b border-white/10 relative z-40 transition-colors">
       <Container className="flex items-center justify-between py-2 gap-4">
         {/* Left Side: Phone & Official Campus Address */}
         <div className="flex items-center gap-6 flex-wrap">
@@ -36,7 +37,7 @@ export function TopBar({
             className="inline-flex items-center gap-2 hover:text-white transition-colors group font-semibold text-slate-200"
             title={t.phoneTitle}
           >
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[#0096DB] group-hover:bg-[#0096DB] group-hover:text-white transition-all">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-accent group-hover:bg-accent group-hover:text-white transition-all">
               <Phone className="h-3 w-3" />
             </span>
             <span>+998 (55) 702-40-40</span>
