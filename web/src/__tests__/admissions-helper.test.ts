@@ -5,7 +5,9 @@ import {
   STUDY_TYPE_OPTIONS_BY_LOCALE,
   LANGUAGE_OPTIONS_BY_LOCALE,
   resolveFacultyName,
+  useAdmissionLeadForm,
 } from "@/lib/admissions";
+import { getFacultySummaries, getLocalizedFaculties } from "@/data/schools";
 import type { Locale } from "@/types";
 
 describe("Admissions Multi-Language Helper & Resolver", () => {
@@ -50,5 +52,28 @@ describe("Admissions Multi-Language Helper & Resolver", () => {
     expect(resolveFacultyName("", "uz")).toBe("Tibbiyot fakulteti");
     expect(resolveFacultyName("", "ru")).toBe("Факультет медицины");
     expect(resolveFacultyName("", "en")).toBe("School of Medicine");
+  });
+
+  it("exports useAdmissionLeadForm hook properly", () => {
+    expect(typeof useAdmissionLeadForm).toBe("function");
+  });
+
+  it("provides localized faculty summaries matching 5 core faculties", () => {
+    locales.forEach((loc) => {
+      const summaries = getFacultySummaries(loc);
+      expect(summaries.length).toBe(5);
+      summaries.forEach((s) => {
+        expect(s.name.length).toBeGreaterThan(0);
+        expect(s.count.length).toBeGreaterThan(0);
+        expect(s.href).toBe("#schools");
+      });
+
+      const fullFaculties = getLocalizedFaculties(loc);
+      expect(fullFaculties.length).toBe(5);
+      fullFaculties.forEach((f) => {
+        expect(f.allPrograms.length).toBeGreaterThan(0);
+        expect(f.highlights.length).toBeGreaterThan(0);
+      });
+    });
   });
 });

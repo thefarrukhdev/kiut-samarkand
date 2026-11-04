@@ -21,6 +21,84 @@ interface ProgramFinderProps {
   onSelectProgramForAdmission?: (programName: string) => void;
 }
 
+const localizedLabels = {
+  uz: {
+    duration: "Ta'lim muddati:",
+    languages: "Ta'lim tillari:",
+    about: "Dastur haqida:",
+    career: "Karyera va ishga joylashish istiqbollari:",
+    close: "Yopish",
+    apply: "Ariza topshirish",
+    allFaculties: "Barcha yo'nalishlar",
+    medicine: "Tibbiyot",
+    engineering: "Muhandislik & IT",
+    economy: "Iqtisodiyot & Biznes",
+    education: "Pedagogika",
+    philology: "Filologiya",
+    allModes: "Barcha shakllar",
+    day: "Kunduzgi",
+    distance: "Sirtqi",
+    evening: "Kechki",
+    searchPlaceholder: "Yo'nalishni qidiring: Masalan, Dasturiy injiniring, Davolash ishi, Moliya...",
+    countLabel: "ta yo'nalish",
+    emptyTitle: "Qidiruv bo'yicha yo'nalish topilmadi",
+    emptyDesc: "Qidiruv so'zini o'zgartiring yoki filtrlarni tozalang",
+    resetBtn: "Filtrni tozalash",
+    infoBtn: "Batafsil",
+    clearSearch: "Qidiruvni tozalash",
+  },
+  ru: {
+    duration: "Срок обучения:",
+    languages: "Языки обучения:",
+    about: "О программе:",
+    career: "Карьерные перспективы и трудоустройство:",
+    close: "Закрыть",
+    apply: "Подать заявку",
+    allFaculties: "Все направления",
+    medicine: "Медицина",
+    engineering: "Инженерия & IT",
+    economy: "Экономика & Бизнес",
+    education: "Педагогика",
+    philology: "Филология & Языки",
+    allModes: "Все формы",
+    day: "Дневное",
+    distance: "Заочное",
+    evening: "Вечернее",
+    searchPlaceholder: "Поиск направления: например, Лечебное дело, Программная инженерия, Финансы...",
+    countLabel: "программ",
+    emptyTitle: "По вашему запросу направлений не найдено",
+    emptyDesc: "Попробуйте изменить поисковый запрос или сбросить фильтры",
+    resetBtn: "Сбросить фильтры",
+    infoBtn: "Инфо",
+    clearSearch: "Очистить поиск",
+  },
+  en: {
+    duration: "Program Duration:",
+    languages: "Languages of Instruction:",
+    about: "About the Program:",
+    career: "Career & Employment Prospects:",
+    close: "Close",
+    apply: "Apply Now",
+    allFaculties: "All Programs",
+    medicine: "Medicine",
+    engineering: "Engineering & IT",
+    economy: "Business & Economy",
+    education: "Education",
+    philology: "Philology & Languages",
+    allModes: "All Modes",
+    day: "Full-time",
+    distance: "Part-time",
+    evening: "Evening",
+    searchPlaceholder: "Search program: e.g. Software Engineering, General Medicine, Business...",
+    countLabel: "programs",
+    emptyTitle: "No matching programs found",
+    emptyDesc: "Try searching with different terms or reset your filters",
+    resetBtn: "Reset Filters",
+    infoBtn: "Info",
+    clearSearch: "Clear search",
+  },
+};
+
 export function ProgramFinder({
   currentLocale = "uz",
   onSelectProgramForAdmission,
@@ -30,23 +108,52 @@ export function ProgramFinder({
   const [selectedMode, setSelectedMode] = React.useState<string>("all");
   const [detailModalProgram, setDetailModalProgram] = React.useState<ProgramItem | null>(null);
 
-  const programs = PROGRAMS_DATA[currentLocale] || PROGRAMS_DATA.uz;
+  const programs = React.useMemo(() => {
+    return PROGRAMS_DATA[currentLocale] || PROGRAMS_DATA.uz;
+  }, [currentLocale]);
 
-  const facultyFilters = [
-    { id: "all", label: currentLocale === "ru" ? "Все направления" : currentLocale === "en" ? "All Programs" : "Barcha yo'nalishlar" },
-    { id: "medicine", label: currentLocale === "ru" ? "Медицина" : currentLocale === "en" ? "Medicine" : "Tibbiyot" },
-    { id: "engineering", label: currentLocale === "ru" ? "Инженерия & IT" : currentLocale === "en" ? "Engineering & IT" : "Muhandislik & IT" },
-    { id: "economy", label: currentLocale === "ru" ? "Экономика & Бизнес" : currentLocale === "en" ? "Business & Economy" : "Iqtisodiyot & Biznes" },
-    { id: "education", label: currentLocale === "ru" ? "Педагогика" : currentLocale === "en" ? "Education" : "Pedagogika" },
-    { id: "philology", label: currentLocale === "ru" ? "Филология & Тиллар" : currentLocale === "en" ? "Philology & Languages" : "Filologiya" },
-  ];
+  const labels = localizedLabels[currentLocale] || localizedLabels.uz;
 
-  const modeFilters = [
-    { id: "all", label: currentLocale === "ru" ? "Все формы" : currentLocale === "en" ? "All Modes" : "Barcha shakllar" },
-    { id: "day", label: currentLocale === "ru" ? "Дневное" : currentLocale === "en" ? "Full-time" : "Kunduzgi" },
-    { id: "distance", label: currentLocale === "ru" ? "Заочное" : currentLocale === "en" ? "Part-time" : "Sirtqi" },
-    { id: "evening", label: currentLocale === "ru" ? "Вечернее" : currentLocale === "en" ? "Evening" : "Kechki" },
-  ];
+  // Lock body scroll and listen for Escape key when program detail modal is open
+  React.useEffect(() => {
+    if (detailModalProgram) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setDetailModalProgram(null);
+        }
+      };
+      document.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [detailModalProgram]);
+
+  const facultyFilters = React.useMemo(
+    () => [
+      { id: "all", label: labels.allFaculties },
+      { id: "medicine", label: labels.medicine },
+      { id: "engineering", label: labels.engineering },
+      { id: "economy", label: labels.economy },
+      { id: "education", label: labels.education },
+      { id: "philology", label: labels.philology },
+    ],
+    [labels]
+  );
+
+  const modeFilters = React.useMemo(
+    () => [
+      { id: "all", label: labels.allModes },
+      { id: "day", label: labels.day },
+      { id: "distance", label: labels.distance },
+      { id: "evening", label: labels.evening },
+    ],
+    [labels]
+  );
 
   const filteredPrograms = React.useMemo(() => {
     return programs.filter((p) => {
@@ -81,7 +188,13 @@ export function ProgramFinder({
   return (
     <section
       id="programs"
-      aria-label="Ta'lim yo'nalishlari interaktiv katalogi"
+      aria-label={
+        currentLocale === "ru"
+          ? "Интерактивный каталог образовательных программ"
+          : currentLocale === "en"
+          ? "Interactive Academic Degrees Explorer"
+          : "Ta'lim yo'nalishlari interaktiv katalogi"
+      }
       className="py-16 sm:py-24 bg-white border-b border-slate-200 relative z-10"
     >
       <Container>
@@ -124,21 +237,16 @@ export function ProgramFinder({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={
-                currentLocale === "ru"
-                  ? "Поиск направления: например, Лечебное дело, Программная инженерия, Финансы..."
-                  : currentLocale === "en"
-                  ? "Search program: e.g. Software Engineering, General Medicine, Business..."
-                  : "Yo'nalishni qidiring: Masalan, Dasturiy injiniring, Davolash ishi, Moliya..."
-              }
+              placeholder={labels.searchPlaceholder}
+              aria-label={labels.searchPlaceholder}
               className="w-full pl-12 pr-10 py-3.5 bg-white border border-slate-200 rounded-xl text-sm sm:text-base text-[#172D50] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0096DB] focus:border-transparent transition-all shadow-xs"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
-                aria-label="Qidiruvni tozalash"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+                aria-label={labels.clearSearch}
               >
                 <X className="h-4 w-4" />
               </button>
@@ -153,6 +261,8 @@ export function ProgramFinder({
                 <button
                   key={tab.id}
                   type="button"
+                  role="tab"
+                  aria-selected={selectedFaculty === tab.id}
                   onClick={() => setSelectedFaculty(tab.id)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     selectedFaculty === tab.id
@@ -167,7 +277,7 @@ export function ProgramFinder({
 
             {/* Mode Tabs & Counter */}
             <div className="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end">
-              <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200">
+              <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200" role="group" aria-label="Study Mode Selection">
                 {modeFilters.map((mode) => (
                   <button
                     key={mode.id}
@@ -178,6 +288,7 @@ export function ProgramFinder({
                         ? "bg-[#0096DB] text-white"
                         : "text-slate-600 hover:text-slate-900"
                     }`}
+                    aria-pressed={selectedMode === mode.id}
                   >
                     {mode.label}
                   </button>
@@ -185,8 +296,7 @@ export function ProgramFinder({
               </div>
 
               <span className="text-xs font-bold text-slate-500 whitespace-nowrap bg-white px-2.5 py-1 rounded-md border border-slate-200">
-                {filteredPrograms.length}{" "}
-                {currentLocale === "ru" ? "программ" : currentLocale === "en" ? "programs" : "ta yo'nalish"}
+                {filteredPrograms.length} {labels.countLabel}
               </span>
             </div>
           </div>
@@ -197,18 +307,10 @@ export function ProgramFinder({
           <div className="text-center py-16 bg-[#F8FAFC] rounded-2xl border border-slate-200">
             <BookOpen className="h-10 w-10 text-slate-400 mx-auto mb-3" />
             <h3 className="text-base font-bold text-[#172D50]">
-              {currentLocale === "ru"
-                ? "По вашему запросу направлений не найдено"
-                : currentLocale === "en"
-                ? "No matching programs found"
-                : "Qidiruv bo'yicha yo'nalish topilmadi"}
+              {labels.emptyTitle}
             </h3>
             <p className="text-xs text-slate-500 mt-1">
-              {currentLocale === "ru"
-                ? "Попробуйте изменить поисковый запрос или сбросить фильтры"
-                : currentLocale === "en"
-                ? "Try searching with different terms or reset your filters"
-                : "Qidiruv so'zini o'zgartiring yoki filtrlarni tozalang"}
+              {labels.emptyDesc}
             </p>
             <Button
               onClick={() => {
@@ -220,7 +322,7 @@ export function ProgramFinder({
               size="sm"
               className="mt-4 text-xs font-bold text-[#172D50] border-slate-300"
             >
-              {currentLocale === "ru" ? "Сбросить фильтры" : currentLocale === "en" ? "Reset Filters" : "Filtrni tozalash"}
+              {labels.resetBtn}
             </Button>
           </div>
         ) : (
@@ -263,10 +365,10 @@ export function ProgramFinder({
                         {program.modes
                           .map((m) =>
                             m === "day"
-                              ? currentLocale === "ru" ? "Дневной" : currentLocale === "en" ? "Day" : "Kunduzgi"
+                              ? labels.day
                               : m === "distance"
-                              ? currentLocale === "ru" ? "Заочный" : currentLocale === "en" ? "Part-time" : "Sirtqi"
-                              : currentLocale === "ru" ? "Вечерний" : currentLocale === "en" ? "Evening" : "Kechki"
+                              ? labels.distance
+                              : labels.evening
                           )
                           .join(" / ")}
                       </span>
@@ -282,7 +384,7 @@ export function ProgramFinder({
                     size="sm"
                     className="flex-1 font-bold bg-[#0096DB] hover:bg-[#007BB3] text-white text-xs py-2 rounded-xl"
                   >
-                    <span>{currentLocale === "ru" ? "Подать заявку" : currentLocale === "en" ? "Apply Now" : "Ariza topshirish"}</span>
+                    <span>{labels.apply}</span>
                     <ArrowRight className="h-3.5 w-3.5 ml-1" />
                   </Button>
 
@@ -292,7 +394,7 @@ export function ProgramFinder({
                     size="sm"
                     className="font-bold border-slate-200 hover:border-slate-300 text-[#172D50] text-xs py-2 px-3 rounded-xl"
                   >
-                    {currentLocale === "ru" ? "Инфо" : currentLocale === "en" ? "Info" : "Batafsil"}
+                    {labels.infoBtn}
                   </Button>
                 </div>
               </div>
@@ -308,6 +410,7 @@ export function ProgramFinder({
             className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
             role="dialog"
             aria-modal="true"
+            aria-labelledby="program-detail-modal-title"
           >
             {/* Solid Dark Backdrop (NO blur) */}
             <motion.div
@@ -330,14 +433,15 @@ export function ProgramFinder({
                   <span className="text-[11px] font-black uppercase tracking-wider text-[#0096DB] bg-[#E9F2FF] px-2.5 py-1 rounded-md">
                     {detailModalProgram.facultyName}
                   </span>
-                  <h3 className="text-xl font-bold text-[#172D50] mt-2">
+                  <h3 id="program-detail-modal-title" className="text-xl font-bold text-[#172D50] mt-2">
                     {detailModalProgram.name}
                   </h3>
                 </div>
                 <button
                   type="button"
                   onClick={() => setDetailModalProgram(null)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors"
+                  className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors cursor-pointer"
+                  aria-label={labels.close}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -347,18 +451,18 @@ export function ProgramFinder({
               <div className="p-6 space-y-5 overflow-y-auto">
                 <div className="grid grid-cols-2 gap-3 text-xs bg-[#F8FAFC] p-3.5 rounded-xl border border-slate-200">
                   <div>
-                    <span className="text-slate-400 block font-medium">Ta&apos;lim muddati:</span>
+                    <span className="text-slate-400 block font-medium">{labels.duration}</span>
                     <span className="font-bold text-[#172D50]">{detailModalProgram.duration}</span>
                   </div>
                   <div>
-                    <span className="text-slate-400 block font-medium">Ta&apos;lim tillari:</span>
+                    <span className="text-slate-400 block font-medium">{labels.languages}</span>
                     <span className="font-bold text-[#172D50]">{detailModalProgram.languages.join(", ")}</span>
                   </div>
                 </div>
 
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
-                    Dastur haqida:
+                    {labels.about}
                   </h4>
                   <p className="text-sm text-slate-600 leading-relaxed">
                     {detailModalProgram.description}
@@ -368,7 +472,7 @@ export function ProgramFinder({
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center gap-1.5">
                     <Briefcase className="h-3.5 w-3.5 text-[#0096DB]" />
-                    <span>Karyera va ishga joylashish istiqbollari:</span>
+                    <span>{labels.career}</span>
                   </h4>
                   <p className="text-sm text-[#172D50] font-medium bg-[#F8FAFC] p-3.5 rounded-xl border border-slate-200">
                     {detailModalProgram.career}
@@ -384,7 +488,7 @@ export function ProgramFinder({
                   size="sm"
                   className="font-bold border-slate-300 text-slate-700"
                 >
-                  Yopish
+                  {labels.close}
                 </Button>
                 <Button
                   onClick={() => handleApplyClick(detailModalProgram)}
@@ -392,7 +496,7 @@ export function ProgramFinder({
                   size="sm"
                   className="font-bold bg-[#0096DB] hover:bg-[#007BB3] text-white px-5 py-2 rounded-xl shadow-md"
                 >
-                  <span>Ariza topshirish</span>
+                  <span>{labels.apply}</span>
                   <ArrowRight className="h-4 w-4 ml-1" />
                 </Button>
               </div>

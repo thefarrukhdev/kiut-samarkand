@@ -22,111 +22,125 @@ export function CampusShowcase({
 }: CampusShowcaseProps) {
   const [activeCluster, setActiveCluster] = React.useState<number>(0);
 
-  const clusters = [
-    {
-      id: "med",
-      title:
-        currentLocale === "ru"
-          ? "Симуляционный медицинский центр"
-          : currentLocale === "en"
-          ? "Medical Simulation & Clinical Center"
-          : "Tibbiy Simulyatsiya va Klinika Markazi",
-      tag: currentLocale === "ru" ? "Медицина" : currentLocale === "en" ? "Medicine" : "Tibbiyot klasteri",
-      image: "/assets/banners/8y8a8213.jpg__1920x1080_q85_crop_subsampling-2.jpg",
-      description:
-        currentLocale === "ru"
-          ? "Оснащен современными анатомическими тренажерами, интерактивными анатомическими столами Anatomage и реанимационными манекенами для отработки практических клинических навыков с 1-го курса."
-          : currentLocale === "en"
-          ? "Equipped with realistic Anatomage virtual dissection tables, automated patient mannequins, and clinical simulation rooms for early hands-on medical training."
-          : "Birinchi bosqichdanoq talabalarga amaliy klinik ko'nikmalarni singdiruvchi zamonaviy Anatomage interaktiv stollari, robotlashtirilgan mulyajlar va jarrohlik simulyatorlari.",
-      features: [
-        currentLocale === "ru" ? "Интерактивная 3D-анатомия Anatomage" : currentLocale === "en" ? "Interactive 3D Anatomage tables" : "Anatomage interaktiv 3D anatomiya stollari",
-        currentLocale === "ru" ? "Реалистичные симуляторы для хирургии" : currentLocale === "en" ? "Surgical and emergency simulators" : "Jarrohlik va reanimatsiya simulyatorlari",
-        currentLocale === "ru" ? "Клиническая база в ведущих больницах" : currentLocale === "en" ? "Clinical rotations in top hospitals" : "Viloyat ko'p tarmoqli tibbiyot markazida amaliyot",
-      ],
-      statNumber: "12+",
-      statLabel: currentLocale === "ru" ? "Специализированных лабораторий" : currentLocale === "en" ? "Specialized Clinical Labs" : "Ixtisoslashgan laboratoriyalar",
-    },
-    {
-      id: "it",
-      title:
-        currentLocale === "ru"
-          ? "IT-Хаб и Лаборатории Искусственного Интеллекта"
-          : currentLocale === "en"
-          ? "IT Innovation Hub & AI Laboratories"
-          : "IT-Xab va Sun'iy Intellekt Laboratoriyalari",
-      tag: "IT & Engineering",
-      image: "/assets/banners/20261022125829.jpg__1920x1080_q85_crop_subsampling-2.jpg",
-      description:
-        currentLocale === "ru"
-          ? "Высокопроизводительные рабочие станции, кластеры графических процессоров (GPU) для обучения нейросетей, лаборатории робототехники, схемотехники и 3D-печати."
-          : currentLocale === "en"
-          ? "High-performance GPU computing clusters, neural network training stations, robotics workshops, and dedicated prototyping 3D-printing labs."
-          : "Neyron tarmoqlarni o'qitish uchun yuqori quvvatli GPU serverlar, robototexnika konstruktorlik ustaxonalari, IoT datchiklar va zamonaviy 3D printerlar majmuasi.",
-      features: [
-        currentLocale === "ru" ? "GPU-кластеры для машинного обучения" : currentLocale === "en" ? "GPU clusters for deep learning" : "Mashinaviy o'rganish uchun GPU klasterlari",
-        currentLocale === "ru" ? "Лаборатория робототехники и IoT" : currentLocale === "en" ? "Robotics & IoT prototyping lab" : "Robototexnika va mikrokontrollerlar xonasi",
-        currentLocale === "ru" ? "Инкубатор студенческих IT-стартапов" : currentLocale === "en" ? "Student tech startup incubator" : "Talabalar startap-inkubatori va kovorking",
-      ],
-      statNumber: "100+",
-      statLabel: currentLocale === "ru" ? "Современных рабочих станций" : currentLocale === "en" ? "High-performance Workstations" : "Yuqori quvvatli ish stansiyalari",
-    },
-    {
-      id: "campus",
-      title:
-        currentLocale === "ru"
-          ? "Современный кампус на ул. Спитамен Шох"
-          : currentLocale === "en"
-          ? "Modern Urban Campus on Spitamen Avenue"
-          : "Spitamen shoh ko'chasidagi zamonaviy bino",
-      tag: currentLocale === "ru" ? "Инфраструктура" : currentLocale === "en" ? "Campus" : "Kampus binosi",
-      image: "/assets/banners/20260808111028.jpg__1920x1080_q85_crop_subsampling-2.jpg",
-      description:
-        currentLocale === "ru"
-          ? "Новое 5-этажное университетское здание, построенное по международным образовательным стандартам. Просторные мультимедийные аудитории, зоны отдыха и безбарьерная среда."
-          : currentLocale === "en"
-          ? "State-of-the-art multi-story academic facility built to international standards, featuring smart classrooms, green study zones, and full accessibility."
-          : "Xalqaro ta'lim me'morchiligi asosida qad rostlagan zamonaviy bino: keng multimedia auditoriyalari, ekologik yashil dam olish hududlari va qulay transport infratuzilmasi.",
-      features: [
-        currentLocale === "ru" ? "Смарт-аудитории с интерактивными панелями" : currentLocale === "en" ? "Smart interactive classrooms" : "Smart interaktiv sensor panellar",
-        currentLocale === "ru" ? "Электронный доступ и безопасность 24/7" : currentLocale === "en" ? "Biometric access & 24/7 security" : "Biometrik Face-ID va 24/7 xavfsizlik",
-        currentLocale === "ru" ? "Удобная транспортная развязка в центре" : currentLocale === "en" ? "Central urban location" : "Samarqand shahrining qulay transport markazi",
-      ],
-      statNumber: "15 000+",
-      statLabel: currentLocale === "ru" ? "кв.м общей площади кампуса" : currentLocale === "en" ? "sq.m Total Educational Area" : "kv.m o'quv va amaliyot maydoni",
-    },
-    {
-      id: "hall",
-      title:
-        currentLocale === "ru"
-          ? "Международный конференц-зал и библиотека"
-          : currentLocale === "en"
-          ? "Grand Auditorium & Digital Library"
-          : "Xalqaro anjumanlar zali va axborot markazi",
-      tag: currentLocale === "ru" ? "Академическая среда" : currentLocale === "en" ? "Academic Culture" : "Ilmiy fond",
-      image: "/assets/banners/8y8a7608.jpg__1920x1080_q85_crop_subsampling-2.jpg",
-      description:
-        currentLocale === "ru"
-          ? "Конференц-зал на 500+ мест с синхронным переводом для международных симпозиумов и электронная библиотека с доступом к Scopus, Web of Science и Springer."
-          : currentLocale === "en"
-          ? "500-seat auditorium equipped with simultaneous translation for global symposia, and digital library connected to Scopus and Springer databases."
-          : "500 dan ortiq o'rinli, sinxron tarjima uskunalariga ega muhtasham anjumanlar zali hamda Scopus va ScienceDirect bazalariga ulangan boy axborot-kutubxona.",
-      features: [
-        currentLocale === "ru" ? "Синхронный перевод на 4 языка" : currentLocale === "en" ? "Simultaneous 4-language interpreting" : "4 ta tilda sinxron tarjima apparaturasi",
-        currentLocale === "ru" ? "100 000+ книг и электронных ресурсов" : currentLocale === "en" ? "100,000+ print and digital titles" : "100 000+ bosma va elektron fond",
-        currentLocale === "ru" ? "Прямые телемосты с зарубежными вузами" : currentLocale === "en" ? "Global university live teleconferences" : "Koreya va Yevropa bilan jonli telemuloqotlar",
-      ],
-      statNumber: "500+",
-      statLabel: currentLocale === "ru" ? "Мест в главном амфитеатре" : currentLocale === "en" ? "Auditorium Seating Capacity" : "O'rinli bosh amfiteatr",
-    },
-  ];
+  const clusters = React.useMemo(
+    () => [
+      {
+        id: "med",
+        title:
+          currentLocale === "ru"
+            ? "Симуляционный медицинский центр"
+            : currentLocale === "en"
+            ? "Medical Simulation & Clinical Center"
+            : "Tibbiy Simulyatsiya va Klinika Markazi",
+        tag: currentLocale === "ru" ? "Медицина" : currentLocale === "en" ? "Medicine" : "Tibbiyot klasteri",
+        image: "/assets/banners/8y8a8213.jpg__1920x1080_q85_crop_subsampling-2.jpg",
+        description:
+          currentLocale === "ru"
+            ? "Оснащен современными анатомическими тренажерами, интерактивными анатомическими столами Anatomage и реанимационными манекенами для отработки практических клинических навыков с 1-го курса."
+            : currentLocale === "en"
+            ? "Equipped with realistic Anatomage virtual dissection tables, automated patient mannequins, and clinical simulation rooms for early hands-on medical training."
+            : "Birinchi bosqichdanoq talabalarga amaliy klinik ko'nikmalarni singdiruvchi zamonaviy Anatomage interaktiv stollari, robotlashtirilgan mulyajlar va jarrohlik simulyatorlari.",
+        features: [
+          currentLocale === "ru" ? "Интерактивная 3D-анатомия Anatomage" : currentLocale === "en" ? "Interactive 3D Anatomage tables" : "Anatomage interaktiv 3D anatomiya stollari",
+          currentLocale === "ru" ? "Реалистичные симуляторы для хирургии" : currentLocale === "en" ? "Surgical and emergency simulators" : "Jarrohlik va reanimatsiya simulyatorlari",
+          currentLocale === "ru" ? "Клиническая база в ведущих больницах" : currentLocale === "en" ? "Clinical rotations in top hospitals" : "Viloyat ko'p tarmoqli tibbiyot markazida amaliyot",
+        ],
+        statNumber: "12+",
+        statLabel: currentLocale === "ru" ? "Специализированных лабораторий" : currentLocale === "en" ? "Specialized Clinical Labs" : "Ixtisoslashgan laboratoriyalar",
+      },
+      {
+        id: "it",
+        title:
+          currentLocale === "ru"
+            ? "IT-Хаб и Лаборатории Искусственного Интеллекта"
+            : currentLocale === "en"
+            ? "IT Innovation Hub & AI Laboratories"
+            : "IT-Xab va Sun'iy Intellekt Laboratoriyalari",
+        tag:
+          currentLocale === "ru"
+            ? "IT и Инженерия"
+            : currentLocale === "en"
+            ? "IT & Engineering"
+            : "IT & Muhandislik",
+        image: "/assets/banners/20261022125829.jpg__1920x1080_q85_crop_subsampling-2.jpg",
+        description:
+          currentLocale === "ru"
+            ? "Высокопроизводительные рабочие станции, кластеры графических процессоров (GPU) для обучения нейросетей, лаборатории робототехники, схемотехники и 3D-печати."
+            : currentLocale === "en"
+            ? "High-performance GPU computing clusters, neural network training stations, robotics workshops, and dedicated prototyping 3D-printing labs."
+            : "Neyron tarmoqlarni o'qitish uchun yuqori quvvatli GPU serverlar, robototexnika konstruktorlik ustaxonalari, IoT datchiklar va zamonaviy 3D printerlar majmuasi.",
+        features: [
+          currentLocale === "ru" ? "GPU-кластеры для машинного обучения" : currentLocale === "en" ? "GPU clusters for deep learning" : "Mashinaviy o'rganish uchun GPU klasterlari",
+          currentLocale === "ru" ? "Лаборатория робототехники и IoT" : currentLocale === "en" ? "Robotics & IoT prototyping lab" : "Robototexnika va mikrokontrollerlar xonasi",
+          currentLocale === "ru" ? "Инкубатор студенческих IT-стартапов" : currentLocale === "en" ? "Student tech startup incubator" : "Talabalar startap-inkubatori va kovorking",
+        ],
+        statNumber: "100+",
+        statLabel: currentLocale === "ru" ? "Современных рабочих станций" : currentLocale === "en" ? "High-performance Workstations" : "Yuqori quvvatli ish stansiyalari",
+      },
+      {
+        id: "campus",
+        title:
+          currentLocale === "ru"
+            ? "Современный кампус на ул. Спитамен Шох"
+            : currentLocale === "en"
+            ? "Modern Urban Campus on Spitamen Avenue"
+            : "Spitamen shoh ko'chasidagi zamonaviy bino",
+        tag: currentLocale === "ru" ? "Инфраструктура" : currentLocale === "en" ? "Campus" : "Kampus binosi",
+        image: "/assets/banners/20260808111028.jpg__1920x1080_q85_crop_subsampling-2.jpg",
+        description:
+          currentLocale === "ru"
+            ? "Новое 5-этажное университетское здание, построенное по международным образовательным стандартам. Просторные мультимедийные аудитории, зоны отдыха и безбарьерная среда."
+            : currentLocale === "en"
+            ? "State-of-the-art multi-story academic facility built to international standards, featuring smart classrooms, green study zones, and full accessibility."
+            : "Xalqaro ta'lim me'morchiligi asosida qad rostlagan zamonaviy bino: keng multimedia auditoriyalari, ekologik yashil dam olish hududlari va qulay transport infratuzilmasi.",
+        features: [
+          currentLocale === "ru" ? "Смарт-аудитории с интерактивными панелями" : currentLocale === "en" ? "Smart interactive classrooms" : "Smart interaktiv sensor panellar",
+          currentLocale === "ru" ? "Электронный доступ и безопасность 24/7" : currentLocale === "en" ? "Biometric access & 24/7 security" : "Biometrik Face-ID va 24/7 xavfsizlik",
+          currentLocale === "ru" ? "Удобная транспортная развязка в центре" : currentLocale === "en" ? "Central urban location" : "Samarqand shahrining qulay transport markazi",
+        ],
+        statNumber: "15 000+",
+        statLabel: currentLocale === "ru" ? "кв.м общей площади кампуса" : currentLocale === "en" ? "sq.m Total Educational Area" : "kv.m o'quv va amaliyot maydoni",
+      },
+      {
+        id: "hall",
+        title:
+          currentLocale === "ru"
+            ? "Международный конференц-зал и библиотека"
+            : currentLocale === "en"
+            ? "Grand Auditorium & Digital Library"
+            : "Xalqaro anjumanlar zali va axborot markazi",
+        tag: currentLocale === "ru" ? "Академическая среда" : currentLocale === "en" ? "Academic Culture" : "Ilmiy fond",
+        image: "/assets/banners/8y8a7608.jpg__1920x1080_q85_crop_subsampling-2.jpg",
+        description:
+          currentLocale === "ru"
+            ? "Конференц-зал на 500+ мест с синхронным переводом для международных симпозиумов и электронная библиотека с доступом к Scopus, Web of Science и Springer."
+            : currentLocale === "en"
+            ? "500-seat auditorium equipped with simultaneous translation for global symposia, and digital library connected to Scopus and Springer databases."
+            : "500 dan ortiq o'rinli, sinxron tarjima uskunalariga ega muhtasham anjumanlar zali hamda Scopus va ScienceDirect bazalariga ulangan boy axborot-kutubxona.",
+        features: [
+          currentLocale === "ru" ? "Синхронный перевод на 4 языка" : currentLocale === "en" ? "Simultaneous 4-language interpreting" : "4 ta tilda sinxron tarjima apparaturasi",
+          currentLocale === "ru" ? "100 000+ книг и электронных ресурсов" : currentLocale === "en" ? "100,000+ print and digital titles" : "100 000+ bosma va elektron fond",
+          currentLocale === "ru" ? "Прямые телемосты с зарубежными вузами" : currentLocale === "en" ? "Global university live teleconferences" : "Koreya va Yevropa bilan jonli telemuloqotlar",
+        ],
+        statNumber: "500+",
+        statLabel: currentLocale === "ru" ? "Мест в главном амфитеатре" : currentLocale === "en" ? "Auditorium Seating Capacity" : "O'rinli bosh amfiteatr",
+      },
+    ],
+    [currentLocale]
+  );
 
-  const current = clusters[activeCluster];
+  const current = clusters[activeCluster] || clusters[0];
 
   return (
     <section
       id="campus"
-      aria-label="Kampus infratuzilmasi va laboratoriyalar"
+      aria-label={
+        currentLocale === "ru"
+          ? "Инфраструктура кампуса и лаборатории"
+          : currentLocale === "en"
+          ? "Campus Infrastructure and Laboratories"
+          : "Kampus infratuzilmasi va laboratoriyalar"
+      }
       className="py-16 sm:py-24 bg-white border-b border-slate-200 relative z-10"
     >
       <Container>
@@ -166,6 +180,8 @@ export function CampusShowcase({
             <button
               key={c.id}
               type="button"
+              role="tab"
+              aria-selected={activeCluster === idx}
               onClick={() => setActiveCluster(idx)}
               className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
                 activeCluster === idx
@@ -262,7 +278,11 @@ export function CampusShowcase({
                   {current.title}
                 </span>
                 <span className="text-xs text-slate-300 font-medium">
-                  TKXU Samarqand
+                  {currentLocale === "ru"
+                    ? "ТМУК Самарканд"
+                    : currentLocale === "en"
+                    ? "KIUT Samarkand"
+                    : "TKXU Samarqand"}
                 </span>
               </div>
             </div>

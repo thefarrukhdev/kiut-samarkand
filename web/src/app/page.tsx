@@ -24,27 +24,37 @@ export default function Home() {
   const [admissionModalOpen, setAdmissionModalOpen] = React.useState(false);
   const [selectedFaculty, setSelectedFaculty] = React.useState<string>("Tibbiyot fakulteti");
 
-  const handleLocaleChange = (newLocale: Locale) => {
+  const handleLocaleChange = React.useCallback((newLocale: Locale) => {
     setCurrentLocale(newLocale);
     setSelectedFaculty((prev) => resolveFacultyName(prev, newLocale));
-  };
+  }, []);
 
-  const handleOpenAdmissionModal = (facultyOrProgramName?: string) => {
-    if (facultyOrProgramName) {
-      setSelectedFaculty(resolveFacultyName(facultyOrProgramName, currentLocale));
-    }
-    setAdmissionModalOpen(true);
-  };
-
-  const handleSelectFacultyForAdmission = (facultyName: string) => {
-    setSelectedFaculty(resolveFacultyName(facultyName, currentLocale));
-    const admissionSection = document.getElementById("admission");
-    if (admissionSection) {
-      admissionSection.scrollIntoView({ behavior: "smooth" });
-    } else {
+  const handleOpenAdmissionModal = React.useCallback(
+    (facultyOrProgramName?: string) => {
+      if (facultyOrProgramName) {
+        setSelectedFaculty(resolveFacultyName(facultyOrProgramName, currentLocale));
+      }
       setAdmissionModalOpen(true);
-    }
-  };
+    },
+    [currentLocale]
+  );
+
+  const handleCloseAdmissionModal = React.useCallback(() => {
+    setAdmissionModalOpen(false);
+  }, []);
+
+  const handleSelectFacultyForAdmission = React.useCallback(
+    (facultyName: string) => {
+      setSelectedFaculty(resolveFacultyName(facultyName, currentLocale));
+      const admissionSection = document.getElementById("admission");
+      if (admissionSection) {
+        admissionSection.scrollIntoView({ behavior: "smooth" });
+      } else {
+        setAdmissionModalOpen(true);
+      }
+    },
+    [currentLocale]
+  );
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F4F7FC]">
@@ -55,7 +65,7 @@ export default function Home() {
       <Navbar
         currentLocale={currentLocale}
         onLocaleChange={handleLocaleChange}
-        onOpenAdmissionModal={() => handleOpenAdmissionModal()}
+        onOpenAdmissionModal={handleOpenAdmissionModal}
       />
 
       {/* Main Content Area: Elite University Portal Architecture */}
@@ -63,7 +73,7 @@ export default function Home() {
         {/* 3. Hero Slider with Academic Eyebrow, Dual CTAs & Visual Showcase */}
         <HeroSlider
           currentLocale={currentLocale}
-          onOpenAdmissionModal={() => handleOpenAdmissionModal()}
+          onOpenAdmissionModal={handleOpenAdmissionModal}
         />
 
         {/* 4. Animated Verified Stats Counter */}
@@ -84,13 +94,13 @@ export default function Home() {
         {/* 7. Institutional Scholarships & Tuition Grants Showcase */}
         <ScholarshipsSection
           currentLocale={currentLocale}
-          onOpenAdmissionModal={(grant) => handleOpenAdmissionModal(grant)}
+          onOpenAdmissionModal={handleOpenAdmissionModal}
         />
 
         {/* 8. Modern Campus Infrastructure & Laboratory Clusters Tour */}
         <CampusShowcase
           currentLocale={currentLocale}
-          onOpenAdmissionModal={() => handleOpenAdmissionModal()}
+          onOpenAdmissionModal={handleOpenAdmissionModal}
         />
 
         {/* 9. University Mission, Accreditation & Strategic Pillars */}
@@ -102,7 +112,7 @@ export default function Home() {
         {/* 11. Official Abituriyent & Parent Accreditation FAQ Accordion */}
         <FaqSection
           currentLocale={currentLocale}
-          onOpenAdmissionModal={() => handleOpenAdmissionModal()}
+          onOpenAdmissionModal={handleOpenAdmissionModal}
         />
 
         {/* 12. Conversion-Engineered Admission Lead Generation Form */}
@@ -118,13 +128,13 @@ export default function Home() {
       {/* 14. Quick Action Floating Hotline & Consultation Widget */}
       <FloatingContact
         currentLocale={currentLocale}
-        onOpenAdmissionModal={() => handleOpenAdmissionModal()}
+        onOpenAdmissionModal={handleOpenAdmissionModal}
       />
 
       {/* 15. Global Application Modal */}
       <AdmissionModal
         isOpen={admissionModalOpen}
-        onClose={() => setAdmissionModalOpen(false)}
+        onClose={handleCloseAdmissionModal}
         defaultFaculty={selectedFaculty}
         currentLocale={currentLocale}
       />

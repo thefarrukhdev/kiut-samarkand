@@ -21,129 +21,146 @@ export function ScholarshipsSection({
   currentLocale = "uz",
   onOpenAdmissionModal,
 }: ScholarshipsSectionProps) {
-  const grants = [
-    {
-      id: "grant-rector",
-      badge: currentLocale === "ru" ? "100% Грант" : currentLocale === "en" ? "100% Grant" : "100% Grant",
-      title:
-        currentLocale === "ru"
-          ? "Ректорский грант для одаренных студентов"
-          : currentLocale === "en"
-          ? "Rector's Excellence Scholarship"
-          : "Iqtidorli talabalar uchun Rektorat granti",
-      coverage: "100%",
-      coverageLabel:
-        currentLocale === "ru"
-          ? "Бесплатное обучение"
-          : currentLocale === "en"
-          ? "Full Tuition Covered"
-          : "To'liq bepul ta'lim",
-      description:
-        currentLocale === "ru"
-          ? "Выделяется абитуриентам, набравшим наивысшие баллы на вступительных испытаниях по профильным предметам."
-          : currentLocale === "en"
-          ? "Awarded to top-scoring applicants in university entrance examinations across specialized academic subjects."
-          : "Kirish imtihonlarida eng yuqori ball to'plagan eng iqtidorli abituriyentlar uchun universitet maxsus jamg'armasi.",
-      criteria: [
-        currentLocale === "ru" ? "Высший балл на экзаменах" : currentLocale === "en" ? "Top entrance exam rank" : "Kirish imtihonida 1-o'rin",
-        currentLocale === "ru" ? "Подтверждение академических успехов" : currentLocale === "en" ? "Academic excellence record" : "A'lo baholar attestati",
-        currentLocale === "ru" ? "Ежегодное подтверждение (GPA 4.5+)" : currentLocale === "en" ? "Yearly retention (GPA 4.5+)" : "Har yili GPA 4.5+ bilan tasdiqlash",
-      ],
-      highlight: true,
-    },
-    {
-      id: "grant-language",
-      badge: currentLocale === "ru" ? "Спецстипендия" : currentLocale === "en" ? "Language Award" : "Til imtiyozi",
-      title:
-        currentLocale === "ru"
-          ? "Грант за международные языковые сертификаты"
-          : currentLocale === "en"
-          ? "International Language Certificate Grant"
-          : "Xalqaro til sertifikatlari (IELTS / TOPIK) imtiyozi",
-      coverage: "25% - 50%",
-      coverageLabel:
-        currentLocale === "ru"
-          ? "Скидка на контракт"
-          : currentLocale === "en"
-          ? "Tuition Reduction"
-          : "Kontrakt to'lovi chegirishi",
-      description:
-        currentLocale === "ru"
-          ? "Скидка на оплату контракта для обладателей сертификатов IELTS 7.0+, CEFR C1 или TOPIK 4+."
-          : currentLocale === "en"
-          ? "Substantial fee reductions for holders of certified language scores (IELTS 7.0+, CEFR C1, TOPIK 4+)."
-          : "IELTS 7.0+, CEFR C1 yoki TOPIK 4+ xalqaro darajasiga ega abituriyentlar uchun maxsus stipendiyalar va to'lov imtiyozlari.",
-      criteria: [
-        "IELTS 7.0+ yoki CEFR C1",
-        "TOPIK 4+ (Koreys tili yo'nalishlarida)",
-        currentLocale === "ru" ? "Автоматический зачет языка" : currentLocale === "en" ? "Direct language waiver" : "Til imtihonidan to'liq ozod",
-      ],
-      highlight: false,
-    },
-    {
-      id: "grant-korea",
-      badge: currentLocale === "ru" ? "2+2 Корея" : currentLocale === "en" ? "2+2 Korea" : "2+2 Koreya",
-      title:
-        currentLocale === "ru"
-          ? "Стипендия партнерских вузов Южной Кореи"
-          : currentLocale === "en"
-          ? "South Korean Partner Universities Grant"
-          : "Janubiy Koreya hamkorlik granti (2+2 va 3+1)",
-      coverage: "50% - 100%",
-      coverageLabel:
-        currentLocale === "ru"
-          ? "Обучение в Корее"
-          : currentLocale === "en"
-          ? "Korea Study Grant"
-          : "Koreyada bepul ta'lim",
-      description:
-        currentLocale === "ru"
-          ? "Специальные гранты от Hanyang University, Daegu University и Seokyeong University для студентов программ обмена."
-          : currentLocale === "en"
-          ? "Funded by South Korean university consortia for dual degree exchange students demonstrating academic leadership."
-          : "Hanyang, Daegu va Seokyeong universitetlari bilan tuzilgan shartnomalarga ko'ra Koreyada ta'limni bepul davom ettirish.",
-      criteria: [
-        currentLocale === "ru" ? "Успешные 2 курса в Самарканде" : currentLocale === "en" ? "Completed 2 years in Samarkand" : "Samarqandda 2 yil a'lo o'qish",
-        "TOPIK 4+ yoki IELTS 6.5+",
-        currentLocale === "ru" ? "Два диплома (Узб + Корея)" : currentLocale === "en" ? "Double degree diploma" : "Ikkita rasmiy xalqaro diplom",
-      ],
-      highlight: false,
-    },
-    {
-      id: "grant-social",
-      badge: currentLocale === "ru" ? "Социальный" : currentLocale === "en" ? "Social Aid" : "Ijtimoiy jamg'arma",
-      title:
-        currentLocale === "ru"
-          ? "Фонд социальной поддержки и одаренной молодежи"
-          : currentLocale === "en"
-          ? "Social Opportunity & Youth Empowerment Fund"
-          : "Ijtimoiy rag'batlantirish va yoshlar jamg'armasi",
-      coverage: "30% - 100%",
-      coverageLabel:
-        currentLocale === "ru"
-          ? "Адресная помощь"
-          : currentLocale === "en"
-          ? "Targeted Support"
-          : "Manzilli yordam",
-      description:
-        currentLocale === "ru"
-          ? "Адресная финансовая поддержка талантливой молодежи из социально уязвимых категорий семей."
-          : currentLocale === "en"
-          ? "Dedicated financial aid for talented students requiring need-based social and economic assistance."
-          : "Ijtimoiy himoyaga muhtoj, biroq ilmiy salohiyati va a'lo baholari bilan ajralib turgan talabalarni qo'llab-quvvatlash.",
-      criteria: [
-        currentLocale === "ru" ? "Социальное подтверждение" : currentLocale === "en" ? "Need verification" : "Ijtimoiy reestr hujjati",
-        currentLocale === "ru" ? "Высокая успеваемость" : currentLocale === "en" ? "Strong GPA" : "A'lo o'quv ko'rsatkichi",
-        currentLocale === "ru" ? "Активное участие в жизни филиала" : currentLocale === "en" ? "Campus involvement" : "Universitet jamoat hayoti",
-      ],
-      highlight: false,
-    },
-  ];
+  const grants = React.useMemo(
+    () => [
+      {
+        id: "grant-rector",
+        badge: currentLocale === "ru" ? "100% Грант" : currentLocale === "en" ? "100% Grant" : "100% Grant",
+        title:
+          currentLocale === "ru"
+            ? "Ректорский грант для одаренных студентов"
+            : currentLocale === "en"
+            ? "Rector's Excellence Scholarship"
+            : "Iqtidorli talabalar uchun Rektorat granti",
+        coverage: "100%",
+        coverageLabel:
+          currentLocale === "ru"
+            ? "Бесплатное обучение"
+            : currentLocale === "en"
+            ? "Full Tuition Covered"
+            : "To'liq bepul ta'lim",
+        description:
+          currentLocale === "ru"
+            ? "Выделяется абитуриентам, набравшим наивысшие баллы на вступительных испытаниях по профильным предметам."
+            : currentLocale === "en"
+            ? "Awarded to top-scoring applicants in university entrance examinations across specialized academic subjects."
+            : "Kirish imtihonlarida eng yuqori ball to'plagan eng iqtidorli abituriyentlar uchun universitet maxsus jamg'armasi.",
+        criteria: [
+          currentLocale === "ru" ? "Высший балл на экзаменах" : currentLocale === "en" ? "Top entrance exam rank" : "Kirish imtihonida 1-o'rin",
+          currentLocale === "ru" ? "Подтверждение академических успехов" : currentLocale === "en" ? "Academic excellence record" : "A'lo baholar attestati",
+          currentLocale === "ru" ? "Ежегодное подтверждение (GPA 4.5+)" : currentLocale === "en" ? "Yearly retention (GPA 4.5+)" : "Har yili GPA 4.5+ bilan tasdiqlash",
+        ],
+        highlight: true,
+      },
+      {
+        id: "grant-language",
+        badge: currentLocale === "ru" ? "Спецстипендия" : currentLocale === "en" ? "Language Award" : "Til imtiyozi",
+        title:
+          currentLocale === "ru"
+            ? "Грант за международные языковые сертификаты"
+            : currentLocale === "en"
+            ? "International Language Certificate Grant"
+            : "Xalqaro til sertifikatlari (IELTS / TOPIK) imtiyozi",
+        coverage: "25% - 50%",
+        coverageLabel:
+          currentLocale === "ru"
+            ? "Скидка на контракт"
+            : currentLocale === "en"
+            ? "Tuition Reduction"
+            : "Kontrakt to'lovi chegirishi",
+        description:
+          currentLocale === "ru"
+            ? "Скидка на оплату контракта для обладателей сертификатов IELTS 7.0+, CEFR C1 или TOPIK 4+."
+            : currentLocale === "en"
+            ? "Substantial fee reductions for holders of certified language scores (IELTS 7.0+, CEFR C1, TOPIK 4+)."
+            : "IELTS 7.0+, CEFR C1 yoki TOPIK 4+ xalqaro darajasiga ega abituriyentlar uchun maxsus stipendiyalar va to'lov imtiyozlari.",
+        criteria: [
+          currentLocale === "ru"
+            ? "IELTS 7.0+ или CEFR C1"
+            : currentLocale === "en"
+            ? "IELTS 7.0+ or CEFR C1"
+            : "IELTS 7.0+ yoki CEFR C1",
+          currentLocale === "ru"
+            ? "TOPIK 4+ (для корейской филологии)"
+            : currentLocale === "en"
+            ? "TOPIK 4+ (for Korean Philology)"
+            : "TOPIK 4+ (Koreys tili yo'nalishlarida)",
+          currentLocale === "ru" ? "Автоматический зачет языка" : currentLocale === "en" ? "Direct language waiver" : "Til imtihonidan to'liq ozod",
+        ],
+        highlight: false,
+      },
+      {
+        id: "grant-korea",
+        badge: currentLocale === "ru" ? "2+2 Корея" : currentLocale === "en" ? "2+2 Korea" : "2+2 Koreya",
+        title:
+          currentLocale === "ru"
+            ? "Стипендия партнерских вузов Южной Кореи"
+            : currentLocale === "en"
+            ? "South Korean Partner Universities Grant"
+            : "Janubiy Koreya hamkorlik granti (2+2 va 3+1)",
+        coverage: "50% - 100%",
+        coverageLabel:
+          currentLocale === "ru"
+            ? "Обучение в Корее"
+            : currentLocale === "en"
+            ? "Korea Study Grant"
+            : "Koreyada bepul ta'lim",
+        description:
+          currentLocale === "ru"
+            ? "Специальные гранты от Hanyang University, Daegu University и Seokyeong University для студентов программ обмена."
+            : currentLocale === "en"
+            ? "Funded by South Korean university consortia for dual degree exchange students demonstrating academic leadership."
+            : "Hanyang, Daegu va Seokyeong universitetlari bilan tuzilgan shartnomalarga ko'ra Koreyada ta'limni bepul davom ettirish.",
+        criteria: [
+          currentLocale === "ru" ? "Успешные 2 курса в Самарканде" : currentLocale === "en" ? "Completed 2 years in Samarkand" : "Samarqandda 2 yil a'lo o'qish",
+          currentLocale === "ru" ? "TOPIK 4+ или IELTS 6.5+" : currentLocale === "en" ? "TOPIK 4+ or IELTS 6.5+" : "TOPIK 4+ yoki IELTS 6.5+",
+          currentLocale === "ru" ? "Два диплома (Узб + Корея)" : currentLocale === "en" ? "Double degree diploma" : "Ikkita rasmiy xalqaro diplom",
+        ],
+        highlight: false,
+      },
+      {
+        id: "grant-social",
+        badge: currentLocale === "ru" ? "Социальный" : currentLocale === "en" ? "Social Aid" : "Ijtimoiy jamg'arma",
+        title:
+          currentLocale === "ru"
+            ? "Фонд социальной поддержки и одаренной молодежи"
+            : currentLocale === "en"
+            ? "Social Opportunity & Youth Empowerment Fund"
+            : "Ijtimoiy rag'batlantirish va yoshlar jamg'armasi",
+        coverage: "30% - 100%",
+        coverageLabel:
+          currentLocale === "ru"
+            ? "Адресная помощь"
+            : currentLocale === "en"
+            ? "Targeted Support"
+            : "Manzilli yordam",
+        description:
+          currentLocale === "ru"
+            ? "Адресная финансовая поддержка талантливой молодежи из социально уязвимых категорий семей."
+            : currentLocale === "en"
+            ? "Dedicated financial aid for talented students requiring need-based social and economic assistance."
+            : "Ijtimoiy himoyaga muhtoj, biroq ilmiy salohiyati va a'lo baholari bilan ajralib turgan talabalarni qo'llab-quvvatlash.",
+        criteria: [
+          currentLocale === "ru" ? "Социальное подтверждение" : currentLocale === "en" ? "Need verification" : "Ijtimoiy reestr hujjati",
+          currentLocale === "ru" ? "Высокая успеваемость" : currentLocale === "en" ? "Strong GPA" : "A'lo o'quv ko'rsatkichi",
+          currentLocale === "ru" ? "Активное участие в жизни филиала" : currentLocale === "en" ? "Campus involvement" : "Universitet jamoat hayoti",
+        ],
+        highlight: false,
+      },
+    ],
+    [currentLocale]
+  );
 
   return (
     <section
       id="scholarships"
-      aria-label="Universitet grantlari va stipendiyalari"
+      aria-label={
+        currentLocale === "ru"
+          ? "Университетские гранты и стипендии"
+          : currentLocale === "en"
+          ? "University Scholarships and Financial Aid"
+          : "Universitet grantlari va stipendiyalari"
+      }
       className="py-16 sm:py-24 bg-[#F8FAFC] border-b border-slate-200 relative z-10"
     >
       <Container>
@@ -170,7 +187,7 @@ export function ScholarshipsSection({
           </div>
           <p className="text-sm sm:text-base text-slate-600 max-w-md font-normal leading-relaxed">
             {currentLocale === "ru"
-              ? "Toshkent Kimyo xalqaro universiteti Samarqand filiali iqtidorli talabalarni har tomonlama qo'llab-quvvatlaydi."
+              ? "Самаркандский филиал Международного университета Кимё всесторонне поддерживает академически одаренных и целеустремленных студентов."
               : currentLocale === "en"
               ? "KIUT Samarkand rewards academic merit, international certificates, and global exchange participation."
               : "Iqtidorli, bilimli va til sertifikatlariga ega abituriyentlar uchun to'liq yoki qisman bepul ta'lim olish imkoniyati."}
@@ -292,7 +309,15 @@ export function ScholarshipsSection({
           </div>
 
           <Button
-            onClick={() => onOpenAdmissionModal?.("Grant dasturlari")}
+            onClick={() =>
+              onOpenAdmissionModal?.(
+                currentLocale === "ru"
+                  ? "Грантовые программы"
+                  : currentLocale === "en"
+                  ? "Scholarship Programs"
+                  : "Grant dasturlari"
+              )
+            }
             variant="action"
             size="default"
             className="bg-[#0096DB] hover:bg-[#007BB3] text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-xl whitespace-nowrap shadow-md shrink-0"

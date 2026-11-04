@@ -16,15 +16,8 @@ import {
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { formatUzbekPhone, isUzbekPhoneValid } from "@/lib/phone";
 import { translations } from "@/lib/translations";
-import {
-  FACULTIES_BY_LOCALE,
-  DEGREE_OPTIONS_BY_LOCALE,
-  STUDY_TYPE_OPTIONS_BY_LOCALE,
-  LANGUAGE_OPTIONS_BY_LOCALE,
-  resolveFacultyName,
-} from "@/lib/admissions";
+import { useAdmissionLeadForm } from "@/lib/admissions";
 import type { Locale } from "@/types";
 
 interface AdmissionCTAProps {
@@ -40,119 +33,45 @@ export function AdmissionCTA({
 }: AdmissionCTAProps) {
   const t = translations[currentLocale].admission;
 
-  const facultyOptions = FACULTIES_BY_LOCALE[currentLocale];
-  const degreeOptions = DEGREE_OPTIONS_BY_LOCALE[currentLocale];
-  const studyTypeOptions = STUDY_TYPE_OPTIONS_BY_LOCALE[currentLocale];
-  const languageOptions = LANGUAGE_OPTIONS_BY_LOCALE[currentLocale];
-
-  const resolvedFaculty = React.useMemo(() => {
-    return resolveFacultyName(initialFaculty, currentLocale);
-  }, [initialFaculty, currentLocale]);
-
-  const [fullName, setFullName] = React.useState("");
-  const [phone, setPhone] = React.useState("+998 ");
-  const [faculty, setFaculty] = React.useState(resolvedFaculty);
-  const [prevResolvedFaculty, setPrevResolvedFaculty] = React.useState(resolvedFaculty);
-  const [degree, setDegree] = React.useState(degreeOptions[0].value);
-  const [language, setLanguage] = React.useState(languageOptions[0].value);
-  const [studyType, setStudyType] = React.useState(studyTypeOptions[0].value);
-
-  const [loading, setLoading] = React.useState(false);
-  const [submitted, setSubmitted] = React.useState(false);
-  const [confirmationId, setConfirmationId] = React.useState("");
-  const [errorMessage, setErrorMessage] = React.useState("");
-
-  // Sync if resolved faculty changes externally or by locale change
-  if (resolvedFaculty !== prevResolvedFaculty) {
-    setPrevResolvedFaculty(resolvedFaculty);
-    setFaculty(resolvedFaculty);
-  }
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatUzbekPhone(e.target.value);
-    setPhone(formatted);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage("");
-
-    if (!fullName.trim() || fullName.trim().length < 3) {
-      setErrorMessage(
-        currentLocale === "ru"
-          ? "Пожалуйста, введите полное Ф.И.О. (минимум 3 символа)."
-          : currentLocale === "en"
-          ? "Please enter your full name (at least 3 characters)."
-          : "Iltimos, to'liq ism-familiyangizni kiriting (kamida 3 belgi)."
-      );
-      return;
-    }
-
-    if (!isUzbekPhoneValid(phone)) {
-      setErrorMessage(
-        currentLocale === "ru"
-          ? "Пожалуйста, введите корректный номер телефона Узбекистана (+998 XX XXX-XX-XX)."
-          : currentLocale === "en"
-          ? "Please enter a valid Uzbekistan phone number (+998 XX XXX-XX-XX)."
-          : "Iltimos, to'liq telefon raqamingizni kiriting (+998 XX XXX-XX-XX)."
-      );
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/admission", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: fullName.trim(),
-          phone: phone.trim(),
-          selectedFaculty: faculty,
-          degree,
-          language,
-          studyType,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
-        setErrorMessage(data.error || "Arizani yuborishda xatolik yuz berdi.");
-        setLoading(false);
-        return;
-      }
-
-      setConfirmationId(data.confirmationId);
-      setLoading(false);
-      setSubmitted(true);
-    } catch {
-      setErrorMessage(
-        currentLocale === "ru"
-          ? "Ошибка сетевого соединения. Пожалуйста, проверьте интернет."
-          : currentLocale === "en"
-          ? "Network connection error. Please verify your connection."
-          : "Tarmoq bilan aloqa uzildi. Iltimos, qayta urinib ko'ring."
-      );
-      setLoading(false);
-    }
-  };
-
-  const handleReset = () => {
-    setFullName("");
-    setPhone("+998 ");
-    setSubmitted(false);
-    setErrorMessage("");
-    setFaculty(resolvedFaculty);
-    setDegree(degreeOptions[0].value);
-    setLanguage(languageOptions[0].value);
-    setStudyType(studyTypeOptions[0].value);
-  };
+  const {
+    fullName,
+    setFullName,
+    phone,
+    faculty,
+    setFaculty,
+    degree,
+    setDegree,
+    language,
+    setLanguage,
+    studyType,
+    setStudyType,
+    loading,
+    submitted,
+    confirmationId,
+    errorMessage,
+    facultyOptions,
+    degreeOptions,
+    studyTypeOptions,
+    languageOptions,
+    handlePhoneChange,
+    handleSubmit,
+    resetForm,
+  } = useAdmissionLeadForm({
+    currentLocale,
+    initialFaculty,
+    defaultStudyType: "Kunduzgi",
+  });
 
   return (
     <section
       id="admission"
-      aria-label="Qabul 2026/2027 arizasi"
+      aria-label={
+        currentLocale === "ru"
+          ? "Подача онлайн-заявки на прием 2026/2027"
+          : currentLocale === "en"
+          ? "Admissions 2026/2027 Online Application"
+          : "Qabul 2026/2027 arizasi"
+      }
       className="py-16 sm:py-24 bg-[#172D50] text-white relative overflow-hidden border-t border-white/10"
     >
       <Container className="relative z-10">
@@ -249,7 +168,7 @@ export function AdmissionCTA({
                     </div>
 
                     {errorMessage && (
-                      <div className="p-3 rounded-xl bg-red-50 text-red-700 text-xs flex items-center gap-2 border border-red-200">
+                      <div className="p-3 rounded-xl bg-red-50 text-red-700 text-xs flex items-center gap-2 border border-red-200" role="alert">
                         <AlertCircle className="h-4 w-4 shrink-0" />
                         <span>{errorMessage}</span>
                       </div>
@@ -257,10 +176,11 @@ export function AdmissionCTA({
 
                     {/* Full Name */}
                     <div>
-                      <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                      <label htmlFor="cta-fullname" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
                         {t.fullNameLabel}
                       </label>
                       <input
+                        id="cta-fullname"
                         type="text"
                         required
                         placeholder={t.fullNamePlaceholder}
@@ -272,10 +192,11 @@ export function AdmissionCTA({
 
                     {/* Phone Number with strict Uzbek format */}
                     <div>
-                      <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                      <label htmlFor="cta-phone" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
                         {t.phoneLabel}
                       </label>
                       <input
+                        id="cta-phone"
                         type="tel"
                         required
                         value={phone}
@@ -287,10 +208,11 @@ export function AdmissionCTA({
 
                     {/* Faculty Select */}
                     <div>
-                      <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                      <label htmlFor="cta-faculty" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
                         {t.facultyLabel}
                       </label>
                       <select
+                        id="cta-faculty"
                         value={faculty}
                         onChange={(e) => setFaculty(e.target.value)}
                         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#0096DB] focus:ring-2 focus:ring-[#0096DB]/20 text-sm font-medium transition-all outline-none bg-white cursor-pointer text-[#172D50]"
@@ -306,10 +228,11 @@ export function AdmissionCTA({
                     {/* Degree & Study Type in row */}
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                        <label htmlFor="cta-degree" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
                           {t.degreeLabel}
                         </label>
                         <select
+                          id="cta-degree"
                           value={degree}
                           onChange={(e) => setDegree(e.target.value)}
                           className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#0096DB] focus:ring-2 focus:ring-[#0096DB]/20 text-xs font-semibold outline-none bg-white cursor-pointer text-[#172D50]"
@@ -323,10 +246,11 @@ export function AdmissionCTA({
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                        <label htmlFor="cta-studytype" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
                           {t.studyTypeLabel}
                         </label>
                         <select
+                          id="cta-studytype"
                           value={studyType}
                           onChange={(e) => setStudyType(e.target.value)}
                           className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#0096DB] focus:ring-2 focus:ring-[#0096DB]/20 text-xs font-semibold outline-none bg-white cursor-pointer text-[#172D50]"
@@ -345,7 +269,7 @@ export function AdmissionCTA({
                       <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
                         {t.languageLabel}
                       </label>
-                      <div className="grid grid-cols-3 gap-2">
+                      <div className="grid grid-cols-3 gap-2" role="group" aria-label={t.languageLabel}>
                         {languageOptions.map((l) => (
                           <button
                             type="button"
@@ -356,6 +280,7 @@ export function AdmissionCTA({
                                 ? "bg-[#172D50] text-white border-[#172D50]"
                                 : "bg-[#F4F7FC] text-[#334155] border-slate-200 hover:border-slate-300 hover:text-[#172D50]"
                             }`}
+                            aria-pressed={language === l.value}
                           >
                             {l.label}
                           </button>
@@ -431,7 +356,7 @@ export function AdmissionCTA({
                     </div>
 
                     <Button
-                      onClick={handleReset}
+                      onClick={resetForm}
                       variant="secondary"
                       size="default"
                       className="w-full text-xs font-bold border-slate-200"

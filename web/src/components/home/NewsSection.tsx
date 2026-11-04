@@ -134,23 +134,33 @@ export function NewsSection({ currentLocale = "uz" }: NewsSectionProps) {
     });
   }, [currentLocale]);
 
-  const filteredArticles =
-    activeFilter === "all"
+  const filteredArticles = React.useMemo(() => {
+    return activeFilter === "all"
       ? enrichedArticles
       : enrichedArticles.filter((a) => a.category === activeFilter);
+  }, [activeFilter, enrichedArticles]);
 
-  const filterTabs = [
-    { id: "all", label: t.tabs.all },
-    { id: "academic", label: t.tabs.academic },
-    { id: "partnership", label: t.tabs.partnership },
-    { id: "student-life", label: t.tabs.studentLife },
-    { id: "sport", label: t.tabs.sport },
-  ];
+  const filterTabs = React.useMemo(
+    () => [
+      { id: "all", label: t.tabs.all },
+      { id: "academic", label: t.tabs.academic },
+      { id: "partnership", label: t.tabs.partnership },
+      { id: "student-life", label: t.tabs.studentLife },
+      { id: "sport", label: t.tabs.sport },
+    ],
+    [t.tabs]
+  );
 
   return (
     <section
       id="news"
-      aria-label="Universitet yangiliklari va tadbirlari"
+      aria-label={
+        currentLocale === "ru"
+          ? "Новости и события университета"
+          : currentLocale === "en"
+          ? "University News and Events"
+          : "Universitet yangiliklari va tadbirlari"
+      }
       className="py-16 sm:py-24 bg-white relative"
     >
       <Container>
@@ -259,7 +269,7 @@ export function NewsSection({ currentLocale = "uz" }: NewsSectionProps) {
                       <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                     </button>
                     <span className="text-xs text-slate-400 font-medium">
-                      KIUT Samarqand
+                      {currentLocale === "ru" ? "ТМУК Самарканд" : currentLocale === "en" ? "KIUT Samarkand" : "KIUT Samarqand"}
                     </span>
                   </div>
                 </div>
@@ -322,7 +332,7 @@ export function NewsSection({ currentLocale = "uz" }: NewsSectionProps) {
                   type="button"
                   onClick={() => setSelectedArticle(null)}
                   className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 text-white hover:bg-black transition-colors cursor-pointer"
-                  aria-label="Yopish"
+                  aria-label={t.modalClose}
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -349,7 +359,7 @@ export function NewsSection({ currentLocale = "uz" }: NewsSectionProps) {
                     <span>{selectedArticle.readTime}</span>
                   </span>
                   <span className="text-[#172D50] font-semibold">
-                    KIUT Samarqand filiali Matbuot xizmati
+                    {t.pressRelease}
                   </span>
                 </div>
 
@@ -358,9 +368,11 @@ export function NewsSection({ currentLocale = "uz" }: NewsSectionProps) {
                     {selectedArticle.summary}
                   </p>
                   <p>
-                    Toshkent Kimyo Xalqaro Universiteti Samarqand filiali talabalarga
-                    jahon andozalariga mos ta&apos;lim berish, xalqaro dasturlar va ilg&apos;or amaliy
-                    ko&apos;nikmalarni shakllantirish bo&apos;yicha tizimli ishlarni davom ettirmoqda.
+                    {currentLocale === "ru"
+                      ? "Самаркандский филиал Ташкентского международного университета Кимё продолжает системную работу по обеспечению высшего образования мирового уровня, развитию международных партнерских программ и формированию передовых профессиональных компетенций студентов."
+                      : currentLocale === "en"
+                      ? "The Samarkand Branch of Kimyo International University in Tashkent remains committed to delivering world-class higher education, expanding international academic partnerships, and fostering advanced professional competencies among its students."
+                      : "Toshkent Kimyo Xalqaro Universiteti Samarqand filiali talabalarga jahon andozalariga mos ta'lim berish, xalqaro dasturlar va ilg'or amaliy ko'nikmalarni shakllantirish bo'yicha tizimli ishlarni davom ettirmoqda."}
                   </p>
                 </div>
               </div>
@@ -373,7 +385,7 @@ export function NewsSection({ currentLocale = "uz" }: NewsSectionProps) {
                   size="default"
                   className="font-bold border-slate-200"
                 >
-                  Yopish
+                  {t.modalClose}
                 </Button>
               </div>
             </motion.div>

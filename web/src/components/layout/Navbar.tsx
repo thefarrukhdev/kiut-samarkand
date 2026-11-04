@@ -15,6 +15,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence, motion } from "framer-motion";
 import { translations } from "@/lib/translations";
+import { getFacultySummaries } from "@/data/schools";
 import type { Locale } from "@/types";
 
 interface NavbarProps {
@@ -37,11 +38,7 @@ export function Navbar({
 
   React.useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -79,7 +76,7 @@ export function Navbar({
     };
   }, []);
 
-  const handleAdmissionClick = () => {
+  const handleAdmissionClick = React.useCallback(() => {
     setMobileMenuOpen(false);
     if (onOpenAdmissionModal) {
       onOpenAdmissionModal();
@@ -89,62 +86,48 @@ export function Navbar({
         el.scrollIntoView({ behavior: "smooth" });
       }
     }
-  };
+  }, [onOpenAdmissionModal]);
 
-  const navLinks = [
-    {
-      label: currentLocale === "ru" ? "Программы" : currentLocale === "en" ? "Programs" : "Dasturlar",
-      href: "#programs",
-      badge: "46+",
-      hasDropdown: false,
-    },
-    {
-      label: t.faculties,
-      href: "#schools",
-      hasDropdown: true,
-    },
-    {
-      label: currentLocale === "ru" ? "Гранты" : currentLocale === "en" ? "Scholarships" : "Grantlar",
-      href: "#scholarships",
-      hasDropdown: false,
-    },
-    {
-      label: currentLocale === "ru" ? "Кампус" : currentLocale === "en" ? "Campus" : "Kampus",
-      href: "#campus",
-      hasDropdown: false,
-    },
-    { label: t.university, href: "#about", hasDropdown: false },
-    { label: t.news, href: "#news", hasDropdown: false },
-    { label: "FAQ", href: "#faq", hasDropdown: false },
-  ];
+  const navLinks = React.useMemo(
+    () => [
+      {
+        label: currentLocale === "ru" ? "Программы" : currentLocale === "en" ? "Programs" : "Dasturlar",
+        href: "#programs",
+        badge: "46+",
+        hasDropdown: false,
+      },
+      {
+        label: t.faculties,
+        href: "#schools",
+        hasDropdown: true,
+      },
+      {
+        label: currentLocale === "ru" ? "Гранты" : currentLocale === "en" ? "Scholarships" : "Grantlar",
+        href: "#scholarships",
+        hasDropdown: false,
+      },
+      {
+        label: currentLocale === "ru" ? "Кампус" : currentLocale === "en" ? "Campus" : "Kampus",
+        href: "#campus",
+        hasDropdown: false,
+      },
+      { label: t.university, href: "#about", hasDropdown: false },
+      { label: t.news, href: "#news", hasDropdown: false },
+      { label: "FAQ", href: "#faq", hasDropdown: false },
+    ],
+    [currentLocale, t.faculties, t.university, t.news]
+  );
 
-  const facultyList = [
-    {
-      name: currentLocale === "ru" ? "Факультет медицины" : currentLocale === "en" ? "School of Medicine" : "Tibbiyot fakulteti",
-      href: "#schools",
-      count: currentLocale === "ru" ? "5+ направлений" : currentLocale === "en" ? "5+ Programs" : "5+ yo'nalish",
-    },
-    {
-      name: currentLocale === "ru" ? "Факультет инженерии и IT" : currentLocale === "en" ? "School of Engineering & IT" : "Muhandislik va IT fakulteti",
-      href: "#schools",
-      count: currentLocale === "ru" ? "18+ направлений" : currentLocale === "en" ? "18+ Programs" : "18+ yo'nalish",
-    },
-    {
-      name: currentLocale === "ru" ? "Факультет экономики и бизнеса" : currentLocale === "en" ? "School of Business & Economy" : "Iqtisodiyot va biznes fakulteti",
-      href: "#schools",
-      count: currentLocale === "ru" ? "8+ направлений" : currentLocale === "en" ? "8+ Programs" : "8+ yo'nalish",
-    },
-    {
-      name: currentLocale === "ru" ? "Факультет педагогики" : currentLocale === "en" ? "School of Education" : "Pedagogika va ta'lim fakulteti",
-      href: "#schools",
-      count: currentLocale === "ru" ? "4+ направлений" : currentLocale === "en" ? "4+ Programs" : "4+ yo'nalish",
-    },
-    {
-      name: currentLocale === "ru" ? "Факультет филологии" : currentLocale === "en" ? "School of Philology" : "Filologiya fakulteti",
-      href: "#schools",
-      count: currentLocale === "ru" ? "5+ направлений" : currentLocale === "en" ? "5+ Programs" : "5+ yo'nalish",
-    },
-  ];
+  const facultyList = React.useMemo(() => {
+    return getFacultySummaries(currentLocale);
+  }, [currentLocale]);
+
+  const dropdownHeading =
+    currentLocale === "ru"
+      ? "5 основных факультетов"
+      : currentLocale === "en"
+      ? "5 Core Faculties"
+      : "5 asosiy fakultet";
 
   return (
     <header
@@ -157,7 +140,13 @@ export function Navbar({
         <Link
           href="/"
           className="flex items-center gap-3.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB] rounded-lg"
-          aria-label="KIUT Samarqand Bosh Sahifa"
+          aria-label={
+            currentLocale === "ru"
+              ? "ТМУК Самарканд Главная страница"
+              : currentLocale === "en"
+              ? "KIUT Samarkand Home"
+              : "KIUT Samarqand Bosh Sahifa"
+          }
         >
           <div className="relative h-10 w-36 sm:h-11 sm:w-44 flex items-center">
             <Image
@@ -180,7 +169,16 @@ export function Navbar({
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Asosiy menyu">
+        <nav
+          className="hidden lg:flex items-center gap-1 xl:gap-2"
+          aria-label={
+            currentLocale === "ru"
+              ? "Главное меню"
+              : currentLocale === "en"
+              ? "Main navigation"
+              : "Asosiy menyu"
+          }
+        >
           {navLinks.map((link) => {
             if (link.hasDropdown) {
               return (
@@ -225,13 +223,7 @@ export function Navbar({
                       >
                         <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 overflow-hidden">
                           <div className="px-3.5 py-2 border-b border-slate-100 text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
-                            <span>
-                              {currentLocale === "ru"
-                                ? "5 основных факультетов"
-                                : currentLocale === "en"
-                                ? "5 Core Faculties"
-                                : "5 asosiy fakultet"}
-                            </span>
+                            <span>{dropdownHeading}</span>
                             <span className="text-[11px] font-semibold text-[#0096DB] bg-[#E9F2FF] px-2 py-0.5 rounded-md">
                               {t.facultiesCount}
                             </span>
@@ -239,7 +231,7 @@ export function Navbar({
                           <div className="py-1">
                             {facultyList.map((faculty) => (
                               <a
-                                key={faculty.name}
+                                key={faculty.id}
                                 href={faculty.href}
                                 role="menuitem"
                                 onClick={() => setFacultiesDropdownOpen(false)}
@@ -293,7 +285,17 @@ export function Navbar({
         {/* Action Button & Language Switcher */}
         <div className="flex items-center gap-3">
           {/* Single Unified Language Selector */}
-          <div className="flex items-center gap-0.5 bg-slate-100 rounded-lg p-1 border border-slate-200" role="group" aria-label="Language selection">
+          <div
+            className="flex items-center gap-0.5 bg-slate-100 rounded-lg p-1 border border-slate-200"
+            role="group"
+            aria-label={
+              currentLocale === "ru"
+                ? "Выбор языка"
+                : currentLocale === "en"
+                ? "Language selection"
+                : "Tilni tanlash"
+            }
+          >
             <Globe className="h-3.5 w-3.5 ml-1 mr-0.5 text-slate-500 hidden sm:block" />
             {(["uz", "ru", "en"] as const).map((lang) => (
               <button
@@ -329,7 +331,19 @@ export function Navbar({
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden p-2 rounded-xl text-[#172D50] hover:text-[#0096DB] hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB] transition-colors"
             aria-expanded={mobileMenuOpen}
-            aria-label="Menyuni ochish"
+            aria-label={
+              mobileMenuOpen
+                ? currentLocale === "ru"
+                  ? "Закрыть меню"
+                  : currentLocale === "en"
+                  ? "Close menu"
+                  : "Menyuni yopish"
+                : currentLocale === "ru"
+                ? "Открыть меню"
+                : currentLocale === "en"
+                ? "Open menu"
+                : "Menyuni ochish"
+            }
           >
             {mobileMenuOpen ? (
               <X className="h-6 w-6 text-[#172D50]" />
@@ -351,7 +365,16 @@ export function Navbar({
             className="lg:hidden overflow-hidden border-t border-slate-200 bg-white shadow-xl"
           >
             <Container className="py-5 space-y-4">
-              <nav className="flex flex-col space-y-1" aria-label="Mobil menyu">
+              <nav
+                className="flex flex-col space-y-1"
+                aria-label={
+                  currentLocale === "ru"
+                    ? "Мобильное меню"
+                    : currentLocale === "en"
+                    ? "Mobile navigation"
+                    : "Mobil menyu"
+                }
+              >
                 {navLinks.map((link) => (
                   <a
                     key={link.label}
@@ -388,7 +411,7 @@ export function Navbar({
                   <span>{t.hotline}</span>
                 </a>
                 <p className="text-slate-500 text-[11px]">
-                  Samarqand shahar, Spitamen shoh ko&apos;chasi, 270-uy
+                  {translations[currentLocale].topbar.address}
                 </p>
               </div>
             </Container>

@@ -80,6 +80,8 @@ const slideMetadata = [
   },
 ];
 
+const popularTags = ["Davolash ishi", "Dasturiy injiniring", "Xalqaro biznes", "Koreys filologiyasi"];
+
 interface HeroSliderProps {
   currentLocale?: Locale;
   onOpenAdmissionModal?: () => void;
@@ -144,16 +146,19 @@ export function HeroSlider({
   const currentSlide = slides[current] || slides[0];
   const currentPhoto = slideImages[current] || slideImages[0];
 
-  const handleAction = (href: string) => {
-    if (href === "#admission" && onOpenAdmissionModal) {
-      onOpenAdmissionModal();
-      return;
-    }
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const handleAction = React.useCallback(
+    (href: string) => {
+      if (href === "#admission" && onOpenAdmissionModal) {
+        onOpenAdmissionModal();
+        return;
+      }
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    [onOpenAdmissionModal]
+  );
 
   // Touch handlers for mobile swipe
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -173,10 +178,86 @@ export function HeroSlider({
     setTouchStartX(null);
   };
 
+  const pillarRibbonItems = React.useMemo(
+    () => [
+      {
+        title:
+          currentLocale === "ru"
+            ? "46+ Академических программ"
+            : currentLocale === "en"
+            ? "46+ Degree Programs"
+            : "46+ Ta'lim yo'nalishlari",
+        desc:
+          currentLocale === "ru"
+            ? "Бакалавриат и магистратура"
+            : currentLocale === "en"
+            ? "Undergraduate & Graduate"
+            : "Bakalavriat va magistratura",
+        href: "#programs",
+        tag: currentLocale === "ru" ? "Каталог" : currentLocale === "en" ? "Directory" : "Katalog",
+      },
+      {
+        title:
+          currentLocale === "ru"
+            ? "500+ Университетских грантов"
+            : currentLocale === "en"
+            ? "500+ Annual Scholarships"
+            : "500+ Yillik ichki grantlar",
+        desc:
+          currentLocale === "ru"
+            ? "100% Ректорский грант и IELTS"
+            : currentLocale === "en"
+            ? "100% Rector grant & IELTS 7+"
+            : "Rektor granti va til imtiyozlari",
+        href: "#scholarships",
+        tag: currentLocale === "ru" ? "Гранты" : currentLocale === "en" ? "Grants" : "Grantlar",
+      },
+      {
+        title:
+          currentLocale === "ru"
+            ? "Современный кампус и IT-хаб"
+            : currentLocale === "en"
+            ? "Modern Campus & Labs"
+            : "Spitamen zamonaviy binosi",
+        desc:
+          currentLocale === "ru"
+            ? "Анатомический центр и AI лаборатории"
+            : currentLocale === "en"
+            ? "Anatomage labs & robotics"
+            : "Anatomage va robototexnika",
+        href: "#campus",
+        tag: currentLocale === "ru" ? "Кампус" : currentLocale === "en" ? "Campus" : "Kampus",
+      },
+      {
+        title:
+          currentLocale === "ru"
+            ? "2+2 Международный диплом"
+            : currentLocale === "en"
+            ? "2+2 Dual Degree Programs"
+            : "2+2 Xalqaro dual diplom",
+        desc:
+          currentLocale === "ru"
+            ? "Южная Корея и Европа"
+            : currentLocale === "en"
+            ? "South Korea & Europe"
+            : "Janubiy Koreya va Yevropa",
+        href: "#about",
+        tag: currentLocale === "ru" ? "Международное" : currentLocale === "en" ? "Global" : "Xalqaro",
+      },
+    ],
+    [currentLocale]
+  );
+
   return (
     <section
       id="hero"
-      aria-label="Universitet Asosiy Qismi"
+      aria-label={
+        currentLocale === "ru"
+          ? "Главный раздел университета"
+          : currentLocale === "en"
+          ? "University Hero Showcase"
+          : "Universitet Asosiy Qismi"
+      }
       className="relative bg-gradient-to-b from-white via-[#F8FAFC] to-[#F4F7FC] border-b border-slate-200/80 overflow-hidden py-10 sm:py-14 lg:py-18"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
@@ -196,7 +277,7 @@ export function HeroSlider({
                 transition={{ duration: 0.35, ease: "easeOut" }}
                 className="space-y-6"
               >
-                {/* Academic Eyebrow - Clean Typographic Bar (NO pill badge) */}
+                {/* Academic Eyebrow */}
                 <div className="flex items-center gap-3">
                   <span className="w-8 h-1 bg-[#0096DB] rounded-full" />
                   <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#0096DB]">
@@ -212,12 +293,12 @@ export function HeroSlider({
                   </span>
                 </h1>
 
-                {/* Crisp Editorial Description */}
+                {/* Editorial Description */}
                 <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl">
                   {currentSlide.description}
                 </p>
 
-                {/* Clear High-Contrast Action Buttons */}
+                {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
                   <Button
                     onClick={() => handleAction("#admission")}
@@ -240,7 +321,7 @@ export function HeroSlider({
                   </Button>
                 </div>
 
-                {/* Institutional Trust Badges (Inline clean micro-facts) */}
+                {/* Institutional Trust Badges */}
                 <div className="pt-6 border-t border-slate-200/90 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-[13px] text-slate-600 font-medium">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="h-4 w-4 text-[#0096DB] shrink-0" />
@@ -248,11 +329,23 @@ export function HeroSlider({
                   </div>
                   <div className="flex items-center gap-2">
                     <Award className="h-4 w-4 text-[#0096DB] shrink-0" />
-                    <span>100% Davlat diplomi</span>
+                    <span>
+                      {currentLocale === "ru"
+                        ? "100% Государственный диплом"
+                        : currentLocale === "en"
+                        ? "100% State-Accredited Degree"
+                        : "100% Davlat diplomi"}
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <GraduationCap className="h-4 w-4 text-[#0096DB] shrink-0" />
-                    <span>5+1 Dual ta&apos;lim</span>
+                    <span>
+                      {currentLocale === "ru"
+                        ? "5+1 Дуальное образование"
+                        : currentLocale === "en"
+                        ? "5+1 Dual Education Model"
+                        : "5+1 Dual ta'lim"}
+                    </span>
                   </div>
                 </div>
 
@@ -296,6 +389,7 @@ export function HeroSlider({
                             ? "Medicine, Software Engineering, Architecture..."
                             : "Davolash ishi, Dasturiy injiniring, Arxitektura..."
                         }
+                        aria-label="Qidiruv so'zi"
                         className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0096DB] focus:border-transparent transition-all shadow-sm"
                       />
                     </div>
@@ -313,7 +407,7 @@ export function HeroSlider({
                     <span className="text-[11px] text-slate-400 font-medium">
                       {currentLocale === "ru" ? "Популярные:" : currentLocale === "en" ? "Popular:" : "Ommabop:"}
                     </span>
-                    {["Davolash ishi", "Dasturiy injiniring", "Xalqaro biznes", "Koreys filologiyasi"].map((tag) => (
+                    {popularTags.map((tag) => (
                       <button
                         key={tag}
                         type="button"
@@ -339,10 +433,10 @@ export function HeroSlider({
             </AnimatePresence>
           </div>
 
-          {/* Right Column: Curated Framed Photographic Showcase Card & Interactive Thumbnails */}
+          {/* Right Column: Framed Showcase Card & Thumbnails */}
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/10 border border-slate-200/90 aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/4.2] bg-slate-900 group">
-              {/* Slide Image with Smooth Ken-Burns Motion */}
+              {/* Slide Image with Ken-Burns Motion */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={`${current}-${currentLocale}`}
@@ -360,16 +454,15 @@ export function HeroSlider({
                     sizes="(max-width: 1024px) 100vw, 45vw"
                     className="object-cover object-center"
                   />
-                  {/* Subtle lower gradient for caption readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#172D50] via-[#172D50]/25 to-transparent pointer-events-none" />
                 </motion.div>
               </AnimatePresence>
 
-              {/* Photo Caption & Slide Navigation Controls (Bottom) */}
+              {/* Photo Caption & Slide Controls */}
               <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between gap-3 text-white">
                 <div className="pr-2">
                   <p className="text-[11px] font-extrabold uppercase tracking-wider text-[#0096DB]">
-                    KIUT Samarqand
+                    {currentLocale === "ru" ? "ТМУК Самарканд" : currentLocale === "en" ? "KIUT Samarkand" : "KIUT Samarqand"}
                   </p>
                   <p className="text-xs sm:text-sm font-semibold text-white line-clamp-1">
                     {slideMetadata[current]?.caption[currentLocale] || currentPhoto.caption}
@@ -381,7 +474,13 @@ export function HeroSlider({
                   <button
                     type="button"
                     onClick={prevSlide}
-                    aria-label="Oldingi rasm"
+                    aria-label={
+                      currentLocale === "ru"
+                        ? "Предыдущий слайд"
+                        : currentLocale === "en"
+                        ? "Previous slide"
+                        : "Oldingi slayd"
+                    }
                     className="p-1.5 rounded-lg hover:bg-white/20 text-white transition-colors cursor-pointer"
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -392,7 +491,13 @@ export function HeroSlider({
                   <button
                     type="button"
                     onClick={nextSlide}
-                    aria-label="Keyingi rasm"
+                    aria-label={
+                      currentLocale === "ru"
+                        ? "Следующий слайд"
+                        : currentLocale === "en"
+                        ? "Next slide"
+                        : "Keyingi slayd"
+                    }
                     className="p-1.5 rounded-lg hover:bg-white/20 text-white transition-colors cursor-pointer"
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -401,11 +506,17 @@ export function HeroSlider({
               </div>
             </div>
 
-            {/* Interactive 4-Slide Thumbnail Preview Grid */}
+            {/* Thumbnail Preview Grid */}
             <div
               className="grid grid-cols-4 gap-2 sm:gap-2.5 mt-3.5"
               role="tablist"
-              aria-label="Slaydlar galereyasi"
+              aria-label={
+                currentLocale === "ru"
+                  ? "Галерея слайдов"
+                  : currentLocale === "en"
+                  ? "Slide gallery"
+                  : "Slaydlar galereyasi"
+              }
             >
               {slideImages.map((img, idx) => {
                 const meta = slideMetadata[idx];
@@ -470,72 +581,7 @@ export function HeroSlider({
 
         {/* Fast-Track Institutional Pillar Ribbon */}
         <div className="mt-12 sm:mt-16 pt-8 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            {
-              title:
-                currentLocale === "ru"
-                  ? "46+ Академических программ"
-                  : currentLocale === "en"
-                  ? "46+ Degree Programs"
-                  : "46+ Ta'lim yo'nalishlari",
-              desc:
-                currentLocale === "ru"
-                  ? "Бакалавриат и магистратура"
-                  : currentLocale === "en"
-                  ? "Undergraduate & Graduate"
-                  : "Bakalavriat va magistratura",
-              href: "#programs",
-              tag: "Katalog",
-            },
-            {
-              title:
-                currentLocale === "ru"
-                  ? "500+ Университетских грантов"
-                  : currentLocale === "en"
-                  ? "500+ Annual Scholarships"
-                  : "500+ Yillik ichki grantlar",
-              desc:
-                currentLocale === "ru"
-                  ? "100% Ректорский грант и IELTS"
-                  : currentLocale === "en"
-                  ? "100% Rector grant & IELTS 7+"
-                  : "Rektor granti va til imtiyozlari",
-              href: "#scholarships",
-              tag: "Grantlar",
-            },
-            {
-              title:
-                currentLocale === "ru"
-                  ? "Современный кампус и IT-хаб"
-                  : currentLocale === "en"
-                  ? "Modern Campus & Labs"
-                  : "Spitamen zamonaviy binosi",
-              desc:
-                currentLocale === "ru"
-                  ? "Анатомический центр и AI лаборатории"
-                  : currentLocale === "en"
-                  ? "Anatomage labs & robotics"
-                  : "Anatomage va robototexnika",
-              href: "#campus",
-              tag: "Kampus",
-            },
-            {
-              title:
-                currentLocale === "ru"
-                  ? "2+2 Международный диплом"
-                  : currentLocale === "en"
-                  ? "2+2 Dual Degree Programs"
-                  : "2+2 Xalqaro dual diplom",
-              desc:
-                currentLocale === "ru"
-                  ? "Южная Корея и Европа"
-                  : currentLocale === "en"
-                  ? "South Korea & Europe"
-                  : "Janubiy Koreya va Yevropa",
-              href: "#about",
-              tag: "Xalqaro",
-            },
-          ].map((item, idx) => (
+          {pillarRibbonItems.map((item, idx) => (
             <a
               key={idx}
               href={item.href}
@@ -548,9 +594,9 @@ export function HeroSlider({
                   </span>
                   <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-[#0096DB] group-hover:translate-x-1 transition-all" />
                 </div>
-                <h2 className="text-sm sm:text-base font-extrabold text-[#172D50] group-hover:text-[#0096DB] transition-colors leading-snug">
+                <h3 className="text-sm sm:text-base font-extrabold text-[#172D50] group-hover:text-[#0096DB] transition-colors leading-snug">
                   {item.title}
-                </h2>
+                </h3>
                 <p className="text-xs text-slate-500 mt-1 line-clamp-1">
                   {item.desc}
                 </p>

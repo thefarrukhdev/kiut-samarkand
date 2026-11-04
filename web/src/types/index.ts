@@ -83,5 +83,6 @@ export interface AdmissionLead {
   selectedFaculty: string;
   degree: string;
   language: string;
+  studyType?: string;
   createdAt?: string;
 }

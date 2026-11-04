@@ -73,7 +73,7 @@ export function TopBar({
             className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 hover:bg-[#0096DB] text-white text-[11px] font-bold tracking-wide transition-all shadow-xs"
             title={t.hemisTitle}
           >
-            <span>HEMIS Talaba portali</span>
+            <span>{t.hemisLabel}</span>
             <ExternalLink className="h-2.5 w-2.5" />
           </a>
 

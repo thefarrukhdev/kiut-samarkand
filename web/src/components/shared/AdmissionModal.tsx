@@ -10,14 +10,8 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { formatUzbekPhone, isUzbekPhoneValid } from "@/lib/phone";
 import { translations } from "@/lib/translations";
-import {
-  FACULTIES_BY_LOCALE,
-  DEGREE_OPTIONS_BY_LOCALE,
-  LANGUAGE_OPTIONS_BY_LOCALE,
-  resolveFacultyName,
-} from "@/lib/admissions";
+import { useAdmissionLeadForm } from "@/lib/admissions";
 import type { Locale } from "@/types";
 
 interface AdmissionModalProps {
@@ -35,44 +29,40 @@ export function AdmissionModal({
 }: AdmissionModalProps) {
   const t = translations[currentLocale].admission;
 
-  const facultyOptions = FACULTIES_BY_LOCALE[currentLocale];
-  const degreeOptions = DEGREE_OPTIONS_BY_LOCALE[currentLocale];
-  const languageOptions = LANGUAGE_OPTIONS_BY_LOCALE[currentLocale];
-
-  const resolvedFaculty = React.useMemo(() => {
-    return resolveFacultyName(defaultFaculty, currentLocale);
-  }, [defaultFaculty, currentLocale]);
-
-  const [fullName, setFullName] = React.useState("");
-  const [phone, setPhone] = React.useState("+998 ");
-  const [faculty, setFaculty] = React.useState(resolvedFaculty);
-  const [prevResolvedFaculty, setPrevResolvedFaculty] = React.useState(resolvedFaculty);
-  const [degree, setDegree] = React.useState(degreeOptions[0].value);
-  const [language, setLanguage] = React.useState(languageOptions[0].value);
-
-  const [loading, setLoading] = React.useState(false);
-  const [submitted, setSubmitted] = React.useState(false);
-  const [confirmationId, setConfirmationId] = React.useState("");
-  const [errorMessage, setErrorMessage] = React.useState("");
-
-  if (resolvedFaculty !== prevResolvedFaculty) {
-    setPrevResolvedFaculty(resolvedFaculty);
-    setFaculty(resolvedFaculty);
-  }
+  const {
+    fullName,
+    setFullName,
+    phone,
+    faculty,
+    setFaculty,
+    degree,
+    setDegree,
+    language,
+    setLanguage,
+    loading,
+    submitted,
+    confirmationId,
+    errorMessage,
+    facultyOptions,
+    degreeOptions,
+    languageOptions,
+    handlePhoneChange,
+    handleSubmit,
+    resetForm,
+  } = useAdmissionLeadForm({
+    currentLocale,
+    initialFaculty: defaultFaculty,
+    defaultStudyType: "Kunduzgi",
+  });
 
   const handleModalClose = React.useCallback(() => {
     onClose();
     // Reset state after animation finishes so re-opening starts clean
-    setTimeout(() => {
-      setSubmitted(false);
-      setFullName("");
-      setPhone("+998 ");
-      setErrorMessage("");
-      setFaculty(resolvedFaculty);
-      setDegree(degreeOptions[0].value);
-      setLanguage(languageOptions[0].value);
+    const timer = setTimeout(() => {
+      resetForm();
     }, 250);
-  }, [onClose, resolvedFaculty, degreeOptions, languageOptions]);
+    return () => clearTimeout(timer);
+  }, [onClose, resetForm]);
 
   // Lock body scroll and listen for Escape key when modal is open
   React.useEffect(() => {
@@ -92,76 +82,6 @@ export function AdmissionModal({
       document.body.style.overflow = "";
     }
   }, [isOpen, handleModalClose]);
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatUzbekPhone(e.target.value);
-    setPhone(formatted);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage("");
-
-    if (!fullName.trim() || fullName.trim().length < 3) {
-      setErrorMessage(
-        currentLocale === "ru"
-          ? "Пожалуйста, введите полное Ф.И.О. (минимум 3 символа)."
-          : currentLocale === "en"
-          ? "Please enter your full name (at least 3 characters)."
-          : "Iltimos, to'liq ism-familiyangizni kiriting (kamida 3 belgi)."
-      );
-      return;
-    }
-
-    if (!isUzbekPhoneValid(phone)) {
-      setErrorMessage(
-        currentLocale === "ru"
-          ? "Пожалуйста, введите корректный номер телефона Узбекистана (+998 XX XXX-XX-XX)."
-          : currentLocale === "en"
-          ? "Please enter a valid Uzbekistan phone number (+998 XX XXX-XX-XX)."
-          : "Iltimos, to'liq telefon raqamingizni kiriting (+998 XX XXX-XX-XX)."
-      );
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/admission", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fullName: fullName.trim(),
-          phone: phone.trim(),
-          selectedFaculty: faculty,
-          degree,
-          language,
-          studyType: "Kunduzgi",
-        }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.success) {
-        setErrorMessage(data.error || "Arizani yuborishda xatolik yuz berdi.");
-        setLoading(false);
-        return;
-      }
-
-      setConfirmationId(data.confirmationId);
-      setLoading(false);
-      setSubmitted(true);
-    } catch {
-      setErrorMessage(
-        currentLocale === "ru"
-          ? "Ошибка сети. Пожалуйста, попробуйте еще раз."
-          : currentLocale === "en"
-          ? "Network error. Please try again."
-          : "Tarmoq bilan aloqa uzildi. Iltimos, qayta urinib ko'ring."
-      );
-      setLoading(false);
-    }
-  };
 
   const closeButtonLabel =
     currentLocale === "ru" ? "Закрыть" : currentLocale === "en" ? "Close" : "Yopish";
@@ -225,17 +145,18 @@ export function AdmissionModal({
                   </div>
 
                   {errorMessage && (
-                    <div className="p-3 rounded-xl bg-red-50 text-red-700 text-xs flex items-center gap-2 border border-red-200">
+                    <div className="p-3 rounded-xl bg-red-50 text-red-700 text-xs flex items-center gap-2 border border-red-200" role="alert">
                       <AlertCircle className="h-4 w-4 shrink-0" />
                       <span>{errorMessage}</span>
                     </div>
                   )}
 
                   <div>
-                    <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
+                    <label htmlFor="modal-fullname" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
                       {t.fullNameLabel}
                     </label>
                     <input
+                      id="modal-fullname"
                       type="text"
                       required
                       placeholder={t.fullNamePlaceholder}
@@ -246,10 +167,11 @@ export function AdmissionModal({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
+                    <label htmlFor="modal-phone" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
                       {t.phoneLabel}
                     </label>
                     <input
+                      id="modal-phone"
                       type="tel"
                       required
                       value={phone}
@@ -260,10 +182,11 @@ export function AdmissionModal({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
+                    <label htmlFor="modal-faculty" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
                       {t.facultyLabel}
                     </label>
                     <select
+                      id="modal-faculty"
                       value={faculty}
                       onChange={(e) => setFaculty(e.target.value)}
                       className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#0096DB] text-xs font-medium outline-none bg-white cursor-pointer text-[#172D50]"
@@ -278,10 +201,11 @@ export function AdmissionModal({
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
+                      <label htmlFor="modal-degree" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
                         {t.degreeLabel}
                       </label>
                       <select
+                        id="modal-degree"
                         value={degree}
                         onChange={(e) => setDegree(e.target.value)}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none bg-white cursor-pointer text-[#172D50]"
@@ -294,10 +218,11 @@ export function AdmissionModal({
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
+                      <label htmlFor="modal-language" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
                         {t.languageLabel}
                       </label>
                       <select
+                        id="modal-language"
                         value={language}
                         onChange={(e) => setLanguage(e.target.value)}
                         className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none bg-white cursor-pointer text-[#172D50]"

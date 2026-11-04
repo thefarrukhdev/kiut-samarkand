@@ -16,157 +16,163 @@ interface FaqSectionProps {
   onOpenAdmissionModal?: () => void;
 }
 
+const FAQS_DATA: Record<Locale, FaqItem[]> = {
+  uz: [
+    {
+      id: "faq-1",
+      category: "diploma",
+      question: "Toshkent Kimyo Xalqaro Universiteti Samarqand filiali diplomi O'zbekistonda 100% tan olinadimi?",
+      answer:
+        "Ha, albatta. Toshkent Kimyo xalqaro universiteti (sobiq Yeoju texnika instituti) O'zbekiston Respublikasi Oliy ta'lim, fan va innovatsiyalar vazirligi tomonidan berilgan № 039281-sonli rasmiy davlat litsenziyasi asosida qonuniy faoliyat yuritadi. Bitiruvchilarga beriladigan diplom davlat oliy ta'lim muassasalari diplomi bilan teng yuridik kuchga ega bo'lib, davlat organlari va barcha xususiy tashkilotlarda to'liq tan olinadi.",
+    },
+    {
+      id: "faq-2",
+      category: "admission",
+      question: "Qabul imtihonlari qanday shaklda o'tkaziladi va kimlar imtihonsiz qabul qilinadi?",
+      answer:
+        "Kirish imtihonlari tanlangan ta'lim yo'nalishiga qarab mutaxassislik fanlari bo'yicha test sinovlari yoki suhbat asosida o'tkaziladi. Xalqaro yoki milliy til sertifikatlariga (IELTS 5.5+, CEFR B2+, TOPIK 3+) ega bo'lgan abituriyentlar chet tili fanidan maksimal ball oladilar yoki tegishli imtihondan to'liq ozod etiladilar.",
+    },
+    {
+      id: "faq-3",
+      category: "diploma",
+      question: "2+2 va 3+1 xalqaro dual diplom dasturlari qanday ishlaydi?",
+      answer:
+        "Ushbu dasturlar orqali talabalar dastlabki 2 yoki 3 yilni Samarqand filialida, yakuniy 1 yoki 2 yilni esa Janubiy Koreya (Hanyang University, Daegu University) yoki Yevropaning yetakchi hamkor oliygohlarida o'qiydilar. Bitirgach talabaga bir vaqtning o'zida ikkita nufuzli xalqaro diplom (TKXU va xorijiy hamkor universitet diplomi) beriladi.",
+    },
+    {
+      id: "faq-4",
+      category: "tuition",
+      question: "Kontrakt to'lovini bo'lib to'lash imkoni mavjudmi?",
+      answer:
+        "Ha, talabalar va ularning ota-onalariga qulaylik yaratish maqsadida o'quv yillik kontrakt to'lovini 4 qismga (har bir semestrda 2 marta yoki har chorakda) bo'lib to'lash imkoniyati qonuniy shartnoma asosida kafolatlanadi.",
+    },
+    {
+      id: "faq-5",
+      category: "admission",
+      question: "Sirtqi va kechki ta'lim shakllari mavjudmi va ular kimlarga mo'ljallangan?",
+      answer:
+        "Ha, Samarqand filialida kunduzgi, sirtqi hamda masofaviy/kechki ta'lim shakllari mavjud. Sirtqi ta'lim shakli, ayniqsa, ishlab turgan xodimlar, ikkinchi oliy ma'lumot oluvchilar va viloyatlardan keluvchi abituriyentlar uchun qulay vaqt grafiklarida tashkil etilgan.",
+    },
+    {
+      id: "faq-6",
+      category: "campus",
+      question: "Universitetda viloyatlardan kelgan talabalar uchun yotoqxona bormi?",
+      answer:
+        "Ha, universitet Samarqand shahrida viloyat va xorijdan kelgan talabalar uchun barcha zamonaviy qulayliklarga ega, xavfsiz va shinam talabalar turar joyiga (yotoqxona) ega. Xonalar mebel, Wi-Fi, oshxona va kir yuvish majmualari bilan to'liq ta'minlangan.",
+    },
+  ],
+  ru: [
+    {
+      id: "faq-1",
+      category: "diploma",
+      question: "Признается ли диплом Самаркандского филиала ТМУК в Узбекистане?",
+      answer:
+        "Да, безусловно. Университет осуществляет деятельность на основании официальной государственной лицензии Министерства высшего образования, науки и инноваций РУз № 039281. Выдаваемый диплом государственного образца имеет полную юридическую силу на всей территории Узбекистана и за рубежом.",
+    },
+    {
+      id: "faq-2",
+      category: "admission",
+      question: "Как проходят вступительные экзамены и кто освобождается от них?",
+      answer:
+        "Вступительные испытания проводятся в форме предметного тестирования или собеседования. Абитуриенты с сертификатами IELTS 5.5+, CEFR B2+, TOPIK 3+ получают максимальный балл по иностранному языку или освобождаются от экзамена.",
+    },
+    {
+      id: "faq-3",
+      category: "diploma",
+      question: "Как работают программы двойного диплома 2+2 и 3+1?",
+      answer:
+        "Студенты обучаются первые 2 или 3 года в Самарканде, а заключительный этап — в партнерских университетах Южной Кореи или Европы. Выпускники получают два признанных международных диплома.",
+    },
+    {
+      id: "faq-4",
+      category: "tuition",
+      question: "Возможна ли оплата контракта в рассрочку?",
+      answer:
+        "Да, для удобства студентов и родителей оплата за обучение может производиться 4 частями (поквартально) в течение академического года.",
+    },
+    {
+      id: "faq-5",
+      category: "admission",
+      question: "Есть ли заочная и вечерняя формы обучения?",
+      answer:
+        "Да, филиал предлагает очную, заочную и вечернюю формы обучения, что особенно актуально для работающих специалистов и получающих второе высшее образование.",
+    },
+    {
+      id: "faq-6",
+      category: "campus",
+      question: "Предоставляется ли общежитие иногородним студентам?",
+      answer:
+        "Да, университет располагает современным благоустроенным общежитием со всеми удобствами, круглосуточной охраной и скоростным интернетом.",
+    },
+  ],
+  en: [
+    {
+      id: "faq-1",
+      category: "diploma",
+      question: "Is the degree from KIUT Samarkand fully accredited and legally recognized?",
+      answer:
+        "Yes, completely. Kimyo International University in Tashkent operates under official State License No. 039281 issued by the Ministry of Higher Education, Science and Innovations of the Republic of Uzbekistan. Degrees hold equal legal authority to state universities and are recognized internationally.",
+    },
+    {
+      id: "faq-2",
+      category: "admission",
+      question: "How are entrance exams organized, and are certificate waivers available?",
+      answer:
+        "Entrance examinations evaluate core subjects via standardized tests or interviews. Applicants with recognized certifications (IELTS 5.5+, CEFR B2+, TOPIK 3+) are granted automatic waivers and full scores for language modules.",
+    },
+    {
+      id: "faq-3",
+      category: "diploma",
+      question: "How do 2+2 and 3+1 dual-degree exchange tracks work?",
+      answer:
+        "Students complete initial foundational coursework in Samarkand before transferring to South Korean or European partner campuses, graduating with two globally recognized diplomas.",
+    },
+    {
+      id: "faq-4",
+      category: "tuition",
+      question: "Can tuition fees be paid in installment plans?",
+      answer:
+        "Yes, tuition can be split into 4 equal quarterly installments across the academic year to accommodate student financial planning.",
+    },
+    {
+      id: "faq-5",
+      category: "admission",
+      question: "Are part-time, distance, and evening programs available?",
+      answer:
+        "Yes, flexible part-time and evening programs are offered across key business, engineering, and educational curricula for working professionals.",
+    },
+    {
+      id: "faq-6",
+      category: "campus",
+      question: "Is modern campus dormitory housing provided for nonlocal students?",
+      answer:
+        "Yes, the university provides secure, modern residential facilities in Samarkand with full furnishing, Wi-Fi, study lounges, and 24/7 security.",
+    },
+  ],
+};
+
 export function FaqSection({
   currentLocale = "uz",
   onOpenAdmissionModal,
 }: FaqSectionProps) {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
 
-  const faqs: Record<Locale, FaqItem[]> = {
-    uz: [
-      {
-        id: "faq-1",
-        category: "diploma",
-        question: "Toshkent Kimyo Xalqaro Universiteti Samarqand filiali diplomi O'zbekistonda 100% tan olinadimi?",
-        answer:
-          "Ha, albatta. Toshkent Kimyo xalqaro universiteti (sobiq Yeoju texnika instituti) O'zbekiston Respublikasi Oliy ta'lim, fan va innovatsiyalar vazirligi tomonidan berilgan № 039281-sonli rasmiy davlat litsenziyasi asosida qonuniy faoliyat yuritadi. Bitiruvchilarga beriladigan diplom davlat oliy ta'lim muassasalari diplomi bilan teng yuridik kuchga ega bo'lib, davlat organlari va barcha xususiy tashkilotlarda to'liq tan olinadi.",
-      },
-      {
-        id: "faq-2",
-        category: "admission",
-        question: "Qabul imtihonlari qanday shaklda o'tkaziladi va kimlar imtihonsiz qabul qilinadi?",
-        answer:
-          "Kirish imtihonlari tanlangan ta'lim yo'nalishiga qarab mutaxassislik fanlari bo'yicha test sinovlari yoki suhbat asosida o'tkaziladi. Xalqaro yoki milliy til sertifikatlariga (IELTS 5.5+, CEFR B2+, TOPIK 3+) ega bo'lgan abituriyentlar chet tili fanidan maksimal ball oladilar yoki tegishli imtihondan to'liq ozod etiladilar.",
-      },
-      {
-        id: "faq-3",
-        category: "diploma",
-        question: "2+2 va 3+1 xalqaro dual diplom dasturlari qanday ishlaydi?",
-        answer:
-          "Ushbu dasturlar orqali talabalar dastlabki 2 yoki 3 yilni Samarqand filialida, yakuniy 1 yoki 2 yilni esa Janubiy Koreya (Hanyang University, Daegu University) yoki Yevropaning yetakchi hamkor oliygohlarida o'qiydilar. Bitirgach talabaga bir vaqtning o'zida ikkita nufuzli xalqaro diplom (TKXU va xorijiy hamkor universitet diplomi) beriladi.",
-      },
-      {
-        id: "faq-4",
-        category: "tuition",
-        question: "Kontrakt to'lovini bo'lib to'lash imkoni mavjudmi?",
-        answer:
-          "Ha, talabalar va ularning ota-onalariga qulaylik yaratish maqsadida o'quv yillik kontrakt to'lovini 4 qismga (har bir semestrda 2 marta yoki har chorakda) bo'lib to'lash imkoniyati qonuniy shartnoma asosida kafolatlanadi.",
-      },
-      {
-        id: "faq-5",
-        category: "admission",
-        question: "Sirtqi va kechki ta'lim shakllari mavjudmi va ular kimlarga mo'ljallangan?",
-        answer:
-          "Ha, Samarqand filialida kunduzgi, sirtqi hamda masofaviy/kechki ta'lim shakllari mavjud. Sirtqi ta'lim shakli, ayniqsa, ishlab turgan xodimlar, ikkinchi oliy ma'lumot oluvchilar va viloyatlardan keluvchi abituriyentlar uchun qulay vaqt grafiklarida tashkil etilgan.",
-      },
-      {
-        id: "faq-6",
-        category: "campus",
-        question: "Universitetda viloyatlardan kelgan talabalar uchun yotoqxona bormi?",
-        answer:
-          "Ha, universitet Samarqand shahrida viloyat va xorijdan kelgan talabalar uchun barcha zamonaviy qulayliklarga ega, xavfsiz va shinam talabalar turar joyiga (yotoqxona) ega. Xonalar mebel, Wi-Fi, oshxona va kir yuvish majmualari bilan to'liq ta'minlangan.",
-      },
-    ],
-    ru: [
-      {
-        id: "faq-1",
-        category: "diploma",
-        question: "Признается ли диплом Самаркандского филиала ТХТИ в Узбекистане?",
-        answer:
-          "Да, безусловно. Университет осуществляет деятельность на основании официальной государственной лицензии Министерства высшего образования, науки и инноваций РУз № 039281. Выдаваемый диплом государственного образца имеет полную юридическую силу на всей территории Узбекистана и за рубежом.",
-      },
-      {
-        id: "faq-2",
-        category: "admission",
-        question: "Как проходят вступительные экзамены и кто освобождается от них?",
-        answer:
-          "Вступительные испытания проводятся в форме предметного тестирования или собеседования. Абитуриенты с сертификатами IELTS 5.5+, CEFR B2+, TOPIK 3+ получают максимальный балл по иностранному языку или освобождаются от экзамена.",
-      },
-      {
-        id: "faq-3",
-        category: "diploma",
-        question: "Как работают программы двойного диплома 2+2 и 3+1?",
-        answer:
-          "Студенты обучаются первые 2 или 3 года в Самарканде, а заключительный этап — в партнерских университетах Южной Кореи или Европы. Выпускники получают два признанных международных диплома.",
-      },
-      {
-        id: "faq-4",
-        category: "tuition",
-        question: "Возможна ли оплата контракта в рассрочку?",
-        answer:
-          "Да, для удобства студентов и родителей оплата за обучение может производиться 4 частями (поквартально) в течение академического года.",
-      },
-      {
-        id: "faq-5",
-        category: "admission",
-        question: "Есть ли заочная и вечерняя формы обучения?",
-        answer:
-          "Да, филиал предлагает очную, заочную и вечернюю формы обучения, что особенно актуально для работающих специалистов и получающих второе высшее образование.",
-      },
-      {
-        id: "faq-6",
-        category: "campus",
-        question: "Предоставляется ли общежитие иногородним студентам?",
-        answer:
-          "Да, университет располагает современным благоустроенным общежитием со всеми удобствами, круглосуточной охраной и скоростным интернетом.",
-      },
-    ],
-    en: [
-      {
-        id: "faq-1",
-        category: "diploma",
-        question: "Is the degree from KIUT Samarkand fully accredited and legally recognized?",
-        answer:
-          "Yes, completely. Kimyo International University in Tashkent operates under official State License No. 039281 issued by the Ministry of Higher Education, Science and Innovations of the Republic of Uzbekistan. Degrees hold equal legal authority to state universities and are recognized internationally.",
-      },
-      {
-        id: "faq-2",
-        category: "admission",
-        question: "How are entrance exams organized, and are certificate waivers available?",
-        answer:
-          "Entrance examinations evaluate core subjects via standardized tests or interviews. Applicants with recognized certifications (IELTS 5.5+, CEFR B2+, TOPIK 3+) are granted automatic waivers and full scores for language modules.",
-      },
-      {
-        id: "faq-3",
-        category: "diploma",
-        question: "How do 2+2 and 3+1 dual-degree exchange tracks work?",
-        answer:
-          "Students complete initial foundational coursework in Samarkand before transferring to South Korean or European partner campuses, graduating with two globally recognized diplomas.",
-      },
-      {
-        id: "faq-4",
-        category: "tuition",
-        question: "Can tuition fees be paid in installment plans?",
-        answer:
-          "Yes, tuition can be split into 4 equal quarterly installments across the academic year to accommodate student financial planning.",
-      },
-      {
-        id: "faq-5",
-        category: "admission",
-        question: "Are part-time, distance, and evening programs available?",
-        answer:
-          "Yes, flexible part-time and evening programs are offered across key business, engineering, and educational curricula for working professionals.",
-      },
-      {
-        id: "faq-6",
-        category: "campus",
-        question: "Is modern campus dormitory housing provided for nonlocal students?",
-        answer:
-          "Yes, the university provides secure, modern residential facilities in Samarkand with full furnishing, Wi-Fi, study lounges, and 24/7 security.",
-      },
-    ],
-  };
+  const list = FAQS_DATA[currentLocale] || FAQS_DATA.uz;
 
-  const list = faqs[currentLocale] || faqs.uz;
-
-  const toggleFaq = (index: number) => {
+  const toggleFaq = React.useCallback((index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
-  };
+  }, []);
 
   return (
     <section
       id="faq"
-      aria-label="Ko'p beriladigan savollar"
+      aria-label={
+        currentLocale === "ru"
+          ? "Часто задаваемые вопросы"
+          : currentLocale === "en"
+          ? "Frequently Asked Questions"
+          : "Ko'p beriladigan savollar"
+      }
       className="py-16 sm:py-24 bg-[#F8FAFC] border-b border-slate-200 relative z-10"
     >
       <Container>
@@ -177,7 +183,11 @@ export function FaqSection({
               <div className="flex items-center gap-2.5 mb-2.5">
                 <span className="w-6 h-0.5 bg-[#0096DB] rounded-full" />
                 <span className="text-xs font-black uppercase tracking-widest text-[#0096DB]">
-                  FAQ &amp; Rasmiy Ma&apos;lumotlar
+                  {currentLocale === "ru"
+                    ? "FAQ и официальные данные"
+                    : currentLocale === "en"
+                    ? "FAQ & Official Accreditation"
+                    : "FAQ & Rasmiy Ma'lumotlar"}
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#172D50] tracking-tight">
@@ -189,7 +199,7 @@ export function FaqSection({
               </h2>
               <p className="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
                 {currentLocale === "ru"
-                  ? "Все юридические, организационные и финансовые вопросы об обучении в Самаркандском филиале ТХТИ."
+                  ? "Все юридические, организационные и финансовые вопросы об обучении в Самаркандском филиале ТМУК."
                   : currentLocale === "en"
                   ? "Essential answers regarding accreditation, tuition installment schedules, and admissions."
                   : "Litsenziya, diplomning qonuniy kuchi, kirish imtihonlari va kontrakt to'lovlari bo'yicha rasmiy javoblar."}
@@ -203,9 +213,9 @@ export function FaqSection({
                   <PhoneCall className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#172D50]">
+                  <h3 className="text-sm font-bold text-[#172D50]">
                     {currentLocale === "ru" ? "Остались вопросы?" : currentLocale === "en" ? "Need Personalized Help?" : "Savollaringiz bormi?"}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-slate-500">
                     {currentLocale === "ru" ? "Позвоните в приемную комиссию" : currentLocale === "en" ? "Talk to an admissions officer" : "Qabul komissiyasi bilan bog'laning"}
                   </p>

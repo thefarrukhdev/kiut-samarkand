@@ -20,6 +20,7 @@ import {
 } from "@/components/shared/SocialIcons";
 import { Container } from "@/components/ui/container";
 import { translations } from "@/lib/translations";
+import { getFacultySummaries } from "@/data/schools";
 import type { Locale } from "@/types";
 
 interface FooterProps {
@@ -33,23 +34,82 @@ export function Footer({ currentLocale = "uz" }: FooterProps) {
 
   const t = translations[currentLocale].footer;
 
-  const faculties = [
-    { name: currentLocale === "ru" ? "Факультет медицины" : currentLocale === "en" ? "School of Medicine" : "Tibbiyot fakulteti", href: "#schools" },
-    { name: currentLocale === "ru" ? "Факультет инженерии и IT" : currentLocale === "en" ? "School of Engineering & IT" : "Muhandislik fakulteti", href: "#schools" },
-    { name: currentLocale === "ru" ? "Факультет экономики и финансов" : currentLocale === "en" ? "School of Business & Economy" : "Iqtisodiyot fakulteti", href: "#schools" },
-    { name: currentLocale === "ru" ? "Факультет образования" : currentLocale === "en" ? "School of Education" : "Ta'lim fakulteti", href: "#schools" },
-    { name: currentLocale === "ru" ? "Факультет филологии" : currentLocale === "en" ? "School of Philology" : "Filologiya fakulteti", href: "#schools" },
-    { name: currentLocale === "ru" ? "Отделение магистратуры" : currentLocale === "en" ? "Graduate Studies" : "Magistratura bo'limi", href: "#schools" },
-  ];
+  const graduateLabel =
+    currentLocale === "ru"
+      ? "Отделение магистратуры"
+      : currentLocale === "en"
+      ? "Graduate Studies"
+      : "Magistratura bo'limi";
 
-  const quickLinks = [
-    { name: currentLocale === "ru" ? "История и устав университета" : currentLocale === "en" ? "University Charter & History" : "Universitet tarixi va nizomi", href: "#about" },
-    { name: currentLocale === "ru" ? "Процесс приема 2026/2027" : currentLocale === "en" ? "Admissions 2026/2027" : "Qabul 2026/2027 jarayoni", href: "#admission" },
-    { name: currentLocale === "ru" ? "Статистика и достижения" : currentLocale === "en" ? "Statistics & Highlights" : "Statistika va yutuqlar", href: "#stats" },
-    { name: currentLocale === "ru" ? "Новости университета" : currentLocale === "en" ? "University News" : "Universitet yangiliklari", href: "#news" },
-    { name: "HEMIS elektron tizimi", href: "https://hemis.kiut.uz", external: true },
-    { name: currentLocale === "ru" ? "Международное сотрудничество" : currentLocale === "en" ? "International Partnerships" : "Xalqaro hamkorlik", href: "#about" },
-  ];
+  const faculties = React.useMemo(() => {
+    const list = getFacultySummaries(currentLocale).map((f) => ({
+      name: f.name,
+      href: f.href,
+    }));
+    list.push({ name: graduateLabel, href: "#schools" });
+    return list;
+  }, [currentLocale, graduateLabel]);
+
+  const quickLinks = React.useMemo(
+    () => [
+      {
+        name:
+          currentLocale === "ru"
+            ? "История и устав университета"
+            : currentLocale === "en"
+            ? "University Charter & History"
+            : "Universitet tarixi va nizomi",
+        href: "#about",
+      },
+      {
+        name:
+          currentLocale === "ru"
+            ? "Процесс приема 2026/2027"
+            : currentLocale === "en"
+            ? "Admissions 2026/2027"
+            : "Qabul 2026/2027 jarayoni",
+        href: "#admission",
+      },
+      {
+        name:
+          currentLocale === "ru"
+            ? "Статистика и достижения"
+            : currentLocale === "en"
+            ? "Statistics & Highlights"
+            : "Statistika va yutuqlar",
+        href: "#stats",
+      },
+      {
+        name:
+          currentLocale === "ru"
+            ? "Новости университета"
+            : currentLocale === "en"
+            ? "University News"
+            : "Universitet yangiliklari",
+        href: "#news",
+      },
+      {
+        name:
+          currentLocale === "ru"
+            ? "Информационная система HEMIS"
+            : currentLocale === "en"
+            ? "HEMIS Academic Information System"
+            : "HEMIS elektron tizimi",
+        href: "https://hemis.kiut.uz",
+        external: true,
+      },
+      {
+        name:
+          currentLocale === "ru"
+            ? "Международное сотрудничество"
+            : currentLocale === "en"
+            ? "International Partnerships"
+            : "Xalqaro hamkorlik",
+        href: "#about",
+      },
+    ],
+    [currentLocale]
+  );
 
   return (
     <footer
@@ -258,9 +318,10 @@ export function Footer({ currentLocale = "uz" }: FooterProps) {
               {t.terms}
             </a>
             <button
+              type="button"
               onClick={scrollToTop}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all border border-white/10 cursor-pointer"
-              aria-label="Sahifa boshiga qaytish"
+              aria-label={t.backToTop}
             >
               <span>{t.backToTop}</span>
               <ArrowUp className="h-3.5 w-3.5" />

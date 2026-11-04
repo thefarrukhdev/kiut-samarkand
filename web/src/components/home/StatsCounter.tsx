@@ -108,7 +108,13 @@ export function StatsCounter({ currentLocale = "uz" }: StatsCounterProps) {
   return (
     <section
       id="stats"
-      aria-label="Universitet ko'rsatkichlari va statistikasi"
+      aria-label={
+        currentLocale === "ru"
+          ? "Показатели и статистика университета"
+          : currentLocale === "en"
+          ? "University Statistics & Metrics"
+          : "Universitet ko'rsatkichlari va statistikasi"
+      }
       className="bg-white py-14 sm:py-20 border-b border-slate-200 relative z-10"
     >
       <Container>

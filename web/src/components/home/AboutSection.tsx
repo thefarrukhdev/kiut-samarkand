@@ -25,18 +25,24 @@ const pillarIcons = [
   { icon: Building2, accent: "text-[#172D50]", bg: "bg-[#E3EDFC]" },
 ];
 
+const partners = [
+  { name: "Asiana Airlines", logo: "/assets/icons_and_logos/asiana_airlines-logo-font.png" },
+  { name: "Oxbridge International", logo: "/assets/icons_and_logos/oxbridge_logo.png" },
+];
+
 export function AboutSection({ currentLocale = "uz" }: AboutSectionProps) {
   const t = translations[currentLocale].about;
-
-  const partners = [
-    { name: "Asiana Airlines", logo: "/assets/icons_and_logos/asiana_airlines-logo-font.png" },
-    { name: "Oxbridge International", logo: "/assets/icons_and_logos/oxbridge_logo.png" },
-  ];
 
   return (
     <section
       id="about"
-      aria-label="Universitet haqida ma'lumot"
+      aria-label={
+        currentLocale === "ru"
+          ? "Информация об университете"
+          : currentLocale === "en"
+          ? "About the University"
+          : "Universitet haqida ma'lumot"
+      }
       className="py-16 sm:py-24 bg-white relative overflow-hidden"
     >
       <Container>
@@ -48,7 +54,13 @@ export function AboutSection({ currentLocale = "uz" }: AboutSectionProps) {
               <div className="relative h-[340px] sm:h-[420px] rounded-3xl overflow-hidden shadow-xl border border-slate-200">
                 <Image
                   src="/assets/banners/photo_2026-08-03_10-09-43.jpg__1920x1080_q85_crop_subsampling-2.jpg"
-                  alt="KIUT Samarkand Kampus Hayoti"
+                  alt={
+                    currentLocale === "ru"
+                      ? "Студенческая жизнь и кампус ТМУК Самарканд"
+                      : currentLocale === "en"
+                      ? "Campus Life at KIUT Samarkand"
+                      : "KIUT Samarqand Kampus Hayoti"
+                  }
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover object-center"
@@ -104,7 +116,7 @@ export function AboutSection({ currentLocale = "uz" }: AboutSectionProps) {
                 return (
                   <div
                     key={`${pillar.title}-${currentLocale}`}
-                    className="p-4 rounded-2xl bg-[#F4F7FC] border border-border flex flex-col justify-between hover:bg-white hover:border-[#0096DB]/40 hover:shadow-md transition-all duration-200"
+                    className="p-4 rounded-2xl bg-[#F4F7FC] border border-slate-200/90 flex flex-col justify-between hover:bg-white hover:border-[#0096DB]/40 hover:shadow-md transition-all duration-200"
                   >
                     <div>
                       <div className={`h-10 w-10 rounded-xl ${meta.bg} flex items-center justify-center mb-3`}>
