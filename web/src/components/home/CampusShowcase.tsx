@@ -148,8 +148,8 @@ export function CampusShowcase({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-slate-200">
           <div>
             <div className="flex items-center gap-2.5 mb-2.5">
-              <span className="w-6 h-0.5 bg-[#0096DB] rounded-full" />
-              <span className="text-xs font-black uppercase tracking-widest text-[#0096DB]">
+              <span className="w-6 h-0.5 bg-accent rounded-full" />
+              <span className="text-xs font-black uppercase tracking-widest text-accent">
                 {currentLocale === "ru"
                   ? "Инфраструктура мирового уровня"
                   : currentLocale === "en"
@@ -157,7 +157,7 @@ export function CampusShowcase({
                   : "Jahon Standartlaridagi Infratuzilma"}
               </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#172D50] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary tracking-tight">
               {currentLocale === "ru"
                 ? "Лаборатории, кампус и интеллектуальная среда"
                 : currentLocale === "en"
@@ -185,8 +185,8 @@ export function CampusShowcase({
               onClick={() => setActiveCluster(idx)}
               className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
                 activeCluster === idx
-                  ? "bg-[#172D50] text-white shadow-md"
-                  : "bg-[#F8FAFC] text-slate-700 border border-slate-200 hover:border-slate-300 hover:bg-slate-100"
+                  ? "bg-primary text-white shadow-md"
+                  : "bg-surface text-slate-700 border border-slate-200 hover:border-slate-300 hover:bg-slate-100"
               }`}
             >
               {c.tag}
@@ -195,14 +195,14 @@ export function CampusShowcase({
         </div>
 
         {/* Active Cluster Showcase Panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-[#F8FAFC] rounded-3xl border border-slate-200 p-6 sm:p-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-surface rounded-3xl border border-slate-200 p-6 sm:p-10">
           {/* Left Column: Details & Features (6 cols) */}
           <div className="lg:col-span-6 space-y-6">
             <div>
-              <span className="text-[11px] font-black uppercase tracking-wider text-[#0096DB] bg-white border border-slate-200 px-3 py-1 rounded-md">
+              <span className="text-[11px] font-black uppercase tracking-wider text-accent bg-white border border-slate-200 px-3 py-1 rounded-md">
                 {current.tag}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-black text-[#172D50] tracking-tight mt-3">
+              <h3 className="text-2xl sm:text-3xl font-black text-primary tracking-tight mt-3">
                 {current.title}
               </h3>
               <p className="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
@@ -214,8 +214,8 @@ export function CampusShowcase({
             <div className="space-y-3 pt-2">
               {current.features.map((feat, i) => (
                 <div key={i} className="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-slate-200">
-                  <CheckCircle className="h-4 w-4 text-[#0096DB] shrink-0" />
-                  <span className="text-xs sm:text-sm font-bold text-[#172D50]">{feat}</span>
+                  <CheckCircle className="h-4 w-4 text-accent shrink-0" />
+                  <span className="text-xs sm:text-sm font-bold text-primary">{feat}</span>
                 </div>
               ))}
             </div>
@@ -223,7 +223,7 @@ export function CampusShowcase({
             {/* Metrics Callout & Action Button */}
             <div className="pt-4 border-t border-slate-200 flex items-center justify-between gap-4 flex-wrap">
               <div>
-                <span className="text-2xl sm:text-3xl font-black text-[#172D50] block tabular-nums">
+                <span className="text-2xl sm:text-3xl font-black text-primary block tabular-nums">
                   {current.statNumber}
                 </span>
                 <span className="text-xs text-slate-500 font-medium">
@@ -235,7 +235,7 @@ export function CampusShowcase({
                 onClick={() => onOpenAdmissionModal?.()}
                 variant="action"
                 size="default"
-                className="font-bold bg-[#0096DB] hover:bg-[#007BB3] text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm shadow-md"
+                className="font-bold bg-accent hover:bg-accent-hover text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm shadow-md"
               >
                 <span>
                   {currentLocale === "ru"
@@ -274,7 +274,7 @@ export function CampusShowcase({
 
               {/* Bottom Caption on photo */}
               <div className="absolute bottom-4 left-4 right-4 text-white z-10 flex items-center justify-between">
-                <span className="text-xs font-bold text-white bg-[#172D50] px-3 py-1 rounded-md border border-white/10">
+                <span className="text-xs font-bold text-white bg-primary px-3 py-1 rounded-md border border-white/10">
                   {current.title}
                 </span>
                 <span className="text-xs text-slate-300 font-medium">

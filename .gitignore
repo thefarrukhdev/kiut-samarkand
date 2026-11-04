@@ -47,3 +47,7 @@ Thumbs.db
 *.swo
 .vscode/
 .idea/
+
+# Source directories whitelist (override global gitignore rules like lib/)
+!web/src/lib/
+!web/src/lib/**

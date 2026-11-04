@@ -19,10 +19,10 @@ interface AboutSectionProps {
 }
 
 const pillarIcons = [
-  { icon: Globe2, accent: "text-[#0096DB]", bg: "bg-[#E9F2FF]" },
-  { icon: ShieldCheck, accent: "text-[#2364AD]", bg: "bg-[#E3EDFC]" },
-  { icon: Award, accent: "text-[#0096DB]", bg: "bg-[#E9F2FF]" },
-  { icon: Building2, accent: "text-[#172D50]", bg: "bg-[#E3EDFC]" },
+  { icon: Globe2, accent: "text-accent", bg: "bg-accent-light" },
+  { icon: ShieldCheck, accent: "text-primary-royal", bg: "bg-ice-blue" },
+  { icon: Award, accent: "text-accent", bg: "bg-accent-light" },
+  { icon: Building2, accent: "text-primary", bg: "bg-ice-blue" },
 ];
 
 const partners = [
@@ -65,9 +65,9 @@ export function AboutSection({ currentLocale = "uz" }: AboutSectionProps) {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover object-center"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172D50]/90 via-[#172D50]/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <span className="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-white/95 text-[#172D50] shadow-sm mb-2">
+                  <span className="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider bg-white/95 text-primary shadow-sm mb-2">
                     {t.imageBadge}
                   </span>
                   <p className="text-base sm:text-lg font-bold leading-snug">
@@ -79,12 +79,12 @@ export function AboutSection({ currentLocale = "uz" }: AboutSectionProps) {
               {/* Overlapping secondary floating card */}
               <div className="hidden sm:block absolute -bottom-8 -right-6 w-64 bg-white p-4 rounded-2xl shadow-xl border border-slate-200">
                 <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-[#E9F2FF] text-[#0096DB] flex items-center justify-center shrink-0">
+                  <div className="h-12 w-12 rounded-xl bg-accent-light text-accent flex items-center justify-center shrink-0">
                     <GraduationCap className="h-6 w-6" />
                   </div>
                   <div>
-                    <span className="text-xl font-black text-[#172D50]">{t.employmentRate}</span>
-                    <p className="text-[11px] text-[#334155] leading-tight font-medium">
+                    <span className="text-xl font-black text-primary">{t.employmentRate}</span>
+                    <p className="text-[11px] text-slate-700 leading-tight font-medium">
                       {t.employmentDesc}
                     </p>
                   </div>
@@ -96,14 +96,14 @@ export function AboutSection({ currentLocale = "uz" }: AboutSectionProps) {
           {/* Right Column: Mission and Pillars (6 cols) */}
           <div className="lg:col-span-6 space-y-6">
             <div>
-              <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0096DB] mb-3">
-                <span className="w-6 h-px bg-[#0096DB]"></span>
+              <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-accent mb-3">
+                <span className="w-6 h-px bg-accent"></span>
                 <span>{t.badge}</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#172D50] tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight leading-tight">
                 {t.title}
               </h2>
-              <p className="mt-4 text-sm sm:text-base text-[#334155] leading-relaxed">
+              <p className="mt-4 text-sm sm:text-base text-slate-700 leading-relaxed">
                 {t.description}
               </p>
             </div>
@@ -116,16 +116,16 @@ export function AboutSection({ currentLocale = "uz" }: AboutSectionProps) {
                 return (
                   <div
                     key={`${pillar.title}-${currentLocale}`}
-                    className="p-4 rounded-2xl bg-[#F4F7FC] border border-slate-200/90 flex flex-col justify-between hover:bg-white hover:border-[#0096DB]/40 hover:shadow-md transition-all duration-200"
+                    className="p-4 rounded-2xl bg-surface border border-slate-200/90 flex flex-col justify-between hover:bg-white hover:border-accent/40 hover:shadow-md transition-all duration-200"
                   >
                     <div>
                       <div className={`h-10 w-10 rounded-xl ${meta.bg} flex items-center justify-center mb-3`}>
                         <Icon className={`h-5 w-5 ${meta.accent}`} />
                       </div>
-                      <h3 className="text-sm font-bold text-[#172D50] mb-1">
+                      <h3 className="text-sm font-bold text-primary mb-1">
                         {pillar.title}
                       </h3>
-                      <p className="text-xs text-[#334155] leading-relaxed">
+                      <p className="text-xs text-slate-700 leading-relaxed">
                         {pillar.desc}
                       </p>
                     </div>
@@ -160,7 +160,7 @@ export function AboutSection({ currentLocale = "uz" }: AboutSectionProps) {
 
               <a
                 href="#schools"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0096DB] hover:text-[#007BB3] transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-accent-hover transition-colors"
               >
                 <span>{t.viewAllCta}</span>
                 <ArrowRight className="h-3.5 w-3.5" />

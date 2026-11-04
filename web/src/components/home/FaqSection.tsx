@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { translations } from "@/lib/translations";
 import type { Locale, FaqItem } from "@/types";
 
 interface FaqSectionProps {
@@ -156,7 +157,7 @@ export function FaqSection({
   onOpenAdmissionModal,
 }: FaqSectionProps) {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
-
+  const t = translations[currentLocale]?.faq || translations.uz.faq;
   const list = FAQS_DATA[currentLocale] || FAQS_DATA.uz;
 
   const toggleFaq = React.useCallback((index: number) => {
@@ -166,14 +167,8 @@ export function FaqSection({
   return (
     <section
       id="faq"
-      aria-label={
-        currentLocale === "ru"
-          ? "Часто задаваемые вопросы"
-          : currentLocale === "en"
-          ? "Frequently Asked Questions"
-          : "Ko'p beriladigan savollar"
-      }
-      className="py-16 sm:py-24 bg-[#F8FAFC] border-b border-slate-200 relative z-10"
+      aria-label={t.sectionLabel}
+      className="py-16 sm:py-24 bg-surface border-b border-slate-200 relative z-10"
     >
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
@@ -181,61 +176,49 @@ export function FaqSection({
           <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
             <div>
               <div className="flex items-center gap-2.5 mb-2.5">
-                <span className="w-6 h-0.5 bg-[#0096DB] rounded-full" />
-                <span className="text-xs font-black uppercase tracking-widest text-[#0096DB]">
-                  {currentLocale === "ru"
-                    ? "FAQ и официальные данные"
-                    : currentLocale === "en"
-                    ? "FAQ & Official Accreditation"
-                    : "FAQ & Rasmiy Ma'lumotlar"}
+                <span className="w-6 h-0.5 bg-accent rounded-full" />
+                <span className="text-xs font-black uppercase tracking-widest text-accent">
+                  {t.badge}
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#172D50] tracking-tight">
-                {currentLocale === "ru"
-                  ? "Часто задаваемые вопросы абитуриентов"
-                  : currentLocale === "en"
-                  ? "Frequently Asked Questions"
-                  : "Abituriyentlar va ota-onalar eng ko'p so'raydigan savollar"}
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary tracking-tight">
+                {t.title}
               </h2>
               <p className="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
-                {currentLocale === "ru"
-                  ? "Все юридические, организационные и финансовые вопросы об обучении в Самаркандском филиале ТМУК."
-                  : currentLocale === "en"
-                  ? "Essential answers regarding accreditation, tuition installment schedules, and admissions."
-                  : "Litsenziya, diplomning qonuniy kuchi, kirish imtihonlari va kontrakt to'lovlari bo'yicha rasmiy javoblar."}
+                {t.description}
               </p>
             </div>
 
             {/* Need More Help Card */}
             <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4 shadow-sm">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-[#E9F2FF] text-[#0096DB] flex items-center justify-center shrink-0">
+                <div className="h-10 w-10 rounded-xl bg-accent-light text-accent flex items-center justify-center shrink-0">
                   <PhoneCall className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-bold text-[#172D50]">
-                    {currentLocale === "ru" ? "Остались вопросы?" : currentLocale === "en" ? "Need Personalized Help?" : "Savollaringiz bormi?"}
+                  <h3 className="text-sm font-bold text-primary">
+                    {t.helpCardTitle}
                   </h3>
                   <p className="text-xs text-slate-500">
-                    {currentLocale === "ru" ? "Позвоните в приемную комиссию" : currentLocale === "en" ? "Talk to an admissions officer" : "Qabul komissiyasi bilan bog'laning"}
+                    {t.helpCardSubtitle}
                   </p>
                 </div>
               </div>
 
               <a
-                href="tel:+998557024040"
-                className="block w-full py-2.5 text-center rounded-xl bg-[#172D50] hover:bg-[#0096DB] text-white text-sm font-bold transition-colors"
+                href={`tel:${t.helpCardPhone.replace(/[^0-9+]/g, "")}`}
+                className="block w-full py-2.5 text-center rounded-xl bg-primary hover:bg-accent text-white text-sm font-bold transition-colors"
               >
-                +998 (55) 702-40-40
+                {t.helpCardPhone}
               </a>
 
               <Button
                 onClick={() => onOpenAdmissionModal?.()}
                 variant="outline"
                 size="sm"
-                className="w-full text-xs font-bold border-slate-200 text-[#172D50] py-2 rounded-xl"
+                className="w-full text-xs font-bold border-slate-200 text-primary py-2 rounded-xl"
               >
-                <span>{currentLocale === "ru" ? "Онлайн-консультация" : currentLocale === "en" ? "Online Consultation" : "Onlayn konsultatsiya olish"}</span>
+                <span>{t.helpCardConsultation}</span>
                 <ArrowRight className="h-3.5 w-3.5 ml-1" />
               </Button>
             </div>
@@ -256,12 +239,12 @@ export function FaqSection({
                     className="w-full p-5 sm:p-6 text-left flex items-start justify-between gap-4 cursor-pointer focus:outline-none"
                     aria-expanded={isOpen}
                   >
-                    <span className="text-sm sm:text-base font-bold text-[#172D50] leading-snug">
+                    <span className="text-sm sm:text-base font-bold text-primary leading-snug">
                       {faq.question}
                     </span>
                     <span
-                      className={`h-7 w-7 rounded-lg bg-[#F8FAFC] flex items-center justify-center shrink-0 border border-slate-200 transition-transform duration-200 ${
-                        isOpen ? "rotate-180 bg-[#172D50] text-white border-[#172D50]" : "text-slate-500"
+                      className={`h-7 w-7 rounded-lg bg-surface flex items-center justify-center shrink-0 border border-slate-200 transition-transform duration-200 ${
+                        isOpen ? "rotate-180 bg-primary text-white border-primary" : "text-slate-500"
                       }`}
                     >
                       <ChevronDown className="h-4 w-4" />

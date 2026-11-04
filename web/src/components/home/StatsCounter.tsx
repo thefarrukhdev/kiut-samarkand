@@ -27,28 +27,28 @@ const iconsMap: Record<
 > = {
   faculties: {
     icon: Building2,
-    accentColor: "text-[#0096DB]",
-    bgGlow: "bg-[#E9F2FF]",
+    accentColor: "text-accent",
+    bgGlow: "bg-accent-light",
   },
   bachelor: {
     icon: GraduationCap,
-    accentColor: "text-[#2364AD]",
-    bgGlow: "bg-[#E3EDFC]",
+    accentColor: "text-primary-royal",
+    bgGlow: "bg-ice-blue",
   },
   master: {
     icon: Award,
-    accentColor: "text-[#0096DB]",
-    bgGlow: "bg-[#E9F2FF]",
+    accentColor: "text-accent",
+    bgGlow: "bg-accent-light",
   },
   professors: {
     icon: BookOpen,
-    accentColor: "text-[#2364AD]",
-    bgGlow: "bg-[#E3EDFC]",
+    accentColor: "text-primary-royal",
+    bgGlow: "bg-ice-blue",
   },
   students: {
     icon: Users,
-    accentColor: "text-[#0096DB]",
-    bgGlow: "bg-[#E9F2FF]",
+    accentColor: "text-accent",
+    bgGlow: "bg-accent-light",
   },
 };
 
@@ -122,12 +122,12 @@ export function StatsCounter({ currentLocale = "uz" }: StatsCounterProps) {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-slate-100">
           <div>
             <div className="flex items-center gap-2.5 mb-2.5">
-              <span className="w-6 h-0.5 bg-[#0096DB] rounded-full" />
-              <span className="text-xs font-black uppercase tracking-widest text-[#0096DB]">
+              <span className="w-6 h-0.5 bg-accent rounded-full" />
+              <span className="text-xs font-black uppercase tracking-widest text-accent">
                 {statsData.badge}
               </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#172D50] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary tracking-tight">
               {statsData.title}
             </h2>
           </div>
@@ -149,7 +149,7 @@ export function StatsCounter({ currentLocale = "uz" }: StatsCounterProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.08 }}
-                className="flex flex-col group p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/90 hover:bg-white hover:border-[#0096DB]/50 hover:shadow-xl transition-all duration-300"
+                className="flex flex-col group p-6 rounded-2xl bg-surface border border-slate-200/90 hover:bg-white hover:border-accent/50 hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div
@@ -159,14 +159,14 @@ export function StatsCounter({ currentLocale = "uz" }: StatsCounterProps) {
                   </div>
                 </div>
 
-                <div className="text-3xl sm:text-4xl font-black text-[#172D50] tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-primary tracking-tight">
                   <CounterDigit
                     value={stat.targetValue}
                     suffix={stat.suffix}
                   />
                 </div>
 
-                <h3 className="text-sm font-bold text-[#172D50] mt-2">
+                <h3 className="text-sm font-bold text-primary mt-2">
                   {stat.label}
                 </h3>
 
