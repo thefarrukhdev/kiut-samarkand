@@ -93,14 +93,29 @@ export function Navbar({
 
   const navLinks = [
     {
+      label: currentLocale === "ru" ? "Программы" : currentLocale === "en" ? "Programs" : "Dasturlar",
+      href: "#programs",
+      badge: "46+",
+      hasDropdown: false,
+    },
+    {
       label: t.faculties,
       href: "#schools",
       hasDropdown: true,
     },
-    { label: t.university, href: "#about" },
-    { label: t.stats, href: "#stats" },
-    { label: t.news, href: "#news" },
-    { label: t.contact, href: "#contact" },
+    {
+      label: currentLocale === "ru" ? "Гранты" : currentLocale === "en" ? "Scholarships" : "Grantlar",
+      href: "#scholarships",
+      hasDropdown: false,
+    },
+    {
+      label: currentLocale === "ru" ? "Кампус" : currentLocale === "en" ? "Campus" : "Kampus",
+      href: "#campus",
+      hasDropdown: false,
+    },
+    { label: t.university, href: "#about", hasDropdown: false },
+    { label: t.news, href: "#news", hasDropdown: false },
+    { label: "FAQ", href: "#faq", hasDropdown: false },
   ];
 
   const facultyList = [
@@ -262,9 +277,14 @@ export function Navbar({
               <a
                 key={link.label}
                 href={link.href}
-                className="px-3.5 py-2 text-sm font-semibold text-[#172D50] hover:text-[#0096DB] transition-colors rounded-lg hover:bg-slate-50"
+                className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-[#172D50] hover:text-[#0096DB] transition-colors rounded-lg hover:bg-slate-50"
               >
-                {link.label}
+                <span>{link.label}</span>
+                {link.badge && (
+                  <span className="text-[10px] font-black bg-[#EBF5FB] text-[#0096DB] border border-[#0096DB]/20 px-1.5 py-0.5 rounded-md leading-none">
+                    {link.badge}
+                  </span>
+                )}
               </a>
             );
           })}

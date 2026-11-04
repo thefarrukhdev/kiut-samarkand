@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   Award,
   GraduationCap,
+  Search,
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
@@ -215,6 +216,86 @@ export function HeroSlider({
                     <span>5+1 Dual ta&apos;lim</span>
                   </div>
                 </div>
+
+                {/* Interactive Academic Direction Fast Finder */}
+                <div className="pt-5 border-t border-slate-200/90 space-y-2.5">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
+                    <Search className="h-3.5 w-3.5 text-[#0096DB]" />
+                    <span>
+                      {currentLocale === "ru"
+                        ? "Быстрый поиск направления:"
+                        : currentLocale === "en"
+                        ? "Quick Degree Explorer:"
+                        : "Yo'nalishni tezkor qidirish:"}
+                    </span>
+                  </div>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      const form = e.currentTarget;
+                      const input = (form.elements.namedItem("search") as HTMLInputElement)?.value;
+                      const target = document.getElementById("programs");
+                      if (target) {
+                        target.scrollIntoView({ behavior: "smooth" });
+                        const searchInput = target.querySelector<HTMLInputElement>("input[type='text']");
+                        if (searchInput && input) {
+                          searchInput.value = input;
+                          searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+                        }
+                      }
+                    }}
+                    className="flex items-center gap-2 max-w-xl"
+                  >
+                    <div className="relative flex-1">
+                      <input
+                        name="search"
+                        type="text"
+                        placeholder={
+                          currentLocale === "ru"
+                            ? "Лечебное дело, Программная инженерия, Архитектура..."
+                            : currentLocale === "en"
+                            ? "Medicine, Software Engineering, Architecture..."
+                            : "Davolash ishi, Dasturiy injiniring, Arxitektura..."
+                        }
+                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0096DB] focus:border-transparent transition-all shadow-sm"
+                      />
+                    </div>
+                    <Button
+                      type="submit"
+                      variant="action"
+                      size="sm"
+                      className="shrink-0 bg-[#172D50] hover:bg-[#12223D] text-white font-bold rounded-xl px-4 py-2.5 text-xs sm:text-sm"
+                    >
+                      <Search className="h-3.5 w-3.5 mr-1" />
+                      <span>{currentLocale === "ru" ? "Найти" : currentLocale === "en" ? "Search" : "Qidirish"}</span>
+                    </Button>
+                  </form>
+                  <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                    <span className="text-[11px] text-slate-400 font-medium">
+                      {currentLocale === "ru" ? "Популярные:" : currentLocale === "en" ? "Popular:" : "Ommabop:"}
+                    </span>
+                    {["Davolash ishi", "Dasturiy injiniring", "Xalqaro biznes", "Koreys filologiyasi"].map((tag) => (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => {
+                          const target = document.getElementById("programs");
+                          if (target) {
+                            target.scrollIntoView({ behavior: "smooth" });
+                            const searchInput = target.querySelector<HTMLInputElement>("input[type='text']");
+                            if (searchInput) {
+                              searchInput.value = tag;
+                              searchInput.dispatchEvent(new Event("input", { bubbles: true }));
+                            }
+                          }
+                        }}
+                        className="text-[11px] font-semibold text-[#172D50] bg-white border border-slate-200 hover:border-[#0096DB] hover:text-[#0096DB] px-2.5 py-1 rounded-lg transition-colors cursor-pointer shadow-xs"
+                      >
+                        {tag}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -306,6 +387,97 @@ export function HeroSlider({
               ))}
             </div>
           </div>
+        </div>
+
+        {/* Fast-Track Institutional Pillar Ribbon */}
+        <div className="mt-12 sm:mt-16 pt-8 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            {
+              title:
+                currentLocale === "ru"
+                  ? "46+ Академических программ"
+                  : currentLocale === "en"
+                  ? "46+ Degree Programs"
+                  : "46+ Ta'lim yo'nalishlari",
+              desc:
+                currentLocale === "ru"
+                  ? "Бакалавриат и магистратура"
+                  : currentLocale === "en"
+                  ? "Undergraduate & Graduate"
+                  : "Bakalavriat va magistratura",
+              href: "#programs",
+              tag: "Katalog",
+            },
+            {
+              title:
+                currentLocale === "ru"
+                  ? "500+ Университетских грантов"
+                  : currentLocale === "en"
+                  ? "500+ Annual Scholarships"
+                  : "500+ Yillik ichki grantlar",
+              desc:
+                currentLocale === "ru"
+                  ? "100% Ректорский грант и IELTS"
+                  : currentLocale === "en"
+                  ? "100% Rector grant & IELTS 7+"
+                  : "Rektor granti va til imtiyozlari",
+              href: "#scholarships",
+              tag: "Grantlar",
+            },
+            {
+              title:
+                currentLocale === "ru"
+                  ? "Современный кампус и IT-хаб"
+                  : currentLocale === "en"
+                  ? "Modern Campus & Labs"
+                  : "Spitamen zamonaviy binosi",
+              desc:
+                currentLocale === "ru"
+                  ? "Анатомический центр и AI лаборатории"
+                  : currentLocale === "en"
+                  ? "Anatomage labs & robotics"
+                  : "Anatomage va robototexnika",
+              href: "#campus",
+              tag: "Kampus",
+            },
+            {
+              title:
+                currentLocale === "ru"
+                  ? "2+2 Международный диплом"
+                  : currentLocale === "en"
+                  ? "2+2 Dual Degree Programs"
+                  : "2+2 Xalqaro dual diplom",
+              desc:
+                currentLocale === "ru"
+                  ? "Южная Корея и Европа"
+                  : currentLocale === "en"
+                  ? "South Korea & Europe"
+                  : "Janubiy Koreya va Yevropa",
+              href: "#about",
+              tag: "Xalqaro",
+            },
+          ].map((item, idx) => (
+            <a
+              key={idx}
+              href={item.href}
+              className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md hover:border-[#0096DB] transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-[#0096DB] bg-[#EBF5FB] px-2 py-0.5 rounded-md">
+                    {item.tag}
+                  </span>
+                  <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-[#0096DB] group-hover:translate-x-1 transition-all" />
+                </div>
+                <h2 className="text-sm sm:text-base font-extrabold text-[#172D50] group-hover:text-[#0096DB] transition-colors leading-snug">
+                  {item.title}
+                </h2>
+                <p className="text-xs text-slate-500 mt-1 line-clamp-1">
+                  {item.desc}
+                </p>
+              </div>
+            </a>
+          ))}
         </div>
       </Container>
     </section>

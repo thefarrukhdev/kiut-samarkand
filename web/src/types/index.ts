@@ -28,6 +28,45 @@ export interface FacultyProgram {
   careerProspects?: string[];
 }
 
+export interface ProgramItem {
+  id: string;
+  slug: string;
+  name: string;
+  facultyId: "medicine" | "engineering" | "economy" | "education" | "philology";
+  facultyName: string;
+  degree: "bachelor" | "master";
+  duration: string;
+  languages: string[];
+  modes: Array<"day" | "evening" | "distance">;
+  description: string;
+  career: string;
+}
+
+export interface ScholarshipItem {
+  id: string;
+  title: string;
+  coverage: string;
+  badge: string;
+  description: string;
+  eligibility: string;
+}
+
+export interface CampusCluster {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  features: string[];
+}
+
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+  category: "admission" | "diploma" | "tuition" | "campus";
+}
+
 export interface NewsArticle {
   slug: string;
   title: string;

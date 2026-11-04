@@ -104,7 +104,7 @@ export function AboutSection({ currentLocale = "uz" }: AboutSectionProps) {
                 return (
                   <div
                     key={`${pillar.title}-${currentLocale}`}
-                    className="p-4 rounded-2xl bg-[#F4F7FC] border border-[#E2E8F0] flex flex-col justify-between hover:bg-white hover:border-[#0096DB]/40 hover:shadow-md transition-all duration-200"
+                    className="p-4 rounded-2xl bg-[#F4F7FC] border border-border flex flex-col justify-between hover:bg-white hover:border-[#0096DB]/40 hover:shadow-md transition-all duration-200"
                   >
                     <div>
                       <div className={`h-10 w-10 rounded-xl ${meta.bg} flex items-center justify-center mb-3`}>
