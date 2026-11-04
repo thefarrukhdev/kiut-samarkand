@@ -154,6 +154,7 @@ export function AboutSection({ currentLocale: propLocale }: AboutSectionProps = 
                         src={partner.logo}
                         alt={partner.name}
                         fill
+                        sizes="80px"
                         className="object-contain"
                       />
                     </div>
