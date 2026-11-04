@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Phone,
   Mail,
@@ -47,9 +48,9 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
   const faculties = React.useMemo(() => {
     const list = getFacultySummaries(currentLocale).map((f) => ({
       name: f.name,
-      href: f.href,
+      href: `/programs?faculty=${f.id}`,
     }));
-    list.push({ name: graduateLabel, href: "#schools" });
+    list.push({ name: graduateLabel, href: "/programs?degree=master" });
     return list;
   }, [currentLocale, graduateLabel]);
 
@@ -62,7 +63,7 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
             : currentLocale === "en"
             ? "University Charter & History"
             : "Universitet tarixi va nizomi",
-        href: "#about",
+        href: "/about",
       },
       {
         name:
@@ -71,16 +72,16 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
             : currentLocale === "en"
             ? "Admissions 2026/2027"
             : "Qabul 2026/2027 jarayoni",
-        href: "#admission",
+        href: "/admission",
       },
       {
         name:
           currentLocale === "ru"
-            ? "Статистика и достижения"
+            ? "Все 48+ направлений"
             : currentLocale === "en"
-            ? "Statistics & Highlights"
-            : "Statistika va yutuqlar",
-        href: "#stats",
+            ? "All 48+ Programs"
+            : "Barcha 48+ yo'nalishlar",
+        href: "/programs",
       },
       {
         name:
@@ -89,7 +90,16 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
             : currentLocale === "en"
             ? "University News"
             : "Universitet yangiliklari",
-        href: "#news",
+        href: "/news",
+      },
+      {
+        name:
+          currentLocale === "ru"
+            ? "Контакты и схема проезда"
+            : currentLocale === "en"
+            ? "Campus Contacts & Directions"
+            : "Aloqa va manzil",
+        href: "/contact",
       },
       {
         name:
@@ -101,15 +111,6 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
         href: "https://hemis.kiut.uz",
         external: true,
       },
-      {
-        name:
-          currentLocale === "ru"
-            ? "Международное сотрудничество"
-            : currentLocale === "en"
-            ? "International Partnerships"
-            : "Xalqaro hamkorlik",
-        href: "#about",
-      },
     ],
     [currentLocale]
   );
@@ -117,7 +118,7 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
   return (
     <footer
       id="contact"
-      className="bg-[#172D50] text-slate-300 relative overflow-hidden border-t border-slate-800"
+      className="bg-primary text-slate-300 relative overflow-hidden border-t border-slate-800"
     >
       {/* Main Footer Content */}
       <div className="pt-16 pb-12 relative z-10">
@@ -141,7 +142,7 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
 
               {/* Accreditation Badge */}
               <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3">
-                <div className="p-2 rounded-xl bg-[#0096DB]/20 text-[#0096DB] shrink-0">
+                <div className="p-2 rounded-xl bg-accent/20 text-accent shrink-0">
                   <ShieldCheck className="h-5 w-5" />
                 </div>
                 <div>
@@ -165,7 +166,7 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Telegram"
-                    className="h-10 w-10 rounded-xl bg-white/5 hover:bg-[#0096DB] hover:text-white border border-white/10 flex items-center justify-center transition-all duration-200"
+                    className="h-10 w-10 rounded-xl bg-white/5 hover:bg-accent hover:text-white border border-white/10 flex items-center justify-center transition-all duration-200"
                   >
                     <TelegramIcon className="h-4 w-4" />
                   </a>
@@ -174,7 +175,7 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Instagram"
-                    className="h-10 w-10 rounded-xl bg-white/5 hover:bg-[#2364AD] hover:text-white border border-white/10 flex items-center justify-center transition-all duration-200"
+                    className="h-10 w-10 rounded-xl bg-white/5 hover:bg-primary-royal hover:text-white border border-white/10 flex items-center justify-center transition-all duration-200"
                   >
                     <InstagramIcon className="h-4 w-4" />
                   </a>
@@ -183,7 +184,7 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Facebook"
-                    className="h-10 w-10 rounded-xl bg-white/5 hover:bg-[#2364AD] hover:text-white border border-white/10 flex items-center justify-center transition-all duration-200"
+                    className="h-10 w-10 rounded-xl bg-white/5 hover:bg-primary-royal hover:text-white border border-white/10 flex items-center justify-center transition-all duration-200"
                   >
                     <FacebookIcon className="h-4 w-4" />
                   </a>
@@ -208,13 +209,13 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
               <ul className="space-y-2.5">
                 {faculties.map((item) => (
                   <li key={item.name}>
-                    <a
+                    <Link
                       href={item.href}
                       className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white hover:translate-x-1 transition-all group"
                     >
-                      <ChevronRight className="h-3.5 w-3.5 text-slate-500 group-hover:text-[#0096DB] transition-colors" />
+                      <ChevronRight className="h-3.5 w-3.5 text-slate-500 group-hover:text-accent transition-colors" />
                       <span>{item.name}</span>
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -233,18 +234,18 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm text-slate-300 hover:text-[#0096DB] transition-colors"
+                        className="inline-flex items-center gap-1.5 text-sm text-slate-300 hover:text-accent transition-colors"
                       >
                         <span>{item.name}</span>
                         <ExternalLink className="h-3 w-3 text-slate-500" />
                       </a>
                     ) : (
-                      <a
+                      <Link
                         href={item.href}
-                        className="inline-flex items-center gap-1.5 text-sm text-slate-300 hover:text-[#0096DB] transition-colors"
+                        className="inline-flex items-center gap-1.5 text-sm text-slate-300 hover:text-accent transition-colors"
                       >
                         <span>{item.name}</span>
-                      </a>
+                      </Link>
                     )}
                   </li>
                 ))}
@@ -263,7 +264,7 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
                   rel="noopener noreferrer"
                   className="flex items-start gap-3 hover:text-white transition-colors group"
                 >
-                  <MapPin className="h-5 w-5 text-[#0096DB] shrink-0 mt-0.5" />
+                  <MapPin className="h-5 w-5 text-accent shrink-0 mt-0.5" />
                   <span className="leading-snug">
                     {t.address}
                   </span>
@@ -274,7 +275,7 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
                     href="tel:+998557024040"
                     className="flex items-center gap-3 hover:text-white transition-colors"
                   >
-                    <Phone className="h-4 w-4 text-[#0096DB] shrink-0" />
+                    <Phone className="h-4 w-4 text-accent shrink-0" />
                     <span>+998 (55) 702-40-40</span>
                   </a>
                   <a
@@ -290,7 +291,7 @@ export function Footer({ currentLocale: propLocale }: FooterProps = {}) {
                   href="mailto:info@kiut.uz"
                   className="flex items-center gap-3 hover:text-white transition-colors"
                 >
-                  <Mail className="h-4 w-4 text-[#0096DB] shrink-0" />
+                  <Mail className="h-4 w-4 text-accent shrink-0" />
                   <span>info@kiut.uz</span>
                 </a>
 

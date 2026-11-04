@@ -13,12 +13,17 @@ export interface TopbarTranslations {
 
 export interface NavTranslations {
   home: string;
+  programs: string;
   faculties: string;
   facultiesCount: string;
   facultiesAll: string;
   university: string;
+  admission: string;
+  scholarships: string;
+  campus: string;
   stats: string;
   news: string;
+  faq: string;
   contact: string;
   cta: string;
   branchLabel: string;

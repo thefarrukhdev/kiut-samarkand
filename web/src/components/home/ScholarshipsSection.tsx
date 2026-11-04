@@ -164,15 +164,15 @@ export function ScholarshipsSection({
           ? "University Scholarships and Financial Aid"
           : "Universitet grantlari va stipendiyalari"
       }
-      className="py-16 sm:py-24 bg-[#F8FAFC] border-b border-slate-200 relative z-10"
+      className="py-16 sm:py-24 bg-slate-50 border-b border-slate-200 relative z-10"
     >
       <Container>
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-slate-200">
           <div>
             <div className="flex items-center gap-2.5 mb-2.5">
-              <span className="w-6 h-0.5 bg-[#0096DB] rounded-full" />
-              <span className="text-xs font-black uppercase tracking-widest text-[#0096DB]">
+              <span className="w-6 h-0.5 bg-accent rounded-full" />
+              <span className="text-xs font-black uppercase tracking-widest text-accent">
                 {currentLocale === "ru"
                   ? "Финансовая поддержка и гранты"
                   : currentLocale === "en"
@@ -180,7 +180,7 @@ export function ScholarshipsSection({
                   : "Grantlar va Stipendiyalar Dasturi"}
               </span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#172D50] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary tracking-tight">
               {currentLocale === "ru"
                 ? "500+ ежегодных внутренних грантов для лучших"
                 : currentLocale === "en"
@@ -208,7 +208,7 @@ export function ScholarshipsSection({
               intensity={0.22}
               className={`!rounded-2xl border !p-6 flex flex-col justify-between transition-all duration-300 ${
                 grant.highlight
-                  ? "bg-white border-[#0096DB] shadow-lg ring-1 ring-[#0096DB]/20"
+                  ? "bg-white border-accent shadow-lg ring-1 ring-accent/20"
                   : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-md"
               }`}
             >
@@ -218,18 +218,18 @@ export function ScholarshipsSection({
                   <span
                     className={`text-[11px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md ${
                       grant.highlight
-                        ? "bg-[#0096DB] text-white"
-                        : "bg-[#E9F2FF] text-[#0096DB]"
+                        ? "bg-accent text-white"
+                        : "bg-accent-light text-accent"
                     }`}
                   >
                     {grant.badge}
                   </span>
-                  <Award className="h-5 w-5 text-[#0096DB]" />
+                  <Award className="h-5 w-5 text-accent" />
                 </div>
 
                 {/* Big Coverage Number */}
                 <div>
-                  <div className="text-3xl sm:text-4xl font-black text-[#172D50] tracking-tight">
+                  <div className="text-3xl sm:text-4xl font-black text-primary tracking-tight">
                     {grant.coverage}
                   </div>
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">
@@ -239,7 +239,7 @@ export function ScholarshipsSection({
 
                 {/* Title & Description */}
                 <div>
-                  <h3 className="text-base font-bold text-[#172D50] leading-snug">
+                  <h3 className="text-base font-bold text-primary leading-snug">
                     {grant.title}
                   </h3>
                   <p className="text-xs text-slate-600 mt-2 leading-relaxed">
@@ -269,8 +269,8 @@ export function ScholarshipsSection({
                   size="sm"
                   className={`w-full text-xs font-bold py-2.5 rounded-xl ${
                     grant.highlight
-                      ? "bg-[#0096DB] hover:bg-[#007BB3] text-white shadow-sm"
-                      : "border-slate-300 hover:border-slate-400 text-[#172D50]"
+                      ? "bg-accent hover:bg-accent-hover text-white shadow-sm"
+                      : "border-slate-300 hover:border-slate-400 text-primary"
                   }`}
                 >
                   <span>
@@ -288,9 +288,9 @@ export function ScholarshipsSection({
         </div>
 
         {/* Stat Callout Footer Banner */}
-        <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-[#172D50] text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10">
+        <div className="mt-10 p-6 sm:p-8 rounded-2xl bg-primary text-white flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10">
           <div className="flex items-center gap-4">
-            <div className="h-12 w-12 rounded-xl bg-[#0096DB] flex items-center justify-center shrink-0">
+            <div className="h-12 w-12 rounded-xl bg-accent flex items-center justify-center shrink-0">
               <BadgeCheck className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -323,7 +323,7 @@ export function ScholarshipsSection({
             }
             variant="action"
             size="default"
-            className="bg-[#0096DB] hover:bg-[#007BB3] text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-xl whitespace-nowrap shadow-md shrink-0"
+            className="bg-accent hover:bg-accent-hover text-white font-bold text-xs sm:text-sm px-6 py-2.5 rounded-xl whitespace-nowrap shadow-md shrink-0"
           >
             <span>
               {currentLocale === "ru"

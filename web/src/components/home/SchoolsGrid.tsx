@@ -100,17 +100,17 @@ export function SchoolsGrid({
           ? "Faculties and Academic Disciplines"
           : "Fakultetlar va Ta'lim Yo'nalishlari"
       }
-      className="py-16 sm:py-24 bg-[#F4F7FC] relative"
+      className="py-16 sm:py-24 bg-surface relative"
     >
       <Container>
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-16">
-          <div className="inline-flex items-center justify-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0096DB] mb-3">
-            <span className="w-6 h-px bg-[#0096DB]" />
+          <div className="inline-flex items-center justify-center gap-2 text-xs font-bold tracking-widest uppercase text-accent mb-3">
+            <span className="w-6 h-px bg-accent" />
             <span>{t.badge}</span>
-            <span className="w-6 h-px bg-[#0096DB]" />
+            <span className="w-6 h-px bg-accent" />
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#172D50] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary tracking-tight">
             {t.title}
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#334155] leading-relaxed">
@@ -128,8 +128,8 @@ export function SchoolsGrid({
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   activeTab === tab.id
-                    ? "bg-[#172D50] text-white shadow-sm"
-                    : "bg-white text-[#334155] hover:text-[#172D50] border border-slate-200 hover:border-slate-300"
+                    ? "bg-primary text-white shadow-sm"
+                    : "bg-white text-[#334155] hover:text-primary border border-slate-200 hover:border-slate-300"
                 }`}
               >
                 {tab.label}
@@ -156,10 +156,10 @@ export function SchoolsGrid({
                   spotlightColor="rgba(0, 150, 219, 0.28)"
                   spotlightSize={340}
                   intensity={0.28}
-                  className="!p-0 !rounded-2xl flex flex-col h-full bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#0096DB]/50 transition-all duration-300 group hover:-translate-y-1 overflow-hidden"
+                  className="!p-0 !rounded-2xl flex flex-col h-full bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-accent/50 transition-all duration-300 group hover:-translate-y-1 overflow-hidden"
                 >
                   {/* Image Banner */}
-                  <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-[#172D50]">
+                  <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-primary">
                     <Image
                       src={faculty.image}
                       alt={faculty.name}
@@ -167,11 +167,11 @@ export function SchoolsGrid({
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#172D50]/90 via-[#172D50]/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
 
                     {/* Top Badges */}
                     <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                      <span className="text-xs font-semibold text-white bg-[#172D50] px-3 py-1 rounded-md border border-white/10 tracking-wide uppercase">
+                      <span className="text-xs font-semibold text-white bg-primary px-3 py-1 rounded-md border border-white/10 tracking-wide uppercase">
                         {faculty.badge}
                       </span>
                       <span className="text-xs font-semibold text-white bg-slate-900 px-2.5 py-1 rounded-md border border-white/10">
@@ -186,7 +186,7 @@ export function SchoolsGrid({
                         <span>{faculty.duration}</span>
                       </span>
                       <span className="flex items-center gap-1.5 font-medium">
-                        <Globe2 className="h-3.5 w-3.5 text-[#0096DB]" />
+                        <Globe2 className="h-3.5 w-3.5 text-accent" />
                         <span>{faculty.languages.join(", ")}</span>
                       </span>
                     </div>
@@ -195,7 +195,7 @@ export function SchoolsGrid({
                   {/* Content */}
                   <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-5">
                     <div className="space-y-3">
-                      <h3 className="text-xl sm:text-2xl font-bold text-[#172D50] group-hover:text-[#0096DB] transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-bold text-primary group-hover:text-accent transition-colors">
                         {faculty.name}
                       </h3>
                       <p className="text-xs sm:text-sm text-[#334155] line-clamp-2 leading-relaxed">
@@ -206,7 +206,7 @@ export function SchoolsGrid({
                       <div className="space-y-1.5 pt-2 border-t border-slate-100">
                         {faculty.highlights.map((h, i) => (
                           <div key={i} className="flex items-start gap-2 text-xs text-[#334155]">
-                            <CheckCircle2 className="h-3.5 w-3.5 text-[#0096DB] shrink-0 mt-0.5" />
+                            <CheckCircle2 className="h-3.5 w-3.5 text-accent shrink-0 mt-0.5" />
                             <span className="line-clamp-1">{h}</span>
                           </div>
                         ))}
@@ -221,7 +221,7 @@ export function SchoolsGrid({
                           {faculty.popularPrograms.slice(0, 3).map((prog) => (
                             <span
                               key={prog}
-                              className="text-[11px] font-semibold text-[#334155] bg-[#F4F7FC] border border-slate-200/60 px-2.5 py-1 rounded-lg"
+                              className="text-[11px] font-semibold text-[#334155] bg-surface border border-slate-200/60 px-2.5 py-1 rounded-lg"
                             >
                               {prog}
                             </span>
@@ -233,7 +233,7 @@ export function SchoolsGrid({
                                 setModalFaculty(faculty);
                                 setExpandedProgramIndex(null);
                               }}
-                              className="text-[11px] font-bold text-[#0096DB] hover:text-[#007BB3] hover:underline px-1 py-1 cursor-pointer"
+                              className="text-[11px] font-bold text-accent hover:text-accent-hover hover:underline px-1 py-1 cursor-pointer"
                             >
                               +{faculty.allPrograms.length - 3} {t.morePrograms}
                             </button>
@@ -273,10 +273,10 @@ export function SchoolsGrid({
         </div>
 
         {/* Global Programs Banner */}
-        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-[#172D50] text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md border border-white/10">
+        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-primary text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md border border-white/10">
           <div className="space-y-2 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0096DB]">
-              <span className="w-4 h-px bg-[#0096DB]" />
+            <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-accent">
+              <span className="w-4 h-px bg-accent" />
               <span>{t.bannerBadge}</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold">
@@ -289,7 +289,7 @@ export function SchoolsGrid({
           <div className="flex items-center gap-3 shrink-0">
             <a
               href="tel:+998557024040"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0096DB] hover:bg-[#007BB3] text-white font-bold text-sm transition-colors shadow-md"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent hover:bg-accent-hover text-white font-bold text-sm transition-colors shadow-md"
             >
               <span>+998 (55) 702-40-40</span>
             </a>
@@ -321,12 +321,12 @@ export function SchoolsGrid({
               className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden z-10 max-h-[90vh] flex flex-col"
             >
               {/* Modal Header */}
-              <div className="p-6 border-b border-slate-200 flex items-center justify-between bg-[#F4F7FC]">
+              <div className="p-6 border-b border-slate-200 flex items-center justify-between bg-surface">
                 <div className="flex items-center gap-3">
                   <Badge variant={modalFaculty.badgeVariant}>
                     {modalFaculty.badge}
                   </Badge>
-                  <h3 id="schools-modal-title" className="text-xl font-bold text-[#172D50]">
+                  <h3 id="schools-modal-title" className="text-xl font-bold text-primary">
                     {modalFaculty.name}
                   </h3>
                 </div>
@@ -351,14 +351,14 @@ export function SchoolsGrid({
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-[#F4F7FC] border border-slate-200/60 text-xs">
+                <div className="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-surface border border-slate-200/60 text-xs">
                   <div>
                     <span className="text-slate-400 block font-semibold">{t.durationLabel}</span>
-                    <span className="font-bold text-[#172D50] text-sm mt-0.5 block">{modalFaculty.duration}</span>
+                    <span className="font-bold text-primary text-sm mt-0.5 block">{modalFaculty.duration}</span>
                   </div>
                   <div>
                     <span className="text-slate-400 block font-semibold">{t.languagesLabel}</span>
-                    <span className="font-bold text-[#172D50] text-sm mt-0.5 block">{modalFaculty.languages.join(", ")}</span>
+                    <span className="font-bold text-primary text-sm mt-0.5 block">{modalFaculty.languages.join(", ")}</span>
                   </div>
                 </div>
 
@@ -372,16 +372,16 @@ export function SchoolsGrid({
                       return (
                         <li
                           key={index}
-                          className="rounded-xl bg-[#F4F7FC] border border-slate-200/80 overflow-hidden transition-colors"
+                          className="rounded-xl bg-surface border border-slate-200/80 overflow-hidden transition-colors"
                         >
                           <button
                             type="button"
                             onClick={() => setExpandedProgramIndex(isExpanded ? null : index)}
-                            className="w-full p-3 flex items-center justify-between text-left text-xs font-semibold text-[#172D50] hover:bg-white transition-colors cursor-pointer"
+                            className="w-full p-3 flex items-center justify-between text-left text-xs font-semibold text-primary hover:bg-white transition-colors cursor-pointer"
                             aria-expanded={isExpanded}
                           >
                             <span className="flex items-center gap-2">
-                              <CheckCircle2 className="h-4 w-4 text-[#0096DB] shrink-0" />
+                              <CheckCircle2 className="h-4 w-4 text-accent shrink-0" />
                               <span>{prog.name}</span>
                             </span>
                             <div className="flex items-center gap-2 shrink-0">
@@ -390,7 +390,7 @@ export function SchoolsGrid({
                               </span>
                               <ChevronDown
                                 className={`h-3.5 w-3.5 text-slate-400 transition-transform ${
-                                  isExpanded ? "rotate-180 text-[#0096DB]" : ""
+                                  isExpanded ? "rotate-180 text-accent" : ""
                                 }`}
                               />
                             </div>
@@ -409,7 +409,7 @@ export function SchoolsGrid({
               </div>
 
               {/* Modal Footer */}
-              <div className="p-6 border-t border-slate-200 flex items-center justify-end gap-3 bg-[#F4F7FC]">
+              <div className="p-6 border-t border-slate-200 flex items-center justify-end gap-3 bg-surface">
                 <Button
                   onClick={() => setModalFaculty(null)}
                   variant="secondary"

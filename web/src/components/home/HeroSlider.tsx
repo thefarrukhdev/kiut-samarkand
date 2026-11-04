@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft,
@@ -262,7 +263,7 @@ export function HeroSlider({
           ? "University Hero Showcase"
           : "Universitet Asosiy Qismi"
       }
-      className="relative bg-gradient-to-b from-white via-[#F8FAFC] to-[#F4F7FC] border-b border-slate-200/80 overflow-hidden py-10 sm:py-14 lg:py-18"
+      className="relative bg-gradient-to-b from-white via-[#F8FAFC] to-surface border-b border-slate-200/80 overflow-hidden py-10 sm:py-14 lg:py-18"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
@@ -283,16 +284,16 @@ export function HeroSlider({
               >
                 {/* Academic Eyebrow */}
                 <div className="flex items-center gap-3">
-                  <span className="w-8 h-1 bg-[#0096DB] rounded-full" />
-                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#0096DB]">
+                  <span className="w-8 h-1 bg-accent rounded-full" />
+                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-accent">
                     {currentSlide.badge}
                   </span>
                 </div>
 
                 {/* Monumental Title in Deep Navy & Real KIUT Blue */}
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#172D50] leading-[1.12]">
+                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-primary leading-[1.12]">
                   {currentSlide.title}{" "}
-                  <span className="text-[#0096DB]">
+                  <span className="text-accent">
                     {currentSlide.highlight}
                   </span>
                 </h1>
@@ -308,31 +309,32 @@ export function HeroSlider({
                     onClick={() => handleAction("#admission")}
                     variant="action"
                     size="lg"
-                    className="text-base font-bold bg-[#0096DB] hover:bg-[#007BB3] text-white shadow-lg shadow-[#0096DB]/25 hover:shadow-xl hover:shadow-[#0096DB]/35 px-7 py-3.5 rounded-xl transition-all"
+                    className="text-base font-bold bg-accent hover:bg-accent-hover text-white shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/35 px-7 py-3.5 rounded-xl transition-all"
                   >
                     <span>{currentSlide.primaryCtaText}</span>
                     <ArrowRight className="h-4 w-4 ml-1" />
                   </Button>
 
-                  <Button
-                    onClick={() => handleAction("#schools")}
-                    variant="outline"
-                    size="lg"
-                    className="text-base font-bold border-2 border-slate-300 hover:border-[#172D50] hover:bg-slate-50 text-[#172D50] px-6 py-3.5 rounded-xl transition-all"
-                  >
-                    <BookOpen className="h-4 w-4 text-[#0096DB]" />
-                    <span>{currentSlide.secondaryCtaText}</span>
-                  </Button>
+                  <Link href="/programs" className="inline-block">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="w-full sm:w-auto text-base font-bold border-2 border-slate-300 hover:border-primary hover:bg-slate-50 text-primary px-6 py-3.5 rounded-xl transition-all"
+                    >
+                      <BookOpen className="h-4 w-4 text-accent" />
+                      <span>{currentSlide.secondaryCtaText}</span>
+                    </Button>
+                  </Link>
                 </div>
 
                 {/* Institutional Trust Badges */}
                 <div className="pt-6 border-t border-slate-200/90 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-[13px] text-slate-600 font-medium">
                   <div className="flex items-center gap-2">
-                    <ShieldCheck className="h-4 w-4 text-[#0096DB] shrink-0" />
+                    <ShieldCheck className="h-4 w-4 text-accent shrink-0" />
                     <span>{heroData.officialLicense}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Award className="h-4 w-4 text-[#0096DB] shrink-0" />
+                    <Award className="h-4 w-4 text-accent shrink-0" />
                     <span>
                       {currentLocale === "ru"
                         ? "100% Государственный диплом"
@@ -342,7 +344,7 @@ export function HeroSlider({
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <GraduationCap className="h-4 w-4 text-[#0096DB] shrink-0" />
+                    <GraduationCap className="h-4 w-4 text-accent shrink-0" />
                     <span>
                       {currentLocale === "ru"
                         ? "5+1 Дуальное образование"
@@ -356,7 +358,7 @@ export function HeroSlider({
                 {/* Interactive Academic Direction Fast Finder */}
                 <div className="pt-5 border-t border-slate-200/90 space-y-2.5">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
-                    <Search className="h-3.5 w-3.5 text-[#0096DB]" />
+                    <Search className="h-3.5 w-3.5 text-accent" />
                     <span>
                       {currentLocale === "ru"
                         ? "Быстрый поиск направления:"
@@ -394,14 +396,14 @@ export function HeroSlider({
                             : "Davolash ishi, Dasturiy injiniring, Arxitektura..."
                         }
                         aria-label="Qidiruv so'zi"
-                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0096DB] focus:border-transparent transition-all shadow-sm"
+                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all shadow-sm"
                       />
                     </div>
                     <Button
                       type="submit"
                       variant="action"
                       size="sm"
-                      className="shrink-0 bg-[#172D50] hover:bg-[#12223D] text-white font-bold rounded-xl px-4 py-2.5 text-xs sm:text-sm"
+                      className="shrink-0 bg-primary hover:bg-primary-hover text-white font-bold rounded-xl px-4 py-2.5 text-xs sm:text-sm"
                     >
                       <Search className="h-3.5 w-3.5 mr-1" />
                       <span>{currentLocale === "ru" ? "Найти" : currentLocale === "en" ? "Search" : "Qidirish"}</span>
@@ -426,7 +428,7 @@ export function HeroSlider({
                             }
                           }
                         }}
-                        className="text-[11px] font-semibold text-[#172D50] bg-white border border-slate-200 hover:border-[#0096DB] hover:text-[#0096DB] px-2.5 py-1 rounded-lg transition-colors cursor-pointer shadow-xs"
+                        className="text-[11px] font-semibold text-primary bg-white border border-slate-200 hover:border-accent hover:text-accent px-2.5 py-1 rounded-lg transition-colors cursor-pointer shadow-xs"
                       >
                         {tag}
                       </button>
@@ -458,14 +460,14 @@ export function HeroSlider({
                     sizes="(max-width: 1024px) 100vw, 45vw"
                     className="object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#172D50] via-[#172D50]/25 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/25 to-transparent pointer-events-none" />
                 </motion.div>
               </AnimatePresence>
 
               {/* Photo Caption & Slide Controls */}
               <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between gap-3 text-white">
                 <div className="pr-2">
-                  <p className="text-[11px] font-extrabold uppercase tracking-wider text-[#0096DB]">
+                  <p className="text-[11px] font-extrabold uppercase tracking-wider text-accent">
                     {currentLocale === "ru" ? "ТМУК Самарканд" : currentLocale === "en" ? "KIUT Samarkand" : "KIUT Samarqand"}
                   </p>
                   <p className="text-xs sm:text-sm font-semibold text-white line-clamp-1">
@@ -474,7 +476,7 @@ export function HeroSlider({
                 </div>
 
                 {/* Slider Controls */}
-                <div className="flex items-center gap-1 bg-[#172D50] p-1 rounded-xl border border-white/20 shrink-0">
+                <div className="flex items-center gap-1 bg-primary p-1 rounded-xl border border-white/20 shrink-0">
                   <button
                     type="button"
                     onClick={prevSlide}
@@ -532,9 +534,9 @@ export function HeroSlider({
                     role="tab"
                     aria-selected={isActive}
                     onClick={() => setCurrent(idx)}
-                    className={`group relative rounded-xl overflow-hidden border-2 transition-all p-1 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB] ${
+                    className={`group relative rounded-xl overflow-hidden border-2 transition-all p-1 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                       isActive
-                        ? "border-[#0096DB] bg-white shadow-md shadow-[#0096DB]/15"
+                        ? "border-accent bg-white shadow-md shadow-accent/15"
                         : "border-slate-200/90 bg-white/70 hover:border-slate-400 hover:bg-white"
                     }`}
                   >
@@ -550,7 +552,7 @@ export function HeroSlider({
                             : "opacity-65 group-hover:opacity-95"
                         }`}
                       />
-                      <div className="absolute top-1 left-1 bg-[#172D50] text-white text-[9px] font-black px-1.5 py-0.5 rounded">
+                      <div className="absolute top-1 left-1 bg-primary text-white text-[9px] font-black px-1.5 py-0.5 rounded">
                         {meta.num}
                       </div>
                     </div>
@@ -558,8 +560,8 @@ export function HeroSlider({
                       <p
                         className={`text-[11px] font-bold truncate ${
                           isActive
-                            ? "text-[#0096DB]"
-                            : "text-slate-700 group-hover:text-[#172D50]"
+                            ? "text-accent"
+                            : "text-slate-700 group-hover:text-primary"
                         }`}
                       >
                         {meta.tag[currentLocale] || meta.tag.uz}
@@ -572,7 +574,7 @@ export function HeroSlider({
                           initial={{ width: "0%" }}
                           animate={{ width: "100%" }}
                           transition={{ duration: 6.5, ease: "linear" }}
-                          className="h-full bg-[#0096DB]"
+                          className="h-full bg-accent"
                         />
                       </div>
                     )}
@@ -589,16 +591,16 @@ export function HeroSlider({
             <a
               key={idx}
               href={item.href}
-              className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md hover:border-[#0096DB] transition-all flex flex-col justify-between"
+              className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md hover:border-accent transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-[#0096DB] bg-[#EBF5FB] px-2 py-0.5 rounded-md">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-accent bg-accent-light px-2 py-0.5 rounded-md">
                     {item.tag}
                   </span>
-                  <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-[#0096DB] group-hover:translate-x-1 transition-all" />
+                  <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-accent group-hover:translate-x-1 transition-all" />
                 </div>
-                <h3 className="text-sm sm:text-base font-extrabold text-[#172D50] group-hover:text-[#0096DB] transition-colors leading-snug">
+                <h3 className="text-sm sm:text-base font-extrabold text-primary group-hover:text-accent transition-colors leading-snug">
                   {item.title}
                 </h3>
                 <p className="text-xs text-slate-500 mt-1 line-clamp-1">

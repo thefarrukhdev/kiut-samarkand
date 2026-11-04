@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Calendar,
@@ -170,11 +171,11 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0096DB] mb-3">
-              <span className="w-6 h-px bg-[#0096DB]" />
+            <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-accent mb-3">
+              <span className="w-6 h-px bg-accent" />
               <span>{t.badge}</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#172D50] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary tracking-tight">
               {t.title}
             </h2>
             <p className="mt-3 text-base sm:text-lg text-[#334155]">
@@ -193,8 +194,8 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                 onClick={() => setActiveFilter(tab.id)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                   activeFilter === tab.id
-                    ? "bg-[#172D50] text-white shadow-sm"
-                    : "bg-[#F4F7FC] text-[#334155] hover:text-[#172D50] border border-slate-200 hover:border-slate-300"
+                    ? "bg-primary text-white shadow-sm"
+                    : "bg-surface text-[#334155] hover:text-primary border border-slate-200 hover:border-slate-300"
                 }`}
               >
                 {tab.label}
@@ -214,10 +215,10 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35, delay: idx * 0.05 }}
-                className="flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:border-[#0096DB]/40 transition-all duration-300 group hover:-translate-y-1"
+                className="flex flex-col bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:border-accent/40 transition-all duration-300 group hover:-translate-y-1"
               >
                 {/* Image */}
-                <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-[#172D50]">
+                <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-primary">
                   <Image
                     src={article.image}
                     alt={article.title}
@@ -225,7 +226,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#172D50]/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
 
                   {/* Category Badge */}
                   <div className="absolute top-4 left-4">
@@ -241,7 +242,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                     {/* Meta info */}
                     <div className="flex items-center gap-4 text-xs text-slate-400">
                       <span className="flex items-center gap-1.5 font-medium">
-                        <Calendar className="h-3.5 w-3.5 text-[#0096DB]" />
+                        <Calendar className="h-3.5 w-3.5 text-accent" />
                         <span>{article.date}</span>
                       </span>
                       <span className="flex items-center gap-1.5">
@@ -251,7 +252,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-lg sm:text-xl font-bold text-[#172D50] group-hover:text-[#0096DB] transition-colors leading-snug line-clamp-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-primary group-hover:text-accent transition-colors leading-snug line-clamp-2">
                       {article.title}
                     </h3>
 
@@ -266,7 +267,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
                     <button
                       type="button"
                       onClick={() => setSelectedArticle(article)}
-                      className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#0096DB] hover:text-[#007BB3] group/btn transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-accent hover:text-accent-hover group/btn transition-colors cursor-pointer"
                     >
                       <span>{t.readMore}</span>
                       <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
@@ -284,16 +285,15 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
         {/* Bottom Archive Link */}
         <div className="mt-14 text-center">
           <Button
-            onClick={() => {
-              const el = document.getElementById("schools");
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }}
+            asChild
             variant="secondary"
             size="lg"
-            className="font-bold border-slate-200 hover:border-slate-300 hover:bg-[#F4F7FC]"
+            className="font-bold border-slate-200 hover:border-slate-300 hover:bg-surface"
           >
-            <span>{t.archiveButton}</span>
-            <ArrowRight className="h-4 w-4 ml-2" />
+            <Link href="/news">
+              <span>{t.archiveButton}</span>
+              <ArrowRight className="h-4 w-4 ml-2" />
+            </Link>
           </Button>
         </div>
       </Container>
@@ -322,14 +322,14 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
               className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden z-10 max-h-[90vh] flex flex-col"
             >
               {/* Modal Banner */}
-              <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-[#172D50] shrink-0">
+              <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-primary shrink-0">
                 <Image
                   src={selectedArticle.image}
                   alt={selectedArticle.title}
                   fill
                   className="object-cover object-center"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#172D50]/90 via-[#172D50]/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
 
                 <button
                   type="button"
@@ -354,20 +354,20 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
               <div className="p-6 sm:p-8 overflow-y-auto space-y-4">
                 <div className="flex items-center gap-4 text-xs text-slate-500 pb-3 border-b border-slate-100">
                   <span className="flex items-center gap-1.5 font-medium">
-                    <Calendar className="h-3.5 w-3.5 text-[#0096DB]" />
+                    <Calendar className="h-3.5 w-3.5 text-accent" />
                     <span>{selectedArticle.date}</span>
                   </span>
                   <span className="flex items-center gap-1.5">
                     <Clock className="h-3.5 w-3.5 text-slate-400" />
                     <span>{selectedArticle.readTime}</span>
                   </span>
-                  <span className="text-[#172D50] font-semibold">
+                  <span className="text-primary font-semibold">
                     {t.pressRelease}
                   </span>
                 </div>
 
                 <div className="text-sm sm:text-base text-[#334155] leading-relaxed space-y-4">
-                  <p className="font-medium text-[#172D50]">
+                  <p className="font-medium text-primary">
                     {selectedArticle.summary}
                   </p>
                   <p>
@@ -381,7 +381,7 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
               </div>
 
               {/* Modal Footer */}
-              <div className="p-4 border-t border-slate-100 bg-[#F4F7FC] flex justify-end">
+              <div className="p-4 border-t border-slate-100 bg-surface flex justify-end">
                 <Button
                   onClick={() => setSelectedArticle(null)}
                   variant="secondary"

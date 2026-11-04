@@ -75,20 +75,20 @@ export function AdmissionCTA({
           ? "Admissions 2026/2027 Online Application"
           : "Qabul 2026/2027 arizasi"
       }
-      className="py-16 sm:py-24 bg-[#172D50] text-white relative overflow-hidden border-t border-white/10"
+      className="py-16 sm:py-24 bg-primary text-white relative overflow-hidden border-t border-white/10"
     >
       <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
           {/* Left Column: Institutional Value Pitch (7 cols) */}
           <div className="lg:col-span-7 space-y-8">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0096DB]">
-                <span className="w-6 h-px bg-[#0096DB]"></span>
+              <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-accent">
+                <span className="w-6 h-px bg-accent"></span>
                 <span>{t.badge}</span>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15]">
                 {t.title}{" "}
-                <span className="text-[#0096DB]">
+                <span className="text-accent">
                   {t.titleHighlight}
                 </span>{" "}
                 {t.titleEnd}
@@ -107,7 +107,7 @@ export function AdmissionCTA({
                     key={`${benefit.title}-${currentLocale}`}
                     className="p-4 rounded-2xl bg-[#1E3A66] border border-white/15 flex items-start gap-3.5 hover:bg-[#234275] transition-colors"
                   >
-                    <div className="p-2 rounded-xl bg-[#0096DB]/20 text-[#0096DB] shrink-0 mt-0.5">
+                    <div className="p-2 rounded-xl bg-accent/20 text-accent shrink-0 mt-0.5">
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
@@ -126,14 +126,14 @@ export function AdmissionCTA({
             {/* Direct hotline contact pill */}
             <div className="p-5 rounded-2xl bg-white/5 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-[#0096DB]/20 text-[#0096DB] flex items-center justify-center shrink-0">
+                <div className="h-10 w-10 rounded-xl bg-accent/20 text-accent flex items-center justify-center shrink-0">
                   <Phone className="h-5 w-5" />
                 </div>
                 <div>
                   <span className="text-xs text-slate-300 block">{t.hotlineLabel}</span>
                   <a
                     href="tel:+998557024040"
-                    className="text-lg font-extrabold text-white hover:text-[#0096DB] transition-colors"
+                    className="text-lg font-extrabold text-white hover:text-accent transition-colors"
                   >
                     +998 (55) 702-40-40
                   </a>
@@ -162,7 +162,7 @@ export function AdmissionCTA({
                       <Badge variant="accent" className="mb-2 text-xs font-bold">
                         {t.formBadge}
                       </Badge>
-                      <h3 className="text-2xl font-black text-[#172D50]">
+                      <h3 className="text-2xl font-black text-primary">
                         {t.formTitle}
                       </h3>
                       <p className="text-xs text-[#334155] mt-1">
@@ -179,7 +179,7 @@ export function AdmissionCTA({
 
                     {/* Full Name */}
                     <div>
-                      <label htmlFor="cta-fullname" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                      <label htmlFor="cta-fullname" className="block text-xs font-bold text-primary uppercase tracking-wider mb-1.5">
                         {t.fullNameLabel}
                       </label>
                       <input
@@ -189,13 +189,13 @@ export function AdmissionCTA({
                         placeholder={t.fullNamePlaceholder}
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#0096DB] focus:ring-2 focus:ring-[#0096DB]/20 text-sm font-medium transition-all outline-none text-[#172D50]"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/20 text-sm font-medium transition-all outline-none text-primary"
                       />
                     </div>
 
                     {/* Phone Number with strict Uzbek format */}
                     <div>
-                      <label htmlFor="cta-phone" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                      <label htmlFor="cta-phone" className="block text-xs font-bold text-primary uppercase tracking-wider mb-1.5">
                         {t.phoneLabel}
                       </label>
                       <input
@@ -205,20 +205,20 @@ export function AdmissionCTA({
                         value={phone}
                         onChange={handlePhoneChange}
                         placeholder={t.phonePlaceholder}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#0096DB] focus:ring-2 focus:ring-[#0096DB]/20 text-sm font-semibold tracking-wide transition-all outline-none text-[#172D50]"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/20 text-sm font-semibold tracking-wide transition-all outline-none text-primary"
                       />
                     </div>
 
                     {/* Faculty Select */}
                     <div>
-                      <label htmlFor="cta-faculty" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                      <label htmlFor="cta-faculty" className="block text-xs font-bold text-primary uppercase tracking-wider mb-1.5">
                         {t.facultyLabel}
                       </label>
                       <select
                         id="cta-faculty"
                         value={faculty}
                         onChange={(e) => setFaculty(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#0096DB] focus:ring-2 focus:ring-[#0096DB]/20 text-sm font-medium transition-all outline-none bg-white cursor-pointer text-[#172D50]"
+                        className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/20 text-sm font-medium transition-all outline-none bg-white cursor-pointer text-primary"
                       >
                         {facultyOptions.map((f) => (
                           <option key={f.id} value={f.name}>
@@ -231,14 +231,14 @@ export function AdmissionCTA({
                     {/* Degree & Study Type in row */}
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label htmlFor="cta-degree" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                        <label htmlFor="cta-degree" className="block text-xs font-bold text-primary uppercase tracking-wider mb-1.5">
                           {t.degreeLabel}
                         </label>
                         <select
                           id="cta-degree"
                           value={degree}
                           onChange={(e) => setDegree(e.target.value)}
-                          className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#0096DB] focus:ring-2 focus:ring-[#0096DB]/20 text-xs font-semibold outline-none bg-white cursor-pointer text-[#172D50]"
+                          className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/20 text-xs font-semibold outline-none bg-white cursor-pointer text-primary"
                         >
                           {degreeOptions.map((d) => (
                             <option key={d.value} value={d.value}>
@@ -249,14 +249,14 @@ export function AdmissionCTA({
                       </div>
 
                       <div>
-                        <label htmlFor="cta-studytype" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                        <label htmlFor="cta-studytype" className="block text-xs font-bold text-primary uppercase tracking-wider mb-1.5">
                           {t.studyTypeLabel}
                         </label>
                         <select
                           id="cta-studytype"
                           value={studyType}
                           onChange={(e) => setStudyType(e.target.value)}
-                          className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#0096DB] focus:ring-2 focus:ring-[#0096DB]/20 text-xs font-semibold outline-none bg-white cursor-pointer text-[#172D50]"
+                          className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/20 text-xs font-semibold outline-none bg-white cursor-pointer text-primary"
                         >
                           {studyTypeOptions.map((s) => (
                             <option key={s.value} value={s.value}>
@@ -269,7 +269,7 @@ export function AdmissionCTA({
 
                     {/* Language Choice */}
                     <div>
-                      <label className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-primary uppercase tracking-wider mb-1.5">
                         {t.languageLabel}
                       </label>
                       <div className="grid grid-cols-3 gap-2" role="group" aria-label={t.languageLabel}>
@@ -280,8 +280,8 @@ export function AdmissionCTA({
                             onClick={() => setLanguage(l.value)}
                             className={`py-2 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
                               language === l.value
-                                ? "bg-[#172D50] text-white border-[#172D50]"
-                                : "bg-[#F4F7FC] text-[#334155] border-slate-200 hover:border-slate-300 hover:text-[#172D50]"
+                                ? "bg-primary text-white border-primary"
+                                : "bg-surface text-[#334155] border-slate-200 hover:border-slate-300 hover:text-primary"
                             }`}
                             aria-pressed={language === l.value}
                           >
@@ -298,7 +298,7 @@ export function AdmissionCTA({
                         disabled={loading}
                         variant="action"
                         size="lg"
-                        className="w-full font-bold shadow-lg shadow-[#0096DB]/30 text-base"
+                        className="w-full font-bold shadow-lg shadow-accent/30 text-base"
                       >
                         {loading ? (
                           <>
@@ -333,7 +333,7 @@ export function AdmissionCTA({
                       <Badge variant="success" className="text-xs">
                         {t.successBadge}
                       </Badge>
-                      <h3 className="text-2xl font-bold text-[#172D50]">
+                      <h3 className="text-2xl font-bold text-primary">
                         {t.successGreeting} {fullName}!
                       </h3>
                       <p className="text-xs sm:text-sm text-[#334155] leading-relaxed max-w-sm mx-auto">
@@ -341,20 +341,20 @@ export function AdmissionCTA({
                       </p>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-[#F4F7FC] text-xs text-left space-y-1.5 border border-slate-200/80">
+                    <div className="p-4 rounded-2xl bg-surface text-xs text-left space-y-1.5 border border-slate-200/80">
                       <div className="flex justify-between">
                         <span className="text-slate-500">{t.idLabel}</span>
-                        <span className="font-mono font-bold text-[#172D50]">
+                        <span className="font-mono font-bold text-primary">
                           #{confirmationId}
                         </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-500">{t.phoneResultLabel}</span>
-                        <span className="font-semibold text-[#172D50]">{phone}</span>
+                        <span className="font-semibold text-primary">{phone}</span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-slate-500">{t.languageResultLabel}</span>
-                        <span className="font-semibold text-[#172D50]">{language}</span>
+                        <span className="font-semibold text-primary">{language}</span>
                       </div>
                     </div>
 

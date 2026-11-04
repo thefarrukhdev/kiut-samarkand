@@ -135,14 +135,14 @@ export function AdmissionModal({
                   className="space-y-4"
                 >
                   <div>
-                    <div className="inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase text-[#0096DB] mb-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#0096DB]" />
+                    <div className="inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase text-accent mb-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                       <span>{t.badge}</span>
                     </div>
-                    <h3 id="admission-modal-title" className="text-2xl font-black text-[#172D50]">
+                    <h3 id="admission-modal-title" className="text-2xl font-black text-primary">
                       {t.formTitle}
                     </h3>
-                    <p className="text-xs text-[#334155] mt-1">
+                    <p className="text-xs text-foreground mt-1">
                       {t.formSubtitle}
                     </p>
                   </div>
@@ -155,7 +155,7 @@ export function AdmissionModal({
                   )}
 
                   <div>
-                    <label htmlFor="modal-fullname" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
+                    <label htmlFor="modal-fullname" className="block text-xs font-bold text-primary uppercase tracking-wider mb-1">
                       {t.fullNameLabel}
                     </label>
                     <input
@@ -165,12 +165,12 @@ export function AdmissionModal({
                       placeholder={t.fullNamePlaceholder}
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#0096DB] focus:ring-2 focus:ring-[#0096DB]/20 text-sm outline-none text-[#172D50]"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/20 text-sm outline-none text-primary"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="modal-phone" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
+                    <label htmlFor="modal-phone" className="block text-xs font-bold text-primary uppercase tracking-wider mb-1">
                       {t.phoneLabel}
                     </label>
                     <input
@@ -180,19 +180,19 @@ export function AdmissionModal({
                       value={phone}
                       onChange={handlePhoneChange}
                       placeholder={t.phonePlaceholder}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#0096DB] focus:ring-2 focus:ring-[#0096DB]/20 text-sm font-semibold outline-none text-[#172D50]"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-accent focus:ring-2 focus:ring-accent/20 text-sm font-semibold outline-none text-primary"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="modal-faculty" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
+                    <label htmlFor="modal-faculty" className="block text-xs font-bold text-primary uppercase tracking-wider mb-1">
                       {t.facultyLabel}
                     </label>
                     <select
                       id="modal-faculty"
                       value={faculty}
                       onChange={(e) => setFaculty(e.target.value)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-[#0096DB] text-xs font-medium outline-none bg-white cursor-pointer text-[#172D50]"
+                      className="w-full px-3 py-2.5 rounded-xl border border-slate-200 focus:border-accent text-xs font-medium outline-none bg-white cursor-pointer text-primary"
                     >
                       {facultyOptions.map((f) => (
                         <option key={f.id} value={f.name}>
@@ -204,14 +204,14 @@ export function AdmissionModal({
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label htmlFor="modal-degree" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
+                      <label htmlFor="modal-degree" className="block text-xs font-bold text-primary uppercase tracking-wider mb-1">
                         {t.degreeLabel}
                       </label>
                       <select
                         id="modal-degree"
                         value={degree}
                         onChange={(e) => setDegree(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none bg-white cursor-pointer text-[#172D50]"
+                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none bg-white cursor-pointer text-primary"
                       >
                         {degreeOptions.map((d) => (
                           <option key={d.value} value={d.value}>
@@ -221,14 +221,14 @@ export function AdmissionModal({
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="modal-language" className="block text-xs font-bold text-[#172D50] uppercase tracking-wider mb-1">
+                      <label htmlFor="modal-language" className="block text-xs font-bold text-primary uppercase tracking-wider mb-1">
                         {t.languageLabel}
                       </label>
                       <select
                         id="modal-language"
                         value={language}
                         onChange={(e) => setLanguage(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none bg-white cursor-pointer text-[#172D50]"
+                        className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold outline-none bg-white cursor-pointer text-primary"
                       >
                         {languageOptions.map((l) => (
                           <option key={l.value} value={l.value}>
@@ -245,7 +245,7 @@ export function AdmissionModal({
                       disabled={loading}
                       variant="action"
                       size="lg"
-                      className="w-full font-bold shadow-lg shadow-[#0096DB]/30"
+                      className="w-full font-bold shadow-lg shadow-accent/30"
                     >
                       {loading ? (
                         <>
@@ -271,15 +271,15 @@ export function AdmissionModal({
                   <div className="h-14 w-14 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
                     <FileCheck className="h-7 w-7" />
                   </div>
-                  <h3 className="text-xl font-bold text-[#172D50]">
+                  <h3 className="text-xl font-bold text-primary">
                     {t.successBadge}
                   </h3>
-                  <p className="text-xs text-[#334155] max-w-sm mx-auto leading-relaxed">
+                  <p className="text-xs text-foreground max-w-sm mx-auto leading-relaxed">
                     {t.successGreeting} <strong>{fullName}</strong>!{" "}
                     <strong>{faculty}</strong> ({degree}) {t.successMessage}
                   </p>
 
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F4F7FC] border border-slate-200/80 text-xs font-mono font-bold text-[#172D50]">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface border border-slate-200/80 text-xs font-mono font-bold text-primary">
                     <span className="text-slate-400 font-sans">{t.idLabel}</span>
                     <span>#{confirmationId}</span>
                   </div>

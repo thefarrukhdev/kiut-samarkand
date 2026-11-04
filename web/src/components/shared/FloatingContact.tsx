@@ -70,7 +70,7 @@ export function FloatingContact({
           type="button"
           onClick={scrollToTop}
           aria-label={labels.top}
-          className="h-10 w-10 rounded-xl bg-white border border-slate-300 shadow-md text-slate-700 hover:text-[#172D50] hover:border-slate-400 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB] cursor-pointer"
+          className="h-10 w-10 rounded-xl bg-white border border-slate-300 shadow-md text-slate-700 hover:text-primary hover:border-slate-400 flex items-center justify-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
         >
           <ArrowUp className="h-4 w-4" />
         </button>
@@ -80,16 +80,16 @@ export function FloatingContact({
       <a
         href="tel:+998557024040"
         aria-label={labels.call}
-        className="group hidden sm:flex items-center gap-2.5 bg-white border border-slate-200 shadow-lg hover:shadow-xl rounded-xl px-3.5 py-2 text-slate-700 hover:text-[#172D50] hover:border-slate-300 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB]"
+        className="group hidden sm:flex items-center gap-2.5 bg-white border border-slate-200 shadow-lg hover:shadow-xl rounded-xl px-3.5 py-2 text-slate-700 hover:text-primary hover:border-slate-300 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
-        <span className="h-7 w-7 rounded-lg bg-[#F0F7FF] text-[#0096DB] flex items-center justify-center group-hover:scale-105 transition-transform">
+        <span className="h-7 w-7 rounded-lg bg-accent-light text-accent flex items-center justify-center group-hover:scale-105 transition-transform">
           <Phone className="h-3.5 w-3.5" />
         </span>
         <div className="flex flex-col text-left pr-1">
           <span className="text-[10px] uppercase font-bold tracking-wider text-slate-600">
             {labels.admissionsOffice}
           </span>
-          <span className="text-xs font-black text-[#172D50]">
+          <span className="text-xs font-black text-primary">
             +998 (55) 702-40-40
           </span>
         </div>
@@ -111,9 +111,9 @@ export function FloatingContact({
         type="button"
         onClick={onOpenAdmissionModal}
         aria-label={labels.apply}
-        className="flex items-center gap-2.5 bg-[#172D50] hover:bg-[#12223D] text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-xl shadow-[#172D50]/30 hover:shadow-2xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB] cursor-pointer"
+        className="flex items-center gap-2.5 bg-primary hover:bg-primary-hover text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-xl shadow-xl shadow-primary/30 hover:shadow-2xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
       >
-        <GraduationCap className="h-4 w-4 text-[#0096DB]" />
+        <GraduationCap className="h-4 w-4 text-accent" />
         <span>{labels.apply}</span>
       </button>
     </aside>

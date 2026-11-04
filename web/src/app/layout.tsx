@@ -11,6 +11,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kiut-samarkand.uz"),
   title: "KIUT Samarkand — Toshkent Kimyo Xalqaro Universiteti Samarqand Filiali",
   description: "Toshkent Kimyo Xalqaro Universiteti Samarqand filiali rasmiy axborot va qabul portali.",
   icons: {

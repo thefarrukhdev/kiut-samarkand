@@ -94,31 +94,38 @@ export function Navbar({
   const navLinks = React.useMemo(
     () => [
       {
-        label: currentLocale === "ru" ? "Программы" : currentLocale === "en" ? "Programs" : "Dasturlar",
-        href: "#programs",
-        badge: "46+",
+        label: t.programs || (currentLocale === "ru" ? "Программы" : currentLocale === "en" ? "Programs" : "Dasturlar"),
+        href: "/programs",
+        badge: "48+",
         hasDropdown: false,
       },
       {
         label: t.faculties,
-        href: "#schools",
+        href: "/programs",
         hasDropdown: true,
       },
       {
-        label: currentLocale === "ru" ? "Гранты" : currentLocale === "en" ? "Scholarships" : "Grantlar",
-        href: "#scholarships",
+        label: t.admission || (currentLocale === "ru" ? "Приём 2026" : currentLocale === "en" ? "Admission 2026" : "Qabul 2026"),
+        href: "/admission",
         hasDropdown: false,
       },
       {
-        label: currentLocale === "ru" ? "Кампус" : currentLocale === "en" ? "Campus" : "Kampus",
-        href: "#campus",
+        label: t.university,
+        href: "/about",
         hasDropdown: false,
       },
-      { label: t.university, href: "#about", hasDropdown: false },
-      { label: t.news, href: "#news", hasDropdown: false },
-      { label: "FAQ", href: "#faq", hasDropdown: false },
+      {
+        label: t.news,
+        href: "/news",
+        hasDropdown: false,
+      },
+      {
+        label: t.contact || (currentLocale === "ru" ? "Контакты" : currentLocale === "en" ? "Contacts" : "Aloqa"),
+        href: "/contact",
+        hasDropdown: false,
+      },
     ],
-    [currentLocale, t.faculties, t.university, t.news]
+    [currentLocale, t]
   );
 
   const facultyList = React.useMemo(() => {
@@ -142,7 +149,7 @@ export function Navbar({
         {/* KIUT Brand Logo & Academic Label */}
         <Link
           href="/"
-          className="flex items-center gap-3.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB] rounded-lg"
+          className="flex items-center gap-3.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg"
           aria-label={
             currentLocale === "ru"
               ? "ТМУК Самарканд Главная страница"
@@ -162,7 +169,7 @@ export function Navbar({
             />
           </div>
           <div className="hidden sm:flex flex-col border-l border-slate-200 pl-3.5">
-            <span className="text-[11px] font-black uppercase tracking-wider text-[#172D50]">
+            <span className="text-[11px] font-black uppercase tracking-wider text-primary">
               {t.branchLabel}
             </span>
             <span className="text-[10px] text-slate-500 font-medium">
@@ -203,12 +210,12 @@ export function Navbar({
                     }}
                     aria-expanded={facultiesDropdownOpen}
                     aria-haspopup="menu"
-                    className="flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold text-[#172D50] hover:text-[#0096DB] transition-colors rounded-lg hover:bg-slate-50 cursor-pointer"
+                    className="flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold text-primary hover:text-accent transition-colors rounded-lg hover:bg-slate-50 cursor-pointer"
                   >
                     <span>{link.label}</span>
                     <ChevronDown
                       className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${
-                        facultiesDropdownOpen ? "rotate-180 text-[#0096DB]" : ""
+                        facultiesDropdownOpen ? "rotate-180 text-accent" : ""
                       }`}
                     />
                   </button>
@@ -227,38 +234,38 @@ export function Navbar({
                         <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 overflow-hidden">
                           <div className="px-3.5 py-2 border-b border-slate-100 text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center justify-between">
                             <span>{dropdownHeading}</span>
-                            <span className="text-[11px] font-semibold text-[#0096DB] bg-[#E9F2FF] px-2 py-0.5 rounded-md">
+                            <span className="text-[11px] font-semibold text-accent bg-accent-light px-2 py-0.5 rounded-md">
                               {t.facultiesCount}
                             </span>
                           </div>
                           <div className="py-1">
                             {facultyList.map((faculty) => (
-                              <a
+                              <Link
                                 key={faculty.id}
-                                href={faculty.href}
+                                href={`/programs?faculty=${faculty.id}`}
                                 role="menuitem"
                                 onClick={() => setFacultiesDropdownOpen(false)}
-                                className="flex items-center justify-between px-3.5 py-2.5 text-xs font-medium text-slate-700 hover:text-[#0096DB] hover:bg-[#F4F7FC] rounded-xl transition-colors group"
+                                className="flex items-center justify-between px-3.5 py-2.5 text-xs font-medium text-slate-700 hover:text-accent hover:bg-surface rounded-xl transition-colors group"
                               >
-                                <span className="font-semibold text-[#172D50] group-hover:text-[#0096DB]">
+                                <span className="font-semibold text-primary group-hover:text-accent">
                                   {faculty.name}
                                 </span>
                                 <span className="text-[11px] text-slate-400 group-hover:text-slate-600 font-medium">
                                   {faculty.count}
                                 </span>
-                              </a>
+                              </Link>
                             ))}
                           </div>
-                          <div className="p-2 border-t border-slate-100 bg-[#F4F7FC] rounded-xl mt-1">
-                            <a
-                              href="#schools"
+                          <div className="p-2 border-t border-slate-100 bg-surface rounded-xl mt-1">
+                            <Link
+                              href="/programs"
                               role="menuitem"
                               onClick={() => setFacultiesDropdownOpen(false)}
-                              className="flex items-center justify-between px-2 py-1 text-xs font-bold text-[#0096DB] hover:text-[#007BB3] transition-colors"
+                              className="flex items-center justify-between px-2 py-1 text-xs font-bold text-accent hover:text-accent-hover transition-colors"
                             >
                               <span>{t.facultiesAll}</span>
                               <ArrowRight className="h-3.5 w-3.5" />
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </motion.div>
@@ -269,18 +276,18 @@ export function Navbar({
             }
 
             return (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
-                className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-[#172D50] hover:text-[#0096DB] transition-colors rounded-lg hover:bg-slate-50"
+                className="flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold text-primary hover:text-accent transition-colors rounded-lg hover:bg-slate-50"
               >
                 <span>{link.label}</span>
                 {link.badge && (
-                  <span className="text-[10px] font-black bg-[#EBF5FB] text-[#0096DB] border border-[#0096DB]/20 px-1.5 py-0.5 rounded-md leading-none">
+                  <span className="text-[10px] font-black bg-accent-light text-accent border border-accent/20 px-1.5 py-0.5 rounded-md leading-none">
                     {link.badge}
                   </span>
                 )}
-              </a>
+              </Link>
             );
           })}
         </nav>
@@ -335,7 +342,7 @@ export function Navbar({
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl text-[#172D50] hover:text-[#0096DB] hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0096DB] transition-colors"
+            className="lg:hidden p-2 rounded-xl text-primary hover:text-accent hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-colors"
             aria-expanded={mobileMenuOpen}
             aria-label={
               mobileMenuOpen
@@ -352,9 +359,9 @@ export function Navbar({
             }
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6 text-[#172D50]" />
+              <X className="h-6 w-6 text-primary" />
             ) : (
-              <Menu className="h-6 w-6 text-[#172D50]" />
+              <Menu className="h-6 w-6 text-primary" />
             )}
           </button>
         </div>
@@ -382,7 +389,7 @@ export function Navbar({
                 }
               >
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.label}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
@@ -390,7 +397,7 @@ export function Navbar({
                   >
                     <span>{link.label}</span>
                     <ArrowRight className="h-4 w-4 text-slate-400" />
-                  </a>
+                  </Link>
                 ))}
               </nav>
 

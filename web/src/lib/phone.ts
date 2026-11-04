@@ -44,3 +44,8 @@ export function isUzbekPhoneValid(phone: string): boolean {
 export function getCleanPhoneDigits(phone: string): string {
   return phone.replace(/\D/g, "");
 }
+
+// Aliases for compatibility
+export const formatUzbekistanPhone = formatUzbekPhone;
+export const isValidUzbekistanPhone = isUzbekPhoneValid;
+

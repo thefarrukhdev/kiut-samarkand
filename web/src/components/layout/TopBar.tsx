@@ -50,7 +50,7 @@ export function TopBar({
             className="hidden sm:inline-flex items-center gap-2 hover:text-white transition-colors group text-slate-300"
             title={t.addressTitle}
           >
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[#0096DB] group-hover:bg-[#0096DB] group-hover:text-white transition-all">
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-accent group-hover:bg-accent group-hover:text-white transition-all">
               <MapPin className="h-3 w-3" />
             </span>
             <span className="truncate max-w-[260px] lg:max-w-none">
@@ -71,7 +71,7 @@ export function TopBar({
             href="https://hemis.kiut.uz"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 hover:bg-[#0096DB] text-white text-[11px] font-bold tracking-wide transition-all shadow-xs"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/10 hover:bg-accent text-white text-[11px] font-bold tracking-wide transition-all shadow-xs"
             title={t.hemisTitle}
           >
             <span>{t.hemisLabel}</span>
@@ -85,7 +85,7 @@ export function TopBar({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Telegram"
-              className="p-1 hover:text-[#0096DB] transition-colors rounded hover:bg-white/5"
+              className="p-1 hover:text-accent transition-colors rounded hover:bg-white/5"
             >
               <TelegramIcon className="h-3.5 w-3.5" />
             </a>
@@ -94,7 +94,7 @@ export function TopBar({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="p-1 hover:text-[#0096DB] transition-colors rounded hover:bg-white/5"
+              className="p-1 hover:text-accent transition-colors rounded hover:bg-white/5"
             >
               <InstagramIcon className="h-3.5 w-3.5" />
             </a>
@@ -103,7 +103,7 @@ export function TopBar({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="p-1 hover:text-[#0096DB] transition-colors rounded hover:bg-white/5"
+              className="p-1 hover:text-accent transition-colors rounded hover:bg-white/5"
             >
               <FacebookIcon className="h-3.5 w-3.5" />
             </a>
@@ -112,7 +112,7 @@ export function TopBar({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="YouTube"
-              className="p-1 hover:text-[#0096DB] transition-colors rounded hover:bg-white/5"
+              className="p-1 hover:text-accent transition-colors rounded hover:bg-white/5"
             >
               <YoutubeIcon className="h-3.5 w-3.5" />
             </a>

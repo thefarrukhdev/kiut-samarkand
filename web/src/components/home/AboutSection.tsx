@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ShieldCheck,
   Globe2,
@@ -162,13 +163,13 @@ export function AboutSection({ currentLocale: propLocale }: AboutSectionProps = 
                 </div>
               </div>
 
-              <a
-                href="#schools"
+              <Link
+                href="/about"
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-accent hover:text-accent-hover transition-colors"
               >
                 <span>{t.viewAllCta}</span>
                 <ArrowRight className="h-3.5 w-3.5" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

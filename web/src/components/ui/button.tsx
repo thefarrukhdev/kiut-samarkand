@@ -8,22 +8,22 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-[#2364AD] text-white hover:bg-[#172D50] shadow-sm hover:shadow focus-visible:ring-[#2364AD]",
+          "bg-primary text-white hover:bg-primary-hover shadow-sm hover:shadow focus-visible:ring-primary",
         action:
-          "bg-[#0096DB] text-white hover:bg-[#007BB3] shadow-md shadow-[#0096DB]/25 hover:shadow-lg hover:shadow-[#0096DB]/35 focus-visible:ring-[#0096DB]",
+          "bg-accent text-white hover:bg-accent-hover shadow-md shadow-accent/25 hover:shadow-lg hover:shadow-accent/35 focus-visible:ring-accent",
         navy:
-          "bg-[#172D50] text-white hover:bg-[#0F1E36] shadow-sm hover:shadow focus-visible:ring-[#172D50]",
+          "bg-primary text-white hover:bg-primary-hover shadow-sm hover:shadow focus-visible:ring-primary",
         royal:
-          "bg-[#2364AD] text-white hover:bg-[#172D50] shadow-sm hover:shadow focus-visible:ring-[#2364AD]",
+          "bg-primary-royal text-white hover:bg-primary shadow-sm hover:shadow focus-visible:ring-primary-royal",
         accent:
-          "bg-[#0096DB] text-white hover:bg-[#007BB3] shadow-sm hover:shadow focus-visible:ring-[#0096DB]",
+          "bg-accent text-white hover:bg-accent-hover shadow-sm hover:shadow focus-visible:ring-accent",
         secondary:
-          "bg-white text-[#172D50] border border-slate-200 hover:bg-[#F4F7FC] hover:border-slate-300 shadow-xs",
+          "bg-white text-primary border border-slate-200 hover:bg-surface hover:border-slate-300 shadow-xs",
         outline:
           "border-2 border-white/80 text-white hover:bg-white/10 focus-visible:ring-white",
         ghost:
-          "text-slate-700 hover:bg-[#E9F2FF] hover:text-[#172D50]",
-        link: "text-[#0096DB] underline-offset-4 hover:underline p-0 h-auto",
+          "text-slate-700 hover:bg-accent-light hover:text-primary",
+        link: "text-accent underline-offset-4 hover:underline p-0 h-auto",
       },
       size: {
         default: "h-11 px-5 py-2.5",
