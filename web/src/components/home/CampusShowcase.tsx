@@ -1,14 +1,14 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import {
   CheckCircle,
   ArrowRight,
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import AccordionGallery from "@/components/reactbits/AccordionGallery";
 import { useLocale } from "@/lib/i18n";
 import type { Locale } from "@/types";
 
@@ -36,7 +36,7 @@ export function CampusShowcase({
             ? "Medical Simulation & Clinical Center"
             : "Tibbiy Simulyatsiya va Klinika Markazi",
         tag: currentLocale === "ru" ? "Медицина" : currentLocale === "en" ? "Medicine" : "Tibbiyot klasteri",
-        image: "/assets/banners/8y8a8213.jpg__1920x1080_q85_crop_subsampling-2.jpg",
+        image: "/assets/banners/20260808111028.jpg__1920x1080_q85_crop_subsampling-2.jpg",
         description:
           currentLocale === "ru"
             ? "Оснащен современными анатомическими тренажерами, интерактивными анатомическими столами Anatomage и реанимационными манекенами для отработки практических клинических навыков с 1-го курса."
@@ -50,6 +50,32 @@ export function CampusShowcase({
         ],
         statNumber: "12+",
         statLabel: currentLocale === "ru" ? "Специализированных лабораторий" : currentLocale === "en" ? "Specialized Clinical Labs" : "Ixtisoslashgan laboratoriyalar",
+        link: "/programs?faculty=medicine",
+      },
+      {
+        id: "campus",
+        title:
+          currentLocale === "ru"
+            ? "Главный кампус на ул. Спитамен Шох"
+            : currentLocale === "en"
+            ? "Modern Urban Campus on Spitamen Avenue"
+            : "Spitamen shoh ko'chasidagi zamonaviy bino",
+        tag: currentLocale === "ru" ? "Инфраструктура" : currentLocale === "en" ? "Campus" : "Kampus binosi",
+        image: "/assets/banners/photo_2026-08-03_10-09-43.jpg__1920x1080_q85_crop_subsampling-2.jpg",
+        description:
+          currentLocale === "ru"
+            ? "Новое 5-этажное университетское здание, построенное по международным образовательным стандартам. Просторные мультимедийные аудитории, зоны отдыха и безбарьерная среда."
+            : currentLocale === "en"
+            ? "State-of-the-art multi-story academic facility built to international standards, featuring smart classrooms, green study zones, and full accessibility."
+            : "Xalqaro ta'lim me'morchiligi asosida qad rostlagan zamonaviy bino: keng multimedia auditoriyalari, ekologik yashil dam olish hududlari va qulay transport infratuzilmasi.",
+        features: [
+          currentLocale === "ru" ? "Смарт-аудитории с интерактивными панелями" : currentLocale === "en" ? "Smart interactive classrooms" : "Smart interaktiv sensor panellar",
+          currentLocale === "ru" ? "Электронный доступ и безопасность 24/7" : currentLocale === "en" ? "Biometric access & 24/7 security" : "Biometrik Face-ID va 24/7 xavfsizlik",
+          currentLocale === "ru" ? "Удобная транспортная развязка в центре" : currentLocale === "en" ? "Central urban location" : "Samarqand shahrining qulay transport markazi",
+        ],
+        statNumber: "15 000+",
+        statLabel: currentLocale === "ru" ? "кв.м общей площади кампуса" : currentLocale === "en" ? "sq.m Total Educational Area" : "kv.m o'quv va amaliyot maydoni",
+        link: "/about",
       },
       {
         id: "it",
@@ -79,30 +105,7 @@ export function CampusShowcase({
         ],
         statNumber: "100+",
         statLabel: currentLocale === "ru" ? "Современных рабочих станций" : currentLocale === "en" ? "High-performance Workstations" : "Yuqori quvvatli ish stansiyalari",
-      },
-      {
-        id: "campus",
-        title:
-          currentLocale === "ru"
-            ? "Современный кампус на ул. Спитамен Шох"
-            : currentLocale === "en"
-            ? "Modern Urban Campus on Spitamen Avenue"
-            : "Spitamen shoh ko'chasidagi zamonaviy bino",
-        tag: currentLocale === "ru" ? "Инфраструктура" : currentLocale === "en" ? "Campus" : "Kampus binosi",
-        image: "/assets/banners/20260808111028.jpg__1920x1080_q85_crop_subsampling-2.jpg",
-        description:
-          currentLocale === "ru"
-            ? "Новое 5-этажное университетское здание, построенное по международным образовательным стандартам. Просторные мультимедийные аудитории, зоны отдыха и безбарьерная среда."
-            : currentLocale === "en"
-            ? "State-of-the-art multi-story academic facility built to international standards, featuring smart classrooms, green study zones, and full accessibility."
-            : "Xalqaro ta'lim me'morchiligi asosida qad rostlagan zamonaviy bino: keng multimedia auditoriyalari, ekologik yashil dam olish hududlari va qulay transport infratuzilmasi.",
-        features: [
-          currentLocale === "ru" ? "Смарт-аудитории с интерактивными панелями" : currentLocale === "en" ? "Smart interactive classrooms" : "Smart interaktiv sensor panellar",
-          currentLocale === "ru" ? "Электронный доступ и безопасность 24/7" : currentLocale === "en" ? "Biometric access & 24/7 security" : "Biometrik Face-ID va 24/7 xavfsizlik",
-          currentLocale === "ru" ? "Удобная транспортная развязка в центре" : currentLocale === "en" ? "Central urban location" : "Samarqand shahrining qulay transport markazi",
-        ],
-        statNumber: "15 000+",
-        statLabel: currentLocale === "ru" ? "кв.м общей площади кампуса" : currentLocale === "en" ? "sq.m Total Educational Area" : "kv.m o'quv va amaliyot maydoni",
+        link: "/programs?faculty=engineering",
       },
       {
         id: "hall",
@@ -127,10 +130,49 @@ export function CampusShowcase({
         ],
         statNumber: "500+",
         statLabel: currentLocale === "ru" ? "Мест в главном амфитеатре" : currentLocale === "en" ? "Auditorium Seating Capacity" : "O'rinli bosh amfiteatr",
+        link: "/about",
+      },
+      {
+        id: "sports",
+        title:
+          currentLocale === "ru"
+            ? "Спортивный комплекс и студенческая жизнь"
+            : currentLocale === "en"
+            ? "Athletic Complex & Student Community"
+            : "Sport majmuasi va talabalar hayoti",
+        tag:
+          currentLocale === "ru"
+            ? "Спорт & Кампус"
+            : currentLocale === "en"
+            ? "Sports & Life"
+            : "Sport & Talabalik",
+        image: "/assets/banners/8y8a8213.jpg__1920x1080_q85_crop_subsampling-2.jpg",
+        description:
+          currentLocale === "ru"
+            ? "Университетский стадион, крытые спортивные залы, секции футбола, волейбола и шахмат, а также активные студенческие клубы и студенческий парламент."
+            : currentLocale === "en"
+            ? "On-campus stadium, indoor athletic courts, competitive football and volleyball leagues, along with active student clubs and Student Parliament."
+            : "Universitet stadioni, yopiq sport zallari, futbol, voleybol va shaxmat seksiyalari hamda faol Talabalar Parlamenti tashabbuslari.",
+        features: [
+          currentLocale === "ru" ? "Мини-футбольное поле и фитнес-зона" : currentLocale === "en" ? "Football pitch and wellness fitness" : "Mini-futbol maydoni va fitnes zali",
+          currentLocale === "ru" ? "Студенческий парламент и дебатный клуб" : currentLocale === "en" ? "Student Parliament & Debate Society" : "Talabalar parlamenti va munozara klubi",
+          currentLocale === "ru" ? "Регулярные межкампусные турниры" : currentLocale === "en" ? "Inter-campus athletic cups" : "Muntazam kampuslararo 'Ta'sischi kubogi'",
+        ],
+        statNumber: "15+",
+        statLabel: currentLocale === "ru" ? "Спортивных и творческих клубов" : currentLocale === "en" ? "Student Clubs & Sports Leagues" : "Sport va ijodiy to'garaklar",
+        link: "/about",
       },
     ],
     [currentLocale]
   );
+
+  const accordionItems = React.useMemo(() => {
+    return clusters.map((c) => ({
+      image: c.image,
+      label: c.title,
+      alt: c.title,
+    }));
+  }, [clusters]);
 
   const current = clusters[activeCluster] || clusters[0];
 
@@ -148,7 +190,7 @@ export function CampusShowcase({
     >
       <Container>
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-8 border-b border-slate-200">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-8 border-b border-slate-200">
           <div>
             <div className="flex items-center gap-2.5 mb-2.5">
               <span className="w-6 h-0.5 bg-accent rounded-full" />
@@ -177,116 +219,107 @@ export function CampusShowcase({
           </p>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none" role="tablist">
-          {clusters.map((c, idx) => (
-            <button
-              key={c.id}
-              type="button"
-              role="tab"
-              aria-selected={activeCluster === idx}
-              onClick={() => setActiveCluster(idx)}
-              className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
-                activeCluster === idx
-                  ? "bg-primary text-white shadow-md"
-                  : "bg-surface text-slate-700 border border-slate-200 hover:border-slate-300 hover:bg-slate-100"
-              }`}
-            >
-              {c.tag}
-            </button>
-          ))}
+        {/* 3D Interactive Accordion Gallery */}
+        <div className="mb-10">
+          <AccordionGallery
+            items={accordionItems}
+            activeIndex={activeCluster}
+            onActiveChange={setActiveCluster}
+            height={460}
+            radius={24}
+            accentColor="#0096DB"
+            overlayColor="#172D50"
+            textColor="#FFFFFF"
+            grayscale={true}
+            expandRatio={0.48}
+            trigger="hover"
+          />
         </div>
 
-        {/* Active Cluster Showcase Panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-surface rounded-3xl border border-slate-200 p-6 sm:p-10">
-          {/* Left Column: Details & Features (6 cols) */}
-          <div className="lg:col-span-6 space-y-6">
-            <div>
-              <span className="text-[11px] font-black uppercase tracking-wider text-accent bg-white border border-slate-200 px-3 py-1 rounded-md">
-                {current.tag}
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-black text-primary tracking-tight mt-3">
-                {current.title}
-              </h3>
-              <p className="text-sm sm:text-base text-slate-600 mt-3 leading-relaxed">
-                {current.description}
-              </p>
-            </div>
+        {/* Dynamic Synchronized Facility Deep-Dive Card */}
+        <div className="bg-surface rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-sm transition-all duration-300">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Column: Details & Features (8 cols) */}
+            <div className="lg:col-span-8 space-y-5">
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-black uppercase tracking-wider text-accent bg-white border border-slate-200 px-3 py-1 rounded-lg">
+                  {current.tag}
+                </span>
+                <span className="text-xs text-slate-400 font-bold tabular-nums">
+                  0{activeCluster + 1} / 0{clusters.length}
+                </span>
+              </div>
 
-            {/* Checklist */}
-            <div className="space-y-3 pt-2">
-              {current.features.map((feat, i) => (
-                <div key={i} className="flex items-center gap-3 bg-white p-3.5 rounded-xl border border-slate-200">
-                  <CheckCircle className="h-4 w-4 text-accent shrink-0" />
-                  <span className="text-xs sm:text-sm font-bold text-primary">{feat}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Metrics Callout & Action Button */}
-            <div className="pt-4 border-t border-slate-200 flex items-center justify-between gap-4 flex-wrap">
               <div>
-                <span className="text-2xl sm:text-3xl font-black text-primary block tabular-nums">
+                <h3 className="text-2xl sm:text-3xl font-black text-primary tracking-tight">
+                  {current.title}
+                </h3>
+                <p className="text-sm sm:text-base text-slate-600 mt-2.5 leading-relaxed font-normal">
+                  {current.description}
+                </p>
+              </div>
+
+              {/* Checklist */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                {current.features.map((feat, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-2.5 bg-white p-3.5 rounded-xl border border-slate-200"
+                  >
+                    <CheckCircle className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span className="text-xs font-bold text-primary leading-snug">
+                      {feat}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Column: Key Metric & Direct CTAs (4 cols) */}
+            <div className="lg:col-span-4 flex flex-col justify-between gap-6 lg:border-l lg:border-slate-200 lg:pl-8">
+              <div className="bg-white p-5 rounded-2xl border border-slate-200">
+                <span className="text-3xl sm:text-4xl font-black text-primary block tabular-nums">
                   {current.statNumber}
                 </span>
-                <span className="text-xs text-slate-500 font-medium">
+                <span className="text-xs text-slate-500 font-medium block mt-1">
                   {current.statLabel}
                 </span>
               </div>
 
-              <Button
-                onClick={() => onOpenAdmissionModal?.()}
-                variant="action"
-                size="default"
-                className="font-bold bg-accent hover:bg-accent-hover text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm shadow-md"
-              >
-                <span>
-                  {currentLocale === "ru"
-                    ? "Записаться на кампус-тур"
-                    : currentLocale === "en"
-                    ? "Book a Campus Tour"
-                    : "Kampusga sayohat buyurtma qilish"}
-                </span>
-                <ArrowRight className="h-4 w-4 ml-1.5" />
-              </Button>
-            </div>
-          </div>
-
-          {/* Right Column: High-Res Framed Photo (6 cols) */}
-          <div className="lg:col-span-6 relative">
-            <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-xl aspect-[16/11] bg-slate-900 group">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={current.id}
-                  initial={{ opacity: 0, scale: 1.03 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute inset-0"
+              <div className="space-y-3">
+                <Button
+                  onClick={() => onOpenAdmissionModal?.()}
+                  variant="action"
+                  size="default"
+                  className="w-full font-bold bg-accent hover:bg-accent-hover text-white py-3 rounded-xl text-xs sm:text-sm shadow-md cursor-pointer"
                 >
-                  <Image
-                    src={current.image}
-                    alt={current.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
-                </motion.div>
-              </AnimatePresence>
+                  <span>
+                    {currentLocale === "ru"
+                      ? "Записаться на кампус-тур"
+                      : currentLocale === "en"
+                      ? "Book a Campus Tour"
+                      : "Kampusga sayohat buyurtma qilish"}
+                  </span>
+                  <ArrowRight className="h-4 w-4 ml-1.5" />
+                </Button>
 
-              {/* Bottom Caption on photo */}
-              <div className="absolute bottom-4 left-4 right-4 text-white z-10 flex items-center justify-between">
-                <span className="text-xs font-bold text-white bg-primary px-3 py-1 rounded-md border border-white/10">
-                  {current.title}
-                </span>
-                <span className="text-xs text-slate-300 font-medium">
-                  {currentLocale === "ru"
-                    ? "ТМУК Самарканд"
-                    : currentLocale === "en"
-                    ? "KIUT Samarkand"
-                    : "TKXU Samarqand"}
-                </span>
+                <Button
+                  asChild
+                  variant="secondary"
+                  size="default"
+                  className="w-full font-bold border-slate-200 text-primary hover:border-slate-300 py-3 rounded-xl text-xs sm:text-sm bg-white"
+                >
+                  <Link href={current.link}>
+                    <span>
+                      {currentLocale === "ru"
+                        ? "Смотреть программы"
+                        : currentLocale === "en"
+                        ? "Explore Programs"
+                        : "Yo'nalishlarni ko'rish"}
+                    </span>
+                    <ArrowRight className="h-4 w-4 ml-1.5" />
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
