@@ -10,11 +10,12 @@ import type { Locale } from "@/types";
 
 interface NewsCardProps {
   article: EnrichedArticle;
-  locale: Locale;
+  locale?: Locale;
   priority?: boolean;
 }
 
-export function NewsCard({ article, locale, priority = false }: NewsCardProps) {
+export function NewsCard({ article, locale: propLocale, priority = false }: NewsCardProps) {
+  const locale = propLocale || article.locale || "uz";
   const readMoreLabel =
     locale === "ru"
       ? "Читать подробнее"

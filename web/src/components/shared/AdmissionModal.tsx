@@ -18,6 +18,7 @@ interface AdmissionModalProps {
   isOpen: boolean;
   onClose: () => void;
   defaultFaculty?: string;
+  initialFaculty?: string;
   currentLocale?: Locale;
 }
 
@@ -25,6 +26,7 @@ export function AdmissionModal({
   isOpen,
   onClose,
   defaultFaculty = "Tibbiyot fakulteti",
+  initialFaculty,
   currentLocale: propLocale,
 }: AdmissionModalProps) {
   const { locale: contextLocale } = useLocale();
@@ -54,7 +56,7 @@ export function AdmissionModal({
     resetForm,
   } = useAdmissionLeadForm({
     currentLocale,
-    initialFaculty: defaultFaculty,
+    initialFaculty: initialFaculty || defaultFaculty,
     defaultStudyType: "Kunduzgi",
   });
 

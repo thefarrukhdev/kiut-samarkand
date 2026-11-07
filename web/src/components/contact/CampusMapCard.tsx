@@ -1,0 +1,59 @@
+import React from "react";
+import { Navigation, Car, Bus } from "lucide-react";
+
+export function CampusMapCard() {
+  return (
+    <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
+      <div>
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0096DB] mb-1">
+          <Navigation className="w-4 h-4" />
+          <span>Universitet Kampusi Manzili</span>
+        </div>
+        <h2 className="text-xl font-bold text-slate-900 tracking-tight">
+          Samarqand Filiali Joylashuvi
+        </h2>
+        <p className="text-xs text-slate-500 mt-1">
+          Spitamen shoh ko&apos;chasi, 270-uy, Samarqand shahri (Xalqaro aeroport yo&apos;nalishi)
+        </p>
+      </div>
+
+      {/* Map Interactive / Preview Frame */}
+      <div className="w-full h-64 sm:h-80 rounded-2xl overflow-hidden border border-slate-200 relative bg-slate-100 shadow-inner">
+        <iframe
+          title="KIUT Samarkand Campus Location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3071.8!2d66.97!3d39.65!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDM5JzAwLjAiTiA2NsKwNTgnMTIuMCJF!5e0!3m2!1sen!2suz!4v1620000000000!5m2!1sen!2suz"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen={false}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="grayscale hover:grayscale-0 transition-all duration-300"
+        />
+      </div>
+
+      {/* Transport & Directions info */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+        <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-3">
+          <Car className="w-5 h-5 text-[#0096DB] shrink-0 mt-0.5" />
+          <div>
+            <strong className="text-xs font-bold text-slate-800 block">Avtomobilda:</strong>
+            <span className="text-xs text-slate-600">
+              Samarqand markazidan Spitamen shoh ko&apos;chasi bo&apos;ylab 10 daqiqalik masofa. Qulay bepul avtoturargoh mavjud.
+            </span>
+          </div>
+        </div>
+
+        <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-3">
+          <Bus className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+          <div>
+            <strong className="text-xs font-bold text-slate-800 block">Jamoat transporti:</strong>
+            <span className="text-xs text-slate-600">
+              14, 22, 54-sonli avtobus va yo&apos;nalishli taksilar to&apos;g&apos;ridan-to&apos;g&apos;ri universitet bekati oldiga keladi.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

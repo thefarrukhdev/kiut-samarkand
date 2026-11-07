@@ -1,25 +1,22 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ChevronLeft,
-  ChevronRight,
   ArrowRight,
   BookOpen,
   ShieldCheck,
   Award,
   GraduationCap,
-  Search,
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { useTranslation, useLocale, translations } from "@/lib/i18n";
-import type { Locale } from "@/types";
+import { HeroQuickFinder } from "./HeroQuickFinder";
+import { HeroImageCarousel, type HeroSlideImage, type HeroSlideMeta } from "./HeroImageCarousel";
+import { useLocale, translations } from "@/lib/i18n";
 
-const slideImages = [
+const slideImages: HeroSlideImage[] = [
   {
     src: "/assets/banners/8y8a8213.jpg__1920x1080_q85_crop_subsampling-2.jpg",
     alt: "KIUT Samarqand talabalari va akademik muhit",
@@ -42,7 +39,7 @@ const slideImages = [
   },
 ];
 
-const slideMetadata = [
+const slideMetadata: HeroSlideMeta[] = [
   {
     num: "01",
     tag: { uz: "Amaliy ta'lim", ru: "Практика", en: "Hands-on" },
@@ -58,49 +55,45 @@ const slideMetadata = [
     caption: {
       uz: "Spitamen shoh ko'chasidagi zamonaviy bino",
       ru: "Современный корпус на проспекте Спитамен",
-      en: "State-of-the-art campus on Spitamen Avenue",
+      en: "Modern campus along Spitamen Avenue",
     },
   },
   {
     num: "03",
-    tag: { uz: "Xalqaro forum", ru: "Конференции", en: "Conferences" },
+    tag: { uz: "Xalqaro forum", ru: "Конференции", en: "Global Forum" },
     caption: {
       uz: "Xorijiy professor-o'qituvchilar ma'ruzalari",
-      ru: "Лекции зарубежных профессоров и ученых",
-      en: "Lectures by international visiting professors",
+      ru: "Лекции приглашенных профессоров из-за рубежа",
+      en: "Visiting international scholar lectures",
     },
   },
   {
     num: "04",
-    tag: { uz: "5+1 Dual ta'lim", ru: "Дуальное обучение", en: "Dual Study" },
+    tag: { uz: "Dual ta'lim", ru: "Дуальное обучение", en: "Dual Model" },
     caption: {
       uz: "5+1 Dual ta'lim va ishlab chiqarish amaliyoti",
-      ru: "5+1 Дуальная система и производственная практика",
-      en: "5+1 Dual training and industrial internship",
+      ru: "Модель дуального образования 5+1",
+      en: "5+1 Dual education & industry placement",
     },
   },
 ];
 
-const popularTags = ["Davolash ishi", "Dasturiy injiniring", "Xalqaro biznes", "Koreys filologiyasi"];
+const popularTagsByLocale = {
+  uz: ["Davolash ishi", "Dasturiy injiniring", "Stomatologiya", "Arxitektura", "Xalqaro biznes"],
+  ru: ["Лечебное дело", "Программная инженерия", "Стоматология", "Архитектура", "Международный бизнес"],
+  en: ["Medicine", "Software Engineering", "Dentistry", "Architecture", "International Business"],
+};
 
-interface HeroSliderProps {
-  currentLocale?: Locale;
-  onOpenAdmissionModal?: () => void;
+export interface HeroSliderProps {
+  onOpenAdmissionModal?: (facultyOrProgramName?: string) => void;
 }
 
-export function HeroSlider({
-  currentLocale: propLocale,
-  onOpenAdmissionModal,
-}: HeroSliderProps = {}) {
-  const { locale: contextLocale } = useLocale();
-  const { t: contextT } = useTranslation("hero");
-  const currentLocale = propLocale || contextLocale;
-  const heroData = propLocale ? (translations[propLocale]?.hero || contextT) : contextT;
-
+export function HeroSlider({ onOpenAdmissionModal }: HeroSliderProps = {}) {
   const [current, setCurrent] = React.useState(0);
   const [isPaused, setIsPaused] = React.useState(false);
-  const [touchStartX, setTouchStartX] = React.useState<number | null>(null);
+  const { locale: currentLocale } = useLocale();
 
+  const heroData = translations[currentLocale].hero;
   const slides = heroData.slides;
   const length = slides.length;
 
@@ -112,190 +105,59 @@ export function HeroSlider({
     setCurrent((prev) => (prev === 0 ? length - 1 : prev - 1));
   }, [length]);
 
-  // Tab visibility change listener: pause autoplay if page is not visible
+  // Autoplay
   React.useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-
-    const startInterval = () => {
-      if (!interval && !isPaused && document.visibilityState === "visible") {
-        interval = setInterval(() => {
-          nextSlide();
-        }, 6500);
-      }
-    };
-
-    const stopInterval = () => {
-      if (interval) {
-        clearInterval(interval);
-        interval = null;
-      }
-    };
-
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        startInterval();
-      } else {
-        stopInterval();
-      }
-    };
-
-    startInterval();
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    return () => {
-      stopInterval();
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 6500);
+    return () => clearInterval(interval);
   }, [isPaused, nextSlide]);
 
   const currentSlide = slides[current] || slides[0];
-  const currentPhoto = slideImages[current] || slideImages[0];
+  const popularTags = popularTagsByLocale[currentLocale] || popularTagsByLocale.uz;
 
-  const handleAction = React.useCallback(
-    (href: string) => {
-      if (href === "#admission" && onOpenAdmissionModal) {
-        onOpenAdmissionModal();
-        return;
-      }
-      const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth" });
-      }
-    },
-    [onOpenAdmissionModal]
-  );
-
-  // Touch handlers for mobile swipe
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX === null) return;
-    const touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX - touchEndX;
-
-    if (diff > 50) {
-      nextSlide();
-    } else if (diff < -50) {
-      prevSlide();
+  const handleAction = (href: string) => {
+    if (href === "#admission" && onOpenAdmissionModal) {
+      onOpenAdmissionModal();
+      return;
     }
-    setTouchStartX(null);
+    if (href.startsWith("#")) {
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
   };
-
-  const pillarRibbonItems = React.useMemo(
-    () => [
-      {
-        title:
-          currentLocale === "ru"
-            ? "46+ Академических программ"
-            : currentLocale === "en"
-            ? "46+ Degree Programs"
-            : "46+ Ta'lim yo'nalishlari",
-        desc:
-          currentLocale === "ru"
-            ? "Бакалавриат и магистратура"
-            : currentLocale === "en"
-            ? "Undergraduate & Graduate"
-            : "Bakalavriat va magistratura",
-        href: "#programs",
-        tag: currentLocale === "ru" ? "Каталог" : currentLocale === "en" ? "Directory" : "Katalog",
-      },
-      {
-        title:
-          currentLocale === "ru"
-            ? "500+ Университетских грантов"
-            : currentLocale === "en"
-            ? "500+ Annual Scholarships"
-            : "500+ Yillik ichki grantlar",
-        desc:
-          currentLocale === "ru"
-            ? "100% Ректорский грант и IELTS"
-            : currentLocale === "en"
-            ? "100% Rector grant & IELTS 7+"
-            : "Rektor granti va til imtiyozlari",
-        href: "#scholarships",
-        tag: currentLocale === "ru" ? "Гранты" : currentLocale === "en" ? "Grants" : "Grantlar",
-      },
-      {
-        title:
-          currentLocale === "ru"
-            ? "Современный кампус и IT-хаб"
-            : currentLocale === "en"
-            ? "Modern Campus & Labs"
-            : "Spitamen zamonaviy binosi",
-        desc:
-          currentLocale === "ru"
-            ? "Анатомический центр и AI лаборатории"
-            : currentLocale === "en"
-            ? "Anatomage labs & robotics"
-            : "Anatomage va robototexnika",
-        href: "#campus",
-        tag: currentLocale === "ru" ? "Кампус" : currentLocale === "en" ? "Campus" : "Kampus",
-      },
-      {
-        title:
-          currentLocale === "ru"
-            ? "2+2 Международный диплом"
-            : currentLocale === "en"
-            ? "2+2 Dual Degree Programs"
-            : "2+2 Xalqaro dual diplom",
-        desc:
-          currentLocale === "ru"
-            ? "Южная Корея и Европа"
-            : currentLocale === "en"
-            ? "South Korea & Europe"
-            : "Janubiy Koreya va Yevropa",
-        href: "#about",
-        tag: currentLocale === "ru" ? "Международное" : currentLocale === "en" ? "Global" : "Xalqaro",
-      },
-    ],
-    [currentLocale]
-  );
 
   return (
     <section
-      id="hero"
-      aria-label={
-        currentLocale === "ru"
-          ? "Главный раздел университета"
-          : currentLocale === "en"
-          ? "University Hero Showcase"
-          : "Universitet Asosiy Qismi"
-      }
-      className="relative bg-gradient-to-b from-white via-slate-50 to-surface border-b border-slate-200/80 overflow-hidden py-10 sm:py-14 lg:py-18"
+      className="relative bg-gradient-to-b from-slate-50 via-white to-slate-50/50 py-10 lg:py-16 overflow-hidden border-b border-slate-200/80"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
     >
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Prestigious Academic Typography & Clear CTAs */}
+          {/* Left Column: Academic Editorial Information */}
           <div className="lg:col-span-7 space-y-6">
             <AnimatePresence mode="wait">
               <motion.div
-                key={`${currentSlide.id}-${currentLocale}`}
-                initial={{ opacity: 0, y: 14 }}
+                key={`${current}-${currentLocale}`}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -14 }}
-                transition={{ duration: 0.35, ease: "easeOut" }}
-                className="space-y-6"
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.35 }}
+                className="space-y-5"
               >
-                {/* Academic Eyebrow */}
-                <div className="flex items-center gap-3">
-                  <span className="w-8 h-1 bg-accent rounded-full" />
-                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-accent">
-                    {currentSlide.badge}
-                  </span>
+                {/* Academic School / Faculty Tag */}
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-[#0096DB] text-xs font-bold uppercase tracking-wider">
+                  <span className="w-2 h-2 rounded-full bg-[#0096DB]" />
+                  <span>{currentSlide.highlight}</span>
                 </div>
 
-                {/* Monumental Title in Deep Navy & Real KIUT Blue */}
-                <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-primary leading-[1.12]">
-                  {currentSlide.title}{" "}
-                  <span className="text-accent">
-                    {currentSlide.highlight}
-                  </span>
+                {/* Authoritative Editorial Headline */}
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#172D50] tracking-tight leading-[1.12]">
+                  {currentSlide.title}
                 </h1>
 
                 {/* Editorial Description */}
@@ -309,7 +171,7 @@ export function HeroSlider({
                     onClick={() => handleAction("#admission")}
                     variant="action"
                     size="lg"
-                    className="text-base font-bold bg-accent hover:bg-accent-hover text-white shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/35 px-7 py-3.5 rounded-xl transition-all"
+                    className="text-base font-bold bg-[#0096DB] hover:bg-[#0085c4] text-white shadow-lg shadow-[#0096DB]/25 px-7 py-3.5 rounded-xl transition-all"
                   >
                     <span>{currentSlide.primaryCtaText}</span>
                     <ArrowRight className="h-4 w-4 ml-1" />
@@ -319,9 +181,9 @@ export function HeroSlider({
                     <Button
                       variant="outline"
                       size="lg"
-                      className="w-full sm:w-auto text-base font-bold border-2 border-slate-300 hover:border-primary hover:bg-slate-50 text-primary px-6 py-3.5 rounded-xl transition-all"
+                      className="w-full sm:w-auto text-base font-bold border-2 border-slate-300 hover:border-[#172D50] hover:bg-slate-50 text-[#172D50] px-6 py-3.5 rounded-xl transition-all"
                     >
-                      <BookOpen className="h-4 w-4 text-accent" />
+                      <BookOpen className="h-4 w-4 text-[#0096DB]" />
                       <span>{currentSlide.secondaryCtaText}</span>
                     </Button>
                   </Link>
@@ -330,11 +192,11 @@ export function HeroSlider({
                 {/* Institutional Trust Badges */}
                 <div className="pt-6 border-t border-slate-200/90 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-[13px] text-slate-600 font-medium">
                   <div className="flex items-center gap-2">
-                    <ShieldCheck className="h-4 w-4 text-accent shrink-0" />
+                    <ShieldCheck className="h-4 w-4 text-[#0096DB] shrink-0" />
                     <span>{heroData.officialLicense}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Award className="h-4 w-4 text-accent shrink-0" />
+                    <Award className="h-4 w-4 text-[#0096DB] shrink-0" />
                     <span>
                       {currentLocale === "ru"
                         ? "100% Государственный диплом"
@@ -344,7 +206,7 @@ export function HeroSlider({
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <GraduationCap className="h-4 w-4 text-accent shrink-0" />
+                    <GraduationCap className="h-4 w-4 text-[#0096DB] shrink-0" />
                     <span>
                       {currentLocale === "ru"
                         ? "5+1 Дуальное образование"
@@ -355,260 +217,28 @@ export function HeroSlider({
                   </div>
                 </div>
 
-                {/* Interactive Academic Direction Fast Finder */}
-                <div className="pt-5 border-t border-slate-200/90 space-y-2.5">
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500">
-                    <Search className="h-3.5 w-3.5 text-accent" />
-                    <span>
-                      {currentLocale === "ru"
-                        ? "Быстрый поиск направления:"
-                        : currentLocale === "en"
-                        ? "Quick Degree Explorer:"
-                        : "Yo'nalishni tezkor qidirish:"}
-                    </span>
-                  </div>
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      const form = e.currentTarget;
-                      const input = (form.elements.namedItem("search") as HTMLInputElement)?.value;
-                      const target = document.getElementById("programs");
-                      if (target) {
-                        target.scrollIntoView({ behavior: "smooth" });
-                        const searchInput = target.querySelector<HTMLInputElement>("input[type='text']");
-                        if (searchInput && input) {
-                          searchInput.value = input;
-                          searchInput.dispatchEvent(new Event("input", { bubbles: true }));
-                        }
-                      }
-                    }}
-                    className="flex items-center gap-2 max-w-xl"
-                  >
-                    <div className="relative flex-1">
-                      <input
-                        name="search"
-                        type="text"
-                        placeholder={
-                          currentLocale === "ru"
-                            ? "Лечебное дело, Программная инженерия, Архитектура..."
-                            : currentLocale === "en"
-                            ? "Medicine, Software Engineering, Architecture..."
-                            : "Davolash ishi, Dasturiy injiniring, Arxitektura..."
-                        }
-                        aria-label="Qidiruv so'zi"
-                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all shadow-sm"
-                      />
-                    </div>
-                    <Button
-                      type="submit"
-                      variant="action"
-                      size="sm"
-                      className="shrink-0 bg-primary hover:bg-primary-hover text-white font-bold rounded-xl px-4 py-2.5 text-xs sm:text-sm"
-                    >
-                      <Search className="h-3.5 w-3.5 mr-1" />
-                      <span>{currentLocale === "ru" ? "Найти" : currentLocale === "en" ? "Search" : "Qidirish"}</span>
-                    </Button>
-                  </form>
-                  <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-                    <span className="text-[11px] text-slate-400 font-medium">
-                      {currentLocale === "ru" ? "Популярные:" : currentLocale === "en" ? "Popular:" : "Ommabop:"}
-                    </span>
-                    {popularTags.map((tag) => (
-                      <button
-                        key={tag}
-                        type="button"
-                        onClick={() => {
-                          const target = document.getElementById("programs");
-                          if (target) {
-                            target.scrollIntoView({ behavior: "smooth" });
-                            const searchInput = target.querySelector<HTMLInputElement>("input[type='text']");
-                            if (searchInput) {
-                              searchInput.value = tag;
-                              searchInput.dispatchEvent(new Event("input", { bubbles: true }));
-                            }
-                          }
-                        }}
-                        className="text-[11px] font-semibold text-primary bg-white border border-slate-200 hover:border-accent hover:text-accent px-2.5 py-1 rounded-lg transition-colors cursor-pointer shadow-xs"
-                      >
-                        {tag}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                {/* Fast Finder Subcomponent */}
+                <HeroQuickFinder
+                  currentLocale={currentLocale}
+                  popularTags={popularTags}
+                />
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Right Column: Framed Showcase Card & Thumbnails */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/10 border border-slate-200/90 aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/4.2] bg-slate-900 group">
-              {/* Slide Image with Ken-Burns Motion */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`${current}-${currentLocale}`}
-                  initial={{ opacity: 0, scale: 1.05 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="absolute inset-0 z-0 overflow-hidden"
-                >
-                  <Image
-                    src={currentPhoto.src}
-                    alt={currentPhoto.alt}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                    className="object-cover object-center"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/25 to-transparent pointer-events-none" />
-                </motion.div>
-              </AnimatePresence>
-
-              {/* Photo Caption & Slide Controls */}
-              <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between gap-3 text-white">
-                <div className="pr-2">
-                  <p className="text-[11px] font-extrabold uppercase tracking-wider text-accent">
-                    {currentLocale === "ru" ? "ТМУК Самарканд" : currentLocale === "en" ? "KIUT Samarkand" : "KIUT Samarqand"}
-                  </p>
-                  <p className="text-xs sm:text-sm font-semibold text-white line-clamp-1">
-                    {slideMetadata[current]?.caption[currentLocale] || currentPhoto.caption}
-                  </p>
-                </div>
-
-                {/* Slider Controls */}
-                <div className="flex items-center gap-1 bg-primary p-1 rounded-xl border border-white/20 shrink-0">
-                  <button
-                    type="button"
-                    onClick={prevSlide}
-                    aria-label={
-                      currentLocale === "ru"
-                        ? "Предыдущий слайд"
-                        : currentLocale === "en"
-                        ? "Previous slide"
-                        : "Oldingi slayd"
-                    }
-                    className="p-1.5 rounded-lg hover:bg-white/20 text-white transition-colors cursor-pointer"
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </button>
-                  <span className="text-[11px] font-bold px-1.5 tabular-nums text-slate-200">
-                    {current + 1} / {length}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={nextSlide}
-                    aria-label={
-                      currentLocale === "ru"
-                        ? "Следующий слайд"
-                        : currentLocale === "en"
-                        ? "Next slide"
-                        : "Keyingi slayd"
-                    }
-                    className="p-1.5 rounded-lg hover:bg-white/20 text-white transition-colors cursor-pointer"
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Thumbnail Preview Grid */}
-            <div
-              className="grid grid-cols-4 gap-2 sm:gap-2.5 mt-3.5"
-              role="tablist"
-              aria-label={
-                currentLocale === "ru"
-                  ? "Галерея слайдов"
-                  : currentLocale === "en"
-                  ? "Slide gallery"
-                  : "Slaydlar galereyasi"
-              }
-            >
-              {slideImages.map((img, idx) => {
-                const meta = slideMetadata[idx];
-                const isActive = current === idx;
-                return (
-                  <button
-                    key={idx}
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    onClick={() => setCurrent(idx)}
-                    className={`group relative rounded-xl overflow-hidden border-2 transition-all p-1 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                      isActive
-                        ? "border-accent bg-white shadow-md shadow-accent/15"
-                        : "border-slate-200/90 bg-white/70 hover:border-slate-400 hover:bg-white"
-                    }`}
-                  >
-                    <div className="relative aspect-[16/10] rounded-lg overflow-hidden bg-slate-900">
-                      <Image
-                        src={img.src}
-                        alt={img.alt}
-                        fill
-                        sizes="140px"
-                        className={`object-cover transition-all duration-300 ${
-                          isActive
-                            ? "scale-105 opacity-100"
-                            : "opacity-65 group-hover:opacity-95"
-                        }`}
-                      />
-                      <div className="absolute top-1 left-1 bg-primary text-white text-[9px] font-black px-1.5 py-0.5 rounded">
-                        {meta.num}
-                      </div>
-                    </div>
-                    <div className="mt-1 px-0.5">
-                      <p
-                        className={`text-[11px] font-bold truncate ${
-                          isActive
-                            ? "text-accent"
-                            : "text-slate-700 group-hover:text-primary"
-                        }`}
-                      >
-                        {meta.tag[currentLocale] || meta.tag.uz}
-                      </p>
-                    </div>
-                    {isActive && (
-                      <div className="mt-1 h-0.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                        <motion.div
-                          key={`progress-${idx}`}
-                          initial={{ width: "0%" }}
-                          animate={{ width: "100%" }}
-                          transition={{ duration: 6.5, ease: "linear" }}
-                          className="h-full bg-accent"
-                        />
-                      </div>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+          {/* Right Column: Carousel Component */}
+          <div className="lg:col-span-5">
+            <HeroImageCarousel
+              currentIndex={current}
+              totalSlides={length}
+              slideImages={slideImages}
+              slideMetadata={slideMetadata}
+              currentLocale={currentLocale}
+              onPrev={prevSlide}
+              onNext={nextSlide}
+              onSelect={setCurrent}
+            />
           </div>
-        </div>
-
-        {/* Fast-Track Institutional Pillar Ribbon */}
-        <div className="mt-12 sm:mt-16 pt-8 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {pillarRibbonItems.map((item, idx) => (
-            <a
-              key={idx}
-              href={item.href}
-              className="group p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-md hover:border-accent transition-all flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-accent bg-accent-light px-2 py-0.5 rounded-md">
-                    {item.tag}
-                  </span>
-                  <ArrowRight className="h-4 w-4 text-slate-300 group-hover:text-accent group-hover:translate-x-1 transition-all" />
-                </div>
-                <h3 className="text-sm sm:text-base font-extrabold text-primary group-hover:text-accent transition-colors leading-snug">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-slate-500 mt-1 line-clamp-1">
-                  {item.desc}
-                </p>
-              </div>
-            </a>
-          ))}
         </div>
       </Container>
     </section>

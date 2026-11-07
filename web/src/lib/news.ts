@@ -1213,7 +1213,7 @@ function splitIntoParagraphs(rawText: string): string[] {
 /**
  * Generates an enriched article representation for a given locale and index.
  */
-function enrichArticle(index: number, locale: Locale): EnrichedArticle {
+export function enrichArticle(index: number, locale: Locale): EnrichedArticle {
   const localeKey: "uz" | "ru" | "en" =
     locale === "ru" ? "ru" : locale === "en" ? "en" : "uz";
 

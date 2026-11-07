@@ -50,14 +50,14 @@ export async function generateMetadata({
 export default async function ProgramDetailPage({ params }: ProgramPageProps) {
   const { slug } = await params;
 
-  const exists =
-    PROGRAMS_DATA.uz.some((p) => p.slug === slug) ||
-    PROGRAMS_DATA.ru.some((p) => p.slug === slug) ||
-    PROGRAMS_DATA.en.some((p) => p.slug === slug);
+  const program =
+    PROGRAMS_DATA.uz.find((p) => p.slug === slug) ||
+    PROGRAMS_DATA.ru.find((p) => p.slug === slug) ||
+    PROGRAMS_DATA.en.find((p) => p.slug === slug);
 
-  if (!exists) {
+  if (!program) {
     notFound();
   }
 
-  return <ProgramDetailClient slug={slug} />;
+  return <ProgramDetailClient initialProgram={program} />;
 }
