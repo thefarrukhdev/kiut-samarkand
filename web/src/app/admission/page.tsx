@@ -36,6 +36,13 @@ export default function AdmissionPage() {
       ? "Apply to KIUT Samarkand online today. Modern international higher education."
       : "Toshkent Kimyo xalqaro universiteti Samarqand filiali talabasi bo'lish uchun onlayn ariza topshiring.";
 
+  const badgeText =
+    locale === "ru"
+      ? "Приемная комиссия"
+      : locale === "en"
+      ? "Admissions Office"
+      : "Qabul Komissiyasi";
+
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
       <TopBar currentLocale={locale} />
@@ -43,7 +50,7 @@ export default function AdmissionPage() {
 
       {/* Page Header */}
       <PageHeader
-        badge="Qabul Komissiyasi"
+        badge={badgeText}
         title={pageTitle}
         description={pageDesc}
         breadcrumbs={breadcrumbs}

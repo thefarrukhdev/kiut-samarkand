@@ -1,19 +1,55 @@
+"use client";
+
 import React from "react";
 import { Navigation, Car, Bus } from "lucide-react";
+import { useLocale } from "@/lib/i18n";
+
+const MAP_LABELS = {
+  uz: {
+    badge: "Universitet Kampusi Manzili",
+    title: "Samarqand Filiali Joylashuvi",
+    address: "Spitamen shoh ko'chasi, 270-uy, Samarqand shahri (Xalqaro aeroport yo'nalishi)",
+    carTitle: "Avtomobilda:",
+    carDesc: "Samarqand markazidan Spitamen shoh ko'chasi bo'ylab 10 daqiqalik masofa. Qulay bepul avtoturargoh mavjud.",
+    busTitle: "Jamoat transporti:",
+    busDesc: "14, 22, 54-sonli avtobus va yo'nalishli taksilar to'g'ridan-to'g'ri universitet bekati oldiga keladi.",
+  },
+  ru: {
+    badge: "Адрес университетского кампуса",
+    title: "Расположение филиала в Самарканде",
+    address: "проспект Спитамена, дом 270, город Самарканд (направление к международному аэропорту)",
+    carTitle: "На автомобиле:",
+    carDesc: "10 минут езды от центра Самарканда по проспекту Спитамена. Имеется удобная бесплатная парковка.",
+    busTitle: "Общественный транспорт:",
+    busDesc: "Автобусы № 14, 22, 54 и маршрутные такси останавливаются прямо напротив кампуса университета.",
+  },
+  en: {
+    badge: "University Campus Location",
+    title: "Samarkand Campus Map & Directions",
+    address: "270 Spitamen Avenue, Samarkand City (International Airport Road)",
+    carTitle: "By Car:",
+    carDesc: "10-minute drive from Samarkand city center along Spitamen Avenue. Convenient free parking is available.",
+    busTitle: "Public Transit:",
+    busDesc: "Bus routes 14, 22, 54 and city route taxis stop directly outside the university campus station.",
+  },
+};
 
 export function CampusMapCard() {
+  const { locale } = useLocale();
+  const labels = MAP_LABELS[locale] || MAP_LABELS.uz;
+
   return (
     <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
       <div>
         <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#0096DB] mb-1">
           <Navigation className="w-4 h-4" />
-          <span>Universitet Kampusi Manzili</span>
+          <span>{labels.badge}</span>
         </div>
         <h2 className="text-xl font-bold text-slate-900 tracking-tight">
-          Samarqand Filiali Joylashuvi
+          {labels.title}
         </h2>
         <p className="text-xs text-slate-500 mt-1">
-          Spitamen shoh ko&apos;chasi, 270-uy, Samarqand shahri (Xalqaro aeroport yo&apos;nalishi)
+          {labels.address}
         </p>
       </div>
 
@@ -37,9 +73,9 @@ export function CampusMapCard() {
         <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-3">
           <Car className="w-5 h-5 text-[#0096DB] shrink-0 mt-0.5" />
           <div>
-            <strong className="text-xs font-bold text-slate-800 block">Avtomobilda:</strong>
+            <strong className="text-xs font-bold text-slate-800 block">{labels.carTitle}</strong>
             <span className="text-xs text-slate-600">
-              Samarqand markazidan Spitamen shoh ko&apos;chasi bo&apos;ylab 10 daqiqalik masofa. Qulay bepul avtoturargoh mavjud.
+              {labels.carDesc}
             </span>
           </div>
         </div>
@@ -47,9 +83,9 @@ export function CampusMapCard() {
         <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-start gap-3">
           <Bus className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
           <div>
-            <strong className="text-xs font-bold text-slate-800 block">Jamoat transporti:</strong>
+            <strong className="text-xs font-bold text-slate-800 block">{labels.busTitle}</strong>
             <span className="text-xs text-slate-600">
-              14, 22, 54-sonli avtobus va yo&apos;nalishli taksilar to&apos;g&apos;ridan-to&apos;g&apos;ri universitet bekati oldiga keladi.
+              {labels.busDesc}
             </span>
           </div>
         </div>

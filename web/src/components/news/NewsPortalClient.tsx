@@ -132,6 +132,13 @@ export function NewsPortalClient() {
           next: "Вперед",
           clearSearch: "Отменить поиск",
           foundCount: "Найдено по запросу",
+          formatCount: (n: number) => {
+            const rem10 = n % 10;
+            const rem100 = n % 100;
+            if (rem10 === 1 && rem100 !== 11) return `${n} новость`;
+            if (rem10 >= 2 && rem10 <= 4 && (rem100 < 10 || rem100 >= 20)) return `${n} новости`;
+            return `${n} новостей`;
+          },
         };
       case "en":
         return {
@@ -145,6 +152,7 @@ export function NewsPortalClient() {
           next: "Next",
           clearSearch: "Clear search",
           foundCount: "Articles found for",
+          formatCount: (n: number) => `${n} ${n === 1 ? "article" : "articles"}`,
         };
       case "uz":
       default:
@@ -159,6 +167,7 @@ export function NewsPortalClient() {
           next: "Keyingi",
           clearSearch: "Qidiruvni bekor qilish",
           foundCount: "so'rovi bo'yicha topildi",
+          formatCount: (n: number) => `${n} ta yangilik`,
         };
     }
   }, [locale]);
@@ -239,7 +248,7 @@ export function NewsPortalClient() {
             <div className="flex items-center justify-between text-xs text-slate-500 bg-white px-4 py-2.5 rounded-xl border border-slate-200">
               <span>
                 &ldquo;{searchQuery}&rdquo; {labels.foundCount}:{" "}
-                <strong className="text-slate-800">{filteredArticles.length} ta yangilik</strong>
+                <strong className="text-slate-800">{labels.formatCount(filteredArticles.length)}</strong>
               </span>
               <button
                 type="button"

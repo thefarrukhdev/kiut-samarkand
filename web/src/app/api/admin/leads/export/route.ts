@@ -2,9 +2,14 @@ import { NextResponse } from "next/server";
 import { getCurrentAdminSession } from "@/lib/auth/admin";
 import { db } from "@/lib/db/store";
 
-function escapeCsvField(field: unknown): string {
+export function escapeCsvField(field: unknown): string {
   if (field === null || field === undefined) return '""';
-  const stringValue = String(field);
+  let stringValue = String(field);
+  // CSV Formula Injection mitigation:
+  // If field starts with =, +, -, @, \t, \r, \n, or | (or starts with them after leading whitespace), prefix with a single quote '
+  if (/^[=+\-@\t\r\n|]/.test(stringValue) || /^[=+\-@\t\r\n|]/.test(stringValue.trimStart())) {
+    stringValue = `'${stringValue}`;
+  }
   return `"${stringValue.replace(/"/g, '""')}"`;
 }
 

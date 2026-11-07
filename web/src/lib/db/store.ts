@@ -3,6 +3,7 @@ import path from "path";
 import type {
   AdmissionLead,
   DbNewsItem,
+  ContactMessage,
   LeadFilterOptions,
   NewsFilterOptions,
   DashboardStats,
@@ -12,6 +13,7 @@ import rawScrapedNews from "@/data/news.json";
 interface DatabaseSchema {
   leads: AdmissionLead[];
   news: DbNewsItem[];
+  messages?: ContactMessage[];
   meta: {
     version: number;
     lastUpdated: string;
@@ -182,6 +184,7 @@ class DatabaseStore {
         const raw = fs.readFileSync(DB_FILE, "utf-8");
         const parsed = JSON.parse(raw) as DatabaseSchema;
         if (parsed.leads && parsed.news) {
+          if (!parsed.messages) parsed.messages = [];
           this.cache = parsed;
           return this.cache;
         }
@@ -194,6 +197,7 @@ class DatabaseStore {
     const initialData: DatabaseSchema = {
       leads: INITIAL_SAMPLE_LEADS,
       news: seedInitialNews(),
+      messages: [],
       meta: {
         version: 1,
         lastUpdated: new Date().toISOString(),
@@ -432,6 +436,32 @@ class DatabaseStore {
       return true;
     }
     return false;
+  }
+
+  // --- CONTACT MESSAGES ---
+
+  public createContactMessage(
+    messageData: Omit<ContactMessage, "id" | "submittedAt">
+  ): ContactMessage {
+    const data = this.load();
+    if (!data.messages) {
+      data.messages = [];
+    }
+
+    const newMessage: ContactMessage = {
+      ...messageData,
+      id: `msg-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+      submittedAt: new Date().toISOString(),
+    };
+
+    data.messages.unshift(newMessage);
+    this.save(data);
+    return newMessage;
+  }
+
+  public getContactMessages(): ContactMessage[] {
+    const data = this.load();
+    return data.messages || [];
   }
 }
 

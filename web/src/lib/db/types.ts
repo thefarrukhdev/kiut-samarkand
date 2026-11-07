@@ -64,3 +64,12 @@ export interface DashboardStats {
   leadsByFaculty: Record<string, number>;
   leadsByDegree: Record<string, number>;
 }
+
+export interface ContactMessage {
+  id: string;
+  fullName: string;
+  phone: string;
+  subject: string;
+  message: string;
+  submittedAt: string;
+}

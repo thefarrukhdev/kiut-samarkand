@@ -3,11 +3,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export function AdminLoginForm() {
   const router = useRouter();
-  const [email, setEmail] = useState("admin@sam.kiut.uz");
+  const searchParams = useSearchParams();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,20 +34,22 @@ export function AdminLoginForm() {
         return;
       }
 
-      // Success
-      router.push("/admin/dashboard");
+      // Success: redirect to sanitized callbackUrl if provided, else default to dashboard
+      const rawCallbackUrl = searchParams.get("callbackUrl");
+      const target =
+        rawCallbackUrl &&
+        rawCallbackUrl.startsWith("/admin") &&
+        !rawCallbackUrl.startsWith("//")
+          ? rawCallbackUrl
+          : "/admin/dashboard";
+
+      router.push(target);
       router.refresh();
     } catch (err) {
       console.error("Login fetch error:", err);
       setError("Server bilan bog'lanishda xatolik yuz berdi.");
       setLoading(false);
     }
-  };
-
-  const fillDemoCredentials = () => {
-    setEmail("admin@sam.kiut.uz");
-    setPassword("KiutSam2026!Admin");
-    setError(null);
   };
 
   return (
@@ -114,18 +117,6 @@ export function AdminLoginForm() {
             className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#0096DB] focus:border-transparent transition-all placeholder-slate-500"
             placeholder="••••••••••••"
           />
-        </div>
-
-        {/* Quick Demo Helper */}
-        <div className="pt-1">
-          <button
-            type="button"
-            onClick={fillDemoCredentials}
-            className="w-full text-[11px] text-slate-400 hover:text-slate-200 bg-white/5 hover:bg-white/10 py-1.5 px-3 rounded-lg border border-white/5 transition-colors text-left flex items-center justify-between"
-          >
-            <span>💡 Sinov parolini to&apos;ldirish</span>
-            <span className="font-mono text-emerald-400">KiutSam2026!Admin</span>
-          </button>
         </div>
 
         <button

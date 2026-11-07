@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { getCurrentAdminSession } from "@/lib/auth/admin";
 import { AdminLoginForm } from "./AdminLoginForm";
@@ -24,7 +25,9 @@ export default async function AdminLoginPage() {
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#172D50]/60 rounded-full blur-3xl pointer-events-none translate-y-1/2"></div>
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10 px-4">
-        <AdminLoginForm />
+        <Suspense fallback={<div className="h-96 rounded-2xl bg-slate-800/50 animate-pulse" />}>
+          <AdminLoginForm />
+        </Suspense>
       </div>
     </div>
   );

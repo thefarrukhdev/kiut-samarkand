@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   BookOpen,
@@ -13,6 +12,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
+import { Modal } from "@/components/ui/modal";
 import { useLocale } from "@/lib/i18n";
 import { PROGRAMS_DATA } from "@/data/programs";
 import type { Locale, ProgramItem } from "@/types";
@@ -116,25 +116,6 @@ export function ProgramFinder({
   }, [currentLocale]);
 
   const labels = localizedLabels[currentLocale] || localizedLabels.uz;
-
-  // Lock body scroll and listen for Escape key when program detail modal is open
-  React.useEffect(() => {
-    if (detailModalProgram) {
-      document.body.style.overflow = "hidden";
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          setDetailModalProgram(null);
-        }
-      };
-      document.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.body.style.overflow = "";
-        document.removeEventListener("keydown", handleKeyDown);
-      };
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [detailModalProgram]);
 
   const facultyFilters = React.useMemo(
     () => [
@@ -407,106 +388,88 @@ export function ProgramFinder({
       </Container>
 
       {/* Program Detail Modal */}
-      <AnimatePresence>
-        {detailModalProgram && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="program-detail-modal-title"
-          >
-            {/* Solid Dark Backdrop (NO blur) */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setDetailModalProgram(null)}
-              className="fixed inset-0 bg-slate-950/75"
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 15 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 15 }}
-              className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden z-10 max-h-[90vh] flex flex-col"
-            >
-              {/* Header */}
-              <div className="p-6 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
-                <div>
-                  <span className="text-[11px] font-black uppercase tracking-wider text-accent bg-accent-light px-2.5 py-1 rounded-md">
-                    {detailModalProgram.facultyName}
-                  </span>
-                  <h3 id="program-detail-modal-title" className="text-xl font-bold text-primary mt-2">
-                    {detailModalProgram.name}
-                  </h3>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setDetailModalProgram(null)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors cursor-pointer"
-                  aria-label={labels.close}
-                >
-                  <X className="h-5 w-5" />
-                </button>
+      {detailModalProgram && (
+        <Modal
+          isOpen={Boolean(detailModalProgram)}
+          onClose={() => setDetailModalProgram(null)}
+          maxWidth="xl"
+          closeButtonLabel={labels.close}
+          ariaLabelledBy="program-detail-modal-title"
+          customHeader={
+            <div className="p-6 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+              <div>
+                <span className="text-[11px] font-black uppercase tracking-wider text-accent bg-accent-light px-2.5 py-1 rounded-md">
+                  {detailModalProgram.facultyName}
+                </span>
+                <h3 id="program-detail-modal-title" className="text-xl font-bold text-primary mt-2">
+                  {detailModalProgram.name}
+                </h3>
               </div>
-
-              {/* Body */}
-              <div className="p-6 space-y-5 overflow-y-auto">
-                <div className="grid grid-cols-2 gap-3 text-xs bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-                  <div>
-                    <span className="text-slate-400 block font-medium">{labels.duration}</span>
-                    <span className="font-bold text-primary">{detailModalProgram.duration}</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-400 block font-medium">{labels.languages}</span>
-                    <span className="font-bold text-primary">{detailModalProgram.languages.join(", ")}</span>
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
-                    {labels.about}
-                  </h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    {detailModalProgram.description}
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center gap-1.5">
-                    <Briefcase className="h-3.5 w-3.5 text-accent" />
-                    <span>{labels.career}</span>
-                  </h4>
-                  <p className="text-sm text-primary font-medium bg-slate-50 p-3.5 rounded-xl border border-slate-200">
-                    {detailModalProgram.career}
-                  </p>
-                </div>
+              <button
+                type="button"
+                onClick={() => setDetailModalProgram(null)}
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-200 transition-colors cursor-pointer"
+                aria-label={labels.close}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          }
+          footer={
+            <>
+              <Button
+                onClick={() => setDetailModalProgram(null)}
+                variant="outline"
+                size="sm"
+                className="font-bold border-slate-300 text-slate-700"
+              >
+                {labels.close}
+              </Button>
+              <Button
+                onClick={() => handleApplyClick(detailModalProgram)}
+                variant="action"
+                size="sm"
+                className="font-bold bg-accent hover:bg-accent-hover text-white px-5 py-2 rounded-xl shadow-md"
+              >
+                <span>{labels.apply}</span>
+                <ArrowRight className="h-4 w-4 ml-1" />
+              </Button>
+            </>
+          }
+        >
+          <div className="space-y-5">
+            <div className="grid grid-cols-2 gap-3 text-xs bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+              <div>
+                <span className="text-slate-400 block font-medium">{labels.duration}</span>
+                <span className="font-bold text-primary">{detailModalProgram.duration}</span>
               </div>
-
-              {/* Footer */}
-              <div className="p-6 border-t border-slate-200 bg-slate-50 flex items-center justify-between gap-4">
-                <Button
-                  onClick={() => setDetailModalProgram(null)}
-                  variant="outline"
-                  size="sm"
-                  className="font-bold border-slate-300 text-slate-700"
-                >
-                  {labels.close}
-                </Button>
-                <Button
-                  onClick={() => handleApplyClick(detailModalProgram)}
-                  variant="action"
-                  size="sm"
-                  className="font-bold bg-accent hover:bg-accent-hover text-white px-5 py-2 rounded-xl shadow-md"
-                >
-                  <span>{labels.apply}</span>
-                  <ArrowRight className="h-4 w-4 ml-1" />
-                </Button>
+              <div>
+                <span className="text-slate-400 block font-medium">{labels.languages}</span>
+                <span className="font-bold text-primary">{detailModalProgram.languages.join(", ")}</span>
               </div>
-            </motion.div>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                {labels.about}
+              </h4>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                {detailModalProgram.description}
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center gap-1.5">
+                <Briefcase className="h-3.5 w-3.5 text-accent" />
+                <span>{labels.career}</span>
+              </h4>
+              <p className="text-sm text-primary font-medium bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+                {detailModalProgram.career}
+              </p>
+            </div>
           </div>
-        )}
-      </AnimatePresence>
+        </Modal>
+      )}
     </section>
   );
 }

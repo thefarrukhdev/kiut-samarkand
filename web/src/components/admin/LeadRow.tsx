@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import type { AdmissionLead, LeadStatus } from "@/lib/db/types";
+import { TableRow, TableCell } from "@/components/ui/table";
 
 interface LeadRowProps {
   lead: AdmissionLead;
@@ -36,9 +37,9 @@ export function LeadRow({
   };
 
   return (
-    <tr className="hover:bg-slate-50/50 transition-colors">
+    <TableRow className="hover:bg-slate-50/50 transition-colors">
       {/* Confirmation Code & Date */}
-      <td className="px-5 py-3.5 align-top">
+      <TableCell className="align-top">
         <span className="font-mono font-bold text-slate-800 block">
           {lead.confirmationId}
         </span>
@@ -51,10 +52,10 @@ export function LeadRow({
             minute: "2-digit",
           })}
         </span>
-      </td>
+      </TableCell>
 
       {/* Name & Phone */}
-      <td className="px-5 py-3.5 align-top">
+      <TableCell className="align-top">
         <span className="font-semibold text-slate-900 block text-sm">
           {lead.fullName}
         </span>
@@ -64,10 +65,10 @@ export function LeadRow({
         >
           {lead.phone}
         </a>
-      </td>
+      </TableCell>
 
       {/* Faculty & Degree Details */}
-      <td className="px-5 py-3.5 align-top">
+      <TableCell className="align-top">
         <span className="font-medium text-slate-800 block">
           {lead.selectedFaculty}
         </span>
@@ -80,10 +81,10 @@ export function LeadRow({
           <span>•</span>
           <span>{lead.language}</span>
         </div>
-      </td>
+      </TableCell>
 
       {/* Status Selector */}
-      <td className="px-5 py-3.5 align-top">
+      <TableCell className="align-top">
         <select
           value={lead.status}
           disabled={isUpdating}
@@ -95,10 +96,10 @@ export function LeadRow({
           <option value="enrolled">🟢 Qabul qilindi</option>
           <option value="rejected">⚪ Rad etildi</option>
         </select>
-      </td>
+      </TableCell>
 
       {/* Notes / Comments */}
-      <td className="px-5 py-3.5 align-top max-w-xs">
+      <TableCell className="align-top max-w-xs">
         {editingNotes ? (
           <div className="space-y-1.5">
             <textarea
@@ -143,10 +144,10 @@ export function LeadRow({
             )}
           </div>
         )}
-      </td>
+      </TableCell>
 
       {/* Actions */}
-      <td className="px-5 py-3.5 align-top text-right">
+      <TableCell className="align-top text-right">
         <button
           onClick={() => onDelete(lead.id, lead.fullName)}
           title="Arizani o'chirish"
@@ -156,7 +157,7 @@ export function LeadRow({
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
           </svg>
         </button>
-      </td>
-    </tr>
+      </TableCell>
+    </TableRow>
   );
 }

@@ -1,6 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import type { AdmissionLead, LeadStatus } from "@/lib/db/types";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/components/ui/table";
 
 interface RecentLeadsTableProps {
   leads: AdmissionLead[];
@@ -34,56 +42,54 @@ export function RecentLeadsTable({ leads, totalLeads }: RecentLeadsTableProps) {
         </Link>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-xs">
-          <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-100">
-            <tr>
-              <th className="px-6 py-3">Tasdiq Kodi</th>
-              <th className="px-6 py-3">Abituriyent (F.I.SH)</th>
-              <th className="px-6 py-3">Telefon</th>
-              <th className="px-6 py-3">Fakultet</th>
-              <th className="px-6 py-3">Holati</th>
-              <th className="px-6 py-3 text-right">Vaqt</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {leads.map((lead) => {
-              const badge = STATUS_BADGES[lead.status] || STATUS_BADGES.new;
-              return (
-                <tr key={lead.id} className="hover:bg-slate-50/60 transition-colors">
-                  <td className="px-6 py-3.5 font-mono font-medium text-slate-600">
-                    {lead.confirmationId}
-                  </td>
-                  <td className="px-6 py-3.5 font-semibold text-slate-900">
-                    {lead.fullName}
-                  </td>
-                  <td className="px-6 py-3.5 text-slate-600">
-                    {lead.phone}
-                  </td>
-                  <td className="px-6 py-3.5 text-slate-600">
-                    {lead.selectedFaculty}
-                  </td>
-                  <td className="px-6 py-3.5">
-                    <span
-                      className={`inline-flex px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${badge.bg} ${badge.text}`}
-                    >
-                      {badge.label}
-                    </span>
-                  </td>
-                  <td className="px-6 py-3.5 text-right text-slate-400">
-                    {new Date(lead.submittedAt).toLocaleDateString("uz-UZ", {
-                      day: "2-digit",
-                      month: "short",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Tasdiq Kodi</TableHead>
+            <TableHead>Abituriyent (F.I.SH)</TableHead>
+            <TableHead>Telefon</TableHead>
+            <TableHead>Fakultet</TableHead>
+            <TableHead>Holati</TableHead>
+            <TableHead className="text-right">Vaqt</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {leads.map((lead) => {
+            const badge = STATUS_BADGES[lead.status] || STATUS_BADGES.new;
+            return (
+              <TableRow key={lead.id}>
+                <TableCell className="font-mono font-medium text-slate-600">
+                  {lead.confirmationId}
+                </TableCell>
+                <TableCell className="font-semibold text-slate-900">
+                  {lead.fullName}
+                </TableCell>
+                <TableCell className="text-slate-600">
+                  {lead.phone}
+                </TableCell>
+                <TableCell className="text-slate-600">
+                  {lead.selectedFaculty}
+                </TableCell>
+                <TableCell>
+                  <span
+                    className={`inline-flex px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${badge.bg} ${badge.text}`}
+                  >
+                    {badge.label}
+                  </span>
+                </TableCell>
+                <TableCell className="text-right text-slate-400">
+                  {new Date(lead.submittedAt).toLocaleDateString("uz-UZ", {
+                    day: "2-digit",
+                    month: "short",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
     </div>
   );
 }

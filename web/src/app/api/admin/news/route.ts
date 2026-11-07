@@ -71,12 +71,17 @@ export async function POST(request: Request) {
     const catKey = (category in CATEGORY_LABELS ? category : "academic") as keyof typeof CATEGORY_LABELS;
     const finalSlug = slug && slug.trim() ? slug.trim() : generateSlug(title.uz);
 
-    // Format current date if not provided
+    // Format current date dynamically if not provided
     const now = new Date();
+    const uzMonthRaw = new Intl.DateTimeFormat("uz-UZ", { month: "long" }).format(now);
+    const uzMonth = uzMonthRaw.charAt(0).toUpperCase() + uzMonthRaw.slice(1);
+    const ruDayMonth = new Intl.DateTimeFormat("ru-RU", { day: "numeric", month: "long" }).format(now);
+    const enMonth = new Intl.DateTimeFormat("en-US", { month: "short" }).format(now);
+
     const defaultDate = {
-      uz: `${now.getDate()}-Noyabr, ${now.getFullYear()}`,
-      ru: `${now.getDate()} ноября, ${now.getFullYear()}`,
-      en: `Nov ${now.getDate()}, ${now.getFullYear()}`,
+      uz: `${now.getDate()}-${uzMonth}, ${now.getFullYear()}`,
+      ru: `${ruDayMonth}, ${now.getFullYear()}`,
+      en: `${enMonth} ${now.getDate()}, ${now.getFullYear()}`,
     };
 
     const newArticleData: Omit<DbNewsItem, "id" | "createdAt" | "updatedAt" | "views"> = {

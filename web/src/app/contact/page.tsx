@@ -36,6 +36,13 @@ export default function ContactPage() {
       ? "Connect with KIUT Samarkand admissions office or visit our modern academic campus."
       : "Toshkent Kimyo xalqaro universiteti Samarqand filiali qabul komissiyasi bilan bog'laning yoki kampusimizga tashrif buyuring.";
 
+  const badgeText =
+    locale === "ru"
+      ? "Свяжитесь с нами"
+      : locale === "en"
+      ? "Get in Touch"
+      : "Biz Bilan Bog'lanish";
+
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
       <TopBar currentLocale={locale} />
@@ -43,7 +50,7 @@ export default function ContactPage() {
 
       {/* Page Header */}
       <PageHeader
-        badge="Biz Bilan Bog'lanish"
+        badge={badgeText}
         title={headerTitle}
         description={headerDesc}
         breadcrumbs={breadcrumbs}

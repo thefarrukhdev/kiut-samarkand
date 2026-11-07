@@ -13,6 +13,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Modal } from "@/components/ui/modal";
 import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import rawNewsData from "@/data/news.json";
 import type { Locale } from "@/types";
@@ -123,25 +124,6 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
     if (!selectedArticleSlug) return null;
     return enrichedArticles.find((a) => a.slug === selectedArticleSlug) || null;
   }, [enrichedArticles, selectedArticleSlug]);
-
-  // Lock body scroll and handle Escape key on modal
-  React.useEffect(() => {
-    if (selectedArticle) {
-      document.body.style.overflow = "hidden";
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          setSelectedArticleSlug(null);
-        }
-      };
-      document.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.body.style.overflow = "";
-        document.removeEventListener("keydown", handleKeyDown);
-      };
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [selectedArticle]);
 
   const filteredArticles = React.useMemo(() => {
     return activeFilter === "all"
@@ -304,103 +286,85 @@ export function NewsSection({ currentLocale: propLocale }: NewsSectionProps = {}
       </Container>
 
       {/* Full Article Modal */}
-      <AnimatePresence>
-        {selectedArticle && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="news-modal-title"
-          >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+      {selectedArticle && (
+        <Modal
+          isOpen={Boolean(selectedArticle)}
+          onClose={() => setSelectedArticleSlug(null)}
+          maxWidth="3xl"
+          noPadding={true}
+          hideCloseButton={true}
+          closeButtonLabel={t.modalClose}
+          ariaLabelledBy="news-modal-title"
+          footer={
+            <Button
               onClick={() => setSelectedArticleSlug(null)}
-              className="fixed inset-0 bg-slate-950/75"
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden z-10 max-h-[90vh] flex flex-col"
+              variant="secondary"
+              size="default"
+              className="font-bold border-slate-200"
             >
-              {/* Modal Banner */}
-              <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-primary shrink-0">
-                <Image
-                  src={selectedArticle.image}
-                  alt={selectedArticle.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 768px"
-                  className="object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
+              {t.modalClose}
+            </Button>
+          }
+        >
+          <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-primary shrink-0">
+            <Image
+              src={selectedArticle.image}
+              alt={selectedArticle.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
 
-                <button
-                  type="button"
-                  onClick={() => setSelectedArticleSlug(null)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 text-white hover:bg-black transition-colors cursor-pointer"
-                  aria-label={t.modalClose}
-                >
-                  <X className="h-5 w-5" />
-                </button>
+            <button
+              type="button"
+              onClick={() => setSelectedArticleSlug(null)}
+              className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 text-white hover:bg-black transition-colors cursor-pointer"
+              aria-label={t.modalClose}
+            >
+              <X className="h-5 w-5" />
+            </button>
 
-                <div className="absolute bottom-4 left-6 right-6">
-                  <Badge variant={selectedArticle.categoryBadgeVariant} className="mb-2">
-                    {selectedArticle.categoryLabel}
-                  </Badge>
-                  <h3 id="news-modal-title" className="text-xl sm:text-2xl font-bold text-white leading-snug">
-                    {selectedArticle.title}
-                  </h3>
-                </div>
-              </div>
-
-              {/* Modal Content */}
-              <div className="p-6 sm:p-8 overflow-y-auto space-y-4">
-                <div className="flex items-center gap-4 text-xs text-slate-500 pb-3 border-b border-slate-100">
-                  <span className="flex items-center gap-1.5 font-medium">
-                    <Calendar className="h-3.5 w-3.5 text-accent" />
-                    <span>{selectedArticle.date}</span>
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5 text-slate-400" />
-                    <span>{selectedArticle.readTime}</span>
-                  </span>
-                  <span className="text-primary font-semibold">
-                    {t.pressRelease}
-                  </span>
-                </div>
-
-                <div className="text-sm sm:text-base text-slate-600 leading-relaxed space-y-4">
-                  <p className="font-medium text-primary">
-                    {selectedArticle.summary}
-                  </p>
-                  <p>
-                    {currentLocale === "ru"
-                      ? "Самаркандский филиал Ташкентского международного университета Кимё продолжает системную работу по обеспечению высшего образования мирового уровня, развитию международных партнерских программ и формированию передовых профессиональных компетенций студентов."
-                      : currentLocale === "en"
-                      ? "The Samarkand Branch of Kimyo International University in Tashkent remains committed to delivering world-class higher education, expanding international academic partnerships, and fostering advanced professional competencies among its students."
-                      : "Toshkent Kimyo Xalqaro Universiteti Samarqand filiali talabalarga jahon andozalariga mos ta'lim berish, xalqaro dasturlar va ilg'or amaliy ko'nikmalarni shakllantirish bo'yicha tizimli ishlarni davom ettirmoqda."}
-                  </p>
-                </div>
-              </div>
-
-              {/* Modal Footer */}
-              <div className="p-4 border-t border-slate-100 bg-surface flex justify-end">
-                <Button
-                  onClick={() => setSelectedArticleSlug(null)}
-                  variant="secondary"
-                  size="default"
-                  className="font-bold border-slate-200"
-                >
-                  {t.modalClose}
-                </Button>
-              </div>
-            </motion.div>
+            <div className="absolute bottom-4 left-6 right-6">
+              <Badge variant={selectedArticle.categoryBadgeVariant} className="mb-2">
+                {selectedArticle.categoryLabel}
+              </Badge>
+              <h3 id="news-modal-title" className="text-xl sm:text-2xl font-bold text-white leading-snug">
+                {selectedArticle.title}
+              </h3>
+            </div>
           </div>
-        )}
-      </AnimatePresence>
+
+          <div className="p-6 sm:p-8 space-y-4">
+            <div className="flex items-center gap-4 text-xs text-slate-500 pb-3 border-b border-slate-100">
+              <span className="flex items-center gap-1.5 font-medium">
+                <Calendar className="h-3.5 w-3.5 text-accent" />
+                <span>{selectedArticle.date}</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-3.5 w-3.5 text-slate-400" />
+                <span>{selectedArticle.readTime}</span>
+              </span>
+              <span className="text-primary font-semibold">
+                {t.pressRelease}
+              </span>
+            </div>
+
+            <div className="text-sm sm:text-base text-slate-600 leading-relaxed space-y-4">
+              <p className="font-medium text-primary">
+                {selectedArticle.summary}
+              </p>
+              <p>
+                {currentLocale === "ru"
+                  ? "Самаркандский филиал Ташкентского международного университета Кимё продолжает системную работу по обеспечению высшего образования мирового уровня, развитию международных партнерских программ и формированию передовых профессиональных компетенций студентов."
+                  : currentLocale === "en"
+                  ? "The Samarkand Branch of Kimyo International University in Tashkent remains committed to delivering world-class higher education, expanding international academic partnerships, and fostering advanced professional competencies among its students."
+                  : "Toshkent Kimyo Xalqaro Universiteti Samarqand filiali talabalarga jahon andozalariga mos ta'lim berish, xalqaro dasturlar va ilg'or amaliy ko'nikmalarni shakllantirish bo'yicha tizimli ishlarni davom ettirmoqda."}
+              </p>
+            </div>
+          </div>
+        </Modal>
+      )}
     </section>
   );
 }

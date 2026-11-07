@@ -14,6 +14,7 @@ import {
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Modal } from "@/components/ui/modal";
 import { useTranslation, useLocale, translations } from "@/lib/i18n";
 import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import { getLocalizedFaculties, type FacultyData } from "@/data/schools";
@@ -38,25 +39,6 @@ export function SchoolsGrid({
   const [expandedProgramIndex, setExpandedProgramIndex] = React.useState<number | null>(null);
 
   const facultiesData = React.useMemo(() => getLocalizedFaculties(currentLocale), [currentLocale]);
-
-  // Lock body scroll and add Escape key listener when modal is open
-  React.useEffect(() => {
-    if (modalFaculty) {
-      document.body.style.overflow = "hidden";
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          setModalFaculty(null);
-        }
-      };
-      document.addEventListener("keydown", handleKeyDown);
-      return () => {
-        document.body.style.overflow = "";
-        document.removeEventListener("keydown", handleKeyDown);
-      };
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [modalFaculty]);
 
   const filteredFaculties = React.useMemo(() => {
     return activeTab === "all"
@@ -298,142 +280,125 @@ export function SchoolsGrid({
       </Container>
 
       {/* Program Details Modal */}
-      <AnimatePresence>
-        {modalFaculty && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="schools-modal-title"
-          >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setModalFaculty(null)}
-              className="fixed inset-0 bg-slate-950/75"
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden z-10 max-h-[90vh] flex flex-col"
-            >
-              {/* Modal Header */}
-              <div className="p-6 border-b border-slate-200 flex items-center justify-between bg-surface">
-                <div className="flex items-center gap-3">
-                  <Badge variant={modalFaculty.badgeVariant}>
-                    {modalFaculty.badge}
-                  </Badge>
-                  <h3 id="schools-modal-title" className="text-xl font-bold text-primary">
-                    {modalFaculty.name}
-                  </h3>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setModalFaculty(null)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
-                  aria-label={t.modalClose}
-                >
-                  <X className="h-5 w-5" />
-                </button>
+      {modalFaculty && (
+        <Modal
+          isOpen={Boolean(modalFaculty)}
+          onClose={() => setModalFaculty(null)}
+          maxWidth="2xl"
+          closeButtonLabel={t.modalClose}
+          ariaLabelledBy="schools-modal-title"
+          customHeader={
+            <div className="p-6 border-b border-slate-200 flex items-center justify-between bg-surface">
+              <div className="flex items-center gap-3">
+                <Badge variant={modalFaculty.badgeVariant}>
+                  {modalFaculty.badge}
+                </Badge>
+                <h3 id="schools-modal-title" className="text-xl font-bold text-primary">
+                  {modalFaculty.name}
+                </h3>
               </div>
+              <button
+                type="button"
+                onClick={() => setModalFaculty(null)}
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
+                aria-label={t.modalClose}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          }
+          footer={
+            <>
+              <Button
+                onClick={() => setModalFaculty(null)}
+                variant="secondary"
+                size="default"
+              >
+                {t.modalClose}
+              </Button>
+              <Button
+                onClick={() => {
+                  const name = modalFaculty.name;
+                  setModalFaculty(null);
+                  handleApplyToFaculty(name);
+                }}
+                variant="action"
+                size="default"
+                className="font-bold"
+              >
+                <span>{t.modalApply}</span>
+              </Button>
+            </>
+          }
+        >
+          <div className="space-y-6">
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                {t.modalAbout}
+              </h4>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                {modalFaculty.description}
+              </p>
+            </div>
 
-              {/* Modal Body */}
-              <div className="p-6 overflow-y-auto space-y-6">
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
-                    {t.modalAbout}
-                  </h4>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    {modalFaculty.description}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-surface border border-slate-200/60 text-xs">
-                  <div>
-                    <span className="text-slate-400 block font-semibold">{t.durationLabel}</span>
-                    <span className="font-bold text-primary text-sm mt-0.5 block">{modalFaculty.duration}</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-400 block font-semibold">{t.languagesLabel}</span>
-                    <span className="font-bold text-primary text-sm mt-0.5 block">{modalFaculty.languages.join(", ")}</span>
-                  </div>
-                </div>
-
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
-                    {t.modalAllPrograms} ({modalFaculty.allPrograms.length})
-                  </h4>
-                  <ul className="space-y-2">
-                    {modalFaculty.allPrograms.map((prog, index) => {
-                      const isExpanded = expandedProgramIndex === index;
-                      return (
-                        <li
-                          key={index}
-                          className="rounded-xl bg-surface border border-slate-200/80 overflow-hidden transition-colors"
-                        >
-                          <button
-                            type="button"
-                            onClick={() => setExpandedProgramIndex(isExpanded ? null : index)}
-                            className="w-full p-3 flex items-center justify-between text-left text-xs font-semibold text-primary hover:bg-white transition-colors cursor-pointer"
-                            aria-expanded={isExpanded}
-                          >
-                            <span className="flex items-center gap-2">
-                              <CheckCircle2 className="h-4 w-4 text-accent shrink-0" />
-                              <span>{prog.name}</span>
-                            </span>
-                            <div className="flex items-center gap-2 shrink-0">
-                              <span className="text-[11px] text-slate-500 font-normal">
-                                {prog.duration}
-                              </span>
-                              <ChevronDown
-                                className={`h-3.5 w-3.5 text-slate-400 transition-transform ${
-                                  isExpanded ? "rotate-180 text-accent" : ""
-                                }`}
-                              />
-                            </div>
-                          </button>
-
-                          {isExpanded && prog.description && (
-                            <div className="px-3 pb-3 pt-1 text-xs text-slate-600 bg-white border-t border-slate-200/80 leading-relaxed">
-                              {prog.description}
-                            </div>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
+            <div className="grid grid-cols-2 gap-4 p-4 rounded-2xl bg-surface border border-slate-200/60 text-xs">
+              <div>
+                <span className="text-slate-400 block font-semibold">{t.durationLabel}</span>
+                <span className="font-bold text-primary text-sm mt-0.5 block">{modalFaculty.duration}</span>
               </div>
-
-              {/* Modal Footer */}
-              <div className="p-6 border-t border-slate-200 flex items-center justify-end gap-3 bg-surface">
-                <Button
-                  onClick={() => setModalFaculty(null)}
-                  variant="secondary"
-                  size="default"
-                >
-                  {t.modalClose}
-                </Button>
-                <Button
-                  onClick={() => {
-                    const name = modalFaculty.name;
-                    setModalFaculty(null);
-                    handleApplyToFaculty(name);
-                  }}
-                  variant="action"
-                  size="default"
-                  className="font-bold"
-                >
-                  <span>{t.modalApply}</span>
-                </Button>
+              <div>
+                <span className="text-slate-400 block font-semibold">{t.languagesLabel}</span>
+                <span className="font-bold text-primary text-sm mt-0.5 block">{modalFaculty.languages.join(", ")}</span>
               </div>
-            </motion.div>
+            </div>
+
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                {t.modalAllPrograms} ({modalFaculty.allPrograms.length})
+              </h4>
+              <ul className="space-y-2">
+                {modalFaculty.allPrograms.map((prog, index) => {
+                  const isExpanded = expandedProgramIndex === index;
+                  return (
+                    <li
+                      key={index}
+                      className="rounded-xl bg-surface border border-slate-200/80 overflow-hidden transition-colors"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setExpandedProgramIndex(isExpanded ? null : index)}
+                        className="w-full p-3 flex items-center justify-between text-left text-xs font-semibold text-primary hover:bg-white transition-colors cursor-pointer"
+                        aria-expanded={isExpanded}
+                      >
+                        <span className="flex items-center gap-2">
+                          <CheckCircle2 className="h-4 w-4 text-accent shrink-0" />
+                          <span>{prog.name}</span>
+                        </span>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-[11px] text-slate-500 font-normal">
+                            {prog.duration}
+                          </span>
+                          <ChevronDown
+                            className={`h-3.5 w-3.5 text-slate-400 transition-transform ${
+                              isExpanded ? "rotate-180 text-accent" : ""
+                            }`}
+                          />
+                        </div>
+                      </button>
+
+                      {isExpanded && prog.description && (
+                        <div className="px-3 pb-3 pt-1 text-xs text-slate-600 bg-white border-t border-slate-200/80 leading-relaxed">
+                          {prog.description}
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
-        )}
-      </AnimatePresence>
+        </Modal>
+      )}
     </section>
   );
 }

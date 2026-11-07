@@ -1,12 +1,15 @@
+"use client";
+
 import React from "react";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import { useLocale } from "@/lib/i18n";
 
-export function ContactInfoGrid() {
-  const contacts = [
+const CONTACT_DATA = {
+  uz: [
     {
       title: "Telefon Raqamlar",
       value: "+998 (78) 129-40-40",
-      secondary: "+998 (55) 702-40-40",
+      secondary: "+998 (55) 702-40-40 (Qabul markazi)",
       href: "tel:+998781294040",
       icon: Phone,
       color: "text-[#0096DB] bg-blue-50 border-blue-100",
@@ -42,7 +45,94 @@ export function ContactInfoGrid() {
       icon: Send,
       color: "text-sky-600 bg-sky-50 border-sky-100",
     },
-  ];
+  ],
+  ru: [
+    {
+      title: "Номера телефонов",
+      value: "+998 (78) 129-40-40",
+      secondary: "+998 (55) 702-40-40 (Колл-центр)",
+      href: "tel:+998781294040",
+      icon: Phone,
+      color: "text-[#0096DB] bg-blue-50 border-blue-100",
+    },
+    {
+      title: "Адрес приемной комиссии",
+      value: "г. Самарканд, проспект Спитамена, дом 270",
+      secondary: "Ориентир: рядом с Международным аэропортом",
+      href: "https://maps.google.com/?q=Samarkand+Spitamen+270",
+      icon: MapPin,
+      color: "text-rose-600 bg-rose-50 border-rose-100",
+    },
+    {
+      title: "Электронная почта",
+      value: "samarkand@kiut.uz",
+      secondary: "info@kiut.uz",
+      href: "mailto:samarkand@kiut.uz",
+      icon: Mail,
+      color: "text-indigo-600 bg-indigo-50 border-indigo-100",
+    },
+    {
+      title: "Часы работы",
+      value: "Понедельник — Суббота: 09:00 - 18:00",
+      secondary: "Воскресенье: Выходной",
+      icon: Clock,
+      color: "text-amber-600 bg-amber-50 border-amber-100",
+    },
+    {
+      title: "Официальный Telegram-канал",
+      value: "@kiut_samarkand",
+      secondary: "Все новости и объявления университета",
+      href: "https://t.me/kiut_samarkand",
+      icon: Send,
+      color: "text-sky-600 bg-sky-50 border-sky-100",
+    },
+  ],
+  en: [
+    {
+      title: "Phone Numbers",
+      value: "+998 (78) 129-40-40",
+      secondary: "+998 (55) 702-40-40 (Admissions Center)",
+      href: "tel:+998781294040",
+      icon: Phone,
+      color: "text-[#0096DB] bg-blue-50 border-blue-100",
+    },
+    {
+      title: "Admissions Office Address",
+      value: "270 Spitamen Avenue, Samarkand City",
+      secondary: "Landmark: Near Samarkand International Airport",
+      href: "https://maps.google.com/?q=Samarkand+Spitamen+270",
+      icon: MapPin,
+      color: "text-rose-600 bg-rose-50 border-rose-100",
+    },
+    {
+      title: "Email Address",
+      value: "samarkand@kiut.uz",
+      secondary: "info@kiut.uz",
+      href: "mailto:samarkand@kiut.uz",
+      icon: Mail,
+      color: "text-indigo-600 bg-indigo-50 border-indigo-100",
+    },
+    {
+      title: "Working Hours",
+      value: "Monday — Saturday: 09:00 - 18:00",
+      secondary: "Sunday: Closed",
+      icon: Clock,
+      color: "text-amber-600 bg-amber-50 border-amber-100",
+    },
+    {
+      title: "Official Telegram Channel",
+      value: "@kiut_samarkand",
+      secondary: "Official announcements and news updates",
+      href: "https://t.me/kiut_samarkand",
+      icon: Send,
+      color: "text-sky-600 bg-sky-50 border-sky-100",
+    },
+  ],
+};
+
+export function ContactInfoGrid() {
+  const { locale } = useLocale();
+  const contacts = CONTACT_DATA[locale] || CONTACT_DATA.uz;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -4,7 +4,14 @@ import {
   verifyAdminCredentials,
   createAdminToken,
   verifyAdminToken,
+  getAdminPasswordHash,
+  getJwtSecret,
 } from "@/lib/auth/admin";
+import {
+  checkLoginRateLimit,
+  recordFailedLoginAttempt,
+  clearLoginRateLimit,
+} from "@/app/api/admin/login/route";
 
 describe("Database Store & Persistent Layer", () => {
   it("initializes with seeded leads and news items", () => {
@@ -107,17 +114,17 @@ describe("Database Store & Persistent Layer", () => {
 });
 
 describe("Admin Authentication & JWT Session Protocol", () => {
-  it("verifies credentials against bcrypt hash", () => {
+  it("verifies credentials against bcrypt hash", async () => {
     // Valid password
-    const valid = verifyAdminCredentials("KiutSam2026!Admin", "admin@sam.kiut.uz");
+    const valid = await verifyAdminCredentials("KiutSam2026!Admin", "admin@sam.kiut.uz");
     expect(valid).toBe(true);
 
     // Invalid password
-    const invalidPass = verifyAdminCredentials("WrongPassword123!", "admin@sam.kiut.uz");
+    const invalidPass = await verifyAdminCredentials("WrongPassword123!", "admin@sam.kiut.uz");
     expect(invalidPass).toBe(false);
 
     // Invalid email
-    const invalidEmail = verifyAdminCredentials("KiutSam2026!Admin", "intruder@domain.com");
+    const invalidEmail = await verifyAdminCredentials("KiutSam2026!Admin", "intruder@domain.com");
     expect(invalidEmail).toBe(false);
   });
 
@@ -135,5 +142,46 @@ describe("Admin Authentication & JWT Session Protocol", () => {
     const tampered = token.slice(0, -5) + "abcde";
     const invalidSession = await verifyAdminToken(tampered);
     expect(invalidSession).toBeNull();
+  });
+
+  it("throws explicit errors when secrets are missing", () => {
+    const origHash = process.env.ADMIN_PASSWORD_HASH;
+    const origSecret = process.env.ADMIN_JWT_SECRET;
+
+    try {
+      delete process.env.ADMIN_PASSWORD_HASH;
+      expect(() => getAdminPasswordHash()).toThrow("Missing or invalid required environment variable: ADMIN_PASSWORD_HASH");
+
+      delete process.env.ADMIN_JWT_SECRET;
+      expect(() => getJwtSecret()).toThrow("Missing or insecure required environment variable: ADMIN_JWT_SECRET");
+    } finally {
+      process.env.ADMIN_PASSWORD_HASH = origHash;
+      process.env.ADMIN_JWT_SECRET = origSecret;
+    }
+  });
+
+  it("enforces in-memory rate limiting against brute-force login attacks", () => {
+    const testIp = "192.168.1.99";
+    clearLoginRateLimit(testIp);
+
+    // Initial check: allowed
+    expect(checkLoginRateLimit(testIp).allowed).toBe(true);
+
+    // Record 4 failed attempts: still allowed
+    for (let i = 0; i < 4; i++) {
+      recordFailedLoginAttempt(testIp);
+    }
+    expect(checkLoginRateLimit(testIp).allowed).toBe(true);
+
+    // 5th failed attempt: blocked
+    recordFailedLoginAttempt(testIp);
+    const blockedCheck = checkLoginRateLimit(testIp);
+    expect(blockedCheck.allowed).toBe(false);
+    expect(typeof blockedCheck.retryAfterSeconds).toBe("number");
+    expect(blockedCheck.retryAfterSeconds).toBeGreaterThan(0);
+
+    // Clear limit resets state
+    clearLoginRateLimit(testIp);
+    expect(checkLoginRateLimit(testIp).allowed).toBe(true);
   });
 });

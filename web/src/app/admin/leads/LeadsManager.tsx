@@ -7,6 +7,14 @@ import { LeadRow } from "@/components/admin/LeadRow";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/components/ui/table";
 import { Search } from "lucide-react";
 
 interface LeadsManagerProps {
@@ -186,43 +194,41 @@ export function LeadsManager({ initialLeads }: LeadsManagerProps) {
 
       {/* Leads Table */}
       <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-100">
-              <tr>
-                <th className="px-5 py-3.5">Kod & Sana</th>
-                <th className="px-5 py-3.5">Abituriyent</th>
-                <th className="px-5 py-3.5">Fakultet & Ta&apos;lim</th>
-                <th className="px-5 py-3.5">Holati</th>
-                <th className="px-5 py-3.5">Qayd / Izoh</th>
-                <th className="px-5 py-3.5 text-right">Amallar</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100">
-              {filteredLeads.length === 0 ? (
-                <tr>
-                  <td colSpan={6} className="py-12">
-                    <EmptyState
-                      title="Ariza topilmadi"
-                      description="Qidiruv mezonlari bo'yicha hech qanday abituriyent arizasi mavjud emas."
-                    />
-                  </td>
-                </tr>
-              ) : (
-                filteredLeads.map((lead) => (
-                  <LeadRow
-                    key={lead.id}
-                    lead={lead}
-                    isUpdating={isUpdating}
-                    onStatusChange={handleStatusChange}
-                    onSaveNotes={handleSaveNotes}
-                    onDelete={handleDeleteLead}
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Kod & Sana</TableHead>
+              <TableHead>Abituriyent</TableHead>
+              <TableHead>Fakultet & Ta&apos;lim</TableHead>
+              <TableHead>Holati</TableHead>
+              <TableHead>Qayd / Izoh</TableHead>
+              <TableHead className="text-right">Amallar</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredLeads.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={6} className="py-12">
+                  <EmptyState
+                    title="Ariza topilmadi"
+                    description="Qidiruv mezonlari bo'yicha hech qanday abituriyent arizasi mavjud emas."
                   />
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                </TableCell>
+              </TableRow>
+            ) : (
+              filteredLeads.map((lead) => (
+                <LeadRow
+                  key={lead.id}
+                  lead={lead}
+                  isUpdating={isUpdating}
+                  onStatusChange={handleStatusChange}
+                  onSaveNotes={handleSaveNotes}
+                  onDelete={handleDeleteLead}
+                />
+              ))
+            )}
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

@@ -4,17 +4,25 @@ import { cookies } from "next/headers";
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@sam.kiut.uz";
 
-function getAdminPasswordHash(): string {
-  const envVal = process.env.ADMIN_PASSWORD_HASH;
-  if (!envVal || envVal.length < 20) {
-    return "$2b$10$5fdmse05e6ey1BSbbXNRBuHQAGGeux/LUQplM.JRxniTl8UG3vqau";
+export function getAdminPasswordHash(): string {
+  let envVal = process.env.ADMIN_PASSWORD_HASH;
+  if (!envVal || envVal.trim().length < 20) {
+    throw new Error("Missing or invalid required environment variable: ADMIN_PASSWORD_HASH");
   }
+  envVal = envVal.trim().replace(/^['"]|['"]$/g, "");
   return envVal.replace(/\\\$/g, "$");
 }
 
-const JWT_SECRET = new TextEncoder().encode(
-  process.env.ADMIN_JWT_SECRET || "kiut_samarkand_portal_jwt_secret_2026_super_secure_key_123456789"
-);
+export function getJwtSecret(): Uint8Array {
+  let secret = process.env.ADMIN_JWT_SECRET;
+  if (!secret || secret.trim().length < 16) {
+    throw new Error(
+      "Missing or insecure required environment variable: ADMIN_JWT_SECRET (minimum 16 characters required)"
+    );
+  }
+  secret = secret.trim().replace(/^['"]|['"]$/g, "");
+  return new TextEncoder().encode(secret);
+}
 
 export const ADMIN_COOKIE_NAME = "kiut_admin_session";
 
@@ -25,21 +33,22 @@ export interface AdminSession {
   exp?: number;
 }
 
-export function verifyAdminCredentials(password: string, email?: string): boolean {
+export async function verifyAdminCredentials(password: string, email?: string): Promise<boolean> {
+  if (!password || typeof password !== "string") {
+    return false;
+  }
+
   if (email && email.trim().toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
     return false;
   }
 
   const hash = getAdminPasswordHash();
   try {
-    if (bcrypt.compareSync(password, hash)) {
-      return true;
-    }
+    return await bcrypt.compare(password, hash);
   } catch (err) {
-    console.warn("[BCRYPT_VERIFY_WARNING]", err);
+    console.error("[BCRYPT_VERIFY_ERROR]", err);
+    return false;
   }
-
-  return password === "KiutSam2026!Admin";
 }
 
 export async function createAdminToken(email: string = ADMIN_EMAIL): Promise<string> {
@@ -47,12 +56,12 @@ export async function createAdminToken(email: string = ADMIN_EMAIL): Promise<str
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime("7d")
-    .sign(JWT_SECRET);
+    .sign(getJwtSecret());
 }
 
 export async function verifyAdminToken(token: string): Promise<AdminSession | null> {
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET);
+    const { payload } = await jwtVerify(token, getJwtSecret());
     if (payload && payload.email) {
       return {
         email: String(payload.email),
