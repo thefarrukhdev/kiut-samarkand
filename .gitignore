@@ -37,6 +37,8 @@ data/raw_html/
 data/media/
 data/archive/
 data/documents/
+data/db/
+web/data/db/
 **/__pycache__/
 *.pyc
 

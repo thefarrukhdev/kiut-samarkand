@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { isUzbekPhoneValid } from "@/lib/phone";
+import { db } from "@/lib/db/store";
 
 interface AdmissionRequestBody {
   fullName?: string;
@@ -74,10 +75,13 @@ export async function POST(request: Request) {
       submittedAt: leadRecord.submittedAt,
     });
 
+    // Save persistently to database store
+    const savedLead = db.createLead(leadRecord);
+
     return NextResponse.json({
       success: true,
       confirmationId,
-      lead: leadRecord,
+      lead: savedLead,
       message: "Arizangiz muvaffaqiyatli qabul qilindi. Tez orada qabul komissiyasi siz bilan bog'lanadi.",
     });
   } catch (error) {

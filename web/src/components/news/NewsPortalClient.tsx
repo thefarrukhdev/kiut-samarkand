@@ -43,15 +43,35 @@ export function NewsPortalClient() {
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [currentPage, setCurrentPage] = React.useState<number>(1);
 
-  // Load all articles for current locale
-  const allArticles = React.useMemo(() => {
-    return getAllNews(locale);
+  // Load static baseline articles for current locale
+  const staticArticles = React.useMemo(() => getAllNews(locale), [locale]);
+  const [dynamicArticles, setDynamicArticles] = React.useState<ReturnType<typeof getAllNews> | null>(null);
+
+  React.useEffect(() => {
+    // Fetch live updates from dynamic DB
+    let isMounted = true;
+    fetch(`/api/news?locale=${locale}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.success && Array.isArray(data.articles)) {
+          setDynamicArticles(data.articles);
+        }
+      })
+      .catch((err) => {
+        console.warn("[LIVE_NEWS_FETCH_FALLBACK] Using static news:", err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [locale]);
+
+  const liveArticles = dynamicArticles || staticArticles;
 
   // Filter articles based on active category and search query
   const filteredArticles = React.useMemo(() => {
-    return filterNews(allArticles, activeCategory, searchQuery);
-  }, [allArticles, activeCategory, searchQuery]);
+    return filterNews(liveArticles, activeCategory, searchQuery);
+  }, [liveArticles, activeCategory, searchQuery]);
 
   const handleCategoryChange = (category: NewsCategory) => {
     setActiveCategory(category);
@@ -86,7 +106,7 @@ export function NewsPortalClient() {
       sport: 0,
     };
 
-    allArticles.forEach((article) => {
+    liveArticles.forEach((article) => {
       // Check query match
       const q = searchQuery.toLowerCase().trim();
       const matchesQuery =
@@ -104,7 +124,7 @@ export function NewsPortalClient() {
     });
 
     return counts;
-  }, [allArticles, searchQuery]);
+  }, [liveArticles, searchQuery]);
 
   // Filter tabs definitions with icons
   const filterTabs = React.useMemo<

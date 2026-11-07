@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import rawNewsData from "@/data/news.json";
 import { getNewsBySlug } from "@/lib/news";
+import { db } from "@/lib/db/store";
+import { dbNewsToEnrichedArticle } from "@/lib/db/converter";
 import { NewsArticleClient } from "@/components/news/NewsArticleClient";
+import type { Locale } from "@/types";
 
 interface PageProps {
   params: Promise<{
@@ -21,6 +24,34 @@ export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   return [...uzPaths, ...ruPaths, ...enPaths];
 }
 
+function resolveArticle(slug: string, locale: Locale = "uz") {
+  // 1. Try static json resolver first
+  const staticResult = getNewsBySlug(slug, locale);
+  if (staticResult) return staticResult;
+
+  // 2. Fallback to dynamic database store
+  const dbItem = db.getNewsBySlug(slug);
+  if (dbItem && dbItem.published) {
+    const article = dbNewsToEnrichedArticle(dbItem, locale);
+    const otherDbItems = db
+      .getNews({ publishedOnly: true })
+      .filter((n) => n.slug !== slug)
+      .slice(0, 3);
+    const related = otherDbItems.map((item, idx) =>
+      dbNewsToEnrichedArticle(item, locale, idx)
+    );
+
+    return {
+      article,
+      related,
+      index: 0,
+      detectedLocale: locale,
+    };
+  }
+
+  return null;
+}
+
 /**
  * Generates dynamic OpenGraph and SEO metadata for the requested article slug.
  */
@@ -28,7 +59,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const result = getNewsBySlug(slug);
+  const result = resolveArticle(slug);
 
   if (!result) {
     return {
@@ -62,7 +93,7 @@ export async function generateMetadata({
 
 export default async function NewsArticlePage({ params }: PageProps) {
   const { slug } = await params;
-  const result = getNewsBySlug(slug);
+  const result = resolveArticle(slug);
 
   if (!result) {
     notFound();
